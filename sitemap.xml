@@ -3,163 +3,163 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>ialy1595.github.io/about/</loc>
+    <loc>/about/</loc>
     <lastmod>2019-02-04T10:25:27+09:00</lastmod>
   </url>
   
   <url>
-    <loc>ialy1595.github.io/post/sequential-logic/</loc>
+    <loc>/post/sequential-logic/</loc>
     <lastmod>2019-02-03T19:53:09+09:00</lastmod>
   </url>
   
   <url>
-    <loc>ialy1595.github.io/post/combinational-logic/</loc>
+    <loc>/post/combinational-logic/</loc>
     <lastmod>2018-09-26T18:27:42+09:00</lastmod>
   </url>
   
   <url>
-    <loc>ialy1595.github.io/post/trangister-and-basic-logic-gate/</loc>
+    <loc>/post/trangister-and-basic-logic-gate/</loc>
     <lastmod>2018-07-31T02:13:42+09:00</lastmod>
   </url>
   
   <url>
-    <loc>ialy1595.github.io/tags/algebraic-structure/</loc>
+    <loc>/tags/algebraic-structure/</loc>
     <lastmod>2018-09-26T18:27:42+09:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>ialy1595.github.io/tags/arithmetic-logic-unit/</loc>
+    <loc>/tags/arithmetic-logic-unit/</loc>
     <lastmod>2018-09-26T18:27:42+09:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>ialy1595.github.io/tags/basic-logic-gate/</loc>
-    <lastmod>2018-07-31T02:13:42+09:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>ialy1595.github.io/tags/boolean-expression/</loc>
-    <lastmod>2018-09-26T18:27:42+09:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>ialy1595.github.io/tags/canonical-forms/</loc>
-    <lastmod>2018-09-26T18:27:42+09:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>ialy1595.github.io/categories/</loc>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>ialy1595.github.io/tags/clock/</loc>
-    <lastmod>2019-02-03T19:53:09+09:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>ialy1595.github.io/categories/code/</loc>
-    <lastmod>2019-02-03T19:53:09+09:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>ialy1595.github.io/tags/combinational-logic/</loc>
-    <lastmod>2018-09-26T18:27:42+09:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>ialy1595.github.io/tags/delay/</loc>
-    <lastmod>2018-09-26T18:27:42+09:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>ialy1595.github.io/tags/flip-flop/</loc>
-    <lastmod>2019-02-03T19:53:09+09:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>ialy1595.github.io/tags/functional-completeness/</loc>
+    <loc>/tags/basic-logic-gate/</loc>
     <lastmod>2018-07-31T02:13:42+09:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>ialy1595.github.io/tags/karnaugh-map/</loc>
+    <loc>/tags/boolean-expression/</loc>
     <lastmod>2018-09-26T18:27:42+09:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>ialy1595.github.io/tags/latch/</loc>
-    <lastmod>2019-02-03T19:53:09+09:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>ialy1595.github.io/tags/memory/</loc>
-    <lastmod>2019-02-03T19:53:09+09:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>ialy1595.github.io/post/</loc>
-    <lastmod>2019-02-03T19:53:09+09:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>ialy1595.github.io/tags/ram/</loc>
-    <lastmod>2019-02-03T19:53:09+09:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>ialy1595.github.io/tags/register/</loc>
-    <lastmod>2019-02-03T19:53:09+09:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>ialy1595.github.io/tags/sequential-logic/</loc>
-    <lastmod>2019-02-03T19:53:09+09:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>ialy1595.github.io/subcategories/</loc>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>ialy1595.github.io/subcategories/system-architecture/</loc>
-    <lastmod>2019-02-03T19:53:09+09:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>ialy1595.github.io/tags/</loc>
+    <loc>/tags/canonical-forms/</loc>
     <lastmod>2018-09-26T18:27:42+09:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>ialy1595.github.io/tags/trangister/</loc>
+    <loc>/categories/</loc>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/tags/clock/</loc>
+    <lastmod>2019-02-03T19:53:09+09:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/categories/code/</loc>
+    <lastmod>2019-02-03T19:53:09+09:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/tags/combinational-logic/</loc>
+    <lastmod>2018-09-26T18:27:42+09:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/tags/delay/</loc>
+    <lastmod>2018-09-26T18:27:42+09:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/tags/flip-flop/</loc>
+    <lastmod>2019-02-03T19:53:09+09:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/tags/functional-completeness/</loc>
     <lastmod>2018-07-31T02:13:42+09:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>ialy1595.github.io/</loc>
+    <loc>/tags/karnaugh-map/</loc>
+    <lastmod>2018-09-26T18:27:42+09:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/tags/latch/</loc>
+    <lastmod>2019-02-03T19:53:09+09:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/tags/memory/</loc>
+    <lastmod>2019-02-03T19:53:09+09:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/post/</loc>
+    <lastmod>2019-02-03T19:53:09+09:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/tags/ram/</loc>
+    <lastmod>2019-02-03T19:53:09+09:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/tags/register/</loc>
+    <lastmod>2019-02-03T19:53:09+09:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/tags/sequential-logic/</loc>
+    <lastmod>2019-02-03T19:53:09+09:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/subcategories/</loc>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/subcategories/system-architecture/</loc>
+    <lastmod>2019-02-03T19:53:09+09:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/tags/</loc>
+    <lastmod>2018-09-26T18:27:42+09:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/tags/trangister/</loc>
+    <lastmod>2018-07-31T02:13:42+09:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/</loc>
     <lastmod>2019-02-04T10:25:27+09:00</lastmod>
     <priority>0</priority>
   </url>

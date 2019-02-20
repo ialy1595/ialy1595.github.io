@@ -2,22 +2,22 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Categories on ialy&#39;s blog</title>
-    <link>ialy1595.github.io/categories/</link>
+    <link>/categories/</link>
     <description>Recent content in Categories on ialy&#39;s blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ko-KR</language>
     <managingEditor>ialy12006@gmail.com (ialy)</managingEditor>
     <webMaster>ialy12006@gmail.com (ialy)</webMaster>
     
-	<atom:link href="ialy1595.github.io/categories/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="/categories/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Code</title>
-      <link>ialy1595.github.io/categories/code/</link>
+      <link>/categories/code/</link>
       <pubDate>Sun, 03 Feb 2019 19:53:09 +0900</pubDate>
       <author>ialy12006@gmail.com (ialy)</author>
-      <guid>ialy1595.github.io/categories/code/</guid>
+      <guid>/categories/code/</guid>
       <description></description>
     </item>
     
