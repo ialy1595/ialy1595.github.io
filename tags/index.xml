@@ -2,7 +2,7 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Tags on ialy&#39;s blog</title>
-    <link>/tags/</link>
+    <link>https://ialy1595.github.io/tags/</link>
     <description>Recent content in Tags on ialy&#39;s blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ko-KR</language>
@@ -10,159 +10,159 @@
     <webMaster>ialy12006@gmail.com (ialy)</webMaster>
     <lastBuildDate>Wed, 26 Sep 2018 18:27:42 +0900</lastBuildDate>
     
-	<atom:link href="/tags/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://ialy1595.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Algebraic Structure</title>
-      <link>/tags/algebraic-structure/</link>
+      <link>https://ialy1595.github.io/tags/algebraic-structure/</link>
       <pubDate>Wed, 26 Sep 2018 18:27:42 +0900</pubDate>
       <author>ialy12006@gmail.com (ialy)</author>
-      <guid>/tags/algebraic-structure/</guid>
+      <guid>https://ialy1595.github.io/tags/algebraic-structure/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Arithmetic Logic Unit</title>
-      <link>/tags/arithmetic-logic-unit/</link>
+      <link>https://ialy1595.github.io/tags/arithmetic-logic-unit/</link>
       <pubDate>Wed, 26 Sep 2018 18:27:42 +0900</pubDate>
       <author>ialy12006@gmail.com (ialy)</author>
-      <guid>/tags/arithmetic-logic-unit/</guid>
+      <guid>https://ialy1595.github.io/tags/arithmetic-logic-unit/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Basic Logic Gate</title>
-      <link>/tags/basic-logic-gate/</link>
+      <link>https://ialy1595.github.io/tags/basic-logic-gate/</link>
       <pubDate>Tue, 31 Jul 2018 02:13:42 +0900</pubDate>
       <author>ialy12006@gmail.com (ialy)</author>
-      <guid>/tags/basic-logic-gate/</guid>
+      <guid>https://ialy1595.github.io/tags/basic-logic-gate/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Boolean Expression</title>
-      <link>/tags/boolean-expression/</link>
+      <link>https://ialy1595.github.io/tags/boolean-expression/</link>
       <pubDate>Wed, 26 Sep 2018 18:27:42 +0900</pubDate>
       <author>ialy12006@gmail.com (ialy)</author>
-      <guid>/tags/boolean-expression/</guid>
+      <guid>https://ialy1595.github.io/tags/boolean-expression/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Canonical Forms</title>
-      <link>/tags/canonical-forms/</link>
+      <link>https://ialy1595.github.io/tags/canonical-forms/</link>
       <pubDate>Wed, 26 Sep 2018 18:27:42 +0900</pubDate>
       <author>ialy12006@gmail.com (ialy)</author>
-      <guid>/tags/canonical-forms/</guid>
+      <guid>https://ialy1595.github.io/tags/canonical-forms/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Clock</title>
-      <link>/tags/clock/</link>
+      <link>https://ialy1595.github.io/tags/clock/</link>
       <pubDate>Sun, 03 Feb 2019 19:53:09 +0900</pubDate>
       <author>ialy12006@gmail.com (ialy)</author>
-      <guid>/tags/clock/</guid>
+      <guid>https://ialy1595.github.io/tags/clock/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Combinational Logic</title>
-      <link>/tags/combinational-logic/</link>
+      <link>https://ialy1595.github.io/tags/combinational-logic/</link>
       <pubDate>Wed, 26 Sep 2018 18:27:42 +0900</pubDate>
       <author>ialy12006@gmail.com (ialy)</author>
-      <guid>/tags/combinational-logic/</guid>
+      <guid>https://ialy1595.github.io/tags/combinational-logic/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Delay</title>
-      <link>/tags/delay/</link>
+      <link>https://ialy1595.github.io/tags/delay/</link>
       <pubDate>Wed, 26 Sep 2018 18:27:42 +0900</pubDate>
       <author>ialy12006@gmail.com (ialy)</author>
-      <guid>/tags/delay/</guid>
+      <guid>https://ialy1595.github.io/tags/delay/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Flip Flop</title>
-      <link>/tags/flip-flop/</link>
+      <link>https://ialy1595.github.io/tags/flip-flop/</link>
       <pubDate>Sun, 03 Feb 2019 19:53:09 +0900</pubDate>
       <author>ialy12006@gmail.com (ialy)</author>
-      <guid>/tags/flip-flop/</guid>
+      <guid>https://ialy1595.github.io/tags/flip-flop/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Functional Completeness</title>
-      <link>/tags/functional-completeness/</link>
+      <link>https://ialy1595.github.io/tags/functional-completeness/</link>
       <pubDate>Tue, 31 Jul 2018 02:13:42 +0900</pubDate>
       <author>ialy12006@gmail.com (ialy)</author>
-      <guid>/tags/functional-completeness/</guid>
+      <guid>https://ialy1595.github.io/tags/functional-completeness/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Karnaugh Map</title>
-      <link>/tags/karnaugh-map/</link>
+      <link>https://ialy1595.github.io/tags/karnaugh-map/</link>
       <pubDate>Wed, 26 Sep 2018 18:27:42 +0900</pubDate>
       <author>ialy12006@gmail.com (ialy)</author>
-      <guid>/tags/karnaugh-map/</guid>
+      <guid>https://ialy1595.github.io/tags/karnaugh-map/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Latch</title>
-      <link>/tags/latch/</link>
+      <link>https://ialy1595.github.io/tags/latch/</link>
       <pubDate>Sun, 03 Feb 2019 19:53:09 +0900</pubDate>
       <author>ialy12006@gmail.com (ialy)</author>
-      <guid>/tags/latch/</guid>
+      <guid>https://ialy1595.github.io/tags/latch/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Memory</title>
-      <link>/tags/memory/</link>
+      <link>https://ialy1595.github.io/tags/memory/</link>
       <pubDate>Sun, 03 Feb 2019 19:53:09 +0900</pubDate>
       <author>ialy12006@gmail.com (ialy)</author>
-      <guid>/tags/memory/</guid>
+      <guid>https://ialy1595.github.io/tags/memory/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Ram</title>
-      <link>/tags/ram/</link>
+      <link>https://ialy1595.github.io/tags/ram/</link>
       <pubDate>Sun, 03 Feb 2019 19:53:09 +0900</pubDate>
       <author>ialy12006@gmail.com (ialy)</author>
-      <guid>/tags/ram/</guid>
+      <guid>https://ialy1595.github.io/tags/ram/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Register</title>
-      <link>/tags/register/</link>
+      <link>https://ialy1595.github.io/tags/register/</link>
       <pubDate>Sun, 03 Feb 2019 19:53:09 +0900</pubDate>
       <author>ialy12006@gmail.com (ialy)</author>
-      <guid>/tags/register/</guid>
+      <guid>https://ialy1595.github.io/tags/register/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Sequential Logic</title>
-      <link>/tags/sequential-logic/</link>
+      <link>https://ialy1595.github.io/tags/sequential-logic/</link>
       <pubDate>Sun, 03 Feb 2019 19:53:09 +0900</pubDate>
       <author>ialy12006@gmail.com (ialy)</author>
-      <guid>/tags/sequential-logic/</guid>
+      <guid>https://ialy1595.github.io/tags/sequential-logic/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Trangister</title>
-      <link>/tags/trangister/</link>
+      <link>https://ialy1595.github.io/tags/trangister/</link>
       <pubDate>Tue, 31 Jul 2018 02:13:42 +0900</pubDate>
       <author>ialy12006@gmail.com (ialy)</author>
-      <guid>/tags/trangister/</guid>
+      <guid>https://ialy1595.github.io/tags/trangister/</guid>
       <description></description>
     </item>
     
