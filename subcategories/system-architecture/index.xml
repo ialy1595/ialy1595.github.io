@@ -2,7 +2,7 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>System Architecture on ialy&#39;s blog</title>
-    <link>your-site-address/subcategories/system-architecture/</link>
+    <link>ialy1595.github.io/subcategories/system-architecture/</link>
     <description>Recent content in System Architecture on ialy&#39;s blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ko-KR</language>
@@ -10,33 +10,33 @@
     <webMaster>ialy12006@gmail.com (ialy)</webMaster>
     <lastBuildDate>Sun, 03 Feb 2019 19:53:09 +0900</lastBuildDate>
     
-	<atom:link href="your-site-address/subcategories/system-architecture/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="ialy1595.github.io/subcategories/system-architecture/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Sequential Logic</title>
-      <link>your-site-address/post/sequential-logic/</link>
+      <link>ialy1595.github.io/post/sequential-logic/</link>
       <pubDate>Sun, 03 Feb 2019 19:53:09 +0900</pubDate>
       <author>ialy12006@gmail.com (ialy)</author>
-      <guid>your-site-address/post/sequential-logic/</guid>
+      <guid>ialy1595.github.io/post/sequential-logic/</guid>
       <description>sequential logic이란 같은 input이 들어왔다고 해도 logic의 state나 memory에 따라 결과가 달라지는 logic을 의미한다. 이러한 sequential logic이 존재할 수 있는 중요한 요소중 하나는 gate가 이상적이지 않아서 delay가 존재한다는 것이다.</description>
     </item>
     
     <item>
       <title>Combinational Logic</title>
-      <link>your-site-address/post/combinational-logic/</link>
+      <link>ialy1595.github.io/post/combinational-logic/</link>
       <pubDate>Wed, 26 Sep 2018 18:27:42 +0900</pubDate>
       <author>ialy12006@gmail.com (ialy)</author>
-      <guid>your-site-address/post/combinational-logic/</guid>
+      <guid>ialy1595.github.io/post/combinational-logic/</guid>
       <description>Combinational Logic에서는 이전에 basic logic gate를 다루면서 만들었던 재료인 NOT, AND, OR, NAND, NOR을 가지고 요리를 해볼 것이다. 하지만 그 전에 Combinational Logic과 Sequential Logic의 차이 대해 먼저 알아보자.</description>
     </item>
     
     <item>
       <title>Trangister and Basic Logic Gate</title>
-      <link>your-site-address/post/trangister-and-basic-logic-gate/</link>
+      <link>ialy1595.github.io/post/trangister-and-basic-logic-gate/</link>
       <pubDate>Tue, 31 Jul 2018 02:13:42 +0900</pubDate>
       <author>ialy12006@gmail.com (ialy)</author>
-      <guid>your-site-address/post/trangister-and-basic-logic-gate/</guid>
+      <guid>ialy1595.github.io/post/trangister-and-basic-logic-gate/</guid>
       <description>컴퓨터공학부에 입학하고 처음으로 들은 전공 관련 수업이 컴퓨터 개론 및 실습(컴개실)이었는데, 코딩을 배울 것이라고 생각했던 것과 달리 갑자기 반도체와 트랜지스터가 나와서 멘붕했던 내용이다. 그 당시에는 전기과도 아닌데 이런걸 왜하나 생각을 했지만 배우고 나서 뒤의 흐름을 익히니 기초부터 하나씩 쌓아올려 나가려는 큰 그림이었음을 깨달았다.</description>
     </item>
     
