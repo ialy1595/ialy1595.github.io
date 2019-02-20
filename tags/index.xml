@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Tags on ialy&#39;s blog</title>
+    <link>your-site-address/tags/</link>
+    <description>Recent content in Tags on ialy&#39;s blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>ko-KR</language>
+    <managingEditor>ialy12006@gmail.com (ialy)</managingEditor>
+    <webMaster>ialy12006@gmail.com (ialy)</webMaster>
+    <lastBuildDate>Wed, 26 Sep 2018 18:27:42 +0900</lastBuildDate>
+    
+	<atom:link href="your-site-address/tags/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Algebraic Structure</title>
+      <link>your-site-address/tags/algebraic-structure/</link>
+      <pubDate>Wed, 26 Sep 2018 18:27:42 +0900</pubDate>
+      <author>ialy12006@gmail.com (ialy)</author>
+      <guid>your-site-address/tags/algebraic-structure/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Arithmetic Logic Unit</title>
+      <link>your-site-address/tags/arithmetic-logic-unit/</link>
+      <pubDate>Wed, 26 Sep 2018 18:27:42 +0900</pubDate>
+      <author>ialy12006@gmail.com (ialy)</author>
+      <guid>your-site-address/tags/arithmetic-logic-unit/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Basic Logic Gate</title>
+      <link>your-site-address/tags/basic-logic-gate/</link>
+      <pubDate>Tue, 31 Jul 2018 02:13:42 +0900</pubDate>
+      <author>ialy12006@gmail.com (ialy)</author>
+      <guid>your-site-address/tags/basic-logic-gate/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Boolean Expression</title>
+      <link>your-site-address/tags/boolean-expression/</link>
+      <pubDate>Wed, 26 Sep 2018 18:27:42 +0900</pubDate>
+      <author>ialy12006@gmail.com (ialy)</author>
+      <guid>your-site-address/tags/boolean-expression/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Canonical Forms</title>
+      <link>your-site-address/tags/canonical-forms/</link>
+      <pubDate>Wed, 26 Sep 2018 18:27:42 +0900</pubDate>
+      <author>ialy12006@gmail.com (ialy)</author>
+      <guid>your-site-address/tags/canonical-forms/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Clock</title>
+      <link>your-site-address/tags/clock/</link>
+      <pubDate>Sun, 03 Feb 2019 19:53:09 +0900</pubDate>
+      <author>ialy12006@gmail.com (ialy)</author>
+      <guid>your-site-address/tags/clock/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Combinational Logic</title>
+      <link>your-site-address/tags/combinational-logic/</link>
+      <pubDate>Wed, 26 Sep 2018 18:27:42 +0900</pubDate>
+      <author>ialy12006@gmail.com (ialy)</author>
+      <guid>your-site-address/tags/combinational-logic/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Delay</title>
+      <link>your-site-address/tags/delay/</link>
+      <pubDate>Wed, 26 Sep 2018 18:27:42 +0900</pubDate>
+      <author>ialy12006@gmail.com (ialy)</author>
+      <guid>your-site-address/tags/delay/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Flip Flop</title>
+      <link>your-site-address/tags/flip-flop/</link>
+      <pubDate>Sun, 03 Feb 2019 19:53:09 +0900</pubDate>
+      <author>ialy12006@gmail.com (ialy)</author>
+      <guid>your-site-address/tags/flip-flop/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Functional Completeness</title>
+      <link>your-site-address/tags/functional-completeness/</link>
+      <pubDate>Tue, 31 Jul 2018 02:13:42 +0900</pubDate>
+      <author>ialy12006@gmail.com (ialy)</author>
+      <guid>your-site-address/tags/functional-completeness/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Karnaugh Map</title>
+      <link>your-site-address/tags/karnaugh-map/</link>
+      <pubDate>Wed, 26 Sep 2018 18:27:42 +0900</pubDate>
+      <author>ialy12006@gmail.com (ialy)</author>
+      <guid>your-site-address/tags/karnaugh-map/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Latch</title>
+      <link>your-site-address/tags/latch/</link>
+      <pubDate>Sun, 03 Feb 2019 19:53:09 +0900</pubDate>
+      <author>ialy12006@gmail.com (ialy)</author>
+      <guid>your-site-address/tags/latch/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Memory</title>
+      <link>your-site-address/tags/memory/</link>
+      <pubDate>Sun, 03 Feb 2019 19:53:09 +0900</pubDate>
+      <author>ialy12006@gmail.com (ialy)</author>
+      <guid>your-site-address/tags/memory/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Ram</title>
+      <link>your-site-address/tags/ram/</link>
+      <pubDate>Sun, 03 Feb 2019 19:53:09 +0900</pubDate>
+      <author>ialy12006@gmail.com (ialy)</author>
+      <guid>your-site-address/tags/ram/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Register</title>
+      <link>your-site-address/tags/register/</link>
+      <pubDate>Sun, 03 Feb 2019 19:53:09 +0900</pubDate>
+      <author>ialy12006@gmail.com (ialy)</author>
+      <guid>your-site-address/tags/register/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Sequential Logic</title>
+      <link>your-site-address/tags/sequential-logic/</link>
+      <pubDate>Sun, 03 Feb 2019 19:53:09 +0900</pubDate>
+      <author>ialy12006@gmail.com (ialy)</author>
+      <guid>your-site-address/tags/sequential-logic/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Trangister</title>
+      <link>your-site-address/tags/trangister/</link>
+      <pubDate>Tue, 31 Jul 2018 02:13:42 +0900</pubDate>
+      <author>ialy12006@gmail.com (ialy)</author>
+      <guid>your-site-address/tags/trangister/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>

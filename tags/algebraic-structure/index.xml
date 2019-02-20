@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Algebraic Structure on ialy&#39;s blog</title>
+    <link>your-site-address/tags/algebraic-structure/</link>
+    <description>Recent content in Algebraic Structure on ialy&#39;s blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>ko-KR</language>
+    <managingEditor>ialy12006@gmail.com (ialy)</managingEditor>
+    <webMaster>ialy12006@gmail.com (ialy)</webMaster>
+    <lastBuildDate>Wed, 26 Sep 2018 18:27:42 +0900</lastBuildDate>
+    
+	<atom:link href="your-site-address/tags/algebraic-structure/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Combinational Logic</title>
+      <link>your-site-address/post/combinational-logic/</link>
+      <pubDate>Wed, 26 Sep 2018 18:27:42 +0900</pubDate>
+      <author>ialy12006@gmail.com (ialy)</author>
+      <guid>your-site-address/post/combinational-logic/</guid>
+      <description>Combinational Logic에서는 이전에 basic logic gate를 다루면서 만들었던 재료인 NOT, AND, OR, NAND, NOR을 가지고 요리를 해볼 것이다. 하지만 그 전에 Combinational Logic과 Sequential Logic의 차이 대해 먼저 알아보자.</description>
+    </item>
+    
+  </channel>
+</rss>

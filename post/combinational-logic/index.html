@@ -1,0 +1,2032 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-XXXXXXXX-X"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+  
+    gtag('config', 'UA-XXXXXXXX-X');
+  </script>
+  
+
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <title>Combinational Logic  &middot; ialy&#39;s blog</title>
+  <link rel="icon" href="/your-site-address/favicon.ico" type="image/x-icon">
+  <link rel="canonical" href="your-site-address/post/combinational-logic/">
+  
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/dracula.min.css">
+  <link rel="stylesheet" href="/your-site-address/css/styles.css">
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+  <script type="text/javascript" async
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+  MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [['$','$'], ['\\(','\\)']],
+    displayMath: [['$$','$$']],
+    processEscapes: true,
+    processEnvironments: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+    TeX: { equationNumbers: { autoNumber: "AMS" },
+         extensions: ["AMSmath.js", "AMSsymbols.js"] }
+  }
+  });
+  MathJax.Hub.Queue(function() {
+    
+    
+    
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i = 0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script> 
+  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/gist-embed/2.7.1/gist-embed.min.js"></script>
+</head>
+
+<body>
+<div class="wrap">
+  <div class="navbar">
+    <ul>
+      <li><a href="/your-site-address/">HELLO WORLD!</a></li>
+      <li><a href="/your-site-address/categories">CATEGORIES</a></li>
+      <li><a href="/your-site-address/tags">TAGS</a></li>
+      <li><a href="/your-site-address/about">ABOUT ME</a></li>
+    </ul>
+  </div>
+  <div class="container">
+
+
+
+    <div class="title">
+  
+  
+  
+  <a href="/your-site-address/categories/code">
+    <img src="/your-site-address/images/logo-code.png" width="260px" height="48px" />
+  </a>
+  
+</div>
+	<a href="your-site-address/post/combinational-logic/">
+  <div class="post-title">
+    
+	
+	<img src="/your-site-address/images/post-title-icon-code.png" />
+	
+    <div class="post-meta">
+      <time>26 Sep 2018, 18:27</time>
+      <h1>Combinational Logic</h1>
+    </div>
+  </div>
+</a>
+
+<div class="post-toc">
+  <span class="title">
+    Table of contents
+  </span>
+  <nav id="TableOfContents">
+<ul>
+<li><a href="#boolean-expression">Boolean Expression</a>
+<ul>
+<li><a href="#algebraic-structure">Algebraic Structure</a></li>
+<li><a href="#canonical-forms">Canonical Forms</a>
+<ul>
+<li><a href="#sum-of-products-sop">Sum-of-Products(SoP)</a></li>
+<li><a href="#products-of-sum-pos">Products-of-Sum(PoS)</a></li>
+<li><a href="#two-level-implementation">Two-level implementation</a></li>
+</ul></li>
+<li><a href="#karnaugh-map">Karnaugh map</a></li>
+</ul></li>
+<li><a href="#commonly-used-gates">Commonly used gates</a>
+<ul>
+<li><a href="#multi-bit-notation">Multi-bit notation</a></li>
+<li><a href="#demultiplexer-demux">Demultiplexer(DEMUX)</a></li>
+<li><a href="#multiplexer-mux">Multiplexer(MUX)</a></li>
+<li><a href="#shifter">Shifter</a></li>
+<li><a href="#adder">Adder</a>
+<ul>
+<li><a href="#2-complement-2의-보수">2&rsquo;complement (2의 보수)</a></li>
+<li><a href="#half-adder-full-adder">Half Adder &amp; Full Adder</a></li>
+<li><a href="#ripple-carry-adder">Ripple Carry Adder</a></li>
+</ul></li>
+<li><a href="#alu-arithmetic-loguc-unit">ALU (Arithmetic Loguc Unit)</a>
+<ul>
+<li><a href="#arithmetic-unit">Arithmetic Unit</a></li>
+<li><a href="#logic-unit">Logic Unit</a></li>
+<li><a href="#arithmetic-logic-unit">Arithmetic Logic Unit</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#delay">Delay</a>
+<ul>
+<li><a href="#carry-lookahead-adder-cla">Carry-Lookahead Adder (CLA)</a></li>
+<li><a href="#oscilator">Oscilator</a></li>
+</ul></li>
+</ul>
+</nav>
+</div>
+
+<section class="post-content">
+  
+
+<p>Combinational Logic에서는 이전에 basic logic gate를 다루면서 만들었던 재료인 NOT, AND, OR, NAND, NOR을 가지고 요리를 해볼 것이다. 하지만 그 전에 Combinational Logic과 Sequential Logic의 차이 대해 먼저 알아보자.</p>
+
+<p>combinational logic이란 언제나 어디서나 눈이 오던 바람이 불던 남녀노소 같은 input을 넣으면 같은 output이 나오는 것을 뜻한다. 예를 들면 ADDER를 생각해보자. 내가 ADDER에 <code>2</code>와 <code>3</code>을 집어넣으면 오늘 넣든 내일 넣든 항상 <code>5</code>를 반환할 것이다.</p>
+
+<p>이와 대비되는 sequential logic은 내가 같은 input을 넣어도 상황에 따라 output이 바뀔 수 있는 것을 뜻한다. 예를 들어 내가</p>
+
+<blockquote>
+<p>너의 책장의 왼쪽에서 세번째 책이 뭐야?</p>
+</blockquote>
+
+<p>라고 물어본다고 해보자. 나는 분명 <code>너의 책장</code>과 <code>왼쪽에서 세번째</code> 라는 같은 input을 주지만, 오늘 물어본 결과와 내년에 물어본 결과가 다를 수 있다. 이처럼 logic의 내부 state나 memory에 의해 같은 input이어도 output이 다를 수 있는 경우를 sequential logic이라고 한다.</p>
+
+<p>둘 중에 딱 봐도 combinational logic이 더 쉬워보인다. 그러니 combinational logic부터 알아보자.</p>
+
+<h1 id="boolean-expression">Boolean Expression</h1>
+
+<p>우리가 만들어 볼 것은 0과 1들을 받아서 0과 1들을 반환하는 boolean function이다. 하지만 우리가 이 boolean function을 표현할 때 언제까지나 공간도 많이 잡아먹고 별 효과도 없는 진리표만 주구장창 그릴 것인가? 우리는 더 효과적으로 boolean function을 표현하는 방법을 배울 필요가 있다. 따라서 효과적으로 boolean function을 표현하는 두가지 방법을 배워보자.</p>
+
+<h2 id="algebraic-structure">Algebraic Structure</h2>
+
+<p>우리가 Boolean fnction을 표현할 때 <code>(A AND B) OR C</code> 이런식으로 표현하는데, 이를 잘 보면 문자, 기호(AND, OR, &hellip;), 괄호로 이루어져 있다. 그렇다면 우리가 수학에서 식을 쓰듯이 이것도 식처럼 쓸 수 있지 않을까? 해서 나온 것이 boolean algebra이다. boolean algebra는 다음과 같은 규칙을 가진다.</p>
+
+<ol>
+<li>모든 변수의 값은 <code>1</code> 또는 <code>0</code>이다. 이때 <code>1</code>은 V+, <code>0</code>은 접지상태 처럼 생각하면 된다.</li>
+<li><code>+</code>는 OR, <code>*</code>는 AND이다. 이 때 AND는 곱하기를 생략하는 것 처럼 알파벳을 붙여쓰는 것으로 생략할 수 있다.</li>
+<li><code>'</code>(unary operation, 뒤에 붙임)은 NOT이다.</li>
+</ol>
+
+<p>예를 들어 <code>(A OR (NOT B)) AND C</code> 같은 식은 <code>(A + B')C</code>로 간단하게 표현할 수 있다.</p>
+
+<p>또한 이러한 표현도 algebra에 속하기 때문에 수학에서 하는 것처럼 공리와 성질을 가진다.</p>
+
+<ol>
+<li>Identity: <code>X + 0 = X</code>, <code>X * 1 = X</code></li>
+<li>Null: <code>X + 1 = 1</code>, <code>X * 0 = 0</code></li>
+<li>Idempotency: <code>X + X = X</code>, <code>X * X = X</code></li>
+<li>Involution: <code>(X')' = X</code></li>
+<li>Complementarity: <code>X + X' = 1</code>, <code>X * X' = 0</code></li>
+<li>Commutativity: <code>X + Y = Y + X</code>, <code>X * Y = Y * X</code></li>
+<li>Associativity: <code>(X + Y) + Z = X + (Y + Z)</code>, <code>(X * Y) * Z = X * (Y * Z)</code></li>
+<li>Distributivity: <code>X * (Y + Z) = (X * Y) + (X * Z)</code>, <code>X + (Y * Z) = (X + Y) * (Y * Z)</code></li>
+<li>Uniting: <code>X * Y + X * Y' = X</code>, <code>(X + Y) * (X + Y') = X</code></li>
+<li>Absorption: <code>X + X * Y = X</code>, <code>X * (X + Y) = X</code>, <code>(X + Y') * Y = X * Y</code>, <code>X * Y' + Y = X + Y</code></li>
+<li>Factoring: <code>(X + Y) * (X' + Z) = X * Z + X' + Y</code>, <code>X * Y + X' * Z = (X + Z) * (X' + Y)</code></li>
+<li>Concensus: <code>X * Y + Y * Z + X' * Z = X * Y + X' * Z</code>, <code>(X + Y) * (Y + Z) * (X' + Z) = (X + Y) * (X' + Z)</code></li>
+</ol>
+
+<p>이를 잘 이용하면 나중에 긴 boolean expression을 짧게 줄일 수 있다. 굳이 막 외울 필요까진 없다.</p>
+
+<h2 id="canonical-forms">Canonical Forms</h2>
+
+<p>이제 이를 이용하여 truth table로 표현된 boolean function을 boolean expression으로 바꿔보자.</p>
+
+<table>
+<thead>
+<tr>
+<th align="center">A</th>
+<th align="center">B</th>
+<th align="center">C</th>
+<th align="center">OUT</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+</tr>
+
+<tr>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">1</td>
+<td align="center">1</td>
+</tr>
+
+<tr>
+<td align="center">0</td>
+<td align="center">1</td>
+<td align="center">0</td>
+<td align="center">1</td>
+</tr>
+
+<tr>
+<td align="center">0</td>
+<td align="center">1</td>
+<td align="center">1</td>
+<td align="center">0</td>
+</tr>
+
+<tr>
+<td align="center">1</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+</tr>
+
+<tr>
+<td align="center">1</td>
+<td align="center">0</td>
+<td align="center">1</td>
+<td align="center">0</td>
+</tr>
+
+<tr>
+<td align="center">1</td>
+<td align="center">1</td>
+<td align="center">0</td>
+<td align="center">1</td>
+</tr>
+
+<tr>
+<td align="center">1</td>
+<td align="center">1</td>
+<td align="center">1</td>
+<td align="center">0</td>
+</tr>
+</tbody>
+</table>
+
+<p>만약 AND처럼 특별한 의미가 있고 이미 우리가 잘 아는 함수라면 괜찮겠지만, 위에 처럼 아무런 특징 없는 처음 보는 표만 보고 당장 이와 같은 결과가 나오는 boolean expression을 쓰라고 하면 막막할 것이다. 이를 해결하기 위해 우리는 canonical form이라는 것을 쓸 것이다. Canonical form은 Sop와 PoS로 두가지 종류가 있다.</p>
+
+<h3 id="sum-of-products-sop">Sum-of-Products(SoP)</h3>
+
+<p>SoP는 말 그대로 곱들의 합으로 표현하는 것이다. 여기서 우리는 저 truth table의 1에 주목한다.</p>
+
+<p>첫번째 1은 A가 0, B가 0, C가 1일 때 결과가 1이 나온다. 이 경우에만 1이 나오고 그 외에는 모두 0이 나오는 product 형태는 <code>A'B'C</code>이다. 같은 방법으로 두번째 1의 product 꼴은 <code>A'BC'</code>이고, 세번째는 <code>ABC'</code>이다. 이 세 product 꼴이 SoP에서 굉장히 중요한 역할을 한다. 결과가 1이어야 하는 A, B, C값이라면 이 세 식중 적어도 하나는 1이 나온다. 또한 저 세 경우가 아니라면 이 세 식은 모두 0이 된다. 따라서 이 세 식을 모두 OR을 하게 되면 truth table과 같은 결과가 나오게 된다. 즉, <code>A'B'C + A'BC' + ABC'</code>이 저 truth table과 같은 결과를 주는 boolean expression이 된다. 이처럼 1이 되는 결과를 product 형태로 나타낸 후 이를 모두 sum하기 때문에 Sop Canonical Form이라고 부른다. 이를 더 쉽게 표현하기 위해 다음과 같은 기호와 식을 사용한다.</p>
+
+<table>
+<thead>
+<tr>
+<th align="center">A</th>
+<th align="center">B</th>
+<th align="center">C</th>
+<th align="center">expression</th>
+<th align="center">minterms</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">A&rsquo;B&rsquo;C&rsquo;</td>
+<td align="center">m<sub>0</sub></td>
+</tr>
+
+<tr>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">1</td>
+<td align="center">A&rsquo;B&rsquo;C</td>
+<td align="center">m<sub>1</sub></td>
+</tr>
+
+<tr>
+<td align="center">0</td>
+<td align="center">1</td>
+<td align="center">0</td>
+<td align="center">A&rsquo;BC&rsquo;</td>
+<td align="center">m<sub>2</sub></td>
+</tr>
+
+<tr>
+<td align="center">0</td>
+<td align="center">1</td>
+<td align="center">1</td>
+<td align="center">A&rsquo;BC</td>
+<td align="center">m<sub>3</sub></td>
+</tr>
+
+<tr>
+<td align="center">1</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">AB&rsquo;C&rsquo;</td>
+<td align="center">m<sub>4</sub></td>
+</tr>
+
+<tr>
+<td align="center">1</td>
+<td align="center">0</td>
+<td align="center">1</td>
+<td align="center">AB&rsquo;C</td>
+<td align="center">m<sub>5</sub></td>
+</tr>
+
+<tr>
+<td align="center">1</td>
+<td align="center">1</td>
+<td align="center">0</td>
+<td align="center">ABC&rsquo;</td>
+<td align="center">m<sub>6</sub></td>
+</tr>
+
+<tr>
+<td align="center">1</td>
+<td align="center">1</td>
+<td align="center">1</td>
+<td align="center">ABC</td>
+<td align="center">m<sub>7</sub></td>
+</tr>
+</tbody>
+</table>
+
+<p>이 표현식을 사용하면 위 함수는 m<sub>1</sub>, m<sub>2</sub>, m<sub>6</sub>이 1이다. 따라서 다음과 같이 표현할 수 있다.</p>
+
+<p><code>$\begin{eqnarray} 
+F(A,B,C) &amp;=&amp; \sum m(1,2,6)   \\
+&amp;=&amp; m1+m2+m6   \\
+&amp;=&amp; A'B'C+A'BC'+ABC'
+\end{eqnarray}$</code></p>
+
+<h3 id="products-of-sum-pos">Products-of-Sum(PoS)</h3>
+
+<p>Pos는 Sop와 반대로 합들의 곱으로 나타내는 것이다. SoP의 경우 결과중 1에 주목했던 것 처럼, SoP의 경우 0에 집중한다.</p>
+
+<p>맨 처음 0의 경우 A, B, C 값이 모두 0일 경우 0이다. 이 경우에만 0이 나오고 그 외에는 모두 1이 나오는 sum 형태는 <code>A + B + C</code>이다. 위에서 했던 것 처럼 이런 방식으로 다른 0들도 sum 꼴로 나타낸다. 이후 이 항을 다 product 하면 SoP 형이 완성된다. 즉, 위의 truth table과 동치인 SoP는 <code>(A + B + C)(A + B' + C')(A' + B + C)(A' + B + C')(A' + B' + C')</code>이다.</p>
+
+<p>이 또한 기호와 식을 사용하면 다음과 같이 더욱 간단하게 나타낼 수 있다.</p>
+
+<table>
+<thead>
+<tr>
+<th align="center">A</th>
+<th align="center">B</th>
+<th align="center">C</th>
+<th align="center">expression</th>
+<th align="center">minterms</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">A + B + C</td>
+<td align="center">M<sub>0</sub></td>
+</tr>
+
+<tr>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">1</td>
+<td align="center">A + B + C&rsquo;</td>
+<td align="center">M<sub>1</sub></td>
+</tr>
+
+<tr>
+<td align="center">0</td>
+<td align="center">1</td>
+<td align="center">0</td>
+<td align="center">A + B&rsquo; + C</td>
+<td align="center">M<sub>2</sub></td>
+</tr>
+
+<tr>
+<td align="center">0</td>
+<td align="center">1</td>
+<td align="center">1</td>
+<td align="center">A + B&rsquo; + C&rsquo;</td>
+<td align="center">M<sub>3</sub></td>
+</tr>
+
+<tr>
+<td align="center">1</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">A&rsquo; + B + C</td>
+<td align="center">M<sub>4</sub></td>
+</tr>
+
+<tr>
+<td align="center">1</td>
+<td align="center">0</td>
+<td align="center">1</td>
+<td align="center">A&rsquo; + B + C&rsquo;</td>
+<td align="center">M<sub>5</sub></td>
+</tr>
+
+<tr>
+<td align="center">1</td>
+<td align="center">1</td>
+<td align="center">0</td>
+<td align="center">A&rsquo; + B&rsquo; + C</td>
+<td align="center">M<sub>6</sub></td>
+</tr>
+
+<tr>
+<td align="center">1</td>
+<td align="center">1</td>
+<td align="center">1</td>
+<td align="center">A&rsquo; + B&rsquo; + C&rsquo;</td>
+<td align="center">M<sub>7</sub></td>
+</tr>
+</tbody>
+</table>
+
+<p><code>$\begin{eqnarray} 
+F(A,B,C) &amp;=&amp; \prod M(0,3,4,5,7)   \\
+&amp;=&amp; M0 \cdot M3 \cdot M4 \cdot M5 \cdot M7   \\
+&amp;=&amp; (A+B+C)(A+B'+C')(A'+B+C)(A'+B+C')(A'+B'+C')
+\end{eqnarray}$</code></p>
+
+<h3 id="two-level-implementation">Two-level implementation</h3>
+
+<p>이렇게 SoP나 PoS로 나타난 함수들은 모두 Two-level implementation을 할 수 있다. Two-level implement를 하기 위해서는 우선 de Morgan&rsquo;s theorem을 알아야 한다.</p>
+
+<p><a href="https://en.wikipedia.org/wiki/De_Morgan%27s_laws">de Morgan&rsquo;s theorem</a>이란 다음 두 법칙을 뜻한다.</p>
+
+<ul>
+<li><code>$ (A_1 + A_2 + \ldots + A_n)' = A_1 ' \cdot A_2 ' \cdot \ldots \cdot A_n ' $</code></li>
+<li><code>$ (A_1 \cdot A_2 \cdot \ldots \cdot A_n)' = A_1 ' + A_2 ' + \ldots + A_n ' $</code></li>
+</ul>
+
+<p>즉, 전체에 NOT을 한 것은 각각에 NOT을 한 다음 <code>*</code>은 <code>+</code>로, <code>+</code>는 <code>*</code>로 바꾼 것과 결과가 같다는 것이 드 모르간의 법칙이다. 이를 이용하면 canonical form을 효과적으로 구현할 수 있다. 예시로 SoP 형태로 만든 것을 구현해보자.</p>
+
+<p>우선 위 함수의 SoP 형태를 실제 회로로 다음과 같이 구현할 수 있다.</p>
+
+<p><img src="/images/combinational_logic/sop0.png#center50" alt="" /></p>
+
+<p>위에 공리에서의 Involution 처럼 NOT 연산을 두번 하면 그대로이다. 따라서 다음과 같이 표현할 수 있다. 원이 NOT을 표현하는 기호이다.</p>
+
+<p><img src="/images/combinational_logic/sop1.png#center50" alt="" /></p>
+
+<p>이제 드 모르간의 법칙을 사용해보자. 드 모르간의 법칙에 따르면 <code>D' + E' + F' = (DEF)'</code> 이므로 다음과 같이 나타낼 수 있다.</p>
+
+<p><img src="/images/combinational_logic/sop2.png#center50" alt="" /></p>
+
+<p>따라서 모든 게이트를 NAND만 사용하여 SoP 형태를 구현할 수 있다. PoS 꼴로 나타낸 것도 위에 처럼 OR연산을 한 뒤 이들을 AND 연산하는 것으로 구현한 후 NOT을 두개씩 붙이면 모든 게이트를 NOR만 사용하여 구현할 수 있다. 우리는 지난시간에 NAND와 NOR이 트랜지스터 수가 적은 아주 효율적인 게이트임을 배웠다. 따라서 canonical form으로 만든 후 회로로 구현을 하면 효율적인 구현을 할 수 있다.</p>
+
+<p>하지만 그렇다고 canonical form이 만능은 아니다 예를 들어 다음 함수를 보자.</p>
+
+<table>
+<thead>
+<tr>
+<th align="center">A</th>
+<th align="center">B</th>
+<th align="center">C</th>
+<th align="center">D</th>
+<th align="center">OUT</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+</tr>
+
+<tr>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">1</td>
+<td align="center">1</td>
+</tr>
+
+<tr>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">1</td>
+<td align="center">0</td>
+<td align="center">0</td>
+</tr>
+
+<tr>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">1</td>
+<td align="center">1</td>
+<td align="center">1</td>
+</tr>
+
+<tr>
+<td align="center">0</td>
+<td align="center">1</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+</tr>
+
+<tr>
+<td align="center">0</td>
+<td align="center">1</td>
+<td align="center">0</td>
+<td align="center">1</td>
+<td align="center">1</td>
+</tr>
+
+<tr>
+<td align="center">0</td>
+<td align="center">1</td>
+<td align="center">1</td>
+<td align="center">0</td>
+<td align="center">0</td>
+</tr>
+
+<tr>
+<td align="center">0</td>
+<td align="center">1</td>
+<td align="center">1</td>
+<td align="center">1</td>
+<td align="center">1</td>
+</tr>
+
+<tr>
+<td align="center">1</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+</tr>
+
+<tr>
+<td align="center">1</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">1</td>
+<td align="center">1</td>
+</tr>
+
+<tr>
+<td align="center">1</td>
+<td align="center">0</td>
+<td align="center">1</td>
+<td align="center">0</td>
+<td align="center">0</td>
+</tr>
+
+<tr>
+<td align="center">1</td>
+<td align="center">0</td>
+<td align="center">1</td>
+<td align="center">1</td>
+<td align="center">1</td>
+</tr>
+
+<tr>
+<td align="center">1</td>
+<td align="center">1</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+</tr>
+
+<tr>
+<td align="center">1</td>
+<td align="center">1</td>
+<td align="center">0</td>
+<td align="center">1</td>
+<td align="center">1</td>
+</tr>
+
+<tr>
+<td align="center">1</td>
+<td align="center">1</td>
+<td align="center">1</td>
+<td align="center">0</td>
+<td align="center">1</td>
+</tr>
+
+<tr>
+<td align="center">1</td>
+<td align="center">1</td>
+<td align="center">1</td>
+<td align="center">1</td>
+<td align="center">1</td>
+</tr>
+</tbody>
+</table>
+
+<p>이 함수는 <code>ABC + D</code> 라는 함수로, 회로 구현에도 AND와 OR 하나씩만 있으면 된다. 그러나 이 함수를 canonical form으로 표현하면</p>
+
+<p><code>A'B'C'D + A'B'CD + A'BC'D + A'BCD' + AB'C'D + AB'CD + ABC'D + ABCD' + ABCD</code></p>
+
+<p>라는 굉장히 긴 식이 되고, 이를 구현하려면 10개의 NAND 게이트가 필요하다. 따라서 우리는 식을 효과적으로 간소화할 수 있는 새로운 방법을 찾을 필요가 있다.</p>
+
+<h2 id="karnaugh-map">Karnaugh map</h2>
+
+<p>카르노맵의 기본 기념은 위의 공리중 Uniting 중 <code>X * Y + X * Y' = X</code> 에서 시작되었다. 우선 카르노맵을 그리는 방법을 먼저 배워보자.</p>
+
+<p><img src="/images/combinational_logic/karnaugh0.png#center50" alt="" /></p>
+
+<p>Input이 네개일 경우 위와 같이 4 by 4 표로 그리면 된다. 이 표의 둘레에 두꺼운 선으로 표시하여 알파벳을 써분 부분이 있는데, 이는 그 부분이 해당 알파벳이 1인 칸임을 뜻하는 것이다. 예를 들어 A의 경우 오른쪽 두 열이 A가 1인 경우를 나타내는 칸이고, B의 경우 가운데 두 열이 B가 1이 된다. 이처럼 나타내면 4 by 4 칸 안에 ABCD가 0000인 경우부터 1111인 경우까지 모두 나타낼 수 있다. 이해를 돕기 위해 각 칸에 해당되는 ABCD 값을 회색으로 써놓았다.</p>
+
+<p>이렇게 표를 그린 후, 이제 각 칸에 해당되는 ABCD 값에 맞는 함수값을 쓰면 된다. 예를 들어 다음 함수를 보자.</p>
+
+<table>
+<thead>
+<tr>
+<th align="center">A</th>
+<th align="center">B</th>
+<th align="center">C</th>
+<th align="center">D</th>
+<th align="center">OUT</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">1</td>
+</tr>
+
+<tr>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">1</td>
+<td align="center">0</td>
+</tr>
+
+<tr>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">1</td>
+<td align="center">0</td>
+<td align="center">1</td>
+</tr>
+
+<tr>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">1</td>
+<td align="center">1</td>
+<td align="center">1</td>
+</tr>
+
+<tr>
+<td align="center">0</td>
+<td align="center">1</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+</tr>
+
+<tr>
+<td align="center">0</td>
+<td align="center">1</td>
+<td align="center">0</td>
+<td align="center">1</td>
+<td align="center">1</td>
+</tr>
+
+<tr>
+<td align="center">0</td>
+<td align="center">1</td>
+<td align="center">1</td>
+<td align="center">0</td>
+<td align="center">1</td>
+</tr>
+
+<tr>
+<td align="center">0</td>
+<td align="center">1</td>
+<td align="center">1</td>
+<td align="center">1</td>
+<td align="center">1</td>
+</tr>
+
+<tr>
+<td align="center">1</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">1</td>
+</tr>
+
+<tr>
+<td align="center">1</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">1</td>
+<td align="center">0</td>
+</tr>
+
+<tr>
+<td align="center">1</td>
+<td align="center">0</td>
+<td align="center">1</td>
+<td align="center">0</td>
+<td align="center">0</td>
+</tr>
+
+<tr>
+<td align="center">1</td>
+<td align="center">0</td>
+<td align="center">1</td>
+<td align="center">1</td>
+<td align="center">1</td>
+</tr>
+
+<tr>
+<td align="center">1</td>
+<td align="center">1</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+</tr>
+
+<tr>
+<td align="center">1</td>
+<td align="center">1</td>
+<td align="center">0</td>
+<td align="center">1</td>
+<td align="center">0</td>
+</tr>
+
+<tr>
+<td align="center">1</td>
+<td align="center">1</td>
+<td align="center">1</td>
+<td align="center">0</td>
+<td align="center">0</td>
+</tr>
+
+<tr>
+<td align="center">1</td>
+<td align="center">1</td>
+<td align="center">1</td>
+<td align="center">1</td>
+<td align="center">1</td>
+</tr>
+</tbody>
+</table>
+
+<p>이 함수를 카르노맵으로 나타내면 다음과 같다.</p>
+
+<p><img src="/images/combinational_logic/karnaugh1.png#center50" alt="" /></p>
+
+<p>몇개만 예를 들어 확인해보자. ABCD가 0000일 경우 결과값이 1이다. 따라서 제일 왼쪽 위의 칸에 해당하는 값은 1이다. ABCD가 0001일 경우 결과값이 0이다. 따라서 그 아래 칸에 해당하는 값은 0이다. 이처럼 각 칸의 ABCD에 해당하는 결과값을 써두면 된다. undefined일 경우 x로 표현한다.</p>
+
+<p>이렇게 카르노맵을 그리고 나면 이제 본격적인 작업이 시작된다. 우선 우리는 1에 주목한다. 그 다음 각 1들만 덮는 가장 큰 직사각형을 그리는데, 이 직사각형의 가로와 세로는 항상 2<sup>n</sup> 꼴이어야 한다. 즉, 2 by 4나 4 by 1은 되지만 2 by 3같은 것은 안된다. 또한 이 카르노맵은 좌우가 서로 연결되어있고, 위아래가 서로 연결되어 있다고 생각해야한다.</p>
+
+<p>제일 왼쪽 위의 1부터 보면 다음과 같은 두 직사각형을 그릴 수 있다.</p>
+
+<p><img src="/images/combinational_logic/karnaugh2.png#center50" alt="" /></p>
+
+<p>이 직사각형을 보면 위아래나 좌우가 연결되어있다는 것이 무슨 의미인지 짐작이 갈 것이다.</p>
+
+<p>오른쪽 위의 1은 이미 초록색 직사각형에 포함되어있고, 이를 벗어나는 직사각형을 그릴 수 없으므로 넘어간다. 이처럼 모든 1에 대해서 이를 포함하는 가장 큰 직사각형들을 그리면 다음과 같다.</p>
+
+<p><img src="/images/combinational_logic/karnaugh3.png#center50" alt="" /></p>
+
+<p>여기서 주황색 직사각형은 이미 다른 직사각형에 모두 포함되므로 제거해도 된다. 따라서 최종적인 그림은 다음과 같다.</p>
+
+<p><img src="/images/combinational_logic/karnaugh4.png#center50" alt="" /></p>
+
+<p>이제 각 직사각형에 해당하는 식을 찾으면 된다.</p>
+
+<ul>
+<li>초록색 직사각형의 경우 A의 값은 섞여있지만, B, C, D는 항상 0이다. 따라서 이 직사각형에 해당하는 식은 <code>B'C'D'</code>이다.</li>
+<li>파란색 직사각형의 경우 C의 값은 섞여있지만, A의 값은 항상 0이고 B, D의 값은 항상 1이다. 따라서 이에 해당하는 식은 <code>A'BD</code>이다.</li>
+<li>노란색 직사각형의 경우 A, B의 값은 섞여있지만 C, D의 값은 항상 1이다. 따라서 이에 해당하는 식은 <code>CD</code>이다.</li>
+<li>보라색 직사각형의 경우 B, D의 값은 섞여있지만 A값은 항상 0이고 C의 값은 항상 1이다. 따라서 이에 해당하는 식은 <code>A'C</code> 이다.</li>
+</ul>
+
+<p>따라서 이를 총 정리하면 <code>B'C'D' + A'BD + CD + A'C</code>가 된다.</p>
+
+<p>이게 성립하는 이유는 처음에 말했듯이 Uniting 공리로 설명할 수 있다. 예를 들어 보라색 사각형을 보자. 보라색 사각형의 1들을 SoP로 나타내면</p>
+
+<p><code>A'B'CD + A'BCD + A'B'CD' + A'BCD'</code></p>
+
+<p>이다. 이를 정리하면</p>
+
+<p><code>A'B'CD + A'BCD + A'B'CD' + A'BCD' = A'CD(B' + B) + A'CD'(B' + B) 
+= A'CD + A'CD' = A'C(D + D') = A'C</code></p>
+
+<p>가 된다. 이처럼 직사각형의 가로와 세로가 2<sup>n</sup> 꼴이라면 SoP 꼴을 Uniting 공리를 사용하여 짧게 줄일 수 있다.</p>
+
+<p>사실 이거 한번 읽어보는 것만으로는 바로 깨닫기 어렵다. 랜덤으로 함수를 만들어본 다음에 연습해 보는 것을 추천한다.</p>
+
+<h1 id="commonly-used-gates">Commonly used gates</h1>
+
+<p>지금까지 랜덤한 boolean function을 정리하고 구현하는 것을 해봤다. 이제 일반적으로 많이 쓰이는 게이트들을 다뤄보자.</p>
+
+<h2 id="multi-bit-notation">Multi-bit notation</h2>
+
+<p>복잡한 게이트를 구현하려 하다보면 여러 비트를 겹쳐서 써야할 때가 있다. 이 떄 다음과 같이 빗금을 친 다음 겹쳐있는 수 만큼 표시를 한다.</p>
+
+<p><img src="/images/combinational_logic/multibit0.png#center50" alt="" /></p>
+
+<p>여기서 n이 아니라 [31:0]처럼 표기하는 경우도 있는데 이는 31번째 부터 0번째까지 사용한다는 것이고, 이 때 앞의 숫자인 31이 <a href="https://ko.wikipedia.org/wiki/%EC%B5%9C%EC%83%81%EC%9C%84_%EB%B9%84%ED%8A%B8">최상위 비트(Most significant bit, MSB)</a>가 된다.</p>
+
+<h2 id="demultiplexer-demux">Demultiplexer(DEMUX)</h2>
+
+<p>일명 DEMUX라고 불리는 Demultiplexer는 다른 이름으로 decoder라고도 불린다. 이 회로는 n개의 input을 받아서 2<sup>n</sup>개의 output을 낸다. 이 갯수에 따라 2-to-4, 3-to-8, 4-to-16 등으로 불린다.</p>
+
+<p>DEMUX의 n개의 인풋은 이진수처럼 생각할 수 있다. 즉, 0 ~ (2<sup>n-1</sup>) 까지 표현할 수 있는데, 이에 해당되는 output만 1이고 나머지는 모두 0을 출력한다. 예를 들어 2-to-4 DEMUX를 표로 나타내면 다음과 같다.</p>
+
+<table>
+<thead>
+<tr>
+<th align="center">enable</th>
+<th align="center">a<sub>0</sub></th>
+<th align="center">a<sub>1</sub></th>
+<th align="center"></th>
+<th align="center">d<sub>0</sub></th>
+<th align="center">d<sub>1</sub></th>
+<th align="center">d<sub>2</sub></th>
+<th align="center">d<sub>3</sub></th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td align="center">1</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center"></td>
+<td align="center">1</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+</tr>
+
+<tr>
+<td align="center">1</td>
+<td align="center">0</td>
+<td align="center">1</td>
+<td align="center"></td>
+<td align="center">0</td>
+<td align="center">1</td>
+<td align="center">0</td>
+<td align="center">0</td>
+</tr>
+
+<tr>
+<td align="center">1</td>
+<td align="center">1</td>
+<td align="center">0</td>
+<td align="center"></td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">1</td>
+<td align="center">0</td>
+</tr>
+
+<tr>
+<td align="center">1</td>
+<td align="center">1</td>
+<td align="center">1</td>
+<td align="center"></td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">1</td>
+</tr>
+
+<tr>
+<td align="center">0</td>
+<td align="center">x</td>
+<td align="center">x</td>
+<td align="center"></td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+</tr>
+</tbody>
+</table>
+
+<p>이제 이 DEMUX를 구현해보자. 우선 가장 간단한 1-to-2 DEMUX부터 만들어보자. 1-to-2 DEMUX의 진리표는 다음과 같다.</p>
+
+<table>
+<thead>
+<tr>
+<th align="center">enable</th>
+<th align="center">a<sub>0</sub></th>
+<th align="center"></th>
+<th align="center">d<sub>0</sub></th>
+<th align="center">d<sub>1</sub></th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td align="center">1</td>
+<td align="center">0</td>
+<td align="center"></td>
+<td align="center">1</td>
+<td align="center">0</td>
+</tr>
+
+<tr>
+<td align="center">1</td>
+<td align="center">1</td>
+<td align="center"></td>
+<td align="center">0</td>
+<td align="center">1</td>
+</tr>
+
+<tr>
+<td align="center">0</td>
+<td align="center">x</td>
+<td align="center"></td>
+<td align="center">0</td>
+<td align="center">0</td>
+</tr>
+</tbody>
+</table>
+
+<p>이는 다음과 같이 구현할 수 있다. en은 enable을 뜻한다.</p>
+
+<p><img src="/images/combinational_logic/demux0.png#center50" alt="" /></p>
+
+<p>방금 만든 1-to-2 DEMUX를 사용하면 더 큰 2-to-4 DEMUX를 만들 수 있다. 2-to-4 DEMUX 진리표의 결과부분에서 enable이 1인 부분을 가로세로로 반으로 나눠서 4등분을 해보자. 그중 왼쪽 위의 모양을 보면 1-to-2 DEMUX의 결과부분과 같다. 또한 오른쪽 아래 부분도 1-to-2 DEMUX의 결과 부분과 같다. 또한 나머지 부분은 모두 0이다. 따라서 다음과 같이 경우를 생각할 수 있다.</p>
+
+<ul>
+<li>a<sub>0</sub>가 0인 경우(절반 중 윗부분)
+
+<ul>
+<li>d<sub>0</sub>와 d<sub>1</sub>(절반 중 왼쪽부분) : 1-to-2 DEMUX</li>
+<li>d<sub>2</sub>와 d<sub>3</sub>(절반 중 오른쪽부분) : 0</li>
+</ul></li>
+<li>a<sub>0</sub>가 1인 경우(절반 중 아랫부분)
+
+<ul>
+<li>d<sub>0</sub>와 d<sub>1</sub>(절반 중 왼쪽부분) : 0이고,</li>
+<li>d<sub>2</sub>와 d<sub>3</sub>(절반 중 오른쪽부분) : 1-to-2 DEMUX</li>
+</ul></li>
+</ul>
+
+<p>여기서 0인 부분은 작은 DEMUX의 enable에 0을 넣어주면 된다. 따라서 다음과 같이 구현할 수 있다.</p>
+
+<p><img src="/images/combinational_logic/demux1.png#center50" alt="" /></p>
+
+<p>이와 같은 방법으로 2-to-4 DEMUX 두개를 조합하면 3-to-8을 만들 수 있고, n-to-2<sup>n</sup> DEMUX 두개로 (n+1)-to-2<sup>n+1</sup> DEMUX를 만들 수 있다.</p>
+
+<h2 id="multiplexer-mux">Multiplexer(MUX)</h2>
+
+<p>일명 MUX라고 불리는 Multiplexer는 다른 이름으로 selector라고 불리기도 한다. 말 그대로 여러 input 중 어떤 것을 내보낼지 선택하는 기능을 한다. 이 input의 갯수에 따라 n-to-1 MUX라고 부른다. 예를 들어 2-to-1 MUX는 다음과 같이 표현한다. MUX의 기호는 사다리꼴로 그리고, 선택 당할 input들을 긴 변에, select하는 인자를 빗변에 그린다.</p>
+
+<table>
+<thead>
+<tr>
+<th align="center">s</th>
+<th align="center"></th>
+<th align="center">f</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td align="center">0</td>
+<td align="center"></td>
+<td align="center">x</td>
+</tr>
+
+<tr>
+<td align="center">1</td>
+<td align="center"></td>
+<td align="center">y</td>
+</tr>
+</tbody>
+</table>
+
+<p><img src="/images/combinational_logic/mux0.png#center75" alt="" /></p>
+
+<p>더 큰 MUX 또한 작은 MUX를 이용해서 만들 수 있다. 우선 4-to-1 MUX의 진리표를 먼저 보자.</p>
+
+<table>
+<thead>
+<tr>
+<th align="center">s<sub>1</sub></th>
+<th align="center">s<sub>0</sub></th>
+<th align="center"></th>
+<th align="center">f</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center"></td>
+<td align="center">x</td>
+</tr>
+
+<tr>
+<td align="center">0</td>
+<td align="center">1</td>
+<td align="center"></td>
+<td align="center">y</td>
+</tr>
+
+<tr>
+<td align="center">1</td>
+<td align="center">0</td>
+<td align="center"></td>
+<td align="center">z</td>
+</tr>
+
+<tr>
+<td align="center">1</td>
+<td align="center">1</td>
+<td align="center"></td>
+<td align="center">w</td>
+</tr>
+</tbody>
+</table>
+
+<p>만약에 여기서 s<sub>1</sub>이 0이로 고정되었다고 생각해보자. 그렇다면 진리표는 다음과 같이 바뀐다.</p>
+
+<table>
+<thead>
+<tr>
+<th align="center">s<sub>0</sub></th>
+<th align="center"></th>
+<th align="center">f</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td align="center">0</td>
+<td align="center"></td>
+<td align="center">x</td>
+</tr>
+
+<tr>
+<td align="center">1</td>
+<td align="center"></td>
+<td align="center">y</td>
+</tr>
+</tbody>
+</table>
+
+<p>즉, 2-to-1 MUX와 같이 동작한다. 만약에 s<sub>0</sub>가 0으로 고정되었다고 생각해보자.</p>
+
+<table>
+<thead>
+<tr>
+<th align="center">s<sub>1</sub></th>
+<th align="center"></th>
+<th align="center">f</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td align="center">0</td>
+<td align="center"></td>
+<td align="center">x</td>
+</tr>
+
+<tr>
+<td align="center">1</td>
+<td align="center"></td>
+<td align="center">z</td>
+</tr>
+</tbody>
+</table>
+
+<p>이 또한 2-to-1 MUX와 같이 동작한다. 즉, 모든 select bit는 2-to-1 MUX의 select bit처럼 동작한다. 따라서 다음과 같이 구현할 수 있다.</p>
+
+<p><img src="/images/combinational_logic/mux1.png#center75" alt="" /></p>
+
+<p>MUX를 구현하는 방법 중에는 DEMUX를 이용하는 방법도 있다. 처음에 2-to-1 MUX를 구현한 것을 다시 살펴보자.</p>
+
+<p><img src="/images/combinational_logic/mux2.png#center50" alt="" /></p>
+
+<p>여기서 빨간 네모친 부분을 살펴보자. 이 부분만 생각하면 s라는 하나의 input을 받아서 NOT s와 s를 출력하는 회로로 생각할 수 있다. 이는 1-to-2 DEMUX와 같은 동작을 한다. 여기서 힌트를 받아서 생각해보자.</p>
+
+<ol>
+<li>DEMUX는 선택된 단 하나의 bit만 1을 내보내고, 나머지는 0을 내보낸다.</li>
+<li>이를 MUX의 각 input에 AND하면 선택된 bit만 그대로 나오고 나머지는 모두 0이 된다.</li>
+<li>이 결과를 모두 OR하면 선택된 비트가 그대로 나온다.</li>
+</ol>
+
+<p>따라서 이러한 방법으로 DEMUX를 이용해서 MUX를 구현할 수 있다. 예를 들어 4-to-1 MUX는 다음과 같이 구현할 수 있다.</p>
+
+<p><img src="/images/combinational_logic/mux3.png#center50" alt="" /></p>
+
+<h2 id="shifter">Shifter</h2>
+
+<p>이제 좀더 실용적으로 쓰일만한 연산기를 만들어보자. 우선 제일 간단한 shifter부터 만들어보자. Shifter는 말 그대로 shift연산을 해주는 연산기이다. 왼쪽이나 오른쪽으로 shift를 하게 되면 반대편의 빈 자리는 Lin, Rin이 차지가게 된다. 즉, 입력이 B이고 출력이 D라고 할 때 아래 표와 같은 역할을 한다.</p>
+
+<table>
+<thead>
+<tr>
+<th align="center">s<sub>1</sub></th>
+<th align="center">s<sub>0</sub></th>
+<th align="center"></th>
+<th align="center">D<sub>3</sub></th>
+<th align="center">D<sub>2</sub></th>
+<th align="center">D<sub>1</sub></th>
+<th align="center">D<sub>0</sub></th>
+<th align="center">act</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center"></td>
+<td align="center">B<sub>3</sub></td>
+<td align="center">B<sub>2</sub></td>
+<td align="center">B<sub>1</sub></td>
+<td align="center">B<sub>0</sub></td>
+<td align="center">Idle</td>
+</tr>
+
+<tr>
+<td align="center">0</td>
+<td align="center">1</td>
+<td align="center"></td>
+<td align="center">R<sub>in</sub></td>
+<td align="center">B<sub>3</sub></td>
+<td align="center">B<sub>2</sub></td>
+<td align="center">B<sub>1</sub></td>
+<td align="center">Shift right</td>
+</tr>
+
+<tr>
+<td align="center">1</td>
+<td align="center">0</td>
+<td align="center"></td>
+<td align="center">B<sub>2</sub></td>
+<td align="center">B<sub>1</sub></td>
+<td align="center">B<sub>0</sub></td>
+<td align="center">L<sub>in</sub></td>
+<td align="center">Shift left</td>
+</tr>
+
+<tr>
+<td align="center">1</td>
+<td align="center">1</td>
+<td align="center"></td>
+<td align="center">B<sub>3</sub></td>
+<td align="center">B<sub>2</sub></td>
+<td align="center">B<sub>1</sub></td>
+<td align="center">B<sub>0</sub></td>
+<td align="center">Idle</td>
+</tr>
+</tbody>
+</table>
+
+<p>이는 MUX를 사용하여 어떤 것을 출력할지 정하는 방식으로 구현하면 간단하게 구현할 수 있다.</p>
+
+<p><img src="/images/combinational_logic/shifter0.png#center75" alt="" /></p>
+
+<h2 id="adder">Adder</h2>
+
+<h3 id="2-complement-2의-보수">2&rsquo;complement (2의 보수)</h3>
+
+<p>Adder를 만들어보기 전에 우선 2진법으로 수를 나타내는 방법부터 알아보자. 자주 쓰이는 방법으로는 unsingned와 2&rsquo;s complement 두가지 방법이 있다.</p>
+
+<p>unsigned는 0001은 1이고 1101은 13인것 처럼 우리가 아는 이진수 그대로 쓰면 된다. 이 방법에는 큰 문제가 있는데, 음수를 표현하지 못한다는 것이다.</p>
+
+<p>일반적으로 우리가 쓰는 아라비아 숫자의 경우 앞에 -라는 unary operation을 사용하여 음수 여부를 나타낸다. 그러나 이진수 체계에서는 0과 1만을 사용하여 음수와 양수를 모두 표현해야 한다. 이를 효과적으로 처리하기 위해 나온 개념이 2&rsquo;s complement, 한글로 하면 2의 보수이다.</p>
+
+<p>보수란 말 그대로 보충을 해주는 수이다. 즉, 2의 보수란 n-bit 체계에서 보충을 해서 2^n이 되어 overflow 되는 bit를 제외하면 0이 되도록 해주는 수이다. 4-bit로 예를 들면, 0010의 경우 1110이 보수가 된다. 물론 1110 의 보수는 0010이 된다. 이 때 맨 앞의 bit가 0인 부분이 양수가 되고, 1인 부분을 그 양수의 음수표현으로 사용한다. 즉, 0010은 2이므로 1110은 -2가 된다. 이를 정리하면 아래와 같다.</p>
+
+<table>
+<thead>
+<tr>
+<th align="center">binary</th>
+<th align="center">0000</th>
+<th align="center">0001</th>
+<th align="center">0010</th>
+<th align="center">0011</th>
+<th align="center">0100</th>
+<th align="center">0101</th>
+<th align="center">0110</th>
+<th align="center">0111</th>
+<th align="center">1000</th>
+<th align="center">1001</th>
+<th align="center">1010</th>
+<th align="center">1011</th>
+<th align="center">1100</th>
+<th align="center">1101</th>
+<th align="center">1110</th>
+<th align="center">1111</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td align="center">unsigned</td>
+<td align="center">0</td>
+<td align="center">1</td>
+<td align="center">2</td>
+<td align="center">3</td>
+<td align="center">4</td>
+<td align="center">5</td>
+<td align="center">6</td>
+<td align="center">7</td>
+<td align="center">8</td>
+<td align="center">9</td>
+<td align="center">10</td>
+<td align="center">11</td>
+<td align="center">12</td>
+<td align="center">13</td>
+<td align="center">14</td>
+<td align="center">15</td>
+</tr>
+
+<tr>
+<td align="center">2&rsquo;s complement</td>
+<td align="center">0</td>
+<td align="center">1</td>
+<td align="center">2</td>
+<td align="center">3</td>
+<td align="center">4</td>
+<td align="center">5</td>
+<td align="center">6</td>
+<td align="center">7</td>
+<td align="center">-8</td>
+<td align="center">-7</td>
+<td align="center">-6</td>
+<td align="center">-5</td>
+<td align="center">-4</td>
+<td align="center">-3</td>
+<td align="center">-2</td>
+<td align="center">-1</td>
+</tr>
+</tbody>
+</table>
+
+<p>이처럼 2의 보수를 사용하면 n-bit일 경우 -2<sup>n-1</sup> 부터 2<sup>n-1</sup> - 1 까지 나타낼 수 있다. 여기서 우리가 덧셈이나 뻴셈을 하다 보면 저 범위를 넘어갈 경우가 있고, 그럴 경우 우리가 의도한 수가 안나올 수도 있다. 예를 들어 <code>5 + 6</code>을 하려고 할 경우 <code>0101 + 0110 = 1011 = -5</code>로 의도하지 않은 수가 나오게 된다. 이러한 경우를 overflow라고 하고, 이러한 상황이 나오지 않도록 주의해야한다.</p>
+
+<p>2의 보수를 사용하는 이유는 덧셈을 평소 더하듯이 자연스럽게 더해도 되기 때문이다. 보수인 수끼리 서로 더할 경우 overflow 되는 bit를 제외하면 0000으로 0이 된다. 또한 -2 + 5의 경우 -2 + 5 = -2 + (2 + 3) = (-2 + 2) + 3으로 쪼개어보면 역시 자연스럽게 계산됨을 알 수 있다. 이처럼 우리가 원래 알던 방식대로 더해도 자연스럽게 성립이 되는 2의 보수라는 방식을 통해 음수를 표현한다.</p>
+
+<p>2의 보수를 구하는 방법은 간단하다. 10000을 9999 + 1로 나타낼 수 있듯이 2<sup>n</sup>을 만드려면 11&hellip;11를 만드는 수에서 1을 더하면 된다. 또한 11&hellip;11을 만드려면 원래 수에서 1인부분은 0으로, 0인부분은 1로 바꾼 수를 더하면 되고, NOT 연산이 이와 같은 역할을 한다. 따라서 <code>A</code>의 보수는 MOT을 한 다음 1을 더하면 되므로 <code>A' + 1</code>이 된다.</p>
+
+<h3 id="half-adder-full-adder">Half Adder &amp; Full Adder</h3>
+
+<p>우선 덧셈이라는 연산을 진리표로 나타내면 다음과 같다.</p>
+
+<table>
+<thead>
+<tr>
+<th align="center">x</th>
+<th align="center">y</th>
+<th align="center"></th>
+<th align="center">sum</th>
+<th align="center">carry</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center"></td>
+<td align="center">0</td>
+<td align="center">0</td>
+</tr>
+
+<tr>
+<td align="center">0</td>
+<td align="center">1</td>
+<td align="center"></td>
+<td align="center">1</td>
+<td align="center">0</td>
+</tr>
+
+<tr>
+<td align="center">1</td>
+<td align="center">0</td>
+<td align="center"></td>
+<td align="center">1</td>
+<td align="center">0</td>
+</tr>
+
+<tr>
+<td align="center">1</td>
+<td align="center">1</td>
+<td align="center"></td>
+<td align="center">0</td>
+<td align="center">1</td>
+</tr>
+</tbody>
+</table>
+
+<p>여기서 carry는 받아올림으로 생각하면 된다. 각 output을 식으로 나타내면</p>
+
+<p><code>sum = x ^ y</code></p>
+
+<p><code>carry = x * y</code></p>
+
+<p>여기서 <code>^</code>는 XOR을 나타내는 기호이다. 따라서 이를 로직 회로로 구현하면 다음과 같다.</p>
+
+<p><img src="/images/combinational_logic/halfadder0.png#center50" alt="" /></p>
+
+<p>이를 half adder, 한글는 반가산기라고 부른다. 얘를 반쪽이라고 부르는 carry in, 즉 받아올림이 없기 때문이다. 우리는 단순히 한자리만 더하는 것이 아니라 여러 자리를 더하는 것을 만들어야 한다. 따라서 완벽한 전가산기(full adder)을 만드려고 하면 이전 자리에서 올라온 carry in을 고려해야 한다. 이를 고려한 전가산기의 진리표는 다음과 같다.</p>
+
+<table>
+<thead>
+<tr>
+<th align="center">Cin</th>
+<th align="center">x</th>
+<th align="center">y</th>
+<th align="center"></th>
+<th align="center">sum</th>
+<th align="center">Cout</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center"></td>
+<td align="center">0</td>
+<td align="center">0</td>
+</tr>
+
+<tr>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">1</td>
+<td align="center"></td>
+<td align="center">1</td>
+<td align="center">0</td>
+</tr>
+
+<tr>
+<td align="center">0</td>
+<td align="center">1</td>
+<td align="center">0</td>
+<td align="center"></td>
+<td align="center">1</td>
+<td align="center">0</td>
+</tr>
+
+<tr>
+<td align="center">0</td>
+<td align="center">1</td>
+<td align="center">1</td>
+<td align="center"></td>
+<td align="center">0</td>
+<td align="center">1</td>
+</tr>
+
+<tr>
+<td align="center">1</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center"></td>
+<td align="center">1</td>
+<td align="center">0</td>
+</tr>
+
+<tr>
+<td align="center">1</td>
+<td align="center">0</td>
+<td align="center">1</td>
+<td align="center"></td>
+<td align="center">0</td>
+<td align="center">1</td>
+</tr>
+
+<tr>
+<td align="center">1</td>
+<td align="center">1</td>
+<td align="center">0</td>
+<td align="center"></td>
+<td align="center">0</td>
+<td align="center">1</td>
+</tr>
+
+<tr>
+<td align="center">1</td>
+<td align="center">1</td>
+<td align="center">1</td>
+<td align="center"></td>
+<td align="center">1</td>
+<td align="center">1</td>
+</tr>
+</tbody>
+</table>
+
+<p>또한 이를 식으로 나타내면 다음과 같다.</p>
+
+<p><code>sum = x ^ y ^ Cin</code></p>
+
+<p><code>Cout = x * y + Cin * (x ^ y)</code></p>
+
+<p>사실 잘 생각하면 결국 결과는 <code>x + y + Cin</code>이고,  <code>x + y + Cin = (x + y) + Cin</code>이므로 전가산기는 반가산기 두개로 구현할 수 있다.</p>
+
+<p><img src="/images/combinational_logic/fulladder0.png#center75" alt="" /></p>
+
+<h3 id="ripple-carry-adder">Ripple Carry Adder</h3>
+
+<p>이제 carry in과 carry out을 모두 처리할 수 있으니 n-bit adder을 만들 수 있다. 아래와 같이 이전 bit의 carry out을 다음 bit의 carry in으로 연결하는 방식으로 구현한 것을 ripple carry adder라고 한다.</p>
+
+<p><img src="/images/combinational_logic/ripplecarryadder0.png#center75" alt="" /></p>
+
+<h2 id="alu-arithmetic-loguc-unit">ALU (Arithmetic Loguc Unit)</h2>
+
+<p>헷갈림을 방지하기 위해 여기서의 <code>+</code>는 logical AND가 아니라 arithmetic ADD를 뜻한다.</p>
+
+<h3 id="arithmetic-unit">Arithmetic Unit</h3>
+
+<p>지금부터는 점점 우리가 만든 것들을 합쳐서 큰 unit을 만들 것이다. 우선 만들어볼 것은 Arithemetic unit으로, 아래의 진리표 처럼 작동하며 덧셈과 뺄셈 기능을 수행한다.</p>
+
+<table>
+<thead>
+<tr>
+<th align="center">s<sub>1</sub></th>
+<th align="center">s<sub>0</sub></th>
+<th align="center"></th>
+<th align="center">Y</th>
+<th align="center">F when C<sub>in</sub> = 0</th>
+<th align="center">F when C<sub>in</sub> = 1</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center"></td>
+<td align="center">00&hellip;0</td>
+<td align="center">A</td>
+<td align="center">A + 1</td>
+</tr>
+
+<tr>
+<td align="center">0</td>
+<td align="center">1</td>
+<td align="center"></td>
+<td align="center">B</td>
+<td align="center">A + B</td>
+<td align="center">A + B + 1</td>
+</tr>
+
+<tr>
+<td align="center">1</td>
+<td align="center">0</td>
+<td align="center"></td>
+<td align="center">B&rsquo;</td>
+<td align="center">A + B&rsquo; = A - B - 1</td>
+<td align="center">A + B&rsquo; + 1 = A - B</td>
+</tr>
+
+<tr>
+<td align="center">1</td>
+<td align="center">1</td>
+<td align="center"></td>
+<td align="center">11&hellip;1</td>
+<td align="center">A - 1</td>
+<td align="center">A</td>
+</tr>
+</tbody>
+</table>
+
+<p><img src="/images/combinational_logic/arithmeticunit0.png#center75" alt="" /></p>
+
+<h3 id="logic-unit">Logic Unit</h3>
+
+<p>Logic unit은 말 그대로 logic 연산을 해주는 unit으로, 어떤 연산을 할지를 MUX를 사용하여 결정한다.</p>
+
+<table>
+<thead>
+<tr>
+<th align="center">s<sub>1</sub></th>
+<th align="center">s<sub>0</sub></th>
+<th align="center"></th>
+<th align="center">F</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center"></td>
+<td align="center">A OR B</td>
+</tr>
+
+<tr>
+<td align="center">0</td>
+<td align="center">1</td>
+<td align="center"></td>
+<td align="center">A AND B</td>
+</tr>
+
+<tr>
+<td align="center">1</td>
+<td align="center">0</td>
+<td align="center"></td>
+<td align="center">A XOR B</td>
+</tr>
+
+<tr>
+<td align="center">1</td>
+<td align="center">1</td>
+<td align="center"></td>
+<td align="center">A&rsquo;</td>
+</tr>
+</tbody>
+</table>
+
+<p><img src="/images/combinational_logic/logicunit0.png#center50" alt="" /></p>
+
+<h3 id="arithmetic-logic-unit">Arithmetic Logic Unit</h3>
+
+<p>이제 위에서 만든 두 arithmetic unit과 logic unit을 합치면 arithmetic logic unit을 만들 수 있다.</p>
+
+<table>
+<thead>
+<tr>
+<th align="center">s<sub>2</sub></th>
+<th align="center">s<sub>1</sub></th>
+<th align="center">s<sub>0</sub></th>
+<th align="center">C<sub>in</sub></th>
+<th align="center"></th>
+<th align="center">F</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center"></td>
+<td align="center">A</td>
+</tr>
+
+<tr>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">1</td>
+<td align="center"></td>
+<td align="center">A + 1</td>
+</tr>
+
+<tr>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">1</td>
+<td align="center">0</td>
+<td align="center"></td>
+<td align="center">A + B</td>
+</tr>
+
+<tr>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">1</td>
+<td align="center">1</td>
+<td align="center"></td>
+<td align="center">A + B + 1</td>
+</tr>
+
+<tr>
+<td align="center">0</td>
+<td align="center">1</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center"></td>
+<td align="center">A - B - 1</td>
+</tr>
+
+<tr>
+<td align="center">0</td>
+<td align="center">1</td>
+<td align="center">0</td>
+<td align="center">1</td>
+<td align="center"></td>
+<td align="center">A - B</td>
+</tr>
+
+<tr>
+<td align="center">0</td>
+<td align="center">1</td>
+<td align="center">1</td>
+<td align="center">0</td>
+<td align="center"></td>
+<td align="center">A - 1</td>
+</tr>
+
+<tr>
+<td align="center">0</td>
+<td align="center">1</td>
+<td align="center">1</td>
+<td align="center">1</td>
+<td align="center"></td>
+<td align="center">A</td>
+</tr>
+
+<tr>
+<td align="center">1</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">x</td>
+<td align="center"></td>
+<td align="center">A OR B</td>
+</tr>
+
+<tr>
+<td align="center">1</td>
+<td align="center">0</td>
+<td align="center">1</td>
+<td align="center">x</td>
+<td align="center"></td>
+<td align="center">A AND B</td>
+</tr>
+
+<tr>
+<td align="center">1</td>
+<td align="center">1</td>
+<td align="center">0</td>
+<td align="center">x</td>
+<td align="center"></td>
+<td align="center">A XOR B</td>
+</tr>
+
+<tr>
+<td align="center">1</td>
+<td align="center">1</td>
+<td align="center">1</td>
+<td align="center">x</td>
+<td align="center"></td>
+<td align="center">A&rsquo;</td>
+</tr>
+</tbody>
+</table>
+
+<p><img src="/images/combinational_logic/alu0.png#center75" alt="" /></p>
+
+<p>그러나 일반적으로 CPU 등에 들어가는 ALU는 이 ALU에 Shifter까지 붙인 것을 뜻한다. 이는 아래와 같이 작동하고, 바지를 뒤집은 듯한 기호로 나타낸다. Output중 Negative, Zero, Carry, oVerflow를 NZCV flag라고 부른다.</p>
+
+<table>
+<thead>
+<tr>
+<th align="center">Fs<sub>4</sub></th>
+<th align="center">Fs<sub>3</sub></th>
+<th align="center">Fs<sub>2</sub></th>
+<th align="center">Fs<sub>1</sub></th>
+<th align="center">Fs<sub>0</sub></th>
+<th align="center"></th>
+<th align="center">F</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center"></td>
+<td align="center">A</td>
+</tr>
+
+<tr>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">1</td>
+<td align="center"></td>
+<td align="center">A + 1</td>
+</tr>
+
+<tr>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">1</td>
+<td align="center">0</td>
+<td align="center"></td>
+<td align="center">A + B</td>
+</tr>
+
+<tr>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">1</td>
+<td align="center">1</td>
+<td align="center"></td>
+<td align="center">A + B + 1</td>
+</tr>
+
+<tr>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">1</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center"></td>
+<td align="center">A - B - 1</td>
+</tr>
+
+<tr>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">1</td>
+<td align="center">0</td>
+<td align="center">1</td>
+<td align="center"></td>
+<td align="center">A - B</td>
+</tr>
+
+<tr>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">1</td>
+<td align="center">1</td>
+<td align="center">0</td>
+<td align="center"></td>
+<td align="center">A - 1</td>
+</tr>
+
+<tr>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">1</td>
+<td align="center">1</td>
+<td align="center">1</td>
+<td align="center"></td>
+<td align="center">A</td>
+</tr>
+
+<tr>
+<td align="center">0</td>
+<td align="center">1</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">x</td>
+<td align="center"></td>
+<td align="center">A OR B</td>
+</tr>
+
+<tr>
+<td align="center">0</td>
+<td align="center">1</td>
+<td align="center">0</td>
+<td align="center">1</td>
+<td align="center">x</td>
+<td align="center"></td>
+<td align="center">A AND B</td>
+</tr>
+
+<tr>
+<td align="center">0</td>
+<td align="center">1</td>
+<td align="center">1</td>
+<td align="center">0</td>
+<td align="center">x</td>
+<td align="center"></td>
+<td align="center">A XOR B</td>
+</tr>
+
+<tr>
+<td align="center">0</td>
+<td align="center">1</td>
+<td align="center">1</td>
+<td align="center">1</td>
+<td align="center">x</td>
+<td align="center"></td>
+<td align="center">A&rsquo;</td>
+</tr>
+
+<tr>
+<td align="center">1</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">x</td>
+<td align="center">x</td>
+<td align="center"></td>
+<td align="center">B</td>
+</tr>
+
+<tr>
+<td align="center">1</td>
+<td align="center">0</td>
+<td align="center">1</td>
+<td align="center">0</td>
+<td align="center">x</td>
+<td align="center"></td>
+<td align="center">logical shift right B</td>
+</tr>
+
+<tr>
+<td align="center">1</td>
+<td align="center">0</td>
+<td align="center">1</td>
+<td align="center">1</td>
+<td align="center">x</td>
+<td align="center"></td>
+<td align="center">arithmetic shift right B</td>
+</tr>
+
+<tr>
+<td align="center">1</td>
+<td align="center">1</td>
+<td align="center">0</td>
+<td align="center">x</td>
+<td align="center">x</td>
+<td align="center"></td>
+<td align="center">shift left B</td>
+</tr>
+
+<tr>
+<td align="center">1</td>
+<td align="center">1</td>
+<td align="center">1</td>
+<td align="center">x</td>
+<td align="center">x</td>
+<td align="center"></td>
+<td align="center">B</td>
+</tr>
+</tbody>
+</table>
+
+<p><img src="/images/combinational_logic/alu1.png#center100" alt="" /></p>
+
+<h1 id="delay">Delay</h1>
+
+<p>이론처럼 게이트에서 전기신호가 바로바로 슉슉 바뀌면 이상적이겠지만, 실제로는 신호 변환에 딜레이가 존재한다. 이러한 딜레이로 인하여 내가 하고자 하는 task의 수행 시간이 엄청 길어질 수도 있고, 잘못 처리하면 glitch 등이 발생할 수도 있다. 예를 들어 아래 상황을 보자.</p>
+
+<p><img src="/images/combinational_logic/delay0.png#center50" alt="" /></p>
+
+<p>이 상황은 A와 A&rsquo;을 AND하고 있으므로 결과인 F는 항상 0이어야 한다. 그러나 실제로 작동하는 waveform을 보면 아래와 같다.</p>
+
+<p><img src="/images/combinational_logic/delay1.png#center50" alt="" /></p>
+
+<p>NOT 게이트의 딜레이 때문에 A가 1이 되자마자 D가 바로 0이 되지 못했기 때문에 그동안 F에서 1이 출력되게 된다. 이처럼 딜회로를 설계할 때 딜레이를 잘 고려하지 않으면 의도하지 않은 작동으로 인해 제대로 task가 수행되지 않을 수도 있다.</p>
+
+<h2 id="carry-lookahead-adder-cla">Carry-Lookahead Adder (CLA)</h2>
+
+<p>우리가 위에서 만들었던 ripple carry adder의 모양을 다시 살펴보자.</p>
+
+<p><img src="/images/combinational_logic/ripplecarryadder0.png#center75" alt="" /></p>
+
+<p>이는 이전 bit의 carry out을 다시 carry in으로 받는 방식으로 계산한다. 따라서 이전 bit에서 계산이 완료되어야 다음 bit의 계산 결과가 제대로 나오게 된다. Full adder의 딜레이를 t라고 하면 첫번째 bit의 계산 결과가 나오는데 t가 걸린다. 두번째 bit의 계산 결과가 나오려면 2t가 걸리고, 결국 모든 bit가 계산이 되려면 nt만큼의 시간이 걸린다. 이처럼 계산 시간이 n에 비례해서 선형적으로 증가하므로, 만약에 n이 엄청 크다면 그에 따른 계산 시간도 엄청 오래걸리게 된다. 이러한 점을 방지하기 위해 나온 것이 carry-lookahead adder이다.</p>
+
+<p>이름에서 유추해볼 수 있듯이 우리는 carry부분에 주목한다. 계산시간을 줄이기 위해서는 몇 번째 bit냐에 상관 없이 상수시간 안에 carry in을 구해야 한다. 이러한 작업을 하기 위해 우리는 몇 가지 변수를 정의한다.</p>
+
+<ul>
+<li>C<sub>i</sub>는 i번째 bit가 받는 carry in을 뜻한다.</li>
+<li>G<sub>i</sub>는 i번째 비트의 <code>x * y</code> 이다.</li>
+<li>P<sub>i</sub>는 i번째 비트의 <code>x ^ y</code> 이다.</li>
+</ul>
+
+<p>우리는 위에서 했듯이 <code>Cout = x * y + Cin * (x ^ y)</code>임을 이미 알고있다. 따라서 다음과 같이 적을 수 있다.</p>
+
+<p><code>$ C_{i+1} = G_{i} + P_{i} \cdot C_{i} $</code></p>
+
+<p>예를 들어 4-bit 상황에선 다음과 같이 쓸 수 있다.</p>
+
+<p><code>$
+C_{1} = G_{0} + P_{0} \cdot C_{0} \\
+C_{2} = G_{1} + P_{1} \cdot C_{1} \\
+C_{3} = G_{2} + P_{2} \cdot C_{2} \\
+C_{4} = G_{3} + P_{3} \cdot C_{3}
+$</code></p>
+
+<p>여기서 C<sub>1</sub>, C<sub>2</sub>, C<sub>3</sub> 등을 위에서 구한 식을 대입할 수 있다. 예를 들어 C<sub>2</sub>에 대해 아래처럼 정리할 수 있다.</p>
+
+<p><code>$\begin{eqnarray}
+C_{2} &amp;=&amp; G_{1} + P_{1} \cdot C_{1}   \\
+&amp;=&amp; G_{1} + P_{1} \cdot (G_{0} + P_{0} \cdot C_{0})   \\
+&amp;=&amp; G_{1} + G_{0} \cdot P_{1} + C_{0} \cdot P_{0} \cdot P_{1}
+\end{eqnarray}$</code></p>
+
+<p>이와 같이 모든 값을 정리하면 다음과 같다.</p>
+
+<p><code>$
+C_{1} = G_{0} + P_{0} \cdot C_{0} \\
+C_{2} = G_{1} + G_{0} \cdot P_{1} + C_{0} \cdot P_{0} \cdot P_{1} \\
+C_{3} = G_{2} + G_{1} \cdot P_{2} + G_{0} \cdot P_{1} \cdot P_{2} + C_{0} \cdot P_{0} \cdot P_{1} \cdot P_{2} \\
+C_{4} = G_{3} + G_{2} \cdot P_{3} + G_{1} \cdot P_{2} \cdot P_{3} + G_{0} \cdot P_{1} \cdot P_{2} \cdot P_{3} + C_{0} \cdot P_{0} \cdot P_{1} \cdot P_{2} \cdot P_{3}
+$</code></p>
+
+<p>이제 계산시간을 살펴보자. 우선 P, G를 계산하는데 1 게이트 딜레이가 걸린다. 이후 각 값들을 AND한 다음 OR해야 하므로 여기서 2 게이트 딜레이가 걸린다. 이렇게 나온 C 값으로 full adder에서 계산을 하는데 2 게이트 딜레이가 걸린다. 따라서 n에 상관 없이 총 5 게이트 딜레이면 우리는 올바른 결과를 얻을 수 있다.</p>
+
+<h2 id="oscilator">Oscilator</h2>
+
+<p>이번에는 딜레이를 이용하는 경우를 살펴보자.</p>
+
+<p><img src="/images/combinational_logic/oscilator0.png#center50" alt="" /></p>
+
+<p>만약에 딜레이가 없다면 이는 굉장히 괴이한 회로가 된다. A 값이 1일 경우를 생각해보자. 만약에 D값이 1이라면 B값은 0이고, D값이 0이라면 B값은 1이어야 한다. 따라서 B랑 D는 절대로 같은 값이 될 수 없는데 B에 NOT을 두번 하면 D이니 두 값은 같아야 하는 모순이 발생한다. 이러한 모순 덕분에 딜레이가 작용하면 신기한 작용을 하는 회로가 된다.</p>
+
+<p><img src="/images/combinational_logic/oscilator1.png#center50" alt="" /></p>
+
+<p>이처럼 1과 0이 공존해야 하는 모순이 딜레이를 만나서 1과 0이 반복하게 되는 작업을 한다. 이처럼 1과 0이 반복되는 장치를 clock이라고 하고, 다음에 다룰 sequential logic에서 중요한 역할을 하게 된다.</p>
+
+</section>
+
+<div class="post-meta-code">
+  <div class="desc">
+    public string description() {
+    <div class="desc">val author = "
+    
+        <a href="mailto:ialy12006@gmail.com">ialy</a>
+    ";
+    </div>
+    
+    <div class="desc">
+      val categories = [
+      
+      
+      <a href="your-site-address/categories/code">"code"</a>
+      
+      ];
+    </div>
+    
+	
+    <div class="desc">
+      val subcategories = [
+      
+      
+      <a href="your-site-address/subcategories/system-architecture">"system architecture"</a>
+      
+      ];
+    </div>
+    
+    }
+  </div>
+  <div class="desc">
+    public string tags() {
+      <div class="desc">
+        val tags = [
+        
+          
+          <a href="your-site-addresstags/combinational-logic">"Combinational logic"</a>
+          
+          <a href="your-site-addresstags/boolean-expression">"Boolean Expression"</a>
+          
+          <a href="your-site-addresstags/algebraic-structure">"Algebraic Structure"</a>
+          
+          <a href="your-site-addresstags/canonical-forms">"Canonical Forms"</a>
+          
+          <a href="your-site-addresstags/karnaugh-map">"Karnaugh map"</a>
+          
+          <a href="your-site-addresstags/arithmetic-logic-unit">"Arithmetic Logic Unit"</a>
+          
+          <a href="your-site-addresstags/delay">"Delay"</a>
+          
+        
+        ];
+      </div>
+    }
+  </div>
+</div>
+
+
+
+
+<div class="paging post-paging">
+  
+  
+  <a class="left" href="your-site-address/post/trangister-and-basic-logic-gate/" rel="prev">
+    <i class="fa fa-caret-left" aria-hidden="true"></i> <span>Trangister and Basic Logic Gate</span>
+  </a>
+  
+  
+  
+  
+  <a class="right" href="your-site-address/post/sequential-logic/" rel="next">
+    <span>Sequential Logic</span> <i class="fa fa-caret-right" aria-hidden="true"></i>
+  </a>
+  
+  
+</div>
+
+
+  </div>
+  <div class="blank"></div>
+</div>
+<footer class="footer">
+  <div class="share">
+    <a href="https://github.com/ialy1595" title="Github" target="_blank"><i class="fa fa-github"></i></a>
+    <a href="mailto:ialy12006@gmail.com" title="Email" target="_blank"><i class="fa fa-envelope"></i></a>
+    <a rel="alternate" type="application/rss+xml" href="https://ialy1595.github.io/index.xml" title="RSS feed" target="_blank"><i class="fa fa-rss"></i></a>
+  </div>
+  COPYRIGHT (C) <a href="https://blog.lulab.net">DONGGEUN,BANG</a>. ALL RIGHTS RESERVED.
+</footer>
+
+</body>
+</html>
