@@ -63,11 +63,12 @@ a:hover {
 
 code span {
   font-family: 'Nanum Gothic Coding';
+  font-size: inherit;
 }
 
 code {
   font-family: 'Nanum Gothic Coding';
-  background-color: #F5F5F5;
+  background-color: #F0F0F0;
   border-radius: 3px;
   padding: 3px;
 }
@@ -153,6 +154,15 @@ th {
   padding: 45px;
 }
 
+.gist .highlight {
+  font-family: 'Nanum Gothic Coding';
+  font-size: 18px;
+}
+
+.gist .blob-code-inner {
+  font-family: 'Nanum Gothic Coding';
+  font-size: 18px;
+}
 /*
 * navbar
 */
@@ -166,7 +176,7 @@ th {
 
 .navbar ul {
   list-style-type: none;
-  padding: 0px 12px; 0px; 12px;
+  padding: 0px 12px 0px 12px;
   margin: 0;
 }
 
@@ -198,7 +208,7 @@ th {
 
 .container {
   margin: auto;
-  max-width: 800px;
+  max-width: 890px;
   padding: 40px 30px 15px 30px;
   font-size: 18px;
   font-weight: 400;

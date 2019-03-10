@@ -3,6 +3,16 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>https://ialy1595.github.io/post/blog-construct-2/</loc>
+    <lastmod>2019-03-01T12:37:41+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://ialy1595.github.io/post/blog-construct-1/</loc>
+    <lastmod>2019-02-22T20:07:41+09:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://ialy1595.github.io/about/</loc>
     <lastmod>2019-02-04T10:25:27+09:00</lastmod>
   </url>
@@ -41,6 +51,12 @@
   </url>
   
   <url>
+    <loc>https://ialy1595.github.io/tags/blog/</loc>
+    <lastmod>2019-02-22T20:07:41+09:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>https://ialy1595.github.io/tags/boolean-expression/</loc>
     <lastmod>2018-09-26T18:27:42+09:00</lastmod>
     <priority>0</priority>
@@ -65,13 +81,19 @@
   
   <url>
     <loc>https://ialy1595.github.io/categories/code/</loc>
-    <lastmod>2019-02-03T19:53:09+09:00</lastmod>
+    <lastmod>2019-03-01T12:37:41+09:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://ialy1595.github.io/tags/combinational-logic/</loc>
     <lastmod>2018-09-26T18:27:42+09:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://ialy1595.github.io/tags/custormizing/</loc>
+    <lastmod>2019-03-01T12:37:41+09:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -90,6 +112,30 @@
   <url>
     <loc>https://ialy1595.github.io/tags/functional-completeness/</loc>
     <lastmod>2018-07-31T02:13:42+09:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://ialy1595.github.io/tags/github-page/</loc>
+    <lastmod>2019-02-22T20:07:41+09:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://ialy1595.github.io/tags/github.io/</loc>
+    <lastmod>2019-02-22T20:07:41+09:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://ialy1595.github.io/tags/go-templates/</loc>
+    <lastmod>2019-03-01T12:37:41+09:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://ialy1595.github.io/tags/hugo/</loc>
+    <lastmod>2019-03-01T12:37:41+09:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -113,7 +159,7 @@
   
   <url>
     <loc>https://ialy1595.github.io/post/</loc>
-    <lastmod>2019-02-03T19:53:09+09:00</lastmod>
+    <lastmod>2019-03-01T12:37:41+09:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -136,6 +182,18 @@
   </url>
   
   <url>
+    <loc>https://ialy1595.github.io/tags/static-site/</loc>
+    <lastmod>2019-02-22T20:07:41+09:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://ialy1595.github.io/tags/static-site-generator/</loc>
+    <lastmod>2019-02-22T20:07:41+09:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>https://ialy1595.github.io/subcategories/</loc>
     <priority>0</priority>
   </url>
@@ -153,14 +211,26 @@
   </url>
   
   <url>
+    <loc>https://ialy1595.github.io/tags/theme/</loc>
+    <lastmod>2019-03-01T12:37:41+09:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>https://ialy1595.github.io/tags/trangister/</loc>
     <lastmod>2018-07-31T02:13:42+09:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
+    <loc>https://ialy1595.github.io/subcategories/web/</loc>
+    <lastmod>2019-03-01T12:37:41+09:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>https://ialy1595.github.io/</loc>
-    <lastmod>2019-02-04T10:25:27+09:00</lastmod>
+    <lastmod>2019-03-01T12:37:41+09:00</lastmod>
     <priority>0</priority>
   </url>
   
