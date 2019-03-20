@@ -8,10 +8,19 @@
     <language>ko-KR</language>
     <managingEditor>ialy12006@gmail.com (ialy1595)</managingEditor>
     <webMaster>ialy12006@gmail.com (ialy1595)</webMaster>
-    <lastBuildDate>Fri, 01 Mar 2019 12:37:41 +0900</lastBuildDate>
+    <lastBuildDate>Sun, 03 Mar 2019 17:23:53 +0900</lastBuildDate>
     
 	<atom:link href="https://ialy1595.github.io/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>한글의 incremental search UX 와 인코딩</title>
+      <link>https://ialy1595.github.io/post/korean-incremental-search/</link>
+      <pubDate>Sun, 03 Mar 2019 17:23:53 +0900</pubDate>
+      <author>ialy12006@gmail.com (ialy1595)</author>
+      <guid>https://ialy1595.github.io/post/korean-incremental-search/</guid>
+      <description>한글 검색의 문제점 우리는 수많은 데이터 속에서 살아간다. 이렇게 많은 데이터 속에서 내가 원하는 정보를 얻기 위해 검색이라는 기능은 필수적이다. 세계적으로 보면 구글, 한국에서 보면 네이버 처럼 검색 엔진을 기반으로 둔 기업이 크게 성장한 것만 봐도 검색이라는 기능이 얼마나 중요한지 알 수 있다.</description>
+    </item>
     
     <item>
       <title>블로그 구축기 2 - Theme Custormizing</title>

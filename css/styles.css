@@ -26,7 +26,7 @@ h1 {
 }
 
 h2 {
-  font-size: 27px;
+  font-size: 26px;
   font-weight: 600;
   margin-top: 50px;
   margin-bottom: 10px;
@@ -67,6 +67,7 @@ code span {
 }
 
 code {
+  line-height: 1.8em;
   font-family: 'Nanum Gothic Coding';
   background-color: #F0F0F0;
   border-radius: 3px;
@@ -145,6 +146,22 @@ th, td {
 
 th {
   background-color: #EEEEEE
+}
+
+sm {
+  font: inherit;
+  font-size: 95%;
+  background: inherit;
+  border: inherit;
+  color: #000000;
+}
+
+rr {
+  color: #ff3333
+}
+
+bb {
+  color: #3333ff
 }
 
 .seperator {
