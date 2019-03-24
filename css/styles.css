@@ -61,6 +61,10 @@ a:hover {
 	color: #6666FF;
 }
 
+pre {
+  font-size: 85%;
+}
+
 code span {
   font-family: 'Nanum Gothic Coding';
   font-size: inherit;

@@ -296,9 +296,9 @@ def kr_list(s):
     if kr_num_s &gt; 0 :
         # 초성 + 중성
         if kr_num_s % 28 != 0 :
-            res = res + chr((int(kr_num_s/ 28) * 28) + ord('가'))
+            res.append(((int(kr_num_s/ 28) * 28) + ord('가')))
         # 초성
-        res = res + jaeum_list[int(kr_num_s / 588)]
+        res.append(jaeum_list[int(kr_num_s / 588)])
     return res
 </code></pre>
 
@@ -320,9 +320,9 @@ def kr_list(s):
     if kr_num_s &gt; 0 :
         # 초성 + 중성
         if kr_num_s % 28 != 0 :
-            res = res + chr((int(kr_num_s/ 28) * 28) + ord('가'))
+            res.append(chr((int(kr_num_s/ 28) * 28) + ord('가')))
         # 초성
-        res = res + jaeum_list[int(kr_num_s / 588)]
+        res.append(jaeum_list[int(kr_num_s / 588)])
     return res
 
 def eq_kr(s, d):
@@ -379,7 +379,7 @@ def match(query, data):
     [0, 0], [1, 0], [2, 1], [2, 9], [4, 2], [1, 12], [2, 18],
     [7, 3], [8, 5], [1, 0], [2, 6], [3, 7], [4, 9], [5, 16],
     [6, 17], [7, 18], [16, 6], [17, 7], [1, 9], [19, 9], [20, 10],
-    [21, 11], [22, 12], [23, 14], [24, 15], [25, 16], [26, 17], [28,18]
+    [21, 11], [22, 12], [23, 14], [24, 15], [25, 16], [26, 17], [27,18]
 ]
 </code></pre>
 
@@ -408,9 +408,9 @@ def kr_list(s):
     if kr_num_s &gt; 0 :
         # 초성 + 중성
         if kr_num_s % 28 != 0 :
-            res = res + chr((int(kr_num_s/ 28) * 28) + ord('가'))
+            res.append(chr((int(kr_num_s/ 28) * 28) + ord('가')))
         # 초성
-        res = res + jaeum_list[int(kr_num_s / 588)]
+        res.append(jaeum_list[int(kr_num_s / 588)])
     return res
 
 def eq_kr(s, d):
@@ -428,7 +428,7 @@ def eq_kr_pos(s, d, d_next):
         [0, 0], [1, 0], [2, 1], [2, 9], [4, 2], [1, 12], [2, 18],
         [7, 3], [8, 5], [1, 0], [2, 6], [3, 7], [4, 9], [5, 16],
         [6, 17], [7, 18], [16, 6], [17, 7], [1, 9], [19, 9], [20, 10],
-        [21, 11], [22, 12], [23, 14], [24, 15], [25, 16], [26, 17], [28,18]
+        [21, 11], [22, 12], [23, 14], [24, 15], [25, 16], [26, 17], [27,18]
     ]
     if not (is_kr(s) and is_kr(d) and is_kr(d_next)):
         return False
