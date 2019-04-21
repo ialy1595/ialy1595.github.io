@@ -6,8 +6,8 @@
     <description>Recent content in Sequential Logic on ialy&#39;s blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ko-KR</language>
-    <managingEditor>ialy12006@gmail.com (ialy)</managingEditor>
-    <webMaster>ialy12006@gmail.com (ialy)</webMaster>
+    <managingEditor>ialy12006@gmail.com (ialy1595)</managingEditor>
+    <webMaster>ialy12006@gmail.com (ialy1595)</webMaster>
     <lastBuildDate>Sun, 03 Feb 2019 19:53:09 +0900</lastBuildDate>
     
 	<atom:link href="https://ialy1595.github.io/tags/sequential-logic/index.xml" rel="self" type="application/rss+xml" />
@@ -17,9 +17,9 @@
       <title>Sequential Logic</title>
       <link>https://ialy1595.github.io/post/sequential-logic/</link>
       <pubDate>Sun, 03 Feb 2019 19:53:09 +0900</pubDate>
-      <author>ialy12006@gmail.com (ialy)</author>
+      <author>ialy12006@gmail.com (ialy1595)</author>
       <guid>https://ialy1595.github.io/post/sequential-logic/</guid>
-      <description>sequential logic이란 같은 input이 들어왔다고 해도 logic의 state나 memory에 따라 결과가 달라지는 logic을 의미한다. 이러한 sequential logic이 존재할 수 있는 중요한 요소중 하나는 gate가 이상적이지 않아서 delay가 존재한다는 것이다.</description>
+      <description>Sequential logic이란 같은 input이 들어왔다고 해도 logic의 state나 memory에 따라 결과가 달라지는 logic을 의미한다. 이러한 sequential logic이 존재할 수 있는 중요한 요소중 하나는 gate가 이상적이지 않아서 delay가 존재한다는 것이다.</description>
     </item>
     
   </channel>

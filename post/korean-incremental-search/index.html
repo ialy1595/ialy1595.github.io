@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-134848712-1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+  
+    gtag('config', 'UA-134848712-1');
+  </script>
+  
+
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <title>한글의 incremental search UX 와 인코딩  | ialy&#39;s blog</title>
+  <link rel="icon" href="/favicon.ico" type="image/x-icon">
+  <link rel="canonical" href="https://ialy1595.github.io/post/korean-incremental-search/">
+  
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/monokai-sublime.min.css">
+  <link rel="stylesheet" href="/css/styles.css">
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+  <script type="text/javascript" async
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+  MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [['$','$'], ['\\(','\\)']],
+    displayMath: [['$$','$$']],
+    processEscapes: true,
+    processEnvironments: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+    TeX: { equationNumbers: { autoNumber: "AMS" },
+         extensions: ["AMSmath.js", "AMSsymbols.js"] }
+  }
+  });
+  MathJax.Hub.Queue(function() {
+    
+    
+    
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i = 0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script> 
+  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/gist-embed/2.7.1/gist-embed.min.js"></script>
+</head>
+
+<body>
+<div class="wrap">
+  <div class="navbar">
+    <ul>
+      <li><a href="/">HELLO WORLD!</a></li>
+      <li><a href="/categories">CATEGORIES</a></li>
+      <li><a href="/tags">TAGS</a></li>
+      <li><a href="/about">ABOUT ME</a></li>
+    </ul>
+  </div>
+  <div class="container">
+
+
+
+  <div class="title">
+  
+  
+  
+  <a href="/categories/code">
+    <img src="/images/logo-code.png" width="260px" height="48px" />
+  </a>
+  
+</div>
+	<a href="https://ialy1595.github.io/post/korean-incremental-search/">
+  <div class="post-title">
+    
+	
+	<img src="/images/post-title-icon-code.png" />
+	
+    <div class="post-meta">
+      <time>03 Mar 2019, 17:23</time>
+      <h1>한글의 incremental search UX 와 인코딩</h1>
+    </div>
+  </div>
+</a>
+
+<div class="post-toc">
+  <span class="title">
+    Table of contents
+  </span>
+  <nav id="TableOfContents">
+<ul>
+<li><a href="#한글-검색의-문제점">한글 검색의 문제점</a></li>
+<li><a href="#부드러운-한글-검색-구현">부드러운 한글 검색 구현</a>
+<ul>
+<li><a href="#구현-개요">구현 개요</a></li>
+<li><a href="#utf-8과-unicode">UTF-8과 Unicode</a></li>
+<li><a href="#구현">구현</a></li>
+</ul></li>
+<li><a href="#외전-euc-kr은-어떻게-저장되는가">외전: EUC-KR은 어떻게 저장되는가</a></li>
+</ul>
+</nav>
+</div>
+
+<section class="post-content">
+  
+
+<h1 id="한글-검색의-문제점">한글 검색의 문제점</h1>
+
+<p>우리는 수많은 데이터 속에서 살아간다. 이렇게 많은 데이터 속에서 내가 원하는 정보를 얻기 위해 검색이라는 기능은 필수적이다. 세계적으로 보면 구글, 한국에서 보면 네이버 처럼 검색 엔진을 기반으로 둔 기업이 크게 성장한 것만 봐도 검색이라는 기능이 얼마나 중요한지 알 수 있다.</p>
+
+<p>예전의 검색 시스템은 검색어를 전부 치고난 후 엔터를 눌러야 결과가 나왔었다. 그러나 요즘은 엔터를 누르지 않아도 검색창에 한글자 한글자 칠 때마다 바로바로 결과가 갱신되서 나오는 검색을 지원하는 곳이 많다. 이러한 검색 시스템을 <a href="https://en.wikipedia.org/wiki/Incremental_search">incremental search</a>, 다른 말로는 find as you type(FAYT)라고 한다. Incremental search는 두 가지 장점이 있다.</p>
+
+<ul>
+<li><strong>글자를 필요한 만큼만 칠 수 있다.</strong> 글자를 다 친 다음에 엔터를 쳐야하는 경우 얼마나 많은 글자를 넣어야 내가 원하는 결과가 추출될지 알 수 없기 때문에 필요 이상으로 글자를 치게 되거나 필요한 양 보다 부족하게 쳐서 여러번 검색하게 된다. 그러나 결과가 바로바로 갱신되는 경우 점점 좁혀지는 과정을 보면서 내게 딱 필요한 수준에서 멈출 수 있다.</li>
+<li><strong>오타를 바로 감지할 수 있다.</strong> 오타라는 것은 내가 치는 과정에서 감지하지 못하기에 오타이다. 따라서 예전 검색 시스템이라면 타자를 다 치고 엔터를 누르고 나서야 결과가 이상하다는 것을 보고 오타가 있었다는 것을 알아챌 수 있었다. 그러나 바로바로 결과가 갱신되는 경우 오타가 나는 순간 이상해진 결과를 보고 바로 알아챌 수 있다.</li>
+</ul>
+
+<p>하지만 이것이 과연 한글 사용자에게도 좋은 UX(User eXperience)일까?</p>
+
+<p>한글은 다른 문자들과 달리 초성, 중성, 종성이 모여서 한 글자를 이루는 시스템이다. 이러한 특성 덕분에 다른 글자들에 비해 배우기 쉬우면서도 수많은 음을 표현할 수 있다. 하지만 이 시스템은 검색 UX에서 오히려 단점으로 작용한다.</p>
+
+<p>예를 들어 <code>army</code>와 <code>군대</code>를 검색하는 경우를 비교해보자. <code>army</code>의 경우 사용자는 다음과 같은 경험을 한다.</p>
+
+<ol>
+<li><code>a</code>를 검색했을 때 <code>army</code>가 결과 목록에 <strong><bb>포함된다.</bb></strong></li>
+<li><code>ar</code>를 검색했을 때 <code>army</code>가 결과 목록에 <strong><bb>포함된다.</bb></strong></li>
+<li><code>arm</code>를 검색했을 때 <code>army</code>가 결과 목록에 <strong><bb>포함된다.</bb></strong></li>
+<li><code>army</code>를 검색했을 때 <code>army</code>가 결과 목록에 <strong><bb>포함된다.</bb></strong></li>
+</ol>
+
+<p>영어로 검색하는 경우 위와 같이 자연스럽고 연속적인 경험을 할 수 있다. 그러나 한글은 이와 같은 경험을 제공해주지 못한다. <code>군대</code>가 검색되는 과정을 살펴보자.</p>
+
+<ol>
+<li><code>ㄱ</code>을 검색했을 때 <code>군대</code>가 결과 목록에 <strong><rr>포함되지 않는다.</rr></strong></li>
+<li><code>구</code>을 검색했을 때 <code>군대</code>가 결과 목록에 <strong><rr>포함되지 않는다.</rr></strong></li>
+<li><code>군</code>을 검색했을 때 <code>군대</code>가 결과 목록에 <strong><bb>포함된다.</bb></strong></li>
+<li><code>군ㄷ</code>을 검색했을 때 <code>군대</code>가 결과 목록에 <strong><rr>포함되지 않는다.</rr></strong></li>
+<li><code>군대</code>을 검색했을 때 <code>군대</code>가 결과 목록에 <strong><bb>포함된다.</bb></strong></li>
+</ol>
+
+<p>이렇게 글자를 완성해 나가는 과정에서 나와야 하는 결과가 포함되었다 안 되었다를 반복하게 된다. 왜냐하면 영어의 경우 자연스럽게 한글자 한글자 칠 때마다 생성되는 문자열이 내가 치고자 하는 문자열의 <a href="https://en.wikipedia.org/wiki/Substring">부분문자열</a>이 되지만, 한글은 초성 중성 종성 시스템 때문에 두세번을 쳐야 한 글자가 완성되고, 이 과정에서 <code>구</code>와 <code>군</code>이 다른 글자인것 처럼 원래 치고자 하는 문자열에 없는 문자가 들어가게 되기 때문에 위와 같은 불연속적인 UX가 나오게 되는 것이다. 이제 이 문제를 해결해서 부드러운 한글 검색을 구현해보자.</p>
+
+<h1 id="부드러운-한글-검색-구현">부드러운 한글 검색 구현</h1>
+
+<h2 id="구현-개요">구현 개요</h2>
+
+<p>문제를 해결하기 위해서는 구체적인 원인 분석이 필요하다. 위와 같은 문제가 생기는 이유는 <code>군</code>을 검색하는 과정에서 <code>ㄱ != 군</code>, <code>구 != 군</code>이기 때문에 <code>군</code>이 들어간 결과가 나오지 않게 되는 것이다. 이를 해결하려면 어떻게 해야할까? 간단히 말하면 <code>ㄱ == 군</code>, <code>구 == 군</code>이 되도록 하면 된다. 더 자세히 말하자면 <code>군</code>이 완성되가는 과정인 <code>ㄱ</code>,  <code>구</code>,  <code>군</code>이 모두 <code>군</code>과 같다는 결과가 나오는 비교함수를 만들면 된다. 이 함수는 다음과 같이 만들 수 있다.</p>
+
+<ol>
+<li>이 비교함수는 다른 비교함수와 달리 교환법칙이 성립이 안된다. 왜냐하면 <code>구</code>는 <code>군</code>을 만드는 과정에 있지만, <code>군</code>은 <code>구</code>를 만드는 과정에 없기 때문이다. 따라서 이 둘을 분리하기 위해 우리가 검색창에 치는 글자를 <code>s</code>, 검색되는 대상의 글자를 <code>d</code>라고 하자.</li>
+<li><code>s</code>와 <code>d</code>가 모두 한글인 경우가 아니라면 원래 비교함수처럼  <code>return (s == d)</code>를 반환한다.</li>
+<li><code>d</code>가 만들어지는 과정을 리스트로 반환하는 함수인 <code>kr_list()</code>를 만든다. 예를 들어 <code>kr_list('군')</code>은 <code>['ㄱ', '구', '군']</code>을 반환하고, <code>kr_list('대')</code>은 <code>['ㄷ', '대']</code>를 반환한다.</li>
+<li>저 리스트 중에 <code>s</code>가 존재할 경우 <code>True</code>를 반환한다. 따라서 <code>return (s in kr_list(d))</code>를 하면 된다.</li>
+</ol>
+
+<p>따라서 이를 python으로 구현하면 다음과 같다.</p>
+
+<pre><code class="language-python">def eq_kr(s, d):
+    if is_kr(s) and is_kr(d):
+        return (s in kr_list(d))
+    else:
+        return (s == d)
+</code></pre>
+
+<p>이제 한글인지 확인하는 함수인 <code>is_kr()</code>과 만들어지는 과정을 반환하는 함수인 <code>kr_list()</code> 함수만 구현하면 된다. 이 두 함수를 구현하기 위해서는 한글이 코드상에서는 어떻게 인코딩되고 표현되는지 알아야 한다.</p>
+
+<h2 id="utf-8과-unicode">UTF-8과 Unicode</h2>
+
+<p>한글을 인코딩하는 방식 중 가장 많이 쓰이는 것 중 하나는 UTF-8이다. 여기서 UTF는 Universal coded character set + Transformation Format의 약자로, unicode를 변환하는 형식 중 하나라는 뜻이다. 그렇다면 unicode란 무엇일까?</p>
+
+<p>C에서 문자는 character의 약자인 <code>char</code>라는 1byte짜리 자료형을 써서 나타낼 수 있다. 이 <code>char</code>은 1byte, 즉 8bit이므로 -128 ~ 127까지 나타낼 수 있다. 이 중 음이 아닌 128개의 수를 각각 하나씩 문자에 매칭하여 표현한 것을 <strong>ASCII code</strong>라고 한다.</p>
+
+<p><img src="/images/korean_UX/ascii0.png#center75" alt="" /></p>
+
+<p>예전에는 이 ASCII code만 사용해도 큰 문제가 없었다. 그러나 점점 글로벌시대가 되고 한글을 비롯한 수많은 외국어와 다양한 기호들을 표시할 필요가 생기면서, ASCII code를 확장할 필요가 생겼다. 따라서 ASCII code를 확장하여 수많은 기호와 문자들을 포함시킨 것이 Universal code, 즉 <strong>Unicode</strong>다.</p>
+
+<p>Unicode는 ASCII code를 확장한 것이지만 포함된 문자의 수 외에도 ASCII code와 다른점이 하나 있다. 바로 ASCII code는 매핑임과 동시에 문자를 코드상에 표현하는 인코딩 방식이었다면 <strong>Unicode는 단순히 매핑일 뿐</strong>이라는 것이다. 예를 들어 ASCII code에서 <code>a</code>에 해당하는 숫자는 <code>0x60</code>이고, 이 때 <code>0x60</code>을 문자로 출력하면 <code>a</code>가 나온다. 그러나 unicode의 경우 <code>가</code>에 해당하는 unicode는 <code>0xac00</code>이지만 <code>0xac00</code>을 출력한다고 <code>가</code>가 나오지 않는다. 즉, Unicode는 실제로 표현하는 인코딩 방식은 따로 존재하고, 이중 하나가 UTF-8이다.</p>
+
+<p>Unicode가 이렇게 매핑과 인코딩을 따로 두는 이유는 <strong>확장성</strong> 때문이다. ASCII code에서 unicode로 확장되면서 많은 문자가 추가되었지만, 아직 그 누구도 세상의 모든 문자를 표현했다고 장담할 수 없고 아직도 계속 추가되는 중이다. 이러한 상황에서 unicode가 매핑과 동시에 한가지 형식으로 인코딩이 고정된다면 그 형식에서 표시할 수 있는 모든 글자의 수를 넘는 경우 또 다시 새로운 시스템을 만들어야만 한다. 따라서 unicode는 매핑에만 중점을 둬서 무한한 추가가 가능하도록 하고, unicode에 포함된 문자가 많아질수록 이를 인코딩하는 형식을 바꿔나가는 형식을 택했다.</p>
+
+<p>Unicode를 인코딩하는 방식 중 한글을 인코딩할 때 많이 쓰이는 UTF-8을 살펴보자. python에서는 <code>encode()</code>함수를 통해 문자가 어떻게 인코딩되는지 확인할 수 있다. 예를 들어 입력한 문자가 UTF-8로 어떻게 인코딩 되는지 알고싶다면 다음 코드를 통해 확인할 수 있다.</p>
+
+<pre><code class="language-python">print(input().encode('utf-8'))
+</code></pre>
+
+<p>참고로 <code>encode()</code>의 default 값은 UTF-8이기 때문에 괄호 안에 아무것도 안 쓰고 그냥 <code>encode()</code>라고 해도 똑같이 동작한다. 하지만 다른 사람이(혹은 미래의 내가) 코드를 봤을 때 알아보기 쉽도록 써주는 것을 추천한다.</p>
+
+<p>먼저 자음에 어떻게 되어있는지 살펴보자. 위의 코드로 <code>ㄱ</code>을 뽑아보면 <code>b\xe3\x84\xb1</code>이 나온다. 이 글에서는 쉽게 <code>e3 84 b1</code>으로 표기하자. 이와 같은 방법으로 <code>ㄱ</code>, <code>ㄴ</code>, <code>ㄷ</code>을 순서대로 뽑아보면</p>
+
+<p><code>e3 84 b1</code><br><code>e3 84 b4</code><br><code>e3 84 b7</code></p>
+
+<p>이 나온다. 이것만 보면 &ldquo;아 3씩 차이나서 나오는구나&rdquo;라고 생각할 수 있다. 그러나 <code>ㄹ</code>을 뽑아보면 <code>e3 84 b9</code>가 나온다&hellip;.?! 당황하지 말고 이번엔 역으로 UTF-8 코드를 문자로 출력하는걸 해보자. 이는 <code>bytearray</code> 자료형과 <code>decode()</code> 함수를 써서 할 수 있다. 예를 들어 <code>e3 84 b2</code>를 문자로 출력하는 코드는</p>
+
+<pre><code class="language-python">print(bytearray([0xe3, 0x84, 0xb2]).decode('utf-8'))
+</code></pre>
+
+<p>이 된다. 이 코드를 이용해서 <code>e3 84 b2</code>을 뽑아보면 <code>ㄲ</code>이 나오고, <code>e3 84 b3</code>를 뽑아보면 <code>ㄳ</code>이 나온다. 따라서 이 구간에는 쌍자음, 겹자음까지 포함해서 순서대로 저장되어있음을 알 수 있다. <code>ㄴ</code> 뒤에는 <code>ㄵ</code>과 <code>ㄶ</code> 두가지가 있지만 <code>ㄷ</code>뒤에는 <code>ㄸ</code> 하나밖에 없기 때문에 위와 같이 3차이가 나기도 하고 2차이가 나기도 하는 것이다. 이렇게 순서대로 하나씩 뽑아보면 <code>ㄿ</code>까지 <code>e3 84 bf</code>로 잘 나온다. 하지만 그 다음 순서인 <code>ㅀ</code>을 뽑아보면 <code>e3 84 c0</code>이 아니라 <code>e3 85 80</code>이 나온다. 이를 통해 우리는 다음과 같은 사실을 유추할 수 있다.</p>
+
+<ul>
+<li><code>0x80</code>에서 <code>0xbf</code>까지만 사용하고, <code>0xbf</code>를 넘어가면 다음 자리로 자리올림된다.</li>
+</ul>
+
+<p>이는 완전체 글자(초성+중성 또는 초성+중성+종성)가 어떻게 저장되는지 보면서 다시한번 확인할 수 있다.</p>
+
+<p>완전체 글자의 가장 처음인 <code>가</code>부터 알아보자. <code>가</code>를 UTF-8로 뽑으면 <code>ea b0 80</code>이 나온다. 또한 이 다음인 <code>ea b0 81</code>을 뽑아보면 <code>각</code>이 나온다. 이를 통해 완전체 글자는 받침이 있고 없고 상관없이 사전순으로 저장되어있음을 알 수 있다. 그리고 이 부분에서도 <code>0x80</code>에서 <code>0xbf</code>까지만 사용한다. 예를 들어 <code>ea b0 bf</code>가 <code>갿</code>인데 다음 글자인 <code>걀</code>은 <code>ea b1 80</code>이고, <code>꿿</code>이 <code>ea bf bf</code>인데 다음 글자인 <code>뀀</code>은 <code>eb 80 80</code>이다. 이렇게 <code>힣</code>인 <code>ed 9e a3</code>까지 순서대로 잘 저장되어 있다.</p>
+
+<p>사전순으로 잘 저장되어 있는 것은 굉장히 긍정적인 부분이다. 그러나 <code>0x80</code>에서 <code>0xbf</code>까지만 사용한다는 것 때문에 코딩하기에 약간 귀찮음이 생긴다. 이에 비해 unicode는 더욱 잘(?) 저장되어있다. python에서 unicode를 뽑아보기 위해서는 <code>ord()</code> 함수를 쓰면 된다. 반대로 unicode에서 문자로 전환은 <code>chr()</code> 함수를 쓰면 된다. 예를 들어 <code>가</code>의 unicode를 알고싶다면</p>
+
+<pre><code class="language-python">ord('가')
+</code></pre>
+
+<p>를 하면 된다. 이렇게 <code>가</code>를 뽑아보면 <code>0xac00</code>이 나온다. UTF-8처럼 중간에 <code>0x80</code>이나 <code>0xbf</code>같은 제한 없이, 이 다음부터 <code>힣</code>인 <code>0xd7a3</code>까지 순서대로 저장된다. 기본 자음 또한 <code>ㄱ</code>인 <code>0x3131</code>부터 <code>ㅎ</code>인 <code>0x314e</code>까지 순서대로 저장되어있다. 그렇다면 unicode는 이렇게 순서대로 잘 저장되어있는데 UTF-8은 왜 이상하게 저장될까? 이는 unicode를 UTF-8로 변환하는 방법에 대해 알아보면 이에 대한 해답이 나온다. 먼저 힌트를 얻어보자면, <code>0x80</code>과 <code>0xbf</code>를 각각 이진수로 나타내보면 <code>10000000</code>과 <code>10111111</code>이다. 이를 다시 표현하면 <code>10 000000</code>과 <code>10 111111</code>이다.</p>
+
+<p>Unicode가 UTF-8로 변환될 때, 모두 같은 방식으로 변환되지 않고 unicode 수의 범위에 따라 변환되는 방식이 다르다. 그 중 한글이 있는 <code>0x3131 ~ 0x314e</code>과 <code>0xac00 ~ 0xd7a3</code>은 <code>0x0800 ~ 0xffff</code>범위의 변환하는 방식을 따르고, 이는 다음과 같다.</p>
+
+<ul>
+<li>Unicode: ???????? ????????</li>
+<li>UTF=8  : 1010???? 10?????? 10??????</li>
+</ul>
+
+<p>더 쉽게 보이도록 색을 칠해보면 다음과 같다.</p>
+
+<ul>
+<li>Unicode: ????<rr>????</rr> <rr>??</rr><bb>??????</bb></li>
+<li>UTF=8  : 1010???? 10<rr>??????</rr> 10<bb>??????</bb></li>
+</ul>
+
+<p>예를 들어 <code>가</code>의 Unicode는 <code>0xac00</code>이었다. 이를 이진수로 표현하면</p>
+
+<p><code>10100110 00000000</code></p>
+
+<p>이다. 따라서 이 Unicode가 매핑된 UTF-8은</p>
+
+<p><code>11101010 10011000 10000000</code></p>
+
+<p>이다. 이를 다시 16진수로 바꾸면 <code>ea b0 80</code>이다. 이 수는 아까 우리가 UTF-8로 뽑아봤던 <code>가</code>이다.</p>
+
+<p>당연히 중간에 다른 처리할 필요가 없는 unicode가 더 다루기 쉬울 것이다. 이제 이 unicode에서 한글이 어떻게 저장되어있는지 더 자세히 알아보자.</p>
+
+<p>먼저 초성을 기준으로 분석해보자. <code>가</code>의 unicode는 위에서 봤듯이 <code>0xac00</code>이다. 그 다음 받침이 없는 글자인 <code>까</code>의 unicode는 <code>0xae4c</code>이다. 그리고 그 다음인 <code>나</code>는 <code>0xb098</code>이고, <code>다</code>는 <code>0xb2e4</code>이다. 각 수의 차를 보면 588이다. 즉, 같은 초성을 가지는 글자는 588개씩 있음을 알 수 있다. 확인을 위해 제일 처음인 <code>가</code>와 마지막인 <code>하</code>의 차이인 10584를 588로 나누면 정확히 18로 정확히 나눠 떨어지고, 이는 초성으로 올 수 있는 자음의 갯수 - 1 이다.</p>
+
+<blockquote>
+<p>ㄱ ㄲ ㄴ ㄷ ㄸ ㄹ ㅁ ㅂ ㅃ ㅅ ㅆ ㅇ ㅈ ㅉ ㅊ ㅋ ㅌ ㅍ ㅎ</p>
+</blockquote>
+
+<p>이제 한 초성 안에서 중성을 기준으로 분석해보자. <code>가</code> 다음인 <code>개</code>를 뽑아보면 <code>0xac1c</code>가 나오고, 그 다음인 <code>갸</code>를 뽑아보면 <code>0xac38</code>이 들린다. 이때 각 수의 차이를 보면 28이다. 따라서 위와 같이 이 또한 같은 초성과 중성을 가진 글자가 28개씩 있음을 유추할 수 있다. 이를 확인해보기 위해 588 을 28로 나눠보면 정확히 21로 나누어 떨어지고, 이는 중성에 올 수 있는 모음 갯수이다. 또한 28은 종성으로 올 수 있는 받침의 갯수 + 1이다. ( + 1 인 이유는 받침이 없는 경우)</p>
+
+<blockquote>
+<p>ㅏ ㅐ ㅑ ㅒ ㅓ ㅔ ㅕ ㅖ ㅗ ㅘ ㅙ ㅚ ㅛ ㅜ ㅝ ㅞ ㅟ ㅠ ㅡ ㅢ ㅣ</p>
+
+<p>ㄱ ㄲ ㄳ ㄴ ㄵ ㄶ ㄷ ㄹ ㄺ ㄻ ㄼ ㄽ ㄾ ㄿ ㅀ ㅁ ㅂ ㅄ ㅅ ㅆ ㅇ ㅈ ㅊ ㅋ ㅌ ㅍ ㅎ</p>
+</blockquote>
+
+<p>즉, 한글의 11172글자는 아래 그림과 같이 3차원 테이블에 저장되었다고 생각할 수 있다.</p>
+
+<p><img src="/images/korean_UX/cjj0.PNG#center75" alt="" /></p>
+
+<h2 id="구현">구현</h2>
+
+<p>먼저 <code>is_kr()</code>부터 구현해보자. C에서 어떤 문자가 알파벳인지 ASCII code를 이용해서 다음과 같이 확인한다.</p>
+
+<pre><code class="language-python">if(('a' &lt;= c &amp;&amp; c &lt;= 'z') || ('A' &lt;= c &amp;&amp; c &lt;= 'Z')) {
+    ...
+}
+</code></pre>
+
+<p>한글도 위와 비슷한 방법으로 구현할 수 있다. 한글의 자음은 모두 <code>ㄱ</code>과 <code>ㅎ</code> 사이에 있고, 그 외의 글자는 모두 <code>가</code>와 <code>힣</code> 사이에 있다. 따라서 다음과 같이 판별할 수 있다.</p>
+
+<pre><code class="language-python">def is_kr(c):
+    return (ord('ㄱ') &lt;= ord(c) &lt;= ord('ㅎ')) or (ord('가') &lt;= ord(c) &lt;= ord('힣'))
+</code></pre>
+
+<p>이제 <code>kr_list()</code>만 구현하면 된다. 이를 위해 우리가 위에서 분석했던 내용을 정리해보면 다음을 알아낼 수 있다.</p>
+
+<ul>
+<li><code>ord(c) - ord('가')</code>를 <code>kr_num</code>이라 하자. 자음의 경우 <code>kr_num</code>이 음수가 된다.</li>
+<li><code>kr_num</code>이 28의 배수일 경우 받침이 없고, 이 글자부터 28글자는 모두 자음과 모음이 같다.</li>
+<li><code>kr_num</code>이 588의 배수일 경우 <code>초성 + ㅏ</code>이고, 이 글자부터 588글자는 모두 자음이 같다.</li>
+</ul>
+
+<p>즉, 어떤 글자의 <code>kr_num</code> 이하의 가장 큰 28의 배수가 그 글자의 <code>초성 + 중성</code>이고, 가장 큰 588의 배수가 그 글자의 <code>초성 + ㅏ</code>이다. <code>초성 + ㅏ</code>에서 초성만 추출하는 것은 588로 나눈 몫과 자음 배열을 이용해서 구현할 수 있다. 따라서 <code>kr_list()</code>는 다음과 같이 구현할 수 있다.</p>
+
+<pre><code class="language-python">def kr_num(s):
+    return ord(s) - ord('가')
+
+def kr_list(s):
+    jaeum_list = [
+        'ㄱ', 'ㄲ', 'ㄴ', 'ㄷ', 'ㄸ', 'ㄹ', 'ㅁ', 'ㅂ', 'ㅃ', 'ㅅ', 
+        'ㅆ', 'ㅇ', 'ㅈ', 'ㅉ', 'ㅊ', 'ㅋ', 'ㅌ', 'ㅍ', 'ㅎ' 
+    ]
+    res = [s]
+    kr_num_s = kr_num(s)
+    if kr_num_s &gt; 0 :
+        # 초성 + 중성
+        if kr_num_s % 28 != 0 :
+            res.append(((int(kr_num_s/ 28) * 28) + ord('가')))
+        # 초성
+        res.append(jaeum_list[int(kr_num_s / 588)])
+    return res
+</code></pre>
+
+<p>이제 substring인지를 판별하는 코드에서 위의 함수들을 집어넣기만 하면 된다. Substring 판별 여부는 <a href="https://en.wikipedia.org/wiki/Knuth%E2%80%93Morris%E2%80%93Pratt_algorithm">KMP 알고리즘</a>을 이용하면 <code>$O(n+m)$</code>만에 구할 수 있지만 여기서 목적은 시간이 아니기 때문에 이해하기 쉬운 <code>$O(nm)$</code>인 brute force 알고리즘으로 구현해보자. 위에서 만든 <code>eq_kr()</code>은 마지막 글자에 대해서만 하면 된다.</p>
+
+<pre><code class="language-python">def is_kr(c):
+    return (ord('ㄱ') &lt;= ord(c) &lt;= ord('ㅎ')) or (ord('가') &lt;= ord(c) &lt;= ord('힣'))
+
+def kr_num(s):
+    return ord(s) - ord('가')
+
+def kr_list(s):
+    jaeum_list = [
+        'ㄱ', 'ㄲ', 'ㄴ', 'ㄷ', 'ㄸ', 'ㄹ', 'ㅁ', 'ㅂ', 'ㅃ', 'ㅅ', 
+        'ㅆ', 'ㅇ', 'ㅈ', 'ㅉ', 'ㅊ', 'ㅋ', 'ㅌ', 'ㅍ', 'ㅎ' 
+    ]
+    res = [s]
+    kr_num_s = kr_num(s)
+    if kr_num_s &gt; 0 :
+        # 초성 + 중성
+        if kr_num_s % 28 != 0 :
+            res.append(chr((int(kr_num_s/ 28) * 28) + ord('가')))
+        # 초성
+        res.append(jaeum_list[int(kr_num_s / 588)])
+    return res
+
+def eq_kr(s, d):
+    if is_kr(s) and is_kr(d):
+        return (s in kr_list(d))
+    else:
+        return (s == d)
+
+def match(query, data):
+    query_l = len(query)
+    data_l = len(data)
+    if data_l &lt; query_l:
+        return False
+    for i in range(0, data_l - query_l + 1):
+        res = True
+        for j in range(0, query_l):
+            # 마지막 글자
+            if j == query_l - 1:
+                if not eq_kr(query[j], data[i+j]):
+                    res = False
+                    break
+            else:
+                if query[j] != data[i+j]:
+                    res = False
+                    break
+        if res:
+            return True
+    return False
+</code></pre>
+
+<p>자 이제 끝이다&hellip;! 라고 생각할 수 있지만 아직 한가지 문제가 남았다. 예를 들어 위의 알고리즘을 적용한 상태에서 <code>개학</code>을 검색한다고 가정해보자.</p>
+
+<ol>
+<li><code>ㄱ</code>을 검색했을 때 <code>개학</code>이 결과 목록에 <strong><bb>포함된다.</bb></strong></li>
+<li><code>개</code>을 검색했을 때 <code>개학</code>이 결과 목록에 <strong><bb>포함된다.</bb></strong></li>
+<li><code>갷</code>을 검색했을 때 <code>개학</code>이 결과 목록에 <strong><rr>포함되지 않는다.</rr></strong></li>
+<li><code>개하</code>을 검색했을 때 <code>개학</code>이 결과 목록에 <strong><bb>포함된다.</bb></strong></li>
+<li><code>개학</code>을 검색했을 때 <code>개학</code>이 결과 목록에 <strong><bb>포함된다.</bb></strong></li>
+</ol>
+
+<p><code>학</code>의 <code>ㅎ</code>을 검색했을 때 두번째 글자의 초성으로 들어가는 것이 아니라 첫번째 글자의 종성으로 먼저 들어가기 때문에 이와 같은 문제가 생긴다. 이는 앞의 글자에서 겹받침이 가능한 경우에도 생길 수 있다. 따라서 이를 예외처리 해야한다. 이 문제는 이전 글자의 종성에 달려있다. 따라서 우리는 <code>kr_num</code>을 28로 나눈 나머지만 생각하면 된다.</p>
+
+<p>이를 처리하기 위해 각 종성에 따라 가능성 배열을 만든다. 여기서 가능성이란 <code>갆</code>의 경우 <code>간 + ㅎ</code>일 가능성이 있다는 의미이다. 코딩의 편의를 위해서 가능성 배열 <code>kr_pos[28][2]</code>을 다음과 같이 정의하자.</p>
+
+<ul>
+<li>이 배열은 28*2짜리 배열이다. 여기서 28은 종성의 갯수를 의미한다. 물론 종성이 없는 경우를 제외하면 종성은 27개지만 코딩의 편의를 위해 0번째는 <code>[0, 0]</code>으로 둔다.</li>
+<li><code>kr_pos[i][0]</code>은 <code>i</code>번째 종성과 이 종성에서 다음 글자 초성 후보가 빠진 종성과의 차이다. <code>kr_pos[6][0]</code>을 예로 들면, 6번째 종성이 <code>ㄶ</code>이므로 <code>간 + ㅎ</code>이었을 가능성이 있다. 이 때 <code>간</code>의 종성인 <code>ㄴ</code>은 4번째 종성이므로 <code>kr_pos[6][0] = 6 - 4 = 2</code>이다.</li>
+<li><code>kr_pos[i][1]</code>은 <code>i</code>번째 종성과 여기서 다음 글자 초성 후보의 초성 번호이다. 위의 예에서 <code>ㅎ</code>은 <a href="https://en.wikipedia.org/wiki/Zero-based_numbering">0-index</a>로 하면 18번째 초성이므로 <code>kr_pos[6][1] = 18</code>이다.</li>
+</ul>
+
+<p>이런 식으로 <code>kr_pos</code>를 만들면 다음과 같다.</p>
+
+<pre><code class="language-python">kr_pos = [
+    [0, 0], [1, 0], [2, 1], [2, 9], [4, 2], [1, 12], [2, 18],
+    [7, 3], [8, 5], [1, 0], [2, 6], [3, 7], [4, 9], [5, 16],
+    [6, 17], [7, 18], [16, 6], [17, 7], [1, 9], [19, 9], [20, 10],
+    [21, 11], [22, 12], [23, 14], [24, 15], [25, 16], [26, 17], [27,18]
+]
+</code></pre>
+
+<p>이 <code>kr_pos</code>를 이용하여 다음을 검사하면 위의 문제를 해결할 수 있다.</p>
+
+<ul>
+<li><code>chr(ord(s) - kr_pos[kr_num(s) % 28][0])</code>이 현재 글자와 일치하는가</li>
+<li><code>jaeum_list[kr_pos[kr_num(s) % 28][1]]</code>이 다음 글자의 <code>kr_list()</code>에 있는가</li>
+</ul>
+
+<p>따라서 다음과 같이 구현하면 된다.</p>
+
+<pre><code class="language-python">def is_kr(c):
+    return (ord('ㄱ') &lt;= ord(c) &lt;= ord('ㅎ')) or (ord('가') &lt;= ord(c) &lt;= ord('힣'))
+
+def kr_num(s):
+    return ord(s) - ord('가')
+
+def kr_list(s):
+    jaeum_list = [
+        'ㄱ', 'ㄲ', 'ㄴ', 'ㄷ', 'ㄸ', 'ㄹ', 'ㅁ', 'ㅂ', 'ㅃ', 'ㅅ', 
+        'ㅆ', 'ㅇ', 'ㅈ', 'ㅉ', 'ㅊ', 'ㅋ', 'ㅌ', 'ㅍ', 'ㅎ' 
+    ]
+    res = [s]
+    kr_num_s = kr_num(s)
+    if kr_num_s &gt; 0 :
+        # 초성 + 중성
+        if kr_num_s % 28 != 0 :
+            res.append(chr((int(kr_num_s/ 28) * 28) + ord('가')))
+        # 초성
+        res.append(jaeum_list[int(kr_num_s / 588)])
+    return res
+
+def eq_kr(s, d):
+    if is_kr(s) and is_kr(d):
+        return (s in kr_list(d))
+    else:
+        return (s == d)
+
+def eq_kr_pos(s, d, d_next):
+    jaeum_list = [
+        'ㄱ', 'ㄲ', 'ㄴ', 'ㄷ', 'ㄸ', 'ㄹ', 'ㅁ', 'ㅂ', 'ㅃ', 'ㅅ', 
+        'ㅆ', 'ㅇ', 'ㅈ', 'ㅉ', 'ㅊ', 'ㅋ', 'ㅌ', 'ㅍ', 'ㅎ' 
+    ]
+    kr_pos = [
+        [0, 0], [1, 0], [2, 1], [2, 9], [4, 2], [1, 12], [2, 18],
+        [7, 3], [8, 5], [1, 0], [2, 6], [3, 7], [4, 9], [5, 16],
+        [6, 17], [7, 18], [16, 6], [17, 7], [1, 9], [19, 9], [20, 10],
+        [21, 11], [22, 12], [23, 14], [24, 15], [25, 16], [26, 17], [27,18]
+    ]
+    if not (is_kr(s) and is_kr(d) and is_kr(d_next)):
+        return False
+    s_pos = chr(ord(s) - kr_pos[kr_num(s) % 28][0])
+    s_pos_chosung = jaeum_list[kr_pos[kr_num(s) % 28][1]]
+    return (s_pos == d) and (s_pos_chosung in kr_list(d_next))
+
+def match(query, data):
+    query_l = len(query)
+    data_l = len(data)
+    if data_l &lt; query_l:
+        return False
+    for i in range(0, data_l - query_l + 1):
+        res = True
+        for j in range(0, query_l):
+            # 마지막 글자
+            if j == query_l - 1:
+                if not eq_kr(query[j], data[i+j]):
+                    if i + j + 1 &lt; data_l:
+                        if eq_kr_pos(query[j], data[i+j], data[i+j+1]):
+                            break
+                    res = False
+                    break
+            else:
+                if query[j] != data[i+j]:
+                    res = False
+                    break
+        if res:
+            return True
+    return False
+</code></pre>
+
+<h1 id="외전-euc-kr은-어떻게-저장되는가">외전: EUC-KR은 어떻게 저장되는가</h1>
+
+<p>UTF-8과 마찬가지로 한글에 많이 쓰이는 인코딩이 EUC-KR이다. 그러나 <strong>EUC-KR은 코드로 처리하기엔 매우 부적합한 인코딩 방식이다.</strong> UTF-8에서는 <code>가</code>, <code>개</code>, <code>갸</code>, <code>걔</code>, <code>거</code> 등이 모두 같은 간격으로 이루어져 있고, 이 간격은 가능한 모든 종성 + 1이다. 그러나 EUC-KR을 뽑아보면 이와 다른 방식으로 저장되어있다. EUC-KR도 위처럼 <code>encode</code>함수를 써서 뽑아볼 수 있다.</p>
+
+<pre><code class="language-python">print(input().encode('euc-kr'))
+</code></pre>
+
+<p>이를 통해 <code>가</code>, <code>개</code>, <code>갸</code>, <code>걔</code>, <code>거</code>를 뽑아보면 다음과 같다.</p>
+
+<p><code>b0 a1</code><br><code>b0 b3</code><br><code>b0 bc</code><br><code>b0 c2</code><br><code>b0 c5</code><br></p>
+
+<p>각각의 차를 구해보면 18, 9, 6, 3으로 모두 다르다. 모두 다른 이유는 이 사이의 글자들을 뽑아보면 알아낼 수 있다. EUC-KR에서 한글을 뽑을 때도 위와 같이</p>
+
+<pre><code class="language-python">print(bytearray([0xb0, 0xc3]).decode('euc-kr'))
+</code></pre>
+
+<p>로 할 수 있다. 이를 이용해 <code>걔</code>(<code>b0 c2</code>)와 <code>거</code>(<code>b0 c5</code>)의 사이를 뽑아보면 <code>걘</code>, <code>걜</code>이 나온다. 즉, EUC-KR에서는 일반적으로 쓰일만한 글자만 들어있고, <code>걕</code>과 같이 고유명사가 아니라면 쓰이지 않는 글자는 빠져있다. 그리고 <code>걕</code>을 EUC-KR로 뽑아보면</p>
+
+<p><code>a4 d4 a4 a1 a4 c2 a4 a1</code></p>
+
+<p>처럼 4byte의 긴 코드가 나온다. 이를 분석해보면 다음과 같다.</p>
+
+<ul>
+<li><code>a4 d4</code> : 여기부터 4byte짜리 글자일 것이라는 암시</li>
+<li><code>a4 a1</code> : <code>ㄱ</code>을 EUC-KR로 인코딩한 값</li>
+<li><code>a4 c2</code> : <code>ㅒ</code>를 EUC-KR로 인코딩한 값</li>
+<li><code>a4 a1</code> : <code>ㄱ</code>을 EUC-KR로 인코딩한 값</li>
+</ul>
+
+<p>즉, <code>a4 d4</code>로 시작한 다음 이후 3byte는 각각 초성, 중성, 종성을 나타낸다. 만약 종성이 없는 <code>쮀</code>같은 글자의 경우 <code>a4 d4 a4 b9 a4 ce a4 d4</code>이고 이는</p>
+
+<ul>
+<li><code>a4 d4</code> : 여기부터 4byte짜리 글자일 것이라는 암시</li>
+<li><code>a4 b9</code> : <code>ㅉ</code>을 EUC-KR로 인코딩한 값</li>
+<li><code>a4 ce</code> : <code>ㅞ</code>를 EUC-KR로 인코딩한 값</li>
+<li><code>a4 d4</code> : 종성이 없다는 뜻</li>
+</ul>
+
+<p>을 의미한다. 따라서 EUC-KR은 다음과 같이 정리할 수 있다.</p>
+
+<ul>
+<li>일반적으로 쓰이는 글자의 경우 사전순으로 2byte로 저장된다.</li>
+<li>일반적으로 쓰이지 않는 글자의 경우 4byte로 저장된다. 뒤의 3byte는 초성, 중성, 종성을 의미한다.</li>
+</ul>
+
+<p>UTF-8은 모든 글자가 3byte인 것에 비해 EUC-KR은 일반적으로 쓰이는 글자의 경우 2byte이다. 따라서 글을 저장할 때 EUC-KR을 이용하면 메모리 활용 면에서 좋을 수 있다. 그러나 저장된 글자에 규칙이 없어서 UTF-8에서처럼 28로 나누거나 588로 나누는 트릭을 못쓰고 일일히 매핑해서 구현해야 하기 때문에 코드로 처리하기엔 좋지 않다.</p>
+
+</section>
+
+<div class="post-meta-code">
+  <div class="desc">
+    public string description() {
+    <div class="desc">val author = "
+    
+        <a href="mailto:ialy12006@gmail.com">ialy1595</a>
+    ";
+    </div>
+    
+    <div class="desc">
+      val categories = [
+      
+      
+      <a href="https://ialy1595.github.io//categories/code">"code"</a>
+      
+      ];
+    </div>
+    
+	
+    <div class="desc">
+      val subcategories = [
+      
+      
+      <a href="https://ialy1595.github.io//subcategories/user-experience">"user-experience"</a>
+      
+      ];
+    </div>
+    
+    }
+  </div>
+  <div class="desc">
+    public string tags() {
+      <div class="desc">
+        val tags = [
+        
+          
+          <a href="https://ialy1595.github.io/tags/hangeul">"hangeul"</a>
+          
+          <a href="https://ialy1595.github.io/tags/korean">"korean"</a>
+          
+          <a href="https://ialy1595.github.io/tags/ux">"UX"</a>
+          
+          <a href="https://ialy1595.github.io/tags/search">"search"</a>
+          
+          <a href="https://ialy1595.github.io/tags/incremental-search">"incremental search"</a>
+          
+          <a href="https://ialy1595.github.io/tags/encoding">"encoding"</a>
+          
+          <a href="https://ialy1595.github.io/tags/unicode">"unicode"</a>
+          
+          <a href="https://ialy1595.github.io/tags/utf-8">"UTF-8"</a>
+          
+          <a href="https://ialy1595.github.io/tags/python">"python"</a>
+          
+        
+        ];
+      </div>
+    }
+  </div>
+  
+  <div class="desc">
+    public string references() {
+      <div class="desc">
+        val references = [<br>
+        
+          
+          <a href="https://en.wikipedia.org/wiki/UTF-8">&nbsp;&nbsp;"https://en.wikipedia.org/wiki/UTF-8"</a><br>
+          
+        
+        ];
+      </div>
+    }
+  </div>
+  
+</div>
+
+
+
+
+<div class="paging post-paging">
+  
+  
+</div>
+
+
+  </div>
+  <div class="blank"></div>
+</div>
+<footer class="footer">
+  <div class="share">
+    <a href="https://github.com/ialy1595" title="Github" target="_blank"><i class="fa fa-github"></i></a>
+    <a href="mailto:ialy12006@gmail.com" title="Email" target="_blank"><i class="fa fa-envelope"></i></a>
+    <a rel="alternate" type="application/rss+xml" href="https://ialy1595.github.io/index.xml" title="RSS feed" target="_blank"><i class="fa fa-rss"></i></a>
+  </div>
+  COPYRIGHT (C) <a href="https://blog.lulab.net">DONGGEUN,BANG</a>. ALL RIGHTS RESERVED.
+</footer>
+
+</body>
+</html>
