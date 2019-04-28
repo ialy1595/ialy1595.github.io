@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Big O Natation on ialy&#39;s blog</title>
+    <link>https://ialy1595.github.io/tags/big-o-natation/</link>
+    <description>Recent content in Big O Natation on ialy&#39;s blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>ko-KR</language>
+    <managingEditor>ialy12006@gmail.com (ialy1595)</managingEditor>
+    <webMaster>ialy12006@gmail.com (ialy1595)</webMaster>
+    <lastBuildDate>Tue, 16 Apr 2019 21:28:24 +0900</lastBuildDate>
+    
+	<atom:link href="https://ialy1595.github.io/tags/big-o-natation/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>시간복잡도 (Time Complexity)</title>
+      <link>https://ialy1595.github.io/post/time-complexity/</link>
+      <pubDate>Tue, 16 Apr 2019 21:28:24 +0900</pubDate>
+      <author>ialy12006@gmail.com (ialy1595)</author>
+      <guid>https://ialy1595.github.io/post/time-complexity/</guid>
+      <description>효율적인 코드란 우리는 프로그램을 만들기 위해 코드를 작성한다. 여기서 프로그램이란 어떤 input을 넣었을 때 원하는 output이 나오도록 하는 것이다. 하지만 같은 input을 넣었을 때 같은 output이 나왔다고 해서 다 같은 프로그램은 아니다.</description>
+    </item>
+    
+  </channel>
+</rss>
