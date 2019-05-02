@@ -3,6 +3,11 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>https://ialy1595.github.io/post/brute-force/</loc>
+    <lastmod>2019-04-28T22:03:06+09:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://ialy1595.github.io/post/time-complexity/</loc>
     <lastmod>2019-04-16T21:28:24+09:00</lastmod>
   </url>
@@ -55,7 +60,7 @@
   
   <url>
     <loc>https://ialy1595.github.io/subcategories/algorithm/</loc>
-    <lastmod>2019-04-16T21:28:24+09:00</lastmod>
+    <lastmod>2019-04-28T22:03:06+09:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -90,6 +95,12 @@
   </url>
   
   <url>
+    <loc>https://ialy1595.github.io/tags/brute-force/</loc>
+    <lastmod>2019-04-28T22:03:06+09:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>https://ialy1595.github.io/tags/canonical-forms/</loc>
     <lastmod>2018-09-26T18:27:42+09:00</lastmod>
     <priority>0</priority>
@@ -108,7 +119,7 @@
   
   <url>
     <loc>https://ialy1595.github.io/categories/code/</loc>
-    <lastmod>2019-04-16T21:28:24+09:00</lastmod>
+    <lastmod>2019-04-28T22:03:06+09:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -246,7 +257,7 @@
   
   <url>
     <loc>https://ialy1595.github.io/post/</loc>
-    <lastmod>2019-04-16T21:28:24+09:00</lastmod>
+    <lastmod>2019-04-28T22:03:06+09:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -294,7 +305,7 @@
   
   <url>
     <loc>https://ialy1595.github.io/subcategories/</loc>
-    <lastmod>2019-04-16T21:28:24+09:00</lastmod>
+    <lastmod>2019-04-28T22:03:06+09:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -360,7 +371,7 @@
   
   <url>
     <loc>https://ialy1595.github.io/</loc>
-    <lastmod>2019-04-16T21:28:24+09:00</lastmod>
+    <lastmod>2019-04-28T22:03:06+09:00</lastmod>
     <priority>0</priority>
   </url>
   

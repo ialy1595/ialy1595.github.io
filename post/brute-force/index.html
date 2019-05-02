@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-134848712-1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+  
+    gtag('config', 'UA-134848712-1');
+  </script>
+  
+
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <title>Brute Force  | ialy&#39;s blog</title>
+  <link rel="icon" href="/favicon.ico" type="image/x-icon">
+  <link rel="canonical" href="https://ialy1595.github.io/post/brute-force/">
+  
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/monokai-sublime.min.css">
+  <link rel="stylesheet" href="/css/styles.css">
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+  <script type="text/javascript" async
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+  MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [['$','$'], ['\\(','\\)']],
+    displayMath: [['$$','$$']],
+    processEscapes: true,
+    processEnvironments: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+    TeX: { equationNumbers: { autoNumber: "AMS" },
+         extensions: ["AMSmath.js", "AMSsymbols.js"] }
+  }
+  });
+  MathJax.Hub.Queue(function() {
+    
+    
+    
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i = 0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script> 
+  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/gist-embed/2.7.1/gist-embed.min.js"></script>
+</head>
+
+<body>
+<div class="wrap">
+  <div class="navbar">
+    <ul>
+      <li><a href="/">HELLO WORLD!</a></li>
+      <li><a href="/categories">CATEGORIES</a></li>
+      <li><a href="/tags">TAGS</a></li>
+      <li><a href="/about">ABOUT ME</a></li>
+    </ul>
+  </div>
+  <div class="container">
+
+
+
+  <div class="title">
+  
+  
+  
+  <a href="/categories/code">
+    <img src="/images/logo-code.png" width="260px" height="48px" />
+  </a>
+  
+</div>
+	<a href="https://ialy1595.github.io/post/brute-force/">
+  <div class="post-title">
+    
+	
+	<img src="/images/post-title-icon-code.png" />
+	
+    <div class="post-meta">
+      <time>28 Apr 2019, 22:03</time>
+      <h1>Brute Force</h1>
+    </div>
+  </div>
+</a>
+
+<div class="post-toc">
+  <span class="title">
+    Table of contents
+  </span>
+  <nav id="TableOfContents">
+<ul>
+<li><a href="#1-구현력을-키워준다">1. 구현력을 키워준다.</a></li>
+<li><a href="#2-알고리즘-검증을-할-수-있다">2. 알고리즘 검증을 할 수 있다.</a></li>
+<li><a href="#3-알고리즘을-생각하는-시발점이-될-수-있다">3. 알고리즘을 생각하는 시발점이 될 수 있다.</a></li>
+</ul>
+</nav>
+</div>
+
+<section class="post-content">
+  
+
+<p>한국말로 전수탐색이라고 부르기도 한다. 하지만 단순히 모든 경우의 수를 탐색해 본다라는 전수탐색의 의미보단 일단 무식하게 부딪혀본다라는 의미를 담은 brute force 표현이 더 좋다. 사실 brute force는 알고리즘이라 불릴 수 있을지 미지수일 정도로 매우 단순무식한 방법이다. 시간이나 공간을 얼마나 쓸지 걱정하지 않고 일단 어떻게든 답이 나오도록 하는 것을 brute force라고 한다. 모든 가능성을 다 탐색해보는 전수탐색도, 얼마나 많은 경우의 수가 있을지 모르니 시간과 공간을 엄청나게 쓰겠지만 결국 그 모든 가능성을 다 확인해보면 답을 찾을수 있으니 brute force에 속하는 것이다. 이렇게 비효율적인 알고리즘이지만 그만큼 강력한 점도 있기 때문에 brute force라는 용어가 생긴 것이다. 바로 시간과 공간만 충분하다면 무조건 정확한 답을 찾아낼 수 있다는 것이다.</p>
+
+<p>알고리즘에서 중요하게 생각하는 효율성의 측면에서 보면 brute force는 형편없는 알고리즘이다. 그럼에도 불구하고 이 알고리즘을 소개하는 이유는 다음과 같다.</p>
+
+<h1 id="1-구현력을-키워준다">1. 구현력을 키워준다.</h1>
+
+<p>이는 특히 코딩을 막 시작한 사람들에게 중요한 부분이다. 문제를 어떻게 해결할지 머리속에서 생각하는 것과 실제로 구현해보는 것은 전혀 다른 문제이다. 실제로 구현을 해봐야 어떤 예외가 나올 수 있고, 놓친 부분이 어디이고, 데이터 변수 흐름 설계는 어떻게 해야 하는지 익힐 수 있다. 예를 들어 배열에 변수를 넣을 때 0-index로 해야 좋을 때가 있고 1-index로 해야 좋을 때가 있다. 실제로 구현을 해보지 않으면 이러한 사소한 부분이 훈련되지 못하고, 이런 부분이 점점 쌓이면 나중에 결국 키보드에 손을 올리기만 하면 막막해지고 사소한 실수도 계속 생기기 마련이다. 이제 막 코딩을 시작한 사람이라면 문제를 처음 만났을 때 일단 brute force로 간단한 부분이라도 머릿속에 있는 생각을 구현을 해보는 것을 추천한다.</p>
+
+<h1 id="2-알고리즘-검증을-할-수-있다">2. 알고리즘 검증을 할 수 있다.</h1>
+
+<p>내가 생각한 알고리즘이 맞는지 틀린지 확인해보는 방법 중 하나는 test case를 넣어서 예상한 답과 같은지 확인해 보는 것이다. 문제에서 test case를 제공하는 경우도 있지만, 더 확실히 하기 위해서는 더 많고 edge case까지 다루는 세세한 test case가 필요하다. 이러한 확인 작업을 하기 위해서는 직접 test case를 만들어야 한다. input이야 조건에 맞는 수를 넣으면 되겠지만, 이에 해당하는 output을 직접 손으로 구하려면 귀찮기도 하고 과정에 계산이 많으면 실수를 해서 정확하지 않은 답이 나올 수도 있다. 이런 경우에서 사용하기 좋은 것이 brute force 알고리즘이다. 비효율적인 만큼 확실하게 정답을 보장하고, 알고리즘도 단순할 것이기 때문에 코딩하는 과정에서 실수할 확률도 적을 것이다. 또한 아무리 비효율적이라해도 작은 수에 대해서는 충분히 빠른 시간 안에 답을 낼 수 있다. 따라서 brute force 알고리즘을 이용해서 작은 수에 대한 test case를 만들고, 이를 이용해서 내 알고리즘이 맞는지 검증해볼 수 있다.</p>
+
+<h1 id="3-알고리즘을-생각하는-시발점이-될-수-있다">3. 알고리즘을 생각하는 시발점이 될 수 있다.</h1>
+
+<p>효율적이란 의미는 비효율적인 부분을 개선했다는 뜻이다. 물론 처음부터 효율적인 알고리즘이 바로 생각난다면 금상첨화겠지만, 바로 생각나지 않을 경우 우선 어느 부분이 비효율적인지를 알아야 한다. 이 때 일단 brute force로 구현을 해보면 구현하고 데이터 흐름을 따라가보는 과정에서 이 부분이 비효울적인거 같은데&hellip; 하는 것을 느낄 수 있을 것이다. 이후 그 비효율적인 부분을 개선하는 아이디어가 생각난다면 그게 바로 효율적인 알고리즘이 되는 것이다.</p>
+
+<p>예를 들어 부분문자열 확인 문제를 살펴보자. 부분문자열 확인 문제란 어떤 문자열에 다른 문자열이 부분문자열인지 확인해보는 알고리즘이다. <code>abaa</code>에 <code>aa</code>라는 문자열이 들어있는지 확인해본다고 하자. brute force로 앞에서부터 일일히 확인해보는 과정을 보면 다음과 같다.</p>
+
+<ol>
+<li><strong>a</strong>baa <strong>a</strong>a 일치</li>
+<li>a<strong>b</strong>aa a<strong>a</strong> 불일치</li>
+<li>a<strong>b</strong>aa <strong>a</strong>a 불일치</li>
+<li>ab<strong>a</strong>a <strong>a</strong>a 일치</li>
+<li>aba<strong>a</strong> a<strong>a</strong> 일치</li>
+</ol>
+
+<p>여기서 비효율적이라고 생각되는 부분은 2번과 3번 과정이다. 우리는 2번에서 비교해보는 과정에서 이미 <code>abaa</code>의 두번째 글자는 <code>a</code>가 아님을 알고 있다. 하지만 이 다음 과정에서 <code>abaa</code>의 두번째 글자를 <code>aa</code>의 첫번째 글자인 <code>a</code>와 또 비교하는 비효율적인 연산이 일어난이다. 이러한 비효율적인 부분을 개선해서 앞에서 비교한 데이터를 활용해서 뒤에서 필요없는 비교를 제거한 알고리즘이 KMP 알고리즘이다. 이처럼 일단 brute force로 구현을 한 다음 어느 부분이 비효율적인지 생각해보면 더 나은 알고리즘을 생각해내는 시발점이 될 수 있다.</p>
+
+</section>
+
+<div class="post-meta-code">
+  <div class="desc">
+    public string description() {
+    <div class="desc">val author = "
+    
+        <a href="mailto:ialy12006@gmail.com">ialy1595</a>
+    ";
+    </div>
+    
+    <div class="desc">
+      val categories = [
+      
+      
+      <a href="https://ialy1595.github.io//categories/code">"code"</a>
+      
+      ];
+    </div>
+    
+	
+    <div class="desc">
+      val subcategories = [
+      
+      
+      <a href="https://ialy1595.github.io//subcategories/algorithm">"algorithm"</a>
+      
+      ];
+    </div>
+    
+    }
+  </div>
+  <div class="desc">
+    public string tags() {
+      <div class="desc">
+        val tags = [
+        
+          
+          <a href="https://ialy1595.github.io/tags/brute-force">"brute force"</a>
+          
+        
+        ];
+      </div>
+    }
+  </div>
+  
+</div>
+
+
+
+
+<div class="paging post-paging">
+  
+  
+</div>
+
+
+  </div>
+  <div class="blank"></div>
+</div>
+<footer class="footer">
+  <div class="share">
+    <a href="https://github.com/ialy1595" title="Github" target="_blank"><i class="fa fa-github"></i></a>
+    <a href="mailto:ialy12006@gmail.com" title="Email" target="_blank"><i class="fa fa-envelope"></i></a>
+    <a rel="alternate" type="application/rss+xml" href="https://ialy1595.github.io/index.xml" title="RSS feed" target="_blank"><i class="fa fa-rss"></i></a>
+  </div>
+  COPYRIGHT (C) <a href="https://blog.lulab.net">DONGGEUN,BANG</a>. ALL RIGHTS RESERVED.
+</footer>
+
+</body>
+</html>
