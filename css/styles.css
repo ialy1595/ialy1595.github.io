@@ -19,35 +19,35 @@ html, body, h1, h2, h3, h4, h5 {
 }
 
 h1 {
-  font-size: 30px;
+  font-size: 40px;
   font-weight: 800;
   margin-top: 50px;
   margin-bottom: 10px;
 }
 
 h2 {
-  font-size: 26px;
+  font-size: 33px;
   font-weight: 600;
   margin-top: 50px;
   margin-bottom: 10px;
 }
 
 h3 {
-  font-size: 21px;
+  font-size: 26px;
   font-weight: 600;
   margin-top: 50px;
   margin-bottom: 10px;
 }
 
 h4 {
-  font-size: 18px;
+  font-size: 21px;
   font-weight: 600;
   margin-top: 50px;
   margin-bottom: 10px;
 }
 
 h5 {
-  font-size: 15px;
+  font-size: 18px;
   margin-top: 50px;
   margin-bottom: 10px;
 }
@@ -179,12 +179,12 @@ bb {
 
 .gist .highlight {
   font-family: 'Nanum Gothic Coding';
-  font-size: 18px;
+  font-size: 21px;
 }
 
 .gist .blob-code-inner {
   font-family: 'Nanum Gothic Coding';
-  font-size: 18px;
+  font-size: 21px;
 }
 /*
 * navbar
@@ -205,18 +205,19 @@ bb {
 
 .navbar li {
   display: inline-block;
-  padding: 12px 8px 12px 8px;
+  padding: 23px 0px 23px 0px;
   letter-spacing: 1.5px;
-  font-size: 13px;
+  font-size: 16px;
   font-weight: bolder;
 }
 
 .navbar li:hover {
-  border-bottom: 4px solid #6666FF;
-  padding-bottom: 8px;
+  border-bottom: 6px solid #6666FF;
+  padding-bottom: 17px;
 }
 
 .navbar li a {
+  padding: 23px 10px 23px 10px;
   color: #FFFFFF;
   text-decoration: none;
 }
@@ -231,17 +232,17 @@ bb {
 
 .container {
   margin: auto;
-  max-width: 890px;
+  max-width: 770px;
   padding: 40px 30px 15px 30px;
-  font-size: 18px;
+  font-size: 21px;
   font-weight: 400;
-  line-height: 2.4em;
+  line-height: 2.2em;
   color: #333e4c;
 }
 
 .container .title {
   text-align: center;
-  padding: 50px 0px 80px 0px;
+  padding: 50px 0px 50px 0px;
 }
 
 .post-list-item {
@@ -294,7 +295,7 @@ bb {
 .post-meta, .post-meta a, .post-meta a:visited {
   display: block;
   color: #4A4A4A;
-  font-size: 14px;
+  font-size: 16px;
   line-height: 1.7em;
 }
 
@@ -315,12 +316,11 @@ bb {
 }
 
 .post-toc {
-  float: right;
   margin-left: 20px;
   padding: 20px 25px 20px 25px;
   background-color: #f5f5f5;
-  font-size: .8rem;
-  line-height: 1.8em;
+  font-size: .8em;
+  line-height: 2.2rem;
 }
 
 .post-toc a, .post-toc a:visited {
@@ -328,13 +328,13 @@ bb {
 }
 
 .post-toc .title {
-  font-size: .8rem;
   font-weight: bold;
   padding: 10px 10px 10px 0px;
 }
 
 .post-toc ul {
   padding-left: 20px;
+  margin: 0px;
 }
 
 .post-content {
@@ -359,7 +359,7 @@ bb {
   margin-bottom: 20px;
   padding: 10px;
   color: #A0A0A0;
-  font-size: 12px;
+  font-size: 14px;
   font-weight: 100;
   line-height: 1.6em;
 }
@@ -533,7 +533,7 @@ bb {
 
 .tags .tag {
   display: inline-block;
-  margin: 5px;
+  margin: 12px 10px 12px 10px;
   padding: 5px 10px 5px 10px;
   border: 1px dashed #dddddd;
   border-radius: 5px;
@@ -580,3 +580,8 @@ bb {
   margin-right: 5px !important;
 }
 
+@media screen and (min-width: 640px) {
+  .post-toc {
+    float: right;
+  }
+}
