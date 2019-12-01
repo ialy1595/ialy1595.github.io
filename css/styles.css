@@ -355,7 +355,8 @@ bb {
 
 .post-meta-code {
   background-color: #f5f5f5;
-  margin-top: 80px;
+  margin-top: 20px;
+  margin-bottom: 20px;
   padding: 10px;
   color: #A0A0A0;
   font-size: 12px;
@@ -409,7 +410,6 @@ bb {
 }
 
 .paging:hover {
-	color: #6666FF;
 }
 
 .paging a, a:visited {
@@ -429,7 +429,7 @@ bb {
 }
 
 .post-paging {
-  margin-top: 15px;
+  margin-top: 40px;
   height: 40px;
 }
 
@@ -571,3 +571,12 @@ bb {
   float: right;
   color: #717171;
 }
+
+.left-term {
+  margin-left: 5px !important;
+}
+
+.right-term {
+  margin-right: 5px !important;
+}
+
