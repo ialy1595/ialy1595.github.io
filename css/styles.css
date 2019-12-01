@@ -468,6 +468,7 @@ bb {
 .categories ul {
   list-style-type: none;
   margin: 0px;
+  padding-inline-start: 0px;
 }
 
 .categories li {
@@ -531,8 +532,8 @@ bb {
 
 .tags .tag {
   display: inline-block;
-  margin: 12px 10px 12px 10px;
-  padding: 5px 10px 5px 10px;
+  margin: 6px 5px 6px 5px;
+  padding: 5px 6px 5px 6px;
   border: 1px dashed #dddddd;
   border-radius: 5px;
 }
@@ -578,8 +579,18 @@ bb {
   margin-right: 5px !important;
 }
 
+@media screen and (min-width: 400px) and (max-width: 639px) {
+  .categories ul {
+    padding-inline-start: 5px;
+  }
+}
+
 @media screen and (min-width: 640px) {
   .post-toc {
     float: right;
   }
+  .categories ul {
+    padding-inline-start: 15px;
+  }
+  
 }
