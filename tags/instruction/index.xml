@@ -19,7 +19,7 @@
       <pubDate>Thu, 21 Mar 2019 17:12:20 +0900</pubDate>
       <author>ialy12006@gmail.com (ialy1595)</author>
       <guid>https://ialy1595.github.io/post/datapath-and-control-unit/</guid>
-      <description>Datapath Datapath는 CPU에서 직접적으로 연산이 이루어지는 부분이다. 따라서 연산을 하거나 연산된 결과를 저장할 register file과 연산이 실행되는 ALU로 이루어져 있다. 그리고 memory와 데이터를 주고받아야 하기 때문에 memory와도 연결되었다. 그리고 이 데이터들은 버스에 담겨서 각각 부분으로 들어간다.</description>
+      <description>Datapath Datapath는 CPU에서 직접적으로 연산이 이루어지는 부분이다. 따라서 연산을 하거나 연산된 결과를 저장할 register file과 연산이 실행되는 ALU로 이루어져 있다. 그리고 memory와 데이터를 주고받아야하기 때문에 memory와도 연결되었다. 그리고 이 데이터들은 버스에 담겨서 각각 부분으로 들어간다.</description>
     </item>
     
   </channel>

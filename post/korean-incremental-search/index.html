@@ -87,11 +87,14 @@
   </div>
 </a>
 
-<div class="post-toc">
-  <span class="title">
-    Table of contents
-  </span>
-  <nav id="TableOfContents">
+<section class="post-content">
+  <div class="post-toc-container1">
+    <div class="post-toc-container2">
+      <div class="post-toc">
+        <span class="title">
+          Table of contents
+        </span>
+        <nav id="TableOfContents">
 <ul>
 <li><a href="#한글-검색의-문제점">한글 검색의 문제점</a></li>
 <li><a href="#부드러운-한글-검색-구현">부드러운 한글 검색 구현</a>
@@ -103,9 +106,9 @@
 <li><a href="#외전-euc-kr은-어떻게-저장되는가">외전: EUC-KR은 어떻게 저장되는가</a></li>
 </ul>
 </nav>
-</div>
-
-<section class="post-content">
+      </div>
+    </div>
+  </div>
   
 
 <h1 id="한글-검색의-문제점">한글 검색의 문제점</h1>
@@ -178,11 +181,11 @@
 
 <p>예전에는 이 ASCII code만 사용해도 큰 문제가 없었다. 그러나 점점 글로벌시대가 되고 한글을 비롯한 수많은 외국어와 다양한 기호들을 표시할 필요가 생기면서, ASCII code를 확장할 필요가 생겼다. 따라서 ASCII code를 확장하여 수많은 기호와 문자들을 포함시킨 것이 Universal code, 즉 <strong>Unicode</strong>다.</p>
 
-<p>Unicode는 ASCII code를 확장한 것이지만 포함된 문자의 수 외에도 ASCII code와 다른점이 하나 있다. 바로 ASCII code는 매핑임과 동시에 문자를 코드상에 표현하는 인코딩 방식이었다면 <strong>Unicode는 단순히 매핑일 뿐</strong>이라는 것이다. 예를 들어 ASCII code에서 <code>a</code>에 해당하는 숫자는 <code>0x60</code>이고, 이 때 <code>0x60</code>을 문자로 출력하면 <code>a</code>가 나온다. 그러나 unicode의 경우 <code>가</code>에 해당하는 unicode는 <code>0xac00</code>이지만 <code>0xac00</code>을 출력한다고 <code>가</code>가 나오지 않는다. 즉, Unicode는 실제로 표현하는 인코딩 방식은 따로 존재하고, 이중 하나가 UTF-8이다.</p>
+<p>Unicode는 ASCII code를 확장한 것이지만 포함된 문자의 수 외에도 ASCII code와 다른 점이 하나 있다. 바로 ASCII code는 매핑임과 동시에 문자를 코드 상에 표현하는 인코딩 방식이었다면 <strong>Unicode는 단순히 매핑일 뿐</strong>이라는 것이다. 예를 들어 ASCII code에서 <code>a</code>에 해당하는 숫자는 <code>0x60</code>이고, 이 때 <code>0x60</code>을 문자로 출력하면 <code>a</code>가 나온다. 그러나 unicode의 경우 <code>가</code>에 해당하는 unicode는 <code>0xac00</code>이지만 <code>0xac00</code>을 출력한다고 <code>가</code>가 나오지 않는다. 즉, Unicode는 실제로 표현하는 인코딩 방식은 따로 존재하고, 이중 하나가 UTF-8이다.</p>
 
-<p>Unicode가 이렇게 매핑과 인코딩을 따로 두는 이유는 <strong>확장성</strong> 때문이다. ASCII code에서 unicode로 확장되면서 많은 문자가 추가되었지만, 아직 그 누구도 세상의 모든 문자를 표현했다고 장담할 수 없고 아직도 계속 추가되는 중이다. 이러한 상황에서 unicode가 매핑과 동시에 한가지 형식으로 인코딩이 고정된다면 그 형식에서 표시할 수 있는 모든 글자의 수를 넘는 경우 또 다시 새로운 시스템을 만들어야만 한다. 따라서 unicode는 매핑에만 중점을 둬서 무한한 추가가 가능하도록 하고, unicode에 포함된 문자가 많아질수록 이를 인코딩하는 형식을 바꿔나가는 형식을 택했다.</p>
+<p>Unicode가 이렇게 매핑과 인코딩을 따로 두는 이유는 <strong>확장성</strong> 때문이다. ASCII code에서 unicode로 확장되면서 많은 문자가 추가되었지만, 아직 그 누구도 세상의 모든 문자를 표현했다고 장담할 수 없고 아직도 계속 추가되는 중이다. 이러한 상황에서 unicode가 매핑과 동시에 한 가지 형식으로 인코딩이 고정된다면 그 형식에서 표시할 수 있는 모든 글자의 수를 넘는 경우 또 다시 새로운 시스템을 만들어야 한다. 따라서 unicode는 매핑에만 중점을 둬서 무한한 추가가 가능하도록 하고, unicode에 포함된 문자가 많아질수록 이를 인코딩하는 형식을 바꿔나가는 형식을 택했다.</p>
 
-<p>Unicode를 인코딩하는 방식 중 한글을 인코딩할 때 많이 쓰이는 UTF-8을 살펴보자. python에서는 <code>encode()</code>함수를 통해 문자가 어떻게 인코딩되는지 확인할 수 있다. 예를 들어 입력한 문자가 UTF-8로 어떻게 인코딩 되는지 알고싶다면 다음 코드를 통해 확인할 수 있다.</p>
+<p>Unicode를 인코딩하는 방식 중 한글을 인코딩할 때 많이 쓰이는 UTF-8을 살펴보자. python에서는 <code>encode()</code>함수를 통해 문자가 어떻게 인코딩되는지 확인할 수 있다. 예를 들어 입력한 문자가 UTF-8로 어떻게 인코딩 되는지 알고 싶다면 다음 코드를 통해 확인할 수 있다.</p>
 
 <pre><code class="language-python">print(input().encode('utf-8'))
 </code></pre>
@@ -193,22 +196,22 @@
 
 <p><code>e3 84 b1</code><br><code>e3 84 b4</code><br><code>e3 84 b7</code></p>
 
-<p>이 나온다. 이것만 보면 &ldquo;아 3씩 차이나서 나오는구나&rdquo;라고 생각할 수 있다. 그러나 <code>ㄹ</code>을 뽑아보면 <code>e3 84 b9</code>가 나온다&hellip;.?! 당황하지 말고 이번엔 역으로 UTF-8 코드를 문자로 출력하는걸 해보자. 이는 <code>bytearray</code> 자료형과 <code>decode()</code> 함수를 써서 할 수 있다. 예를 들어 <code>e3 84 b2</code>를 문자로 출력하는 코드는</p>
+<p>이 나온다. 이것만 보면 &ldquo;아 3씩 차이나서 나오는구나&rdquo;라고 생각할 수 있다. 그러나 <code>ㄹ</code>을 뽑아보면 <code>e3 84 b9</code>가 나온다&hellip;.?! 당황하지 말고 이번엔 역으로 UTF-8 코드를 문자로 출력하는 것을 해보자. 이는 <code>bytearray</code> 자료형과 <code>decode()</code> 함수를 써서 할 수 있다. 예를 들어 <code>e3 84 b2</code>를 문자로 출력하는 코드는</p>
 
 <pre><code class="language-python">print(bytearray([0xe3, 0x84, 0xb2]).decode('utf-8'))
 </code></pre>
 
-<p>이 된다. 이 코드를 이용해서 <code>e3 84 b2</code>을 뽑아보면 <code>ㄲ</code>이 나오고, <code>e3 84 b3</code>를 뽑아보면 <code>ㄳ</code>이 나온다. 따라서 이 구간에는 쌍자음, 겹자음까지 포함해서 순서대로 저장되어있음을 알 수 있다. <code>ㄴ</code> 뒤에는 <code>ㄵ</code>과 <code>ㄶ</code> 두가지가 있지만 <code>ㄷ</code>뒤에는 <code>ㄸ</code> 하나밖에 없기 때문에 위와 같이 3차이가 나기도 하고 2차이가 나기도 하는 것이다. 이렇게 순서대로 하나씩 뽑아보면 <code>ㄿ</code>까지 <code>e3 84 bf</code>로 잘 나온다. 하지만 그 다음 순서인 <code>ㅀ</code>을 뽑아보면 <code>e3 84 c0</code>이 아니라 <code>e3 85 80</code>이 나온다. 이를 통해 우리는 다음과 같은 사실을 유추할 수 있다.</p>
+<p>이 된다. 이 코드를 이용해서 <code>e3 84 b2</code>을 뽑아보면 <code>ㄲ</code>이 나오고, <code>e3 84 b3</code>를 뽑아보면 <code>ㄳ</code>이 나온다. 따라서 이 구간에는 쌍자음, 겹자음까지 포함해서 순서대로 저장되어있음을 알 수 있다. <code>ㄴ</code> 뒤에는 <code>ㄵ</code>과 <code>ㄶ</code> 두 가지가 있지만 <code>ㄷ</code>뒤에는 <code>ㄸ</code> 하나밖에 없기 때문에 위와 같이 3차이가 나기도 하고 2차이가 나기도 하는 것이다. 이렇게 순서대로 하나씩 뽑아보면 <code>ㄿ</code>까지 <code>e3 84 bf</code>로 잘 나온다. 하지만 그 다음 순서인 <code>ㅀ</code>을 뽑아보면 <code>e3 84 c0</code>이 아니라 <code>e3 85 80</code>이 나온다. 이를 통해 우리는 다음과 같은 사실을 유추할 수 있다.</p>
 
 <ul>
-<li><code>0x80</code>에서 <code>0xbf</code>까지만 사용하고, <code>0xbf</code>를 넘어가면 다음 자리로 자리올림된다.</li>
+<li><code>0x80</code>에서 <code>0xbf</code>까지만 사용하고, <code>0xbf</code>를 넘어가면 다음 자리로 자리올림 된다.</li>
 </ul>
 
-<p>이는 완전체 글자(초성+중성 또는 초성+중성+종성)가 어떻게 저장되는지 보면서 다시한번 확인할 수 있다.</p>
+<p>이는 완전체 글자(초성+중성 또는 초성+중성+종성)가 어떻게 저장되는지 보면서 다시 한번 확인할 수 있다.</p>
 
-<p>완전체 글자의 가장 처음인 <code>가</code>부터 알아보자. <code>가</code>를 UTF-8로 뽑으면 <code>ea b0 80</code>이 나온다. 또한 이 다음인 <code>ea b0 81</code>을 뽑아보면 <code>각</code>이 나온다. 이를 통해 완전체 글자는 받침이 있고 없고 상관없이 사전순으로 저장되어있음을 알 수 있다. 그리고 이 부분에서도 <code>0x80</code>에서 <code>0xbf</code>까지만 사용한다. 예를 들어 <code>ea b0 bf</code>가 <code>갿</code>인데 다음 글자인 <code>걀</code>은 <code>ea b1 80</code>이고, <code>꿿</code>이 <code>ea bf bf</code>인데 다음 글자인 <code>뀀</code>은 <code>eb 80 80</code>이다. 이렇게 <code>힣</code>인 <code>ed 9e a3</code>까지 순서대로 잘 저장되어 있다.</p>
+<p>완전체 글자의 가장 처음인 <code>가</code>부터 알아보자. <code>가</code>를 UTF-8로 뽑으면 <code>ea b0 80</code>이 나온다. 또한 이 다음인 <code>ea b0 81</code>을 뽑아보면 <code>각</code>이 나온다. 이를 통해 완전체 글자는 받침이 있고 없고 상관없이 사전 순으로 저장되어있음을 알 수 있다. 그리고 이 부분에서도 <code>0x80</code>에서 <code>0xbf</code>까지만 사용한다. 예를 들어 <code>ea b0 bf</code>가 <code>갿</code>인데 다음 글자인 <code>걀</code>은 <code>ea b1 80</code>이고, <code>꿿</code>이 <code>ea bf bf</code>인데 다음 글자인 <code>뀀</code>은 <code>eb 80 80</code>이다. 이렇게 <code>힣</code>인 <code>ed 9e a3</code>까지 순서대로 잘 저장되어 있다.</p>
 
-<p>사전순으로 잘 저장되어 있는 것은 굉장히 긍정적인 부분이다. 그러나 <code>0x80</code>에서 <code>0xbf</code>까지만 사용한다는 것 때문에 코딩하기에 약간 귀찮음이 생긴다. 이에 비해 unicode는 더욱 잘(?) 저장되어있다. python에서 unicode를 뽑아보기 위해서는 <code>ord()</code> 함수를 쓰면 된다. 반대로 unicode에서 문자로 전환은 <code>chr()</code> 함수를 쓰면 된다. 예를 들어 <code>가</code>의 unicode를 알고싶다면</p>
+<p>사전 순으로 잘 저장되어 있는 것은 굉장히 긍정적인 부분이다. 그러나 <code>0x80</code>에서 <code>0xbf</code>까지만 사용한다는 것 때문에 코딩하기에 약간 귀찮음이 생긴다. 이에 비해 unicode는 더욱 잘(?) 저장되어있다. python에서 unicode를 뽑아보기 위해서는 <code>ord()</code> 함수를 쓰면 된다. 반대로 unicode에서 문자로 전환은 <code>chr()</code> 함수를 쓰면 된다. 예를 들어 <code>가</code>의 unicode를 알고싶다면</p>
 
 <pre><code class="language-python">ord('가')
 </code></pre>
@@ -241,13 +244,13 @@
 
 <p>당연히 중간에 다른 처리할 필요가 없는 unicode가 더 다루기 쉬울 것이다. 이제 이 unicode에서 한글이 어떻게 저장되어있는지 더 자세히 알아보자.</p>
 
-<p>먼저 초성을 기준으로 분석해보자. <code>가</code>의 unicode는 위에서 봤듯이 <code>0xac00</code>이다. 그 다음 받침이 없는 글자인 <code>까</code>의 unicode는 <code>0xae4c</code>이다. 그리고 그 다음인 <code>나</code>는 <code>0xb098</code>이고, <code>다</code>는 <code>0xb2e4</code>이다. 각 수의 차를 보면 588이다. 즉, 같은 초성을 가지는 글자는 588개씩 있음을 알 수 있다. 확인을 위해 제일 처음인 <code>가</code>와 마지막인 <code>하</code>의 차이인 10584를 588로 나누면 정확히 18로 정확히 나눠 떨어지고, 이는 초성으로 올 수 있는 자음의 갯수 - 1 이다.</p>
+<p>먼저 초성을 기준으로 분석해보자. <code>가</code>의 unicode는 위에서 봤듯이 <code>0xac00</code>이다. 그 다음 받침이 없는 글자인 <code>까</code>의 unicode는 <code>0xae4c</code>이다. 그리고 그 다음인 <code>나</code>는 <code>0xb098</code>이고, <code>다</code>는 <code>0xb2e4</code>이다. 각 수의 차를 보면 588이다. 즉, 같은 초성을 가지는 글자는 588개씩 있음을 알 수 있다. 확인을 위해 제일 처음인 <code>가</code>와 마지막인 <code>하</code>의 차이인 10584를 588로 나누면 정확히 18로 정확히 나눠떨어지고, 이는 초성으로 올 수 있는 자음의 갯수 - 1 이다.</p>
 
 <blockquote>
 <p>ㄱ ㄲ ㄴ ㄷ ㄸ ㄹ ㅁ ㅂ ㅃ ㅅ ㅆ ㅇ ㅈ ㅉ ㅊ ㅋ ㅌ ㅍ ㅎ</p>
 </blockquote>
 
-<p>이제 한 초성 안에서 중성을 기준으로 분석해보자. <code>가</code> 다음인 <code>개</code>를 뽑아보면 <code>0xac1c</code>가 나오고, 그 다음인 <code>갸</code>를 뽑아보면 <code>0xac38</code>이 들린다. 이때 각 수의 차이를 보면 28이다. 따라서 위와 같이 이 또한 같은 초성과 중성을 가진 글자가 28개씩 있음을 유추할 수 있다. 이를 확인해보기 위해 588 을 28로 나눠보면 정확히 21로 나누어 떨어지고, 이는 중성에 올 수 있는 모음 갯수이다. 또한 28은 종성으로 올 수 있는 받침의 갯수 + 1이다. ( + 1 인 이유는 받침이 없는 경우)</p>
+<p>이제 한 초성 안에서 중성을 기준으로 분석해보자. <code>가</code> 다음인 <code>개</code>를 뽑아보면 <code>0xac1c</code>가 나오고, 그 다음인 <code>갸</code>를 뽑아보면 <code>0xac38</code>이 들린다. 이때 각 수의 차이를 보면 28이다. 따라서 위와 같이 이 또한 같은 초성과 중성을 가진 글자가 28개씩 있음을 유추할 수 있다. 이를 확인해보기 위해 588 을 28로 나눠보면 정확히 21로 나눠떨어지고, 이는 중성에 올 수 있는 모음 개수다. 또한 28은 종성으로 올 수 있는 받침의 개수 + 1이다. ( + 1 인 이유는 받침이 없는 경우)</p>
 
 <blockquote>
 <p>ㅏ ㅐ ㅑ ㅒ ㅓ ㅔ ㅕ ㅖ ㅗ ㅘ ㅙ ㅚ ㅛ ㅜ ㅝ ㅞ ㅟ ㅠ ㅡ ㅢ ㅣ</p>
@@ -354,7 +357,7 @@ def match(query, data):
     return False
 </code></pre>
 
-<p>자 이제 끝이다&hellip;! 라고 생각할 수 있지만 아직 한가지 문제가 남았다. 예를 들어 위의 알고리즘을 적용한 상태에서 <code>개학</code>을 검색한다고 가정해보자.</p>
+<p>자 이제 끝이다&hellip;! 라고 생각할 수 있지만 아직 한 가지 문제가 남았다. 예를 들어 위의 알고리즘을 적용한 상태에서 <code>개학</code>을 검색한다고 가정해보자.</p>
 
 <ol>
 <li><code>ㄱ</code>을 검색했을 때 <code>개학</code>이 결과 목록에 <strong><bb>포함된다.</bb></strong></li>
@@ -364,12 +367,12 @@ def match(query, data):
 <li><code>개학</code>을 검색했을 때 <code>개학</code>이 결과 목록에 <strong><bb>포함된다.</bb></strong></li>
 </ol>
 
-<p><code>학</code>의 <code>ㅎ</code>을 검색했을 때 두번째 글자의 초성으로 들어가는 것이 아니라 첫번째 글자의 종성으로 먼저 들어가기 때문에 이와 같은 문제가 생긴다. 이는 앞의 글자에서 겹받침이 가능한 경우에도 생길 수 있다. 따라서 이를 예외처리 해야한다. 이 문제는 이전 글자의 종성에 달려있다. 따라서 우리는 <code>kr_num</code>을 28로 나눈 나머지만 생각하면 된다.</p>
+<p><code>학</code>의 <code>ㅎ</code>을 검색했을 때 두 번째 글자의 초성으로 들어가는 것이 아니라 첫번째 글자의 종성으로 먼저 들어가기 때문에 이와 같은 문제가 생긴다. 이는 앞의 글자에서 겹받침이 가능한 경우에도 생길 수 있다. 따라서 이를 예외처리 해야 한다. 이 문제는 이전 글자의 종성에 달려있다. 따라서 우리는 <code>kr_num</code>을 28로 나눈 나머지만 생각하면 된다.</p>
 
 <p>이를 처리하기 위해 각 종성에 따라 가능성 배열을 만든다. 여기서 가능성이란 <code>갆</code>의 경우 <code>간 + ㅎ</code>일 가능성이 있다는 의미이다. 코딩의 편의를 위해서 가능성 배열 <code>kr_pos[28][2]</code>을 다음과 같이 정의하자.</p>
 
 <ul>
-<li>이 배열은 28*2짜리 배열이다. 여기서 28은 종성의 갯수를 의미한다. 물론 종성이 없는 경우를 제외하면 종성은 27개지만 코딩의 편의를 위해 0번째는 <code>[0, 0]</code>으로 둔다.</li>
+<li>이 배열은 28*2짜리 배열이다. 여기서 28은 종성의 개수를 의미한다. 물론 종성이 없는 경우를 제외하면 종성은 27개지만 코딩의 편의를 위해 0번째는 <code>[0, 0]</code>으로 둔다.</li>
 <li><code>kr_pos[i][0]</code>은 <code>i</code>번째 종성과 이 종성에서 다음 글자 초성 후보가 빠진 종성과의 차이다. <code>kr_pos[6][0]</code>을 예로 들면, 6번째 종성이 <code>ㄶ</code>이므로 <code>간 + ㅎ</code>이었을 가능성이 있다. 이 때 <code>간</code>의 종성인 <code>ㄴ</code>은 4번째 종성이므로 <code>kr_pos[6][0] = 6 - 4 = 2</code>이다.</li>
 <li><code>kr_pos[i][1]</code>은 <code>i</code>번째 종성과 여기서 다음 글자 초성 후보의 초성 번호이다. 위의 예에서 <code>ㅎ</code>은 <a href="https://en.wikipedia.org/wiki/Zero-based_numbering">0-index</a>로 하면 18번째 초성이므로 <code>kr_pos[6][1] = 18</code>이다.</li>
 </ul>
@@ -485,7 +488,7 @@ def match(query, data):
 <p>처럼 4byte의 긴 코드가 나온다. 이를 분석해보면 다음과 같다.</p>
 
 <ul>
-<li><code>a4 d4</code> : 여기부터 4byte짜리 글자일 것이라는 암시</li>
+<li><code>a4 d4</code> : 여기서부터 4byte짜리 글자일 것이라는 암시</li>
 <li><code>a4 a1</code> : <code>ㄱ</code>을 EUC-KR로 인코딩한 값</li>
 <li><code>a4 c2</code> : <code>ㅒ</code>를 EUC-KR로 인코딩한 값</li>
 <li><code>a4 a1</code> : <code>ㄱ</code>을 EUC-KR로 인코딩한 값</li>
@@ -494,7 +497,7 @@ def match(query, data):
 <p>즉, <code>a4 d4</code>로 시작한 다음 이후 3byte는 각각 초성, 중성, 종성을 나타낸다. 만약 종성이 없는 <code>쮀</code>같은 글자의 경우 <code>a4 d4 a4 b9 a4 ce a4 d4</code>이고 이는</p>
 
 <ul>
-<li><code>a4 d4</code> : 여기부터 4byte짜리 글자일 것이라는 암시</li>
+<li><code>a4 d4</code> : 여기서부터 4byte짜리 글자일 것이라는 암시</li>
 <li><code>a4 b9</code> : <code>ㅉ</code>을 EUC-KR로 인코딩한 값</li>
 <li><code>a4 ce</code> : <code>ㅞ</code>를 EUC-KR로 인코딩한 값</li>
 <li><code>a4 d4</code> : 종성이 없다는 뜻</li>
@@ -503,11 +506,11 @@ def match(query, data):
 <p>을 의미한다. 따라서 EUC-KR은 다음과 같이 정리할 수 있다.</p>
 
 <ul>
-<li>일반적으로 쓰이는 글자의 경우 사전순으로 2byte로 저장된다.</li>
+<li>일반적으로 쓰이는 글자의 경우 사전 순으로 2byte로 저장된다.</li>
 <li>일반적으로 쓰이지 않는 글자의 경우 4byte로 저장된다. 뒤의 3byte는 초성, 중성, 종성을 의미한다.</li>
 </ul>
 
-<p>UTF-8은 모든 글자가 3byte인 것에 비해 EUC-KR은 일반적으로 쓰이는 글자의 경우 2byte이다. 따라서 글을 저장할 때 EUC-KR을 이용하면 메모리 활용 면에서 좋을 수 있다. 그러나 저장된 글자에 규칙이 없어서 UTF-8에서처럼 28로 나누거나 588로 나누는 트릭을 못쓰고 일일히 매핑해서 구현해야 하기 때문에 코드로 처리하기엔 좋지 않다.</p>
+<p>UTF-8은 모든 글자가 3byte인 것에 비해 EUC-KR은 일반적으로 쓰이는 글자의 경우 2byte이다. 따라서 글을 저장할 때 EUC-KR을 이용하면 메모리 활용 면에서 좋을 수 있다. 그러나 저장된 글자에 규칙이 없어서 UTF-8에서처럼 28로 나누거나 588로 나누는 트릭을 못 쓰고 일일이 매핑해서 구현해야하기 때문에 코드로 처리하기엔 좋지 않다.</p>
 
 </section>
 

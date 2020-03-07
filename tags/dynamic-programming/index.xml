@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Dynamic Programming on ialy&#39;s blog</title>
+    <link>https://ialy1595.github.io/tags/dynamic-programming/</link>
+    <description>Recent content in Dynamic Programming on ialy&#39;s blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>ko-KR</language>
+    <managingEditor>ialy12006@gmail.com (ialy1595)</managingEditor>
+    <webMaster>ialy12006@gmail.com (ialy1595)</webMaster>
+    <lastBuildDate>Thu, 05 Mar 2020 18:45:29 +0900</lastBuildDate>
+    
+	<atom:link href="https://ialy1595.github.io/tags/dynamic-programming/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>동적계획법 (Dynamic Programming, DP)</title>
+      <link>https://ialy1595.github.io/post/dynamic-programming/</link>
+      <pubDate>Thu, 05 Mar 2020 18:45:29 +0900</pubDate>
+      <author>ialy12006@gmail.com (ialy1595)</author>
+      <guid>https://ialy1595.github.io/post/dynamic-programming/</guid>
+      <description>동적계획법은 이름부터 생소하다. 종만북에 따르면 동적계획법을 만든 벨만(벨만포드 알고리즘 창시자)은 단순히 dynamic이라는 단어가 멋있어서 선택했다고 한다(&amp;hellip;) 따라서 컴퓨터공학부에서 흔히 쓰이는 dynamic의 의미로 생각하려고 하면 이 알고리즘이 어떤 내용일지 감을 잡을 수 없다.</description>
+    </item>
+    
+  </channel>
+</rss>

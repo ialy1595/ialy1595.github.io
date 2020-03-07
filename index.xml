@@ -8,10 +8,19 @@
     <language>ko-KR</language>
     <managingEditor>ialy12006@gmail.com (ialy1595)</managingEditor>
     <webMaster>ialy12006@gmail.com (ialy1595)</webMaster>
-    <lastBuildDate>Sun, 28 Apr 2019 22:03:06 +0900</lastBuildDate>
+    <lastBuildDate>Thu, 05 Mar 2020 18:45:29 +0900</lastBuildDate>
     
 	<atom:link href="https://ialy1595.github.io/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>동적계획법 (Dynamic Programming, DP)</title>
+      <link>https://ialy1595.github.io/post/dynamic-programming/</link>
+      <pubDate>Thu, 05 Mar 2020 18:45:29 +0900</pubDate>
+      <author>ialy12006@gmail.com (ialy1595)</author>
+      <guid>https://ialy1595.github.io/post/dynamic-programming/</guid>
+      <description>동적계획법은 이름부터 생소하다. 종만북에 따르면 동적계획법을 만든 벨만(벨만포드 알고리즘 창시자)은 단순히 dynamic이라는 단어가 멋있어서 선택했다고 한다(&amp;hellip;) 따라서 컴퓨터공학부에서 흔히 쓰이는 dynamic의 의미로 생각하려고 하면 이 알고리즘이 어떤 내용일지 감을 잡을 수 없다.</description>
+    </item>
     
     <item>
       <title>Brute Force</title>
@@ -19,7 +28,7 @@
       <pubDate>Sun, 28 Apr 2019 22:03:06 +0900</pubDate>
       <author>ialy12006@gmail.com (ialy1595)</author>
       <guid>https://ialy1595.github.io/post/brute-force/</guid>
-      <description>한국말로 전수탐색이라고 부르기도 한다. 하지만 단순히 모든 경우의 수를 탐색해 본다라는 전수탐색의 의미보단 일단 무식하게 부딪혀본다라는 의미를 담은 brute force 표현이 더 좋다. 사실 brute force는 알고리즘이라 불릴 수 있을지 미지수일 정도로 매우 단순무식한 방법이다.</description>
+      <description>한국말로 전수탐색이라고 부르기도 한다. 하지만 단순히 모든 경우의 수를 탐색해 본다는 전수탐색의 의미보단 일단 무식하게 부딪혀본다는 의미를 담은 brute force 표현이 더 좋다. 사실 brute force는 알고리즘이라 불릴 수 있을지 미지수일 정도로 매우 단순무식한 방법이다.</description>
     </item>
     
     <item>
@@ -37,7 +46,7 @@
       <pubDate>Thu, 21 Mar 2019 17:12:20 +0900</pubDate>
       <author>ialy12006@gmail.com (ialy1595)</author>
       <guid>https://ialy1595.github.io/post/datapath-and-control-unit/</guid>
-      <description>Datapath Datapath는 CPU에서 직접적으로 연산이 이루어지는 부분이다. 따라서 연산을 하거나 연산된 결과를 저장할 register file과 연산이 실행되는 ALU로 이루어져 있다. 그리고 memory와 데이터를 주고받아야 하기 때문에 memory와도 연결되었다. 그리고 이 데이터들은 버스에 담겨서 각각 부분으로 들어간다.</description>
+      <description>Datapath Datapath는 CPU에서 직접적으로 연산이 이루어지는 부분이다. 따라서 연산을 하거나 연산된 결과를 저장할 register file과 연산이 실행되는 ALU로 이루어져 있다. 그리고 memory와 데이터를 주고받아야하기 때문에 memory와도 연결되었다. 그리고 이 데이터들은 버스에 담겨서 각각 부분으로 들어간다.</description>
     </item>
     
     <item>
@@ -50,12 +59,12 @@
     </item>
     
     <item>
-      <title>블로그 구축기 2 (Hugo Theme Custormizing)</title>
+      <title>블로그 구축기 2 (Hugo Theme Customizing)</title>
       <link>https://ialy1595.github.io/post/blog-construct-2/</link>
       <pubDate>Fri, 01 Mar 2019 12:37:41 +0900</pubDate>
       <author>ialy12006@gmail.com (ialy1595)</author>
       <guid>https://ialy1595.github.io/post/blog-construct-2/</guid>
-      <description>이제 자신이 만든 블로그를 감상해보자. 마음에 드는가? 물론 마음에 쏙 들수도 있지만 아무래도 자기가 직접 만든 것이 아니라 남이 만든 테마를 가져다 쓰는 것이기 때문에 맘에 안드는 점이 있을 수도 있다.</description>
+      <description>이제 자신이 만든 블로그를 감상해보자. 마음에 드는가? 물론 마음에 쏙 들수도 있지만 아무래도 자기가 직접 만든 것이 아니라 남이 만든 테마를 가져다 쓰는 것이기 때문에 맘에 안 드는 점이 있을 수도 있다.</description>
     </item>
     
     <item>
@@ -64,7 +73,7 @@
       <pubDate>Fri, 22 Feb 2019 20:07:41 +0900</pubDate>
       <author>ialy12006@gmail.com (ialy1595)</author>
       <guid>https://ialy1595.github.io/post/blog-construct-1/</guid>
-      <description>예전에는 문서화 작업에 그렇게 큰 신경을 두지 않았다. 프로젝트를 진행할 때 이것저것 삽질해보고 구글링하면서 문제를 해결하고선 이를 따로 정리해 두지 않고 완성해서 잘 동작시키는 것에만 의의를 두었다. 그러다보니 예전에 부딪혔던 문제를 다시 만나도 어떻게 해결했는지 기억이 안나서 결국 같은 작업을 반복하는 경우가 생겼다.</description>
+      <description>예전에는 문서화 작업에 그렇게 큰 신경을 두지 않았다. 프로젝트를 진행할 때 이것저것 삽질해보고 구글링하면서 문제를 해결하고선 이를 따로 정리해 두지 않고 완성해서 잘 동작시키는 것에만 의의를 두었다. 그러다보니 예전에 부딪혔던 문제를 다시 만나도 어떻게 해결했는지 기억이 안 나서 결국 같은 작업을 반복하는 경우가 생겼다.</description>
     </item>
     
     <item>
@@ -84,7 +93,7 @@
       <pubDate>Sun, 03 Feb 2019 19:53:09 +0900</pubDate>
       <author>ialy12006@gmail.com (ialy1595)</author>
       <guid>https://ialy1595.github.io/post/sequential-logic/</guid>
-      <description>Sequential logic이란 같은 input이 들어왔다고 해도 logic의 state나 memory에 따라 결과가 달라지는 logic을 의미한다. 이러한 sequential logic이 존재할 수 있는 중요한 요소중 하나는 gate가 이상적이지 않아서 delay가 존재한다는 것이다.</description>
+      <description>Sequential logic이란 같은 input이 들어왔다고 해도 logic의 state나 memory에 따라 결과가 달라지는 logic을 의미한다. 이러한 sequential logic이 존재할 수 있는 중요한 요소 중 하나는 gate가 이상적이지 않아서 delay가 존재한다는 것이다.</description>
     </item>
     
     <item>
@@ -102,7 +111,7 @@
       <pubDate>Tue, 31 Jul 2018 02:13:42 +0900</pubDate>
       <author>ialy12006@gmail.com (ialy1595)</author>
       <guid>https://ialy1595.github.io/post/trangister-and-basic-logic-gate/</guid>
-      <description>컴퓨터공학부에 입학하고 처음으로 들은 전공 관련 수업이 컴퓨터 개론 및 실습(컴개실)이었는데, 코딩을 배울 것이라고 생각했던 것과 달리 갑자기 반도체와 트랜지스터가 나와서 멘붕했던 내용이다. 그 당시에는 전기과도 아닌데 이런걸 왜하나 생각을 했지만 배우고 나서 뒤의 흐름을 익히니 기초부터 하나씩 쌓아올려 나가려는 큰 그림이었음을 깨달았다.</description>
+      <description>컴퓨터공학부에 입학하고 처음으로 들은 전공 관련 수업이 컴퓨터 개론 및 실습(컴개실)이었는데, 코딩을 배울 것이라고 생각했던 것과 달리 갑자기 반도체와 트랜지스터가 나와서 멘붕했던 내용이다. 그 당시에는 전기과도 아닌데 이런 것을 왜하나 생각을 했지만 배우고 나서 뒤의 흐름을 익히니 기초부터 하나씩 쌓아올려 나가려는 큰 그림이었음을 깨달았다.</description>
     </item>
     
   </channel>

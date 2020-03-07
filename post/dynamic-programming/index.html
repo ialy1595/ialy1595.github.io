@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-134848712-1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+  
+    gtag('config', 'UA-134848712-1');
+  </script>
+  
+
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>동적계획법 (Dynamic Programming, DP)  | ialy&#39;s blog</title>
+  <link rel="icon" href="/favicon.ico" type="image/x-icon">
+  <link rel="canonical" href="https://ialy1595.github.io/post/dynamic-programming/">
+  
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/monokai-sublime.min.css">
+  <link rel="stylesheet" href="/css/styles.css">
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+  <script type="text/javascript" async
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+  MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [['$','$'], ['\\(','\\)']],
+    displayMath: [['$$','$$']],
+    processEscapes: true,
+    processEnvironments: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+    TeX: { equationNumbers: { autoNumber: "AMS" },
+         extensions: ["AMSmath.js", "AMSsymbols.js"] }
+  }
+  });
+  MathJax.Hub.Queue(function() {
+    
+    
+    
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i = 0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script> 
+  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/gist-embed/2.7.1/gist-embed.min.js"></script>
+</head>
+
+<body>
+<div class="wrap">
+  <div class="navbar">
+    <ul>
+      <li><a href="/">HELLO WORLD!</a></li>
+      <li><a href="/categories">CATEGORIES</a></li>
+      <li><a href="/tags">TAGS</a></li>
+      <li><a href="/about">ABOUT ME</a></li>
+    </ul>
+  </div>
+  <div class="container">
+
+
+
+  <div class="title">
+  
+  
+  
+  <a href="/categories/code">
+    <img src="/images/logo-code.png" width="260px" height="48px" />
+  </a>
+  
+</div>
+	<a href="https://ialy1595.github.io/post/dynamic-programming/">
+  <div class="post-title">
+    
+	
+	<img src="/images/post-title-icon-code.png" />
+	
+    <div class="post-meta">
+      <time>05 Mar 2020, 18:45</time>
+      <h1>동적계획법 (Dynamic Programming, DP)</h1>
+    </div>
+  </div>
+</a>
+
+<section class="post-content">
+  <div class="post-toc-container1">
+    <div class="post-toc-container2">
+      <div class="post-toc">
+        <span class="title">
+          Table of contents
+        </span>
+        <nav id="TableOfContents">
+<ul>
+<li><a href="#동적계획법이란">동적계획법이란</a></li>
+<li><a href="#구현-방법">구현 방법</a>
+<ul>
+<li><a href="#top-down-방식">Top-Down 방식</a></li>
+<li><a href="#bottom-up-방식-collect">Bottom-Up 방식 (Collect)</a></li>
+<li><a href="#bottom-up-방식-spread">Bottom-Up 방식 (Spread)</a></li>
+</ul></li>
+<li><a href="#시간복잡도-분석">시간복잡도 분석</a></li>
+<li><a href="#비트마스킹-기법">비트마스킹 기법</a>
+<ul>
+<li><a href="#비트마스킹에서의-연산">비트마스킹에서의 연산</a>
+<ul>
+<li><a href="#x번째-원소-추가"><strong>x번째 원소 추가</strong></a></li>
+<li><a href="#x번째-원소-제거"><strong>x번째 원소 제거</strong></a></li>
+<li><a href="#최소-원소-찾기"><strong>최소 원소 찾기</strong></a></li>
+<li><a href="#최소-원소-지우기"><strong>최소 원소 지우기</strong></a></li>
+<li><a href="#모든-부분집합-순회하기"><strong>모든 부분집합 순회하기</strong></a></li>
+</ul></li>
+</ul></li>
+</ul>
+</nav>
+      </div>
+    </div>
+  </div>
+  
+
+<p>동적계획법은 이름부터 생소하다. 종만북에 따르면 동적계획법을 만든 벨만(벨만포드 알고리즘 창시자)은 단순히 dynamic이라는 단어가 멋있어서 선택했다고 한다(&hellip;) 따라서 컴퓨터공학부에서 흔히 쓰이는 dynamic의 의미로 생각하려고 하면 이 알고리즘이 어떤 내용일지 감을 잡을 수 없다. 이런 네이밍 센스에도 불구하고 정말 널리 쓰여서 이렇게 유명한걸 보면 그만큼 강력하고 효과적인 알고리즘이라는 것을 알 수 있다.</p>
+
+<h1 id="동적계획법이란">동적계획법이란</h1>
+
+<p>내게 동적계획법의 의미를 가장 와 닿게 설명할 수 있는 두 단어는 <strong>수학적 귀납법</strong>과 <strong>점화식</strong>이다. 동적계획법의 기본 개념을 이해하기 위해 피보나치 수열을 예시로 생각해보자. 피보나치 수열을 점화식으로 쓰면 아래와 같이 나타낼 수 있다.</p>
+
+<p><code>$
+f(n) = f(n-1) + f(n-2)
+$</code></p>
+
+<p>이는 코드로 나타내면 다음과 같이 쓸 수 있다.</p>
+
+<pre><code class="language-C">int f(int n) {
+    return f(n-1) + f(n-2);
+}
+</code></pre>
+
+<p>초기조건까지 해주면 다음과 같이 나타낼 수 있다.</p>
+
+<pre><code class="language-C">int f(int n) {
+    if(n &lt;= 1) return 1;
+    return f(n-1) + f(n-2);
+}
+</code></pre>
+
+<p>이렇게 큰 문제(<code>f(n)</code>)를 작은 문제(<code>f(n-1)</code>, <code>f(n-2)</code>)를 이용해서 나타낼 수 있다면, 수학적 귀납법처럼 초기 조건이 옳다면 큰 n에 대해서도 옳은 값을 구할 수 있다. 이와 같은 방법을 동적계획법이라고 한다. 기본 개념은 이렇지만 진정한 동적계획법이라고 부르려면 여기서 발생하는 한 가지 문제를 해결해야 한다. 어떤 문제가 발생하는지 확인하기 위해 <code>f(5)</code>를 호출하면 함수가 호출되는 과정이 어떻게 되는지 살펴보자.</p>
+
+<p><img src="/images/dynamic_programming/fntree0.png#center75" alt="" /></p>
+
+<p>함수가 무려 15번이나 불린다. 특히 아래로 갈수록 더 많이 불려서 <code>f(1)</code>은 5번이나 불린다. 그리고 조금만 관찰하면 <code>n</code>이 늘어날수록 이 불리는 횟수는 지수적으로 증가할 것이라는 걸 추측할 수 있다. 그렇게 되면 <code>n</code>이 조금만 커져도 프로그램은 터져버리고 말 것이다.</p>
+
+<p>이렇게 지수적으로 증가하는 이 횟수를 획기적으로 감소시켜보자. 먼저 각 함수가 불리는 순서를 표시해보면 다음과 같다.</p>
+
+<p><img src="/images/dynamic_programming/fntree1.png#center75" alt="" /></p>
+
+<p>여기서 잘 생각해보면 우리는 4번 과정에서 이미 <code>f(2)</code>를 구했다. 따라서 이 값을 저장해뒀다면 8번에서 <code>f(2)</code>를 구할 때 굳이 <code>f(1)</code>과 <code>f(0)</code>를 호출하지 않아도 <code>f(2)</code>의 값을 알아낼 수 있다. 따라서 우리는 9번과 10번 과정을 생략할 수 있다. 마찬가지로 3번에서 우리는 이미 <code>f(3)</code>을 구했다. 따라서 이를 이용하면 11번에서 사용하면 12~15번 과정을 생략할 수 있다.</p>
+
+<p>이처럼 큰 문제를 작은 문제를 활용하여 구하되, 이렇게 구한 값을 저장해서 다음에 또 구해야 할 때 효율적으로 가져다 쓸 수 있게 하는 것이 진정한 동적계획법의 설계이다.</p>
+
+<h1 id="구현-방법">구현 방법</h1>
+
+<p>동적계획법의 구현 방식에는 크게 세 가지가 있다. 보통은 두 가지로 많이 분류하는데, 바로 Top-Down 방식이랑 Bottom-Up 방식이다. 나는 여기서 다른 사람들과는 다르게 Bottom-Up 방식도 Collect 방식과 Spread 방식으로 나눠서 총 세 가지라고 분류하는 편이다.</p>
+
+<h2 id="top-down-방식">Top-Down 방식</h2>
+
+<p>Top-Down 방식은 그대로 직역하면 위에서부터 내려오는 방식으로, 내가 먼저 원하는 값을 부른 다음에 거기서부터 필요한 것들을 수집해나가는 방식이다. 이 방식은 주로 <strong>메모이제이션</strong>과 <strong>재귀함수</strong>를 써서 구현한다.</p>
+
+<p>우리가 일반적으로 수학적으로 점화식을 세운 것을 이 방식에서 그대로 사용할 수 있다. 예를 들어 위에서 설명한 피보나치의 점화식인</p>
+
+<p><code>$
+f(n) = f(n-1) + f(n-2)
+$</code></p>
+
+<p>을 살펴보면 마찬가지로 <code>f(n)</code>을 구하기 위해 <code>f(n-1)</code>과 <code>f(n-2)</code>를 구하라고 하는 Top-Down 방식이라고 생각할 수 있다. 따라서 이를 이용해 <code>f(100)</code>을 구하는 것을 구현하면 아래와 같다.</p>
+
+<pre><code class="language-C">int d[110];
+
+int f(int n) {
+    if(n &lt;= 1) return 1;
+    if(d[n] &gt; 0) return d[n];
+    d[n] = f(n-1) + f(n-2)
+    return d[n];
+}
+
+int main() {
+    printf(&quot;%d&quot;,f(100));
+}
+</code></pre>
+
+<p>이 방식은 수학적으로 세운 식 그대로 재귀함수로 구현하고, 이 값을 배열에 저장하는 메모이제이션만 추가하면 되기 때문에 구현이 쉽다는 장점이 있다. 다만 재귀함수라는 것 자체가 함수를 불러오고 하는 과정에서 시간이 걸리기 때문에 재귀함수를 사용하지 않고 반복문으로 처리하는 Bottom-Up 방식에 비해 속도가 조금 느리다. 하지만 시간복잡도는 그대로고 아니고 기껏해야 상수 배 차이니 만약에 Bottom-Up으로 구현하기 어렵거나 헷갈린다면 이 방식으로라도 구현하는 것이 좋다.</p>
+
+<h2 id="bottom-up-방식-collect">Bottom-Up 방식 (Collect)</h2>
+
+<p>Bottom-Up은 직역하자면 아래서부터 올라오는 것으로, 바닥부터 차근차근히 계산해내서 내가 목표하는 곳 까지 구해내는 방식이다. 그 중 일반적으로 많이 쓰이는 Collect(정식 용어는 아니고 내가 붙인 이름이다)방식에 대해 알아보자.</p>
+
+<p>말로 설명하는 것 보다 코드를 먼저 보는 것이 이해하기 쉬울 것이다. Bottom-Up 방식은 주로 for문을 사용해서 구현한다. 따라서 일반적으로 재귀로 구현하는 것보다 빠르다.</p>
+
+<pre><code class="language-C">int d[110];
+
+int main() {
+    d[0] = 1;
+    d[1] = 1;
+    for(int i = 2; i &lt;= 100; i++) {
+        d[i] = d[i-1] + d[i-2];
+    }
+    printf(&quot;%d&quot;,d[100]);
+}
+</code></pre>
+
+<p>이렇게 바닥부터 차근차근 한 단계씩 올라가서 내가 원하는 값까지 구해내는 방식을 Bottom-Up이라고 한다. 위와 같은 구현은 내가 원하는 값(<code>d[i]</code>)를 얻기 위해 나보다 작은 값(<code>d[i-1], d[i-2]</code>)로부터 수집하기 때문에 Collect 방식이라고 이름을 붙였다.</p>
+
+<p>이 방식이 가능하려면 지금 위치(<code>i</code>)에 왔을 때 지금의 값(<code>d[i]</code>)이 수집해야 하는 재료(<code>d[n-1]</code>, <code>d[n-2]</code>)가 모두 구해져 있어야 한다는 조건을 만족해야 한다. 피보나치의 경우 변수가 <code>i</code> 하나뿐이라 <code>i</code>가 증가하는 순으로 계산하면 되지만 나중에 변수가 2,3개 들어가거나 일반적인 차원의 배열을 채우는 것이 아닌 그래프나 집합 같은 자료구조에서 동적계획법을 설계하는 경우 이 점에 유념해서 for문을 순회하는 순서를 정해야 한다.</p>
+
+<h2 id="bottom-up-방식-spread">Bottom-Up 방식 (Spread)</h2>
+
+<p>Spread 방식은 다른 사람들은 거의 얘기하지 않는 방식이다. 그러나 가끔 이 방식으로 생각해야 더 쉽게 설계되는 경우가 있어서 소개하고자 한다. 위의 두 방식은 내가 원하는 값을 얻기 위해서 어떻게 해야 할까를 생각하면서 코딩했다. 그러나 Spread 방식은 이와 다르게 <strong>&lsquo;지금 나의 값이 어디에 영향을 끼칠까`</strong>에 대해서 생각한다. 역시 말 보다 코드를 먼저 보는 것이 빠를 것이다.</p>
+
+<pre><code class="language-C">int a[110];
+
+int main() {
+    d[0] = 1;
+    for(int i = 0; i &lt;= 99; i++) {
+        d[i+1] += d[i];
+        d[i+2] += d[i];
+    }
+    printf(&quot;%d&quot;,d[100]);
+}
+</code></pre>
+
+<p>피보나치의 점화식을 우변에 있는 <code>f(x-1)</code>과 <code>f(x-2)</code>의 입장에서 생각해 보면, 어떤 <code>f(t)</code>가 영향을 끼치는 값은 <code>f(t+1)</code>와 <code>f(t+2)</code>라고 할 수 있다. 따라서 내가 <code>d[i]</code>값에 도달했을 때 이 값을 <code>d[i+1]</code>과 <code>d[i+2]</code>에 전파하기 때문에 Spread 방식이라고 이름을 붙였다.</p>
+
+<p>이 방식을 설계할 땐 지금 위치(<code>i</code>)에 왔을 때 지금의 값(<code>d[i]</code>)에 전파를 해야 했던 값들(<code>d[n-1]</code>, <code>d[n-2]</code>)이 모두 전파를 완료한 상태여야 한다는 조건에 유념해서 for문을 순회하는 순서를 정해야 한다.</p>
+
+<p>Collect 방식과 Spread 방식은 절대적인 상위호환 관계가 있는건 아니고 상황에 따라 어떤게 더 좋을지 달라지는 것 같다. Spread 방식으로 생각하는 것이 익숙하지 않으면 처음엔 어려울 수도 있지만, 나중에 익숙해지면 그래프처럼 특이한 자료구조에서 동적계획법을 해야 할 때 도움이 되는 경우가 많았다.</p>
+
+<h1 id="시간복잡도-분석">시간복잡도 분석</h1>
+
+<p>동적계획법의 장점 중 하나는 시간복잡도를 분석하기가 쉽다는 점이다. 동적계획법을 할 때 채우는 배열을 보통 동적 테이블(Dynamic table)이라고 부르는데, 시간복잡도를 분석할 때 고려해야하는 최악의 경우에서는 대부분 이 테이블을 꽉 채워야 내가 원하는 값을 얻을 수 있다. 또한 테이블은 점화식에 의해서 채워지니 일반적으로 테이블의 한 칸을 채울 때 걸리는 시간복잡도도 거의 일정하다. 따라서<code>(테이블의 크기) * (한 칸을 채우는데 걸리는 시간)</code>을 하면 원하는 시간복잡도를 얻을 수 있다.</p>
+
+<h1 id="비트마스킹-기법">비트마스킹 기법</h1>
+
+<p>비트마스킹 기법은 독립적으로 존재하긴 하지만, 일반적으로 동적계획법과 같이 쓰이니 같이 설명해보자. 비트마스킹 기법은 집합의 포함 상태를 비트를 사용해서 나타내는 집합이다.</p>
+
+<p>예를 들어서 내가 a, b, c, d, e 다섯 개의 원소가 있는데 이 중에서 a, b, e만 포함된 {a, b, e}를 나타낸다고 해보자. 여기서 포함된 원소를 1, 포함되지 않는 원소를 0으로 표현하면 이는 11001<sub>2</sub>라고 할 수 있다. 따라서 이 이진수를 다시 십진수로 바꾸면 25이므로 {a, b, e}와 25가 같다고 할 수 있다. 이렇게 비트를 가지고 놀 경우, 비트연산(<code>&amp;</code>, <code>|</code>, <code>&lt;&lt;</code>, <code>&gt;&gt;</code>)들은 속도가 굉장히 빠른 연산이므로 시간 면에서도 좋다고 할 수 있다.</p>
+
+<h2 id="비트마스킹에서의-연산">비트마스킹에서의 연산</h2>
+
+<p>먼저 이 비트마스킹 기법에서 할 수 있는 간단한 연산부터 알아보자.</p>
+
+<h3 id="x번째-원소-추가"><strong>x번째 원소 추가</strong></h3>
+
+<p>x번째 비트를 1로 바꾸면 되므로 그 비트를 or연산 해주면 된다.</p>
+
+<pre><code class="language-C">mask |= (1&lt;&lt;x)
+</code></pre>
+
+<h3 id="x번째-원소-제거"><strong>x번째 원소 제거</strong></h3>
+
+<p>x번째 비트만 0으로 바꿔주면 된다. 다시 생각하면 x번째 원소만 0이고 나머지는 모두 1인 값과 and를 하면 된다.</p>
+
+<pre><code class="language-C">mask &amp;= !(1&lt;&lt;x)
+</code></pre>
+
+<h3 id="최소-원소-찾기"><strong>최소 원소 찾기</strong></h3>
+
+<p>이번엔 조금 고급기술로 가보자. 최소원소란 가장 오른쪽의 비트로, 예를 들어 현재 mask가 <code>0110100</code>일 경우 <code>0000100</code>을 찾는 것이다. 우선 코드를 먼저 보자.</p>
+
+<pre><code class="language-C">mask &amp; (-mask);
+</code></pre>
+
+<p>음수 연산을 비트적으로 생각하면 2의 보수를 사용하므로 not을 한 다음 1을 더하는 연산이 된다. 오른쪽에서 i번째 비트가 최소 비트라고 하면, not을 하면 i번째 원소는 0이 되고 그 오른쪽에 있는 원소는 모두 1이 된다. 이 상황에서 1을 더하면 다시 i번째 원소는 1이 되고 그 오른쪽에 있는 원소는 0이 된다. 또한 왼쪽에 있는 원소들은 not한 상태에서 변하지 않는다. 따라서 이를 원래 <code>mask</code>와 and를 하면 i번째 원소의 왼쪽은 다 자기 자신과 not을 한 것과 and를 하므로 0이고 오른쪽은 0과 and가 되니 0이 된다. 따라서 i번째 원소만 1로 남아있게 된다.</p>
+
+<h3 id="최소-원소-지우기"><strong>최소 원소 지우기</strong></h3>
+
+<p>위와 비슷한 원리로 작동한다.</p>
+
+<pre><code class="language-C">mask &amp; (mask - 1)
+</code></pre>
+
+<p>마찬가지로 오른쪽에서 i번째 비트가 최소 비트라고 하고 생각해보자. 여기서 1을 빼면 i번째 비트는 0이 되고 그 오른쪽 비트들은 모두 1이 된다. 따라서 이 수와 원래 수를 and를 하면 i번째 왼쪽에 있는 비트들은 변하지 않았으므로 그대로 남는다. 또한 i번째 비트와 그 오른쪽 비트는 모두 0이 된다. 따라서 결론적으로는 i번째 비트만 0으로 변한 효과이므로 최소 원소를 지우는 효과가 된다.</p>
+
+<h3 id="모든-부분집합-순회하기"><strong>모든 부분집합 순회하기</strong></h3>
+
+<p>비트연산으로 할 수 있는 연산중 가장 재밌는 게 아닐까 싶다. 우선 코드부터 보자.</p>
+
+<pre><code class="language-C">for(i = mask; mask; i = ((i - 1) &amp; mask)) {
+    do something
+}
+</code></pre>
+
+<p>워낙 유명한 코드라 그냥 믿고 써도 되지만 공부도 할 겸 증명을 해보자. 우선 <code>(i - 1) &amp; mask)</code>라는 식에 대해 생각해보자. 위에서 봤듯이 자기 자신에서 1을 빼면 최소 비트가 0이 되고 그 오른쪽에 있는 비트는 모두 0이 된다. 이 상태에서 원래의 <code>mask</code>와 and를 하면 현재 집합 상태에서 최소 원소는 0이 되고, 이보다 오른쪽에 있는 비트는 모두 다시 1이 되고, 왼쪽에 있는 원소는 그대로가 된다. 이 점을 생각하면서 다음 명제에 대해 생각해보자.</p>
+
+<blockquote>
+<p>오른쪽부터 x개의 원래 1이었던 비트들이 모두 1인 상태면 자신이 가능한 2<sup>x</sup>개의 모든 상태를 한 번씩 순회한 후 모두 0으로 된 다음에야 이보다 왼쪽에 있는 비트에 영향을 끼치고서 다시 모두 1이 된다.</p>
+</blockquote>
+
+<p>이를 수학적 귀납법을 사용해서 증명해보자. 우선 초기조건부터 보자. 맨 오른쪽의 원래 1이었던 비트는 1인 상태에서 시작한다. 그 다음 <code>i = ((i - 1) &amp; mask))</code>를 실행하면 이 비트만 0으로 꺼진다. 이 다음에 <code>i = ((i - 1) &amp; mask))</code>를 실행하면 오른쪽에서 두 번째인 원래 1이었던 비트는 0이 되고 맨 오른쪽의 원래 1이었던 비트는 다시 1이 된다. 따라서 x가 1인 경우에 대해서 위 명제가 만족한다.</p>
+
+<p>이제 임의의 x에 대해서 오른쪽부터 x+1개의 원래 1이었던 비트들이 모두 1인 상태라고 가정하자. 우선 위의 명제에 따라 이 중 오른쪽의 x개가 가능한 2<sup>x</sup>개의 모든 상태를 한 번씩 순회한 후 모두 0으로 된다. 그 다음 <code>i = ((i - 1) &amp; mask))</code>을 실행하면 오른쪽에서 x+1번째로 원래 1이었던 비트는 0이 되고 나머지 x개의 비트는 다시 1이 된다. 그러면 다시 오른쪽부터 x개의 원래 1이었던 비트들이 모두 1인 상태이므로 가능한 2<sup>x</sup>개의 모든 상태를 한 번씩 순회한 후 모두 0으로 된다.</p>
+
+<p>이 과정을 x+1개의 입장에서 보면 x+1번째 비트가 1일 때 가능한 모든 경우를 한번씩 순회한 다음 x+1번째 비트가 0일 때 가능한 모든 비트를 한 번씩 순회하고, 모두 0이 되었다. 또한 이 과정 동안 x+1번째 비트보다 왼쪽에 있는 비트들에 영향을 끼치지 않았다. 따라서 x+1에 대해서 위 명제가 만족함을 볼 수 있다.</p>
+
+<p>이제 원래 mask에 대해서 총 n개의 비트가 원래 1이었다고 하자. 위의 명제에서 x에 n을 넣으면 가능한 2<sup>n</sup>개의 모든 상태를 한 번씩 순회한 후 모두 0으로 된다. 모두 0이 되면 for문의 가운데 조건에 의해 반복문을 빠져나가므로 결국 모든 부분집합을 한 번씩 순회함을 알 수 있다. 참고로 공집합은 순회하지 않음을 잘 알아두자.</p>
+
+<p>부분집합의 순회에 관한 문제를 풀다보면 아래 코드처럼 모든 부분집합의 부분집합을 순회해야 할 경우가 있다.</p>
+
+<pre><code class="language-C">for(mask=1; mask &lt; (1&lt;&lt;n); mask++) {
+    for(i = mask; mask; i = ((i - 1) &amp; mask)) {
+        do something
+    }
+}
+</code></pre>
+
+<p>이 경우 <code>do something</code>이 몇 번이나 불릴까? 대강 생각하면 부분집합의 개수가 2<sup>n</sup>개이고 각각 최대 2<sup>n</sup>의 부분집합을 가지고 있으니 4<sup>n</sup>이라 생각할 수도 있다. 그러나 실제로 계산해보면 생각보단 적음을 알 수 있다.</p>
+
+<p>원소가 k개인 집합은 총 <code>$ _{n} C_{k} $</code>개 있다. 또한 각각은 <code>$ 2^{k} $</code>개의 부분집합을 순회하게 된다. 따라서 <code>do something</code>이 불리는 횟수는 <code>$ \sum _{k=0} ^{n} {_{n} C_{k}} \cdot 2^{k} $</code>이 될 것이다. 이를 이항계수를 이용하면 다음과 같이 구할 수 있다.</p>
+
+<p><code>$
+\sum _{k=0} ^{n} {_{n} C_{k}} \cdot 2^{k} = (1 + 2) ^{n} = 3^n
+$</code></p>
+
+<p>따라서 4<sup>n</sup>보다는 훨씬 작은 3<sup>n</sup>번 밖에 불리지 않음을 알 수 있다. 이러한 형태의 문제를 SoS(Sum of Subsets) problem이라고도 한다.</p>
+
+</section>
+
+
+
+<div class="paging post-paging">
+  
+  
+  <a class="left" href="https://ialy1595.github.io/post/brute-force/" rel="prev">
+    <i class="fa fa-play fa-rotate-180" aria-hidden="true"></i> <span>Brute Force</span>
+  </a>
+  
+  
+  
+</div>
+<div class="post-meta-code">
+  <div class="desc">
+    public string description() {
+    <div class="desc">val author = "
+    
+        <a href="mailto:ialy12006@gmail.com">ialy1595</a>
+    ";
+    </div>
+    
+    <div class="desc">
+      val categories = [
+      
+      
+      <a href="https://ialy1595.github.io//categories/code">"code"</a>
+      
+      ];
+    </div>
+    
+	
+    <div class="desc">
+      val subcategories = [
+      
+      
+      <a href="https://ialy1595.github.io//subcategories/algorithm">"algorithm"</a>
+      
+      ];
+    </div>
+    
+    }
+  </div>
+  <div class="desc">
+    public string tags() {
+      <div class="desc">
+        val tags = [
+        
+          
+          <a href="https://ialy1595.github.io/tags/dynamic-programming">"dynamic programming"</a>
+          
+        
+        ];
+      </div>
+    }
+  </div>
+  
+</div>
+
+
+
+  </div>
+  <div class="blank"></div>
+</div>
+<footer class="footer">
+  <div class="share">
+    <a href="https://github.com/ialy1595" title="Github" target="_blank"><i class="fa fa-github"></i></a>
+    <a href="mailto:ialy12006@gmail.com" title="Email" target="_blank"><i class="fa fa-envelope"></i></a>
+    <a rel="alternate" type="application/rss+xml" href="https://ialy1595.github.io/index.xml" title="RSS feed" target="_blank"><i class="fa fa-rss"></i></a>
+  </div>
+  COPYRIGHT (C) <a href="https://blog.lulab.net">DONGGEUN,BANG</a>. ALL RIGHTS RESERVED.
+</footer>
+
+</body>
+</html>

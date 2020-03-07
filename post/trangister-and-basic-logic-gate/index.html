@@ -87,11 +87,14 @@
   </div>
 </a>
 
-<div class="post-toc">
-  <span class="title">
-    Table of contents
-  </span>
-  <nav id="TableOfContents">
+<section class="post-content">
+  <div class="post-toc-container1">
+    <div class="post-toc-container2">
+      <div class="post-toc">
+        <span class="title">
+          Table of contents
+        </span>
+        <nav id="TableOfContents">
 <ul>
 <li><a href="#transister">Transister</a></li>
 <li><a href="#basic-logic-gate">Basic Logic Gate</a>
@@ -109,18 +112,18 @@
 </ul></li>
 </ul>
 </nav>
-</div>
-
-<section class="post-content">
+      </div>
+    </div>
+  </div>
   
 
-<p>컴퓨터공학부에 입학하고 처음으로 들은 전공 관련 수업이 컴퓨터 개론 및 실습(컴개실)이었는데, 코딩을 배울 것이라고 생각했던 것과 달리 갑자기 반도체와 트랜지스터가 나와서 멘붕했던 내용이다. 그 당시에는 전기과도 아닌데 이런걸 왜하나 생각을 했지만 배우고 나서 뒤의 흐름을 익히니 기초부터 하나씩 쌓아올려 나가려는 큰 그림이었음을 깨달았다.</p>
+<p>컴퓨터공학부에 입학하고 처음으로 들은 전공 관련 수업이 컴퓨터 개론 및 실습(컴개실)이었는데, 코딩을 배울 것이라고 생각했던 것과 달리 갑자기 반도체와 트랜지스터가 나와서 멘붕했던 내용이다. 그 당시에는 전기과도 아닌데 이런 것을 왜하나 생각을 했지만 배우고 나서 뒤의 흐름을 익히니 기초부터 하나씩 쌓아올려 나가려는 큰 그림이었음을 깨달았다.</p>
 
 <h1 id="transister">Transister</h1>
 
 <p><img src="/images/trangister_and_basic_logic_gate/trangister0.png#center30" alt="" /></p>
 
-<p>트랜지스터는 위의 그림처럼 생긴 다리 세개 달린 부품이다. 물론 생긴게 중요한건 아니지만 이를 통해 입/출력이 3개라는 것은 알 수 있다. 트랜지스터도 종류가 여러개가 있는데 그중 여기서 다룰 것은 MOS(Metal-Oxide-Silicon)트랜지스터이다.</p>
+<p>트랜지스터는 위의 그림처럼 생긴 다리 세 개 달린 부품이다. 물론 생긴 게 중요한건 아니지만 이를 통해 입/출력이 3개라는 것은 알 수 있다. 트랜지스터도 종류가 여러 개가 있는데 그중 여기서 다룰 것은 MOS(Metal-Oxide-Silicon)트랜지스터이다.</p>
 
 <p>MOS트랜지스터의 3개의 입/출력은 각각 G(gate), S(source), D(drain) 이라고 한다. MOS트랜지스터는 p-type과 n-type이 있는데, 이 둘은 역할이 정 반대이다. 우선 p-type부터 보자.</p>
 
@@ -138,12 +141,12 @@
 
 <p><img src="/images/trangister_and_basic_logic_gate/ntype1.png#center30" alt="" /></p>
 
-<p>이 두개를 외울 때 쉽게 외우는 방법이 있다. p는 n과 달리 글자에 구멍이 있으니, p-type 게이트를 그릴때도 동그라미를 그려주고, 0일때 둘이 연결된다. n-type은 p-type의 반대라고 생각하면 된다.</p>
+<p>이 두개를 외울 때 쉽게 외우는 방법이 있다. p는 n과 달리 글자에 구멍이 있으니, p-type 게이트를 그릴 때도 동그라미를 그려주고, 0일때 둘이 연결된다. n-type은 p-type의 반대라고 생각하면 된다.</p>
 
-<p>쨌든 둘은 G의 값에 따라 S와 D 사이를 연결하거나 끊는 스위치같은 역할을 한다. 그러면</p>
+<p>쨌든 둘은 G의 값에 따라 S와 D 사이를 연결하거나 끊는 스위치 같은 역할을 한다. 그러면</p>
 
 <blockquote>
-<p>둘중 하나만 쓰면 되는데 왜 두개나 존재해서 우리를 헷갈리게 만드냐!</p>
+<p>둘 중 하나만 쓰면 되는데 왜 두개나 존재해서 우리를 헷갈리게 만드냐!</p>
 </blockquote>
 
 <p>라고 생각할 수 있다. 그 이유는 p와 n이 &ldquo;잘&rdquo; 전달하는 신호가 다르기 때문이다. 결론부터 말하자면 p는 1을 잘 전달하고, n은 0을 잘 전달한다. 이는 아래에서 더 자세히 다뤄보자.</p>
@@ -198,11 +201,11 @@
 </tbody>
 </table>
 
-<p>NAND는 NOT AND의 약자로 위의 표처럼 AND에 NOT을 한 것 처럼 동작한다. 즉, X나 Y 둘중 하나라도 0이면 V+와 연결되도록 하고, 둘다 1일 경우 접지부분이랑 연결되도록 하면 된다. 여기서 &ldquo;둘중 하나만&rdquo;이라는 부분은 병렬로, &ldquo;둘다&rdquo;라는 부분은 직렬로 회로를 구성함으로써 아래와 같이 NAND를 구현할 수 있다.</p>
+<p>NAND는 NOT AND의 약자로 위의 표처럼 AND에 NOT을 한 것처럼 동작한다. 즉, X나 Y 둘중 하나라도 0이면 V+와 연결되도록 하고, 둘 다 1일 경우 접지부분이랑 연결되도록 하면 된다. 여기서 &ldquo;둘 중 하나만&rdquo;이라는 부분은 병렬로, &ldquo;둘 다&rdquo;라는 부분은 직렬로 회로를 구성함으로써 아래와 같이 NAND를 구현할 수 있다.</p>
 
 <p><img src="/images/trangister_and_basic_logic_gate/nand0.png#center30" alt="" /></p>
 
-<p>X, Y 둘중 하나라도 0이면 p-type 부분에서 위나 아래 둘중에서 적어도 하나는 V+와 연결된다. 또한 둘중 하나라도 1이면 n-type 부분에서 적어도 하나는 끊어지므로 접지와는 끊어진다. 따라서 OUT은 1이다. X와 Y 둘다 1이라면 p-type부분은 둘다 끊어지고, n-type부분은 둘다 연결되므로 OUT은 접지와 연결되어 NAND게이트와 같은 동작을 하게 된다.</p>
+<p>X, Y 둘 중 하나라도 0이면 p-type 부분에서 위나 아래 둘 중에서 적어도 하나는 V+와 연결된다. 또한 둘 중 하나라도 1이면 n-type 부분에서 적어도 하나는 끊어지므로 접지와는 끊어진다. 따라서 OUT은 1이다. X와 Y 둘 다 1이라면 p-type부분은 둘 다 끊어지고, n-type부분은 둘다 연결되므로 OUT은 접지와 연결되어 NAND게이트와 같은 동작을 하게 된다.</p>
 
 <h2 id="and">AND</h2>
 
@@ -210,7 +213,7 @@
 
 <p><img src="/images/trangister_and_basic_logic_gate/and0.png#center50" alt="" /></p>
 
-<p>이때, 어쩌면 한가지 의문점이 생길 수 있다.</p>
+<p>이때, 어쩌면 한 가지 의문점이 생길 수 있다.</p>
 
 <blockquote>
 <p>위에처럼 AND게이트를 만들려면 트랜지스터가 6개가 드는데, 아래처럼 4개만 쓰고 만들 수 있지 않나요?</p>
@@ -218,11 +221,11 @@
 
 <p><img src="/images/trangister_and_basic_logic_gate/and1.png#center30" alt="" /></p>
 
-<p>그 해답은 위에서 잠깐 말한 p-type과 n-type 두개가 필요한 이유로 설명할 수 있다. 위에서 말했듯이 p-type은 1을 잘 전달하고, n-type은 0을 잘 전달하기 때문에 p-type은 V+를 전달할 때 사용하고, n-type은 접지부분을 연결할 때 사용한다. 따라서 위에처럼 p-type을 접지와 연결할 때 사용하고 n-type을 V+를 전달할때 쓰는 식의 구현은 좋지 않으므로, 트랜지스터가 조금 더 들더라도 6개를 사용하는 방식으로 구현을 한다.</p>
+<p>그 해답은 위에서 잠깐 말한 p-type과 n-type 두개가 필요한 이유로 설명할 수 있다. 위에서 말했듯이 p-type은 1을 잘 전달하고, n-type은 0을 잘 전달하기 때문에 p-type은 V+를 전달할 때 사용하고, n-type은 접지부분을 연결할 때 사용한다. 따라서 위에처럼 p-type을 접지와 연결할 때 사용하고 n-type을 V+를 전달할 때 쓰는 식의 구현은 좋지 않으므로, 트랜지스터가 조금 더 들더라도 6개를 사용하는 방식으로 구현을 한다.</p>
 
 <h2 id="nor과-or">NOR과 OR</h2>
 
-<p>NAND를 만들었을 때 처럼 직렬과 병렬의 특성을 사용하면 아래와 같이 NOR을 구현할 수 있다.</p>
+<p>NAND를 만들었을 때처럼 직렬과 병렬의 특성을 사용하면 아래와 같이 NOR을 구현할 수 있다.</p>
 
 <p><img src="/images/trangister_and_basic_logic_gate/nor0.png#center30" alt="" /></p>
 
@@ -232,7 +235,7 @@
 
 <h2 id="tristate-buffer">Tristate Buffer</h2>
 
-<p>Tristate Buffer는 마치 스위치처럼 E가 1이면 D를 그대로 Out에 출력하고, 0이면 회로가 끊긴 효과를 낸다. 여기서 회로가 끊긴 것을 표현하기 위해 Hi-Z라는 새로운 상태가 나온다. Hi-Z란 High-impedance를 뜻하는 것으로, 0과는 달리 회로가 아얘 끊어진, 통하지 않는 것을 뜻한다. 따라서 tristate-buffer의 동작은 아래 그림 같이 나타낼 수 있다.</p>
+<p>Tristate Buffer는 마치 스위치처럼 E가 1이면 D를 그대로 Out에 출력하고, 0이면 회로가 끊긴 효과를 낸다. 여기서 회로가 끊긴 것을 표현하기 위해 Hi-Z라는 새로운 상태가 나온다. Hi-Z란 High-impedance를 뜻하는 것으로, 0과는 달리 회로가 아예 끊어진, 통하지 않는 것을 뜻한다. 따라서 tristate-buffer의 동작은 아래 그림 같이 나타낼 수 있다.</p>
 
 <p><img src="/images/trangister_and_basic_logic_gate/tristatebuffer0.png#center50" alt="" /></p>
 
@@ -276,15 +279,15 @@
 
 <h1 id="왜-nand와-nor">왜 NAND와 NOR?</h1>
 
-<p>이렇게 우리는 트랜지스터부터 시작해서 NOT, NAND, AND, NOR, OR을 구현하는데 성공했다. 그런데 사실 NOT, AND, OR은 익숙하지만, NAND와 NOR은 약간 어색한 존재일 것이다. 그리고 왜 굳이 사용하는지 의문이 들 수 있다. 그러나 논리게이트면에서는 NAND와 NOR은 오히려 AND와 OR보다 의미있다고 할 수 있다. 그 이유는 아래와 같다.</p>
+<p>이렇게 우리는 트랜지스터부터 시작해서 NOT, NAND, AND, NOR, OR을 구현하는데 성공했다. 그런데 사실 NOT, AND, OR은 익숙하지만, NAND와 NOR은 약간 어색한 존재일 것이다. 그리고 왜 굳이 사용하는지 의문이 들 수 있다. 그러나 논리게이트면 에서는 NAND와 NOR은 오히려 AND와 OR보다 의미 있다고 할 수 있다. 그 이유는 아래와 같다.</p>
 
 <h2 id="트랜지스터-갯수">트랜지스터 갯수</h2>
 
-<p>위에서 보았듯이 p-type과 n-type의 특성 때문에 AND와 OR은 트랜지스터가 6개가 사용되지만 NAND와 NOR은 4개로 구현할 수 있다. 갯수로는 단순히 2개 차이지만 비율로 생각하면 1.5배이다. 즉, NAND나 NOR로 구현할 수 있는 것을 AND와 OR을 사용하면 부피나 비용면에서 1.5배나 들게 된다.</p>
+<p>위에서 보았듯이 p-type과 n-type의 특성 때문에 AND와 OR은 트랜지스터가 6개가 사용되지만 NAND와 NOR은 4개로 구현할 수 있다. 개수로는 단순히 2개 차이지만 비율로 생각하면 1.5배이다. 즉, NAND나 NOR로 구현할 수 있는 것을 AND와 OR을 사용하면 부피나 비용 면에서 1.5배나 들게 된다.</p>
 
 <h2 id="함수적-완결성-functional-completeness">함수적 완결성(Functional Completeness)</h2>
 
-<p>함수적 완결성은 우리가 생각할 수 있는 모든 논리함수를 구현가능함을 뜻한다. 예를 들어 {AND, OR, NOT}은 함수적 완결성을 가진다. 즉, AND, OR, NOT을 사용하면 우리가 원하는 모든 논리함수를 구현할 수 있다. 이는 진리표를 이용하면 쉽게 증명할 수 있다.</p>
+<p>함수적 완결성은 우리가 생각할 수 있는 모든 논리함수를 구현 가능함을 뜻한다. 예를 들어 {AND, OR, NOT}은 함수적 완결성을 가진다. 즉, AND, OR, NOT을 사용하면 우리가 원하는 모든 논리함수를 구현할 수 있다. 이는 진리표를 이용하면 쉽게 증명할 수 있다.</p>
 
 <table>
 <thead>
@@ -355,7 +358,7 @@
 </tbody>
 </table>
 
-<p>예를 들어 위와같은 함수가 있다고 하자(별 생각 안하고 이 글을 쓰면서 방금 막 만들었다.)</p>
+<p>예를 들어 위와 같은 함수가 있다고 하자(별 생각 안하고 이 글을 쓰면서 방금 막 만들었다.)</p>
 
 <p>우리가 주목할 부분은 결과가 1이 되는 부분이다. 우선 XYZ가 001일 때 OUT이 1이 된다. 이 때 0인 X와 Y에만 NOT을 붙인 후 다 AND를 한 <code>((NOT X) AND (NOT Y) AND (Z))</code> 라는 식을 생각해보자. 이 식은 XYZ가 001일 때만 1이고, 다른 경우에는 모두 0이다.</p>
 
@@ -375,7 +378,7 @@
 
 <p>이는 NAND로 NOT, AND, OR을 구현함으로써 증명할 수 있다. 만약에 NAND로 NOT, AND, OR을 만들 수 있다면 {AND, OR, NOT}은 함수적 완결성을 가지므로 NAND도 함수적 완결성을 가지기 때문이다.</p>
 
-<p>우선 NAND로 NOT을 만드는건 쉽다. X AND X 는 X 이고, NAND는 NOT AND이므로 X NAND X 는 NOT X이다. <a href="https://ko.wikipedia.org/wiki/%EB%85%BC%EB%A6%AC_%ED%9A%8C%EB%A1%9C">게이트 기호</a>를 이용해서 그리면 아래와 같다.</p>
+<p>우선 NAND로 NOT을 만드는 건 쉽다. X AND X 는 X 이고, NAND는 NOT AND이므로 X NAND X 는 NOT X이다. <a href="https://ko.wikipedia.org/wiki/%EB%85%BC%EB%A6%AC_%ED%9A%8C%EB%A1%9C">게이트 기호</a>를 이용해서 그리면 아래와 같다.</p>
 
 <p><img src="/images/trangister_and_basic_logic_gate/nand2not0.png#center30" alt="" /></p>
 
@@ -395,7 +398,7 @@
 
 <p><img src="/images/trangister_and_basic_logic_gate/nand2or0.png#center30" alt="" /></p>
 
-<p>NOR도 위와 같은 방식을 사용하면 AND, OR, NOT을 만들 수 있다. 따라서 NAND나 NOR은 자기자신 혼자서도 함수적 완결성을 가진다.</p>
+<p>NOR도 위와 같은 방식을 사용하면 AND, OR, NOT을 만들 수 있다. 따라서 NAND나 NOR은 자기 자신 혼자서도 함수적 완결성을 가진다.</p>
 
 <p>이러한 점은 공장의 입장에서 굉장한 중요성을 가진다. 하나의 종류만 찍어내는 것은 당연히 여러 종류의 부품을 찍어내는 것보다 엄청난 효율을 가지게 된다. 즉, 공장에서 NAND게이트만 엄청 찍어낸다 하더라도 우리는 모든 종류의 논리함수를 구현할 수 있다. 따라서 NAND와 NOR은 조금 어색하지만 굉장히 중요한 논리 게이트이다.</p>
 

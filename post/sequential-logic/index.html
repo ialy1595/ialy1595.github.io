@@ -87,11 +87,14 @@
   </div>
 </a>
 
-<div class="post-toc">
-  <span class="title">
-    Table of contents
-  </span>
-  <nav id="TableOfContents">
+<section class="post-content">
+  <div class="post-toc-container1">
+    <div class="post-toc-container2">
+      <div class="post-toc">
+        <span class="title">
+          Table of contents
+        </span>
+        <nav id="TableOfContents">
 <ul>
 <li>
 <ul>
@@ -117,16 +120,16 @@
 </ul></li>
 </ul>
 </nav>
-</div>
-
-<section class="post-content">
+      </div>
+    </div>
+  </div>
   
 
-<p>Sequential logic이란 같은 input이 들어왔다고 해도 logic의 state나 memory에 따라 결과가 달라지는 logic을 의미한다. 이러한 sequential logic이 존재할 수 있는 중요한 요소중 하나는 gate가 이상적이지 않아서 delay가 존재한다는 것이다.</p>
+<p>Sequential logic이란 같은 input이 들어왔다고 해도 logic의 state나 memory에 따라 결과가 달라지는 logic을 의미한다. 이러한 sequential logic이 존재할 수 있는 중요한 요소 중 하나는 gate가 이상적이지 않아서 delay가 존재한다는 것이다.</p>
 
 <h2 id="clock">Clock</h2>
 
-<p>sequential logic들은 회로도를 보면 이상적으로 작동한다면 말이 안되는 회로들이 많다. 어쩌면 그렇기 때문에 delay라는 요소가 들어감으로써 combinational logic과 달리 같은 input에도 다른 output을 낼 수 있는 것일 수도 있다. 이전 챕터에서 마지막에 다뤘던 clock 회로를 다시 봐보자.</p>
+<p>sequential logic들은 회로도를 보면 이상적으로 작동한다면 말이 안 되는 회로들이 많다. 어쩌면 그렇기 때문에 delay라는 요소가 들어감으로써 combinational logic과 달리 같은 input에도 다른 output을 낼 수 있는 것일 수도 있다. 이전 챕터에서 마지막에 다뤘던 clock 회로를 다시 봐보자.</p>
 
 <p><img src="/images/sequential_logic/oscilator0.png#center50" alt="" /></p>
 
@@ -134,11 +137,11 @@
 
 <p><code>B = (A NAND D) = (1 NAND D) = D' = C = B'</code></p>
 
-<p>따라서 <code>B = B'</code>라는 말도 안되는 결과가 나오게 된다. 그러나 이 회로에 delay라는 요소가 추가됨으로써 아래처럼 아주 신기한 작동을 하게 된다.</p>
+<p>따라서 <code>B = B'</code>라는 말도 안 되는 결과가 나오게 된다. 그러나 이 회로에 delay라는 요소가 추가됨으로써 아래처럼 아주 신기한 작동을 하게 된다.</p>
 
 <p><img src="/images/sequential_logic/oscilator1.png#center75" alt="" /></p>
 
-<p>이처럼 0과 1이 일정하게 반복하는 회로를 clock라고 한다. 참고로 cpu 성능을 결정하는 요소중 하나인 clock speed의 clock이 이 clock이다. 뒤에서 보면 알게 되겠지만 0과 1이 빨리 반복 될 수록 데이터가 빨리 처리되기 때문에 clock speed가 빠를수록 cpu 성능이 좋아진다고 보면 된다.</p>
+<p>이처럼 0과 1이 일정하게 반복하는 회로를 clock라고 한다. 참고로 cpu 성능을 결정하는 요소 중 하나인 clock speed의 clock이 이 clock이다. 뒤에서 보면 알게 되겠지만 0과 1이 빨리 반복 될수록 데이터가 빨리 처리되기 때문에 clock speed가 빠를수록 cpu 성능이 좋아진다고 보면 된다.</p>
 
 <p><img src="/images/sequential_logic/clock0.png#center50" alt="" /></p>
 
@@ -198,7 +201,7 @@
 
 <p>Set bit가 1이 되면 1과 NOR을 하면 무조건 0이므로 Q&rsquo;이 먼저 0이 된다. 이후 0과 0을 NOR을 하면 1이 되므로 Q가 1이 된다. 마찬가지로 Reset bit가 1이 되면 Q가 먼저 0이 되고, 이후 이 Q와 S가 NOR을 해서 Q&rsquo;이 1이 된다.</p>
 
-<p>S와 R이 모두 1인 경우에는 Q와 Q&rsquo; 모두 0이 된다. 그러나 이 경우에는 Q와 Q&rsquo;, 즉 두 output이 서로 반대라는 의도에 어긋난다. 이러한 경우 두 output이 서로 반대라고 가정한 상태에서 SR Latch를 이용한 회로를 구성할 때 원하지 않은 결과가 나올 수 있다. 따라서 undefined가 나오지 않도록 input에 각별히 주의해야한다. 그러나 언제나 인간은 실수를 하기 마련이다. 따라서 아얘 회로적으로 이러한 경우가 절대 나오지 않도록 개선한 것이 D Latch이다.</p>
+<p>S와 R이 모두 1인 경우에는 Q와 Q&rsquo; 모두 0이 된다. 그러나 이 경우에는 Q와 Q&rsquo;, 즉 두 output이 서로 반대라는 의도에 어긋난다. 이러한 경우 두 output이 서로 반대라고 가정한 상태에서 SR Latch를 이용한 회로를 구성할 때 원하지 않은 결과가 나올 수 있다. 따라서 undefined가 나오지 않도록 input에 각별히 주의해야한다. 그러나 언제나 인간은 실수를 하기 마련이다. 따라서 아예 회로적으로 이러한 경우가 절대 나오지 않도록 개선한 것이 D Latch이다.</p>
 
 <h3 id="d-latch">D Latch</h3>
 
@@ -309,7 +312,7 @@
 
 <ul>
 <li>단어의 크기가 w-bit라면 w개의 bit가 모두 동시에 저장되고, 출력된다.</li>
-<li>m-bit의 adress를 사용해서 어떤 단어를 고를지 선택한다. 따라서 총 2^m개의 단어를 저장할 수 있고, 각 단어는 고유의 주소값을 가진다.</li>
+<li>m-bit의 adress를 사용해서 어떤 단어를 고를지 선택한다. 따라서 총 2^m개의 단어를 저장할 수 있고, 각 단어는 고유의 주소 값을 가진다.</li>
 </ul>
 
 <p>이 RAM을 만들기 위해 언제나처럼 가장 작은 Memory cell 부터 구현해서 점점 확장해보자.</p>
@@ -318,7 +321,7 @@
 
 <p>우선 register를 약간 바꿔서 1-bit짜리 1개의 data를 처리하는 memory cell을 만들어보자. memory cell은 3개의 input인 DI, select, write와 1개의 output인 DO가 있다.</p>
 
-<p>select는 이 cell이 선택되었는지를 뜻하는 bit이다. 따라서 select가 1일 경우에면 이 cell에 data가 쓰이거나 출력될 수 있고, 0이면 아무런 작동도 하지 않는다. 여기서 아무런 작동을 하지 않는다는 의미는 DO가 0이란 뜻이 아니라 Hi-Z라는 의미이다.</p>
+<p>select는 이 cell이 선택되었는지를 뜻하는 bit이다. 따라서 select가 1일 경우에는 이 cell에 data가 쓰이거나 출력될 수 있고, 0이면 아무런 작동도 하지 않는다. 여기서 아무런 작동을 하지 않는다는 의미는 DO가 0이란 뜻이 아니라 Hi-Z라는 의미이다.</p>
 
 <p>write는 이 cell에 저장된 값을 DI로 갱신할지 정하는 bit이다. 따라서 write가 1이면 cell에 저장된 값이 DI로 갱신되고, 0일 경우 저장된 값이 변하지 않은 채로 그대로 출력한다. 단, 이러한 작동을 하기 위해선 우선 select가 1이어야 한다.</p>
 
@@ -338,7 +341,7 @@
 <p>이제 이 memory cell을 조합해서 4-bit짜리 단어를 4개 저장할 수 있는 RAM을 만들어보자. 이 RAM에는 4개의 input인 addr, DI, write, CS와 1개의 output인 DO로 구성되어 있다.</p>
 
 <ul>
-<li>addr은 4개의 단어중 어떤 단어를 사용할지 선택하는 주소(address)이다. 여기에서는 단어가 총 4개이므로 2-bit adress를 사용한다.</li>
+<li>addr은 4개의 단어 중 어떤 단어를 사용할지 선택하는 주소(address)이다. 여기에서는 단어가 총 4개이므로 2-bit adress를 사용한다.</li>
 <li>CS는 chip select로, 이 4 by 4 RAM 자체를 동작 시킬지 말지 정하는 bit이다.</li>
 <li>write는 memory cell에서의 wirte와 동일하다. write가 1이라면 addr에 의해 선택된 단어가 DI로 갱신된다.</li>
 </ul>
@@ -350,15 +353,15 @@
 <li><strong>write</strong> : CS가 1이고 write가 1일 경우 addr에 의해 선택된 단어가 DI로 갱신된다. 이 때 값이 바뀌는 시기는 clock의 다음 rising edge이다.</li>
 </ul>
 
-<p>먼저 단어를 선택하는 것 부터 구현해보자. 우리는 2-bit의 addr을 받아서 4개의 단어중 하나만 골라야 한다. 단어를 선택하는 방법은 선택된 단어의 select만 1이 들어가게 하고, 나머지 단어에는 0이 들어가게 하면 된다. 따라서 2-bit의 addr을 읽어서 4개중 해당된 한 bit에만 1을 주고 나머지 bit에는 0을 줘야하므로, decoder를 이용하면 구현할 수 있다.</p>
+<p>먼저 단어를 선택하는 것부터 구현해보자. 우리는 2-bit의 addr을 받아서 4개의 단어중 하나만 골라야 한다. 단어를 선택하는 방법은 선택된 단어의 select만 1이 들어가게 하고, 나머지 단어에는 0이 들어가게 하면 된다. 따라서 2-bit의 addr을 읽어서 4개중 해당된 한 bit에만 1을 주고 나머지 bit에는 0을 줘야하므로, decoder를 이용하면 구현할 수 있다.</p>
 
-<p>이후 과정은 register를 cell로 변환시킨 것 처럼 적용하면 된다. 즉, write와 CS를 AND해서 cell의 write에 연결하고, write에 NOT을 한 것과 CS를 AND해서 tristate-buffer에 연결하면 된다. 따라서 다음과 같이 구현할 수 있다.</p>
+<p>이후 과정은 register를 cell로 변환시킨 것처럼 적용하면 된다. 즉, write와 CS를 AND해서 cell의 write에 연결하고, write에 NOT을 한 것과 CS를 AND해서 tristate-buffer에 연결하면 된다. 따라서 다음과 같이 구현할 수 있다.</p>
 
 <p><img src="/images/sequential_logic/4by4ram0.png#center75" alt="" /></p>
 
 <h3 id="ram-확장">RAM 확장</h3>
 
-<p>Combinational circuit에서 DEMUX 등을 다룰 때 작은 DEMUX를 합쳐서 더 큰 DEMUX를 만들 수 있었다. 여기서도 같은 방법으로 작은 RAM을 조합해서 더 큰 RAM을 만들 수 있다. RAM을 확장하는 방법은 다음과 같은 두가지 방법이 있다.</p>
+<p>Combinational circuit에서 DEMUX 등을 다룰 때 작은 DEMUX를 합쳐서 더 큰 DEMUX를 만들 수 있었다. 여기서도 같은 방법으로 작은 RAM을 조합해서 더 큰 RAM을 만들 수 있다. RAM을 확장하는 방법은 다음과 같은 두 가지 방법이 있다.</p>
 
 <h4 id="more-word">More word</h4>
 
@@ -368,7 +371,7 @@
 
 <h4 id="bigger-word">Bigger word</h4>
 
-<p>단어의 길이를 늘리는 방법은 훨씬 쉽다. 우선 같은 주소에 같은 동작을 헤야하니 addr, write, CS는 공유를 하면 된다. 그리고 data는 나눠서 들어간다음 합쳐서 받으면 된다. 따라서 다음과 같이 구현할 수 있다.</p>
+<p>단어의 길이를 늘리는 방법은 훨씬 쉽다. 우선 같은 주소에 같은 동작을 헤야하니 addr, write, CS는 공유를 하면 된다. 그리고 data는 나눠서 들어간 다음 합쳐서 받으면 된다. 따라서 다음과 같이 구현할 수 있다.</p>
 
 <p><img src="/images/sequential_logic/biggerword0.png#center75" alt="" /></p>
 

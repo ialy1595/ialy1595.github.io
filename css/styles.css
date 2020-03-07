@@ -127,7 +127,7 @@ img[src$='#center75'] {
   display: block;
   margin-left: auto;
   margin-right: auto;
-  width: 750%;
+  width: 75%;
 }
 
 img[src$='#center100'] {
@@ -230,7 +230,7 @@ bb {
 
 .container {
   margin: auto;
-  max-width: 770px;
+  max-width: 750px;
   padding: 20px 30px 15px 30px;
   font-size: 18px;
   font-weight: 400;
@@ -314,17 +314,27 @@ bb {
   margin-bottom: 0px;
 }
 
+.post-toc-container1 {
+  position: relative;
+}
+
+.post-toc-container2 {
+  position: absolute;
+  left: 100%;
+}
+
 .post-toc {
-  float: right;
+  width: 200px;
   margin-left: 20px;
   padding: 20px 25px 20px 25px;
   background-color: #f5f5f5;
-  font-size: .8em;
-  line-height: 1.8rem;
+  font-size: .9em;
+  line-height: 2.1rem;
 }
 
 .post-toc a, .post-toc a:visited {
   color: #4A4A4A;
+  word-break: keep-all;
 }
 
 .post-toc .title {
@@ -586,10 +596,13 @@ bb {
   margin-right: 5px !important;
 }
 
-@media screen and (max-width: 640px) {
+@media screen and (max-width: 1320px) {
   .post-toc {
-    float: none;
+    display: none;
   }
+}
+
+@media screen and (max-width: 640px) {
   .container {
     padding: 20px 10px 15px 10px;
   }  
@@ -626,6 +639,12 @@ bb {
     flex-wrap: nowrap;
     justify-content: space-around;
     align-items: center;
+  }
+  h1 {
+    font-size: 28px;
+  }
+  h2 {
+    font-size: 24px;
   }
 }
 
