@@ -3,6 +3,11 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>https://ialy1595.github.io/post/binary-indexed-tree/</loc>
+    <lastmod>2020-03-08T19:19:01+09:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://ialy1595.github.io/post/dynamic-programming/</loc>
     <lastmod>2020-03-05T18:45:29+09:00</lastmod>
   </url>
@@ -65,7 +70,7 @@
   
   <url>
     <loc>https://ialy1595.github.io/subcategories/algorithm/</loc>
-    <lastmod>2020-03-05T18:45:29+09:00</lastmod>
+    <lastmod>2020-03-08T19:19:01+09:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -124,7 +129,7 @@
   
   <url>
     <loc>https://ialy1595.github.io/categories/code/</loc>
-    <lastmod>2020-03-05T18:45:29+09:00</lastmod>
+    <lastmod>2020-03-08T19:19:01+09:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -237,6 +242,12 @@
   </url>
   
   <url>
+    <loc>https://ialy1595.github.io/tags/indexed-tree/</loc>
+    <lastmod>2020-03-08T19:19:01+09:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>https://ialy1595.github.io/tags/instruction/</loc>
     <lastmod>2019-03-21T17:12:20+09:00</lastmod>
     <priority>0</priority>
@@ -268,7 +279,7 @@
   
   <url>
     <loc>https://ialy1595.github.io/post/</loc>
-    <lastmod>2020-03-05T18:45:29+09:00</lastmod>
+    <lastmod>2020-03-08T19:19:01+09:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -316,7 +327,7 @@
   
   <url>
     <loc>https://ialy1595.github.io/subcategories/</loc>
-    <lastmod>2020-03-05T18:45:29+09:00</lastmod>
+    <lastmod>2020-03-08T19:19:01+09:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -347,6 +358,12 @@
   <url>
     <loc>https://ialy1595.github.io/tags/trangister/</loc>
     <lastmod>2018-07-31T02:13:42+09:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://ialy1595.github.io/tags/tree/</loc>
+    <lastmod>2020-03-08T19:19:01+09:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -382,7 +399,7 @@
   
   <url>
     <loc>https://ialy1595.github.io/</loc>
-    <lastmod>2020-03-05T18:45:29+09:00</lastmod>
+    <lastmod>2020-03-08T19:19:01+09:00</lastmod>
     <priority>0</priority>
   </url>
   

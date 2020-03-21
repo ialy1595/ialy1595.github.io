@@ -8,10 +8,20 @@
     <language>ko-KR</language>
     <managingEditor>ialy12006@gmail.com (ialy1595)</managingEditor>
     <webMaster>ialy12006@gmail.com (ialy1595)</webMaster>
-    <lastBuildDate>Thu, 05 Mar 2020 18:45:29 +0900</lastBuildDate>
+    <lastBuildDate>Sun, 08 Mar 2020 19:19:01 +0900</lastBuildDate>
     
 	<atom:link href="https://ialy1595.github.io/categories/code/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>인덱스 트리(Indexed Tree)</title>
+      <link>https://ialy1595.github.io/post/binary-indexed-tree/</link>
+      <pubDate>Sun, 08 Mar 2020 19:19:01 +0900</pubDate>
+      <author>ialy12006@gmail.com (ialy1595)</author>
+      <guid>https://ialy1595.github.io/post/binary-indexed-tree/</guid>
+      <description>개요 이 자료구조는 point update와 range query를 해야 하는 상황에서 사용된다. 더 자세히 말하자면 길이가 n인 수열에 a 대해
+ point update: (i, x) =&amp;gt; a[i]를 x로 치환 range query: (l, r) =&amp;gt; a[l] ~ a[r] 중 sum/max/min 등 구하기.</description>
+    </item>
     
     <item>
       <title>동적계획법 (Dynamic Programming, DP)</title>
