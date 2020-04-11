@@ -127,7 +127,7 @@
 
 <p><img src="/images/datapath_control_unit/cpu0.png#center75" alt="" /></p>
 
-<p>여기서 신기한 점은 위의 그림에서 <strong>빨간색으로 표시한 <code>AA</code>, <code>BA</code>, <code>DA</code>, <code>AS</code>, <code>BS</code>, <code>FS</code>, <code>DS</code>, <code>RW</code>, <code>MW</code> 만 조절하면 우리가 가능한 모든 동작을 할 수 있다</strong>는 것이다. 이러한 비트들을 <strong>control bit</strong>라고 하고, 이 control bit들을 모은 것을 <strong>control word</strong>라고 한다. 따라서 위의 datapath의 control word는 다음과 같이 구성된다.</p>
+<p>여기서 신기한 점은 위의 그림에서 <strong>빨간색으로 표시한 AA, BA, DA, AS, BS, FS, DS, RW, MW 만 조절하면 우리가 가능한 모든 동작을 할 수 있다</strong>는 것이다. 이러한 비트들을 <strong>control bit</strong>라고 하고, 이 control bit들을 모은 것을 <strong>control word</strong>라고 한다. 따라서 위의 datapath의 control word는 다음과 같이 구성된다.</p>
 
 <p><img src="/images/datapath_control_unit/controlword0.png#center100" alt="" /></p>
 
@@ -345,7 +345,7 @@
 <li>register에 상수 값을 대입</li>
 </ul>
 
-<p>먼저 A register의 값을 B register에 대입하는 과정을 보자. 예를 들어 <code>R2 &lt;- R5</code>인 연산을 보자. 이는 다음과 같은 과정으로 이루어진다.</p>
+<p>먼저 A register의 값을 B register에 대입하는 과정을 보자. 예를 들어 <code>$ R2 \leftarrow R5 $</code>인 연산을 보자. 이는 다음과 같은 과정으로 이루어진다.</p>
 
 <ol>
 <li>Register file에서 R5를 A<sub>data</sub>로 출력한다.</li>
@@ -356,18 +356,18 @@
 <p>이제 이 동작을 수행되도록 각 control bit를 조정해보자.</p>
 
 <ul>
-<li>AA : R5를 A<sub>data</sub>로 출력해야 한다. 따라서 R5의 주소인 <code>101</code>이어야 한다.</li>
+<li>AA : R5를 A<sub>data</sub>로 출력해야 한다. 따라서 R5의 주소인 101이어야 한다.</li>
 <li>BA : B<sub>data</sub>는 사용되지 않는다. 따라서 아무 값이나 되어도 상관없다.</li>
-<li>DA : D<sub>data</sub>를 R2에 대입해야 한다. 따라서 R2의 주소인 <code>010</code>이어야 한다.</li>
-<li>AS : Address<sub>in</sub>과 A<sub>data</sub>중 A<sub>data</sub>를 선택해야 한다. 따라서 <code>1</code>이어야 한다.</li>
+<li>DA : D<sub>data</sub>를 R2에 대입해야 한다. 따라서 R2의 주소인 010이어야 한다.</li>
+<li>AS : Address<sub>in</sub>과 A<sub>data</sub>중 A<sub>data</sub>를 선택해야 한다. 따라서 1이어야 한다.</li>
 <li>BS : Bus B의 값은 사용되지 않는다. 따라서 아무 값이나 되어도 상관없다.</li>
-<li>FS : F = A 연산을 해야 한다. 따라서 <code>00000</code>이어야 한다.</li>
-<li>DS : ALU에서 나온 F값을 선택해야 한다. 따라서 <code>0</code>이어야 한다.</li>
-<li>RW : Register file에서 R2에 값을 쓰는 작업을 해야 한다. 따라서 <code>1</code>이어야 한다.</li>
-<li>MW : Memory에 쓰는 작업을 하지 않는다. 따라서 <code>0</code>이어야 한다.</li>
+<li>FS : F = A 연산을 해야 한다. 따라서 00000이어야 한다.</li>
+<li>DS : ALU에서 나온 F값을 선택해야 한다. 따라서 0이어야 한다.</li>
+<li>RW : Register file에서 R2에 값을 쓰는 작업을 해야 한다. 따라서 1이어야 한다.</li>
+<li>MW : Memory에 쓰는 작업을 하지 않는다. 따라서 0이어야 한다.</li>
 </ul>
 
-<p>따라서 <code>R2 &lt;- R5</code>를 수행하는 control word는 아래와 같다.</p>
+<p>따라서 <code>$ R2 \leftarrow R5 $</code>를 수행하는 control word는 아래와 같다.</p>
 
 <p><img src="/images/datapath_control_unit/cwregister0.png#center100" alt="" /></p>
 
@@ -375,7 +375,7 @@
 
 <p><img src="/images/datapath_control_unit/dpregister0.png#center75" alt="" /></p>
 
-<p>Control word가 어떻게 될지는 나와 있는 결과를 보는 것 보다 자신이 직접 각 상황에서 주소나 select를 어떻게 해야 할지 생각해 보는 것이 도움이 많이 된다. 이번에는 register에 상수 값을 대입하는 과정을 살펴보자. register에 대입할 상수값은 Constant<sub>in</sub>에 들어있다. 예를 들어 <code>R3 &lt;- 7</code>을 한다고 하자. 위에서처럼 각 control bit가 어떻게 되야할지 생각해보고, 이렇게 만든 control word가 아래와 같은지 확인해보자.</p>
+<p>Control word가 어떻게 될지는 나와 있는 결과를 보는 것 보다 자신이 직접 각 상황에서 주소나 select를 어떻게 해야 할지 생각해 보는 것이 도움이 많이 된다. 이번에는 register에 상수 값을 대입하는 과정을 살펴보자. register에 대입할 상수값은 Constant<sub>in</sub>에 들어있다. 예를 들어 <code>$ R3 \leftarrow 7 $</code>을 한다고 하자. 위에서처럼 각 control bit가 어떻게 되야할지 생각해보고, 이렇게 만든 control word가 아래와 같은지 확인해보자.</p>
 
 <p><img src="/images/datapath_control_unit/cwregister1.png#center100" alt="" /></p>
 
@@ -385,19 +385,19 @@
 
 <h2 id="arithmetic-logic-operation">Arithmetic &amp; Logic Operation</h2>
 
-<p>위에서 ALU는 단순히 A나 B값을 그대로 출력했다. 이번에는 ALU가 실제 연산을 하는 경우를 살펴보자. ALU에서 연산하기 위해서는 Bus A와 Bus B에 피연산자를 담은 다음 FS값으로 어떤 연산을 할지 정하면 된다. 예를 들어 <code>R1 &lt;- R3 + R4</code>인 경우 이를 수행하는 control word는 다음과 같다.</p>
+<p>위에서 ALU는 단순히 A나 B값을 그대로 출력했다. 이번에는 ALU가 실제 연산을 하는 경우를 살펴보자. ALU에서 연산하기 위해서는 Bus A와 Bus B에 피연산자를 담은 다음 FS값으로 어떤 연산을 할지 정하면 된다. 예를 들어 <code>$ R1 \leftarrow R3 + R4 $</code>인 경우 이를 수행하는 control word는 다음과 같다.</p>
 
 <p><img src="/images/datapath_control_unit/cwalu0.png#center100" alt="" /></p>
 
-<p>피연산자중 하나를 상수 값으로 하는 것도 가능하다. 이때 상수 값은 Constant<sub>in</sub>에 들어있다. 예를 들어 아래 control word는 <code>R2 &lt;- R7 &amp; 1</code>을 수행한다.</p>
+<p>피연산자중 하나를 상수 값으로 하는 것도 가능하다. 이때 상수 값은 Constant<sub>in</sub>에 들어있다. 예를 들어 아래 control word는 <code>$ R2 \leftarrow R7 ~ \&amp; ~ 1 $</code>을 수행한다.</p>
 
 <p><img src="/images/datapath_control_unit/cwalu1.png#center100" alt="" /></p>
 
-<p>만약에 1을 더하거나 빼는 경우 이 연산이 이미 ALU에 들어있다. 따라서 이 경우에는 상수 값을 사용하지 않아도 수행할 수 있다. 예를 들어 아래 control word는 <code>R6 &lt;- R0 + 1</code>을 수행한다.</p>
+<p>만약에 1을 더하거나 빼는 경우 이 연산이 이미 ALU에 들어있다. 따라서 이 경우에는 상수 값을 사용하지 않아도 수행할 수 있다. 예를 들어 아래 control word는 <code>$ R6 \leftarrow R0 + 1 $</code>을 수행한다.</p>
 
 <p><img src="/images/datapath_control_unit/cwalu2.png#center100" alt="" /></p>
 
-<p>xor 연산은 같은 수에 대해서 항상 0이다. 따라서 자기 자신을 xor하면 항상 0이 나온다. 이를 이용하면 어떤 register 값을 0으로 초기화 하는 작업을 0이라는 상수 값을 사용하지 않아도 수행할 수 있다. 예를 들어 아래 control word는 <code>R1 &lt;- 0 = R0 ^ R0</code>를 수행한다.</p>
+<p>xor 연산은 같은 수에 대해서 항상 0이다. 따라서 자기 자신을 xor하면 항상 0이 나온다. 이를 이용하면 어떤 register 값을 0으로 초기화 하는 작업을 0이라는 상수 값을 사용하지 않아도 수행할 수 있다. 예를 들어 아래 control word는 <code>$ R1 \leftarrow 0 = R0 \oplus R0 $</code>를 수행한다.</p>
 
 <p><img src="/images/datapath_control_unit/cwalu3.png#center100" alt="" /></p>
 
@@ -411,15 +411,15 @@
 <li>Memory에 데이터를 쓸 경우 쓸 데이터를 Bus B에 담는다.</li>
 </ul>
 
-<p>먼저 데이터를 읽는 작업을 먼저 해보자. 예를 들어 아래 control word는 <code>R2 &lt;- M[R5]</code>를 수행한다.</p>
+<p>먼저 데이터를 읽는 작업을 먼저 해보자. 예를 들어 아래 control word는 <code>$ R2 \leftarrow M[R5] $</code>를 수행한다.</p>
 
 <p><img src="/images/datapath_control_unit/cwmemory0.png#center100" alt="" /></p>
 
-<p>이번에는 데이터에 값을 쓰는 작업을 해보자. 예를 들어 아래 control word는 <code>M[R0] &lt;- R7</code>를 수행한다.</p>
+<p>이번에는 데이터에 값을 쓰는 작업을 해보자. 예를 들어 아래 control word는 <code>$ M[R0] \leftarrow R7 $</code>를 수행한다.</p>
 
 <p><img src="/images/datapath_control_unit/cwmemory2.png#center100" alt="" /></p>
 
-<p>여기서 Memory에 쓸 값을 특정 상수 값으로 할 수 있다. 이 때 데이터는 Constant<sub>in</sub>에 들어있다. 예를 들어 아래 control word는 <code>M[3] &lt;- 24</code>를 수행한다.</p>
+<p>여기서 Memory에 쓸 값을 특정 상수 값으로 할 수 있다. 이 때 데이터는 Constant<sub>in</sub>에 들어있다. 예를 들어 아래 control word는 <code>$ M[3] \leftarrow 24 $</code>를 수행한다.</p>
 
 <p><img src="/images/datapath_control_unit/cwmemory3.png#center100" alt="" /></p>
 
@@ -457,7 +457,7 @@
 
 <p>우선 control unit까지 적용한 CPU의 회로도에서 instruction이 fetch되는 과정을 보면 다음과 같다.</p>
 
-<p><img src="/images/datapath_control_unit/fetch0.png#center50" alt="" /></p>
+<p><img src="/images/datapath_control_unit/fetch0.png#center75" alt="" /></p>
 
 <p>PC가 datapath의 Address<sub>in</sub>을 타고 memory로 들어가서 instruction을 불러온다. 이 instruction은 Bus D에 담겨서 control unit으로 들어간다. control unit는 이 instruction과 NZCV flag를 통해 control word, Address<sub>in</sub>, Constant<sub>in</sub>을 만들어낸다.</p>
 
@@ -485,19 +485,19 @@
 <li>AA : 피연산자중 하나인 R<sub>n</sub>이다.</li>
 <li>BA : 피연산자중 하나인 R<sub>m</sub>이다.</li>
 <li>DA : 연산 결과가 저장될 R<sub>d</sub>이다.</li>
-<li>AS : A<sub>data</sub>를 연산해야 하므로 <code>1</code>이다.</li>
-<li>BS : B<sub>data</sub>를 연산해야 하므로 <code>0</code>이다.</li>
+<li>AS : A<sub>data</sub>를 연산해야 하므로 1이다.</li>
+<li>BS : B<sub>data</sub>를 연산해야 하므로 0이다.</li>
 <li>FS : opcode에 따라 연산에 해당되는 fs값을 택한다.</li>
-<li>DS : ALU에서 나온 F값이어야 하므로 <code>0</code>이다.</li>
-<li>RW : 연산 결과를 저장해야 하므로 <code>1</code>이다.</li>
-<li>MW : Memory에 쓰는 작업을 하지 않으므로 <code>0</code>이다.</li>
+<li>DS : ALU에서 나온 F값이어야 하므로 0이다.</li>
+<li>RW : 연산 결과를 저장해야 하므로 1이다.</li>
+<li>MW : Memory에 쓰는 작업을 하지 않으므로 0이다.</li>
 </ul>
 
 <p>만약에 피연산자중 하나가 Constant<sub>in</sub>일 경우 아래와 같은 instruction을 가진다.</p>
 
 <p><img src="/images/datapath_control_unit/cu1.png#center100" alt="" /></p>
 
-<p>이 경우 instruction의 constant로 constant<sub>in</sub>을 만들고, BS를 <code>1</code>로 하면 된다.</p>
+<p>이 경우 instruction의 constant로 constant<sub>in</sub>을 만들고, BS를 1로 하면 된다.</p>
 
 <h3 id="data-transfer">Data transfer</h3>
 
@@ -505,29 +505,29 @@
 
 <p><img src="/images/datapath_control_unit/cu2.png#center100" alt="" /></p>
 
-<p>여기서 R<sub>n</sub>은 memory의 주소가 저장된 register의 주소, R<sub>d</sub>는 memory에 저장하거나 memory의 데이터를 저장할 register의 주소이다. 만약 store를 하는 <code>M[Rn] &lt;- Rd</code>의 경우 다음과 같이 control word를 만들어낸다.</p>
+<p>여기서 R<sub>n</sub>은 memory의 주소가 저장된 register의 주소, R<sub>d</sub>는 memory에 저장하거나 memory의 데이터를 저장할 register의 주소이다. 만약 store를 하는 <code>$ M[Rn] \leftarrow Rd $</code>의 경우 다음과 같이 control word를 만들어낸다.</p>
 
 <ul>
 <li>AA : memory에 저장할 주소가 저장된 R<sub>n</sub>이다.</li>
 <li>BA : memory에 저장할 데이터가 저장된 R<sub>d</sub>이다.</li>
 <li>DA : register에 저장하지 않으므로 어떤 값이든 상관없다.</li>
-<li>AS : A<sub>data</sub>를 memory에 Address로 넘겨야 하므로 <code>1</code>이다.</li>
-<li>BS : B<sub>data</sub>를 memory에 Data<sub>in</sub>으로 넘겨야 하므로 <code>0</code>이다.</li>
+<li>AS : A<sub>data</sub>를 memory에 Address로 넘겨야 하므로 1이다.</li>
+<li>BS : B<sub>data</sub>를 memory에 Data<sub>in</sub>으로 넘겨야 하므로 0이다.</li>
 <li>FS : ALU 연산을 하지 않으므로 어떤 값이든 상관없다.</li>
 <li>DS : Bus D를 사용하지 않으므로 어떤 값이든 상관없다.</li>
-<li>RW : register에 저장하지 않으므로 <code>0</code>이다.</li>
-<li>MW : Memory에 저장하므로 <code>1</code>이다.</li>
+<li>RW : register에 저장하지 않으므로 0이다.</li>
+<li>MW : Memory에 저장하므로 1이다.</li>
 </ul>
 
-<p>만약 load를 하는 <code>Rd &lt;- M[Rn]</code>의 경우 <code>AA</code>, <code>AS</code>, <code>FS</code>는 그대로이고 나머지는 다음과 같이 달라진다.</p>
+<p>만약 load를 하는 <code>$ Rd \leftarrow M[Rn] $</code>의 경우 AA, AS, FS는 그대로이고 나머지는 다음과 같이 달라진다.</p>
 
 <ul>
 <li>BA : Bus B를 사용하지 않으므로 어떤 값이든 상관 없다.</li>
 <li>DA : memory에서 꺼낸 값을 저장할 R<sub>d</sub>이다.</li>
 <li>BS : Bus B를 사용하지 않으므로 어떤 값이든 상관 없다.</li>
-<li>DS : memory에서 꺼낸 값을 저장해야 하므로 <code>1</code>이다.</li>
-<li>RW : register에 저장하므로 <code>1</code>이다.</li>
-<li>MW : Memory에 저장하지 않으므로 <code>0</code>이다.</li>
+<li>DS : memory에서 꺼낸 값을 저장해야 하므로 1이다.</li>
+<li>RW : register에 저장하므로 1이다.</li>
+<li>MW : Memory에 저장하지 않으므로 0이다.</li>
 </ul>
 
 <h3 id="control-flow">Control flow</h3>
@@ -536,20 +536,20 @@
 
 <p><img src="/images/datapath_control_unit/cu3.png#center100" alt="" /></p>
 
-<p>여기서 NZCV는 이전 instruction에서 ALU연산을 한 후 저장된 flag로, 각각 <strong>N</strong>egative, <strong>Z</strong>ero, <strong>C</strong>arry out, o<strong>V</strong>erflow를 뜻한다. if와 같이 조건문을 검사할 때 이 NZCV를 통해 그 조건이 true인지 false인지 확인해서 PC를 변경할지 말지 정하게 된다. 예를 들어 <code>R1 == 7</code>을 검사하고 싶을 경우, 이전 instruction에서 <code>R1 - 7</code>을 연산한다. 그 다음 Zero flag를 보면 <code>R1</code>이 <code>7</code>인지 알 수 있다.</p>
+<p>여기서 NZCV는 이전 instruction에서 ALU연산을 한 후 저장된 flag로, 각각 <strong>N</strong>egative, <strong>Z</strong>ero, <strong>C</strong>arry out, o<strong>V</strong>erflow를 뜻한다. if와 같이 조건문을 검사할 때 이 NZCV를 통해 그 조건이 true인지 false인지 확인해서 PC를 변경할지 말지 정하게 된다. 예를 들어 <code>$ R1 == 7 $</code>을 검사하고 싶을 경우, 이전 instruction에서 <code>$ R1 - 7 $</code>을 연산한다. 그 다음 Zero flag를 보면 <code>$ R1 $</code>이 7인지 알 수 있다.</p>
 
-<p>이를 통해 PC가 바뀌어야한다고 정해지면 <code>PC &lt;- PC + offset</code>을 한다. 이를 수행하는 control word는 다음과 같이 생성된다.</p>
+<p>이를 통해 PC가 바뀌어야한다고 정해지면 <code>$ PC \leftarrow PC + offset $</code>을 한다. 이를 수행하는 control word는 다음과 같이 생성된다.</p>
 
 <ul>
 <li>AA : A<sub>data</sub>를 사용하지 않으므로 어떤 값이든 상관없다.</li>
 <li>BA : B<sub>data</sub>를 사용하지 않으므로 어떤 값이든 상관없다.</li>
 <li>DA : register에 저장하지 않으므로 어떤 값이든 상관없다.</li>
-<li>AS : PC값인 Address<sub>in</sub>을 사용해야 하므로 <code>0</code>이다.</li>
-<li>BS : Constant<sub>in</sub>을 사용해야 하므로 <code>1</code>이다.</li>
-<li>FS : 더하는 연산을 해야 하므로 <code>00010</code>이다.</li>
-<li>DS : ALU에서 나온 F값이어야 하므로 <code>0</code>이다.</li>
-<li>RW : register에 저장하지 않으므로 <code>0</code>이다.</li>
-<li>MW : Memory에 저장하지 않으므로 <code>0</code>이다.</li>
+<li>AS : PC값인 Address<sub>in</sub>을 사용해야 하므로 0이다.</li>
+<li>BS : Constant<sub>in</sub>을 사용해야 하므로 1이다.</li>
+<li>FS : 더하는 연산을 해야 하므로 00010이다.</li>
+<li>DS : ALU에서 나온 F값이어야 하므로 0이다.</li>
+<li>RW : register에 저장하지 않으므로 0이다.</li>
+<li>MW : Memory에 저장하지 않으므로 0이다.</li>
 </ul>
 
 </section>

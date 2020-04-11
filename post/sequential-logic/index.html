@@ -133,11 +133,11 @@
 
 <p><img src="/images/sequential_logic/oscilator0.png#center50" alt="" /></p>
 
-<p>여기서 만약 A가 1이라면,</p>
+<p>여기서 만약 <code>$ A $</code>가 1이라면,</p>
 
-<p><code>B = (A NAND D) = (1 NAND D) = D' = C = B'</code></p>
+<p><code>$ B = (A ~ nand ~ D) = (1 ~ nand ~ D) = D' = C = B' $</code></p>
 
-<p>따라서 <code>B = B'</code>라는 말도 안 되는 결과가 나오게 된다. 그러나 이 회로에 delay라는 요소가 추가됨으로써 아래처럼 아주 신기한 작동을 하게 된다.</p>
+<p>따라서 <code>$ B = B' $</code>라는 말도 안 되는 결과가 나오게 된다. 그러나 이 회로에 delay라는 요소가 추가됨으로써 아래처럼 아주 신기한 작동을 하게 된다.</p>
 
 <p><img src="/images/sequential_logic/oscilator1.png#center75" alt="" /></p>
 
@@ -193,15 +193,15 @@
 </tbody>
 </table>
 
-<p>Q에 대한 식을 생각해보면, <code>Q = (R NOR (S NOR Q_prev)) = (R' AND (S OR Q_prev))</code>이다.</p>
+<p>Q에 대한 식을 생각해보면, <code>$ Q = (R ~ nor~ (S ~ nor ~ Q_prev)) = (R' \cdot (S + Q_prev)) $</code>이다.</p>
 
-<p>따라서 S가 0, R이 0이면 <code>Q = Q_prev</code>가 되므로 보존이 된다. SR이 01일 때와 10일 때 Q가 0 ,1이 됨도 위의 진리식에서 쉽게 알 수 있다. 아래 그림을 통해 더 상세한 Q의 변화 과정을 살펴보자.</p>
+<p>따라서 <code>$ S $</code>가 0, <code>$ R $</code>이 0이면 <code>$ Q = Q_prev $</code>가 되므로 보존이 된다. <code>$ S,R $</code>이 01일 때와 10일 때 <code>$ Q $</code>가 0 ,1이 됨도 위의 진리식에서 쉽게 알 수 있다. 아래 그림을 통해 더 상세한 <code>$ Q $</code>의 변화 과정을 살펴보자.</p>
 
 <p><img src="/images/sequential_logic/srlatch1.png#center75" alt="" /></p>
 
-<p>Set bit가 1이 되면 1과 NOR을 하면 무조건 0이므로 Q&rsquo;이 먼저 0이 된다. 이후 0과 0을 NOR을 하면 1이 되므로 Q가 1이 된다. 마찬가지로 Reset bit가 1이 되면 Q가 먼저 0이 되고, 이후 이 Q와 S가 NOR을 해서 Q&rsquo;이 1이 된다.</p>
+<p>Set bit가 1이 되면 1과 NOR을 하면 무조건 0이므로 <code>$ Q' $</code>이 먼저 0이 된다. 이후 0과 0을 NOR을 하면 1이 되므로 <code>$ Q $</code>가 1이 된다. 마찬가지로 Reset bit가 1이 되면 <code>$ Q $</code>가 먼저 0이 되고, 이후 이 <code>$ Q $</code>와 <code>$ S $</code>가 NOR을 해서 <code>$ Q' $</code>이 1이 된다.</p>
 
-<p>S와 R이 모두 1인 경우에는 Q와 Q&rsquo; 모두 0이 된다. 그러나 이 경우에는 Q와 Q&rsquo;, 즉 두 output이 서로 반대라는 의도에 어긋난다. 이러한 경우 두 output이 서로 반대라고 가정한 상태에서 SR Latch를 이용한 회로를 구성할 때 원하지 않은 결과가 나올 수 있다. 따라서 undefined가 나오지 않도록 input에 각별히 주의해야한다. 그러나 언제나 인간은 실수를 하기 마련이다. 따라서 아예 회로적으로 이러한 경우가 절대 나오지 않도록 개선한 것이 D Latch이다.</p>
+<p>S와 R이 모두 1인 경우에는 <code>$ Q $</code>와 <code>$ Q' $</code> 모두 0이 된다. 그러나 이 경우에는 <code>$ Q $</code>와 <code>$ Q' $</code>, 즉 두 output이 서로 반대라는 의도에 어긋난다. 이러한 경우 두 output이 서로 반대라고 가정한 상태에서 SR Latch를 이용한 회로를 구성할 때 원하지 않은 결과가 나올 수 있다. 따라서 undefined가 나오지 않도록 input에 각별히 주의해야한다. 그러나 언제나 인간은 실수를 하고 하지 말라는 것을 하기 마련이다. 따라서 아예 회로적으로 이러한 경우가 절대 나오지 않도록 개선한 것이 D Latch이다.</p>
 
 <h3 id="d-latch">D Latch</h3>
 
@@ -239,9 +239,9 @@
 </tbody>
 </table>
 
-<p>C가 0이라면 모두 AND게이트에 연결되어있으므로 SR에 00이 들어간다. 따라서 Q값이 그대로 보존된다. 만약에 C가 1이라면 S에 D, R에 D&rsquo;이 들어가게 된다. 따라서 D가 0이면 Reset, D가 1이면 Set이 되고, 11이 들어가는 경우는 절대 일어나지 않는다.</p>
+<p><code>$ C $</code>가 0이라면 모두 AND게이트에 연결되어있으므로 SR에 00이 들어간다. 따라서 <code>$ Q $</code>값이 그대로 보존된다. 만약에 <code>$ C $</code>가 1이라면 <code>$ S $</code>에 <code>$ D $</code>, <code>$ R $</code>에 <code>$ D' $</code>이 들어가게 된다. 따라서 <code>$ D $</code>가 0이면 Reset, <code>$ D $</code>가 1이면 Set이 되고, 11이 들어가는 경우는 절대 일어나지 않는다.</p>
 
-<p>D Latch는 SR Latch보다 작동이 좀 더 직관적이라는 장점도 있다. 우선 값이 보존/바뀜이 C값에만 의존하게 된다. 따라서 값을 보존하고 싶으면 C를 0으로, 바꾸고 싶으면 C를 1로 하면 된다. 또한 바뀌는 값도 D와 완벽하게 같다. 즉, D Latch에 대한 진리표를 아래처럼도 나타낼 수 있다.</p>
+<p>D Latch는 SR Latch보다 작동이 좀 더 직관적이라는 장점도 있다. 우선 값의 보존/바뀜이 <code>$ C $</code>값에만 의존하게 된다. 따라서 값을 보존하고 싶으면 <code>$ C $</code>를 0으로, 바꾸고 싶으면 <code>$ C $</code>를 1로 하면 된다. 또한 바뀌는 값도 D와 완벽하게 같다. 즉, D Latch에 대한 진리표를 아래처럼도 나타낼 수 있다.</p>
 
 <table>
 <thead>
@@ -254,7 +254,7 @@
 <tbody>
 <tr>
 <td align="center">0</td>
-<td align="center">Q<sub>prev</sub></td>
+<td align="center"><code>$ Q_prev $</code></td>
 </tr>
 
 <tr>
@@ -268,7 +268,7 @@
 
 <p><img src="/images/sequential_logic/dlatch1.png#center75" alt="" /></p>
 
-<p>C가 1일 경우, D의 값에 따라 Q도 계속 바뀐다. 따라서 Q값을 바꾸고 난 후 한동은 그 값으로 유지하고 싶다면 값을 바꿀 때만 C를 잠깐 1로 올렸다가 내리거나, D값을 계속 일정한 값으로 유지해야 한다. 이러한 불편함을 해소하기 위해 어느 순간에 Q값을 D값으로 바꾸고, 추가적인 조작 없이도 일정 시간동안 그 값을 유지할 수 있게 고안한 회로가 D Flip-flop이다.</p>
+<p><code>$ C $</code>가 1일 경우, <code>$ D $</code>의 값에 따라 <code>$ Q $</code>도 계속 바뀐다. 따라서 <code>$ Q $</code>값을 바꾸고 난 후 한동안은 그 값으로 유지하고 싶다면 값을 바꿀 때만 <code>$ C $</code>를 잠깐 1로 올렸다가 내리거나, <code>$ D $</code>값을 계속 일정한 값으로 유지해야 한다. 이러한 불편함을 해소하기 위해 어느 순간에 순간적으로 <code>$ Q $</code>값을 <code>$ D $</code>값으로 바꾸고, 이후 추가적인 조작 없이도 일정 시간동안 그 값을 유지할 수 있게 고안한 회로가 D Flip-flop이다.</p>
 
 <h3 id="d-flip-flop">D Flip-flop</h3>
 
@@ -312,7 +312,7 @@
 
 <ul>
 <li>단어의 크기가 w-bit라면 w개의 bit가 모두 동시에 저장되고, 출력된다.</li>
-<li>m-bit의 adress를 사용해서 어떤 단어를 고를지 선택한다. 따라서 총 2^m개의 단어를 저장할 수 있고, 각 단어는 고유의 주소 값을 가진다.</li>
+<li>m-bit의 adress를 사용해서 어떤 단어를 고를지 선택한다. 따라서 총 2<sup>m</sup>개의 단어를 저장할 수 있고, 각 단어는 고유의 주소 값을 가진다.</li>
 </ul>
 
 <p>이 RAM을 만들기 위해 언제나처럼 가장 작은 Memory cell 부터 구현해서 점점 확장해보자.</p>
@@ -334,7 +334,7 @@
 
 <p>값이 바뀌는 경우는 select와 write가 모두 1일 경우이다. 따라서 register의 load는 select와 write를 AND해서 연결하면 된다. 또한 select가 1이고 write가 0일 경우에만 cell에 저장된 값이 출력되어야 하고, 나머지 경우엔 Hi-Z여야 한다. 이를 위해선 write에 NOT을 한 것과 select를 AND해서 tristate-buffer에 연결하면 된다. 따라서 다음과 같이 구현할 수 있다.</p>
 
-<p><img src="/images/sequential_logic/memorycell0.png#center50" alt="" /></p>
+<p><img src="/images/sequential_logic/memorycell0.png#center75" alt="" /></p>
 
 <h3 id="4-by-4-ram">4 by 4 RAM</h3>
 
@@ -357,7 +357,7 @@
 
 <p>이후 과정은 register를 cell로 변환시킨 것처럼 적용하면 된다. 즉, write와 CS를 AND해서 cell의 write에 연결하고, write에 NOT을 한 것과 CS를 AND해서 tristate-buffer에 연결하면 된다. 따라서 다음과 같이 구현할 수 있다.</p>
 
-<p><img src="/images/sequential_logic/4by4ram0.png#center75" alt="" /></p>
+<p><img src="/images/sequential_logic/4by4ram0.png#center100" alt="" /></p>
 
 <h3 id="ram-확장">RAM 확장</h3>
 
@@ -367,13 +367,13 @@
 
 <p>우선 저장하는 단어 수를 늘리는 방법에 대해 생각해보자. 저장할 수 있는 단어의 양이 2배로 늘어날 때마다 address는 1-bit 증가한다. 그리고 이 bit는 decoder로 변환되어 memory cell에 전달된다. 따라서 decoder를 확장했던 것과 같은 방식을 사용하여 아래와 같이 확장할 수 있다.</p>
 
-<p><img src="/images/sequential_logic/moreword0.png#center75" alt="" /></p>
+<p><img src="/images/sequential_logic/moreword0.png#center100" alt="" /></p>
 
 <h4 id="bigger-word">Bigger word</h4>
 
 <p>단어의 길이를 늘리는 방법은 훨씬 쉽다. 우선 같은 주소에 같은 동작을 헤야하니 addr, write, CS는 공유를 하면 된다. 그리고 data는 나눠서 들어간 다음 합쳐서 받으면 된다. 따라서 다음과 같이 구현할 수 있다.</p>
 
-<p><img src="/images/sequential_logic/biggerword0.png#center75" alt="" /></p>
+<p><img src="/images/sequential_logic/biggerword0.png#center100" alt="" /></p>
 
 <h2 id="register-file">Register file</h2>
 

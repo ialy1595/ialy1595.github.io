@@ -140,7 +140,7 @@
 
 <p>Combinational Logic에서는 이전에 basic logic gate를 다루면서 만들었던 재료인 NOT, AND, OR, NAND, NOR을 가지고 요리를 해볼 것이다. 하지만 그 전에 Combinational Logic과 Sequential Logic의 차이 대해 먼저 알아보자.</p>
 
-<p>Combinational logic이란 언제나 어디서나 눈이 오던 바람이 불던 남녀노소 같은 input을 넣으면 같은 output이 나오는 것을 뜻한다. 예를 들면 ADDER를 생각해보자. 내가 ADDER에 <code>2</code>와 <code>3</code>을 집어넣으면 오늘 넣든 내일 넣든 항상 <code>5</code>를 반환할 것이다.</p>
+<p>Combinational logic이란 언제나 어디서나 눈이 오던 바람이 불던 남녀노소 같은 input을 넣으면 같은 output이 나오는 것을 뜻한다. 예를 들면 ADDER를 생각해보자. 내가 ADDER에 2와 3을 집어넣으면 오늘 넣든 내일 넣든 항상 5를 반환할 것이다.</p>
 
 <p>이와 대비되는 sequential logic은 내가 같은 input을 넣어도 상황에 따라 output이 바뀔 수 있는 것을 뜻한다. 예를 들어 내가</p>
 
@@ -148,9 +148,9 @@
 <p>너의 책장의 왼쪽에서 세 번째 책이 뭐야?</p>
 </blockquote>
 
-<p>라고 물어본다고 해보자. 나는 분명 <code>너의 책장</code>과 <code>왼쪽에서 세 번째</code> 라는 같은 input을 주지만, 오늘 물어본 결과와 내년에 물어본 결과가 다를 수 있다. 이처럼 logic의 내부 state나 memory에 의해 같은 input이어도 output이 다를 수 있는 경우를 sequential logic이라고 한다.</p>
+<p>라고 물어본다고 해보자. 나는 분명 &ldquo;너의 책장&rdquo;과 &ldquo;왼쪽에서 세 번째&rdquo;이라는 같은 input을 주지만, 오늘 물어본 결과와 내년에 물어본 결과가 다를 수 있다. 이처럼 logic의 내부 state나 memory에 의해 같은 input이어도 output이 다를 수 있는 경우를 sequential logic이라고 한다.</p>
 
-<p>둘 중에 딱 봐도 combinational logic이 더 쉬워 보인다. 그러니 combinational logic부터 알아보자.</p>
+<p>딱 봐도 combinational logic이 더 쉬워 보인다. 그러니 combinational logic부터 알아보자.</p>
 
 <h1 id="boolean-expression">Boolean Expression</h1>
 
@@ -158,38 +158,38 @@
 
 <h2 id="algebraic-structure">Algebraic Structure</h2>
 
-<p>우리가 Boolean function을 표현할 때 <code>(A AND B) OR C</code> 이런 식으로 표현하는데, 이를 잘 보면 문자, 기호(AND, OR, &hellip;), 괄호로 이루어져 있다. 그렇다면 우리가 수학에서 식을 쓰듯이 이것도 식처럼 쓸 수 있지 않을까? 해서 나온 것이 boolean algebra이다. boolean algebra는 다음과 같은 규칙을 가진다.</p>
+<p>우리가 Boolean function을 표현할 때 <code>$ (A ~ and ~ B) ~ or ~ C $</code> 이런 식으로 표현하는데, 이를 잘 보면 문자, 기호(AND, OR, &hellip;), 괄호로 이루어져 있다. 그렇다면 우리가 수학에서 식을 쓰듯이 이것도 식처럼 쓸 수 있지 않을까? 해서 나온 것이 boolean algebra이다. boolean algebra는 다음과 같은 규칙을 가진다.</p>
 
 <ol>
-<li>모든 변수의 값은 <code>1</code> 또는 <code>0</code>이다. 이때 <code>1</code>은 V+, <code>0</code>은 접지상태처럼 생각하면 된다.</li>
-<li><code>+</code>는 OR, <code>*</code>는 AND이다. 이 때 AND는 곱하기를 생략하는 것처럼 알파벳을 붙여 쓰는 것으로 생략할 수 있다.</li>
-<li><code>'</code>(unary operation, 뒤에 붙임)은 NOT이다.</li>
+<li>모든 변수의 값은 1 또는 0이다. 이때 1은 V+, 0은 접지상태처럼 생각하면 된다.</li>
+<li><code>$ + $</code>는 OR, <code>$ \cdot $</code>는 AND이다. 이 때 AND는 곱하기를 생략하는 것처럼 알파벳을 붙여 쓰는 것으로 생략할 수 있다.</li>
+<li><code>$ ' $</code>(unary operation, 뒤에 붙임)은 NOT이다.</li>
 </ol>
 
-<p>예를 들어 <code>(A OR (NOT B)) AND C</code> 같은 식은 <code>(A + B')C</code>로 간단하게 표현할 수 있다.</p>
+<p>예를 들어 <code>$ (A ~ or ~ (not ~ B)) ~ and ~ C $</code> 같은 식은 <code>$ (A + B')C $</code>로 간단하게 표현할 수 있다.</p>
 
 <p>또한 이러한 표현도 algebra에 속하기 때문에 수학에서 하는 것처럼 공리와 성질을 가진다.</p>
 
 <ol>
-<li>Identity: <code>X + 0 = X</code>, <code>X * 1 = X</code></li>
-<li>Null: <code>X + 1 = 1</code>, <code>X * 0 = 0</code></li>
-<li>Idempotency: <code>X + X = X</code>, <code>X * X = X</code></li>
-<li>Involution: <code>(X')' = X</code></li>
-<li>Complementarity: <code>X + X' = 1</code>, <code>X * X' = 0</code></li>
-<li>Commutativity: <code>X + Y = Y + X</code>, <code>X * Y = Y * X</code></li>
-<li>Associativity: <code>(X + Y) + Z = X + (Y + Z)</code>, <code>(X * Y) * Z = X * (Y * Z)</code></li>
-<li>Distributivity: <code>X * (Y + Z) = (X * Y) + (X * Z)</code>, <code>X + (Y * Z) = (X + Y) * (Y * Z)</code></li>
-<li>Uniting: <code>X * Y + X * Y' = X</code>, <code>(X + Y) * (X + Y') = X</code></li>
-<li>Absorption: <code>X + X * Y = X</code>, <code>X * (X + Y) = X</code>, <code>(X + Y') * Y = X * Y</code>, <code>X * Y' + Y = X + Y</code></li>
-<li>Factoring: <code>(X + Y) * (X' + Z) = X * Z + X' + Y</code>, <code>X * Y + X' * Z = (X + Z) * (X' + Y)</code></li>
-<li>Concensus: <code>X * Y + Y * Z + X' * Z = X * Y + X' * Z</code>, <code>(X + Y) * (Y + Z) * (X' + Z) = (X + Y) * (X' + Z)</code></li>
+<li>Identity: <code>$ X + 0 = X $</code>, <code>$ X \cdot 1 = X $</code></li>
+<li>Null: <code>$ X + 1 = 1 $</code>, <code>$ X \cdot 0 = 0 $</code></li>
+<li>Idempotency: <code>$ X + X = X $</code>, <code>$ X \cdot X = X $</code></li>
+<li>Involution: <code>$ (X')' = X $</code></li>
+<li>Complementarity: <code>$ X + X' = 1 $</code>, <code>$ X \cdot X' = 0 $</code></li>
+<li>Commutativity: <code>$ X + Y = Y + X $</code>, <code>$ X \cdot Y = Y \cdot X $</code></li>
+<li>Associativity: <code>$ (X + Y) + Z = X + (Y + Z) $</code>, <code>$ (X \cdot Y) \cdot Z = X \cdot (Y \cdot Z) $</code></li>
+<li>Distributivity: <code>$ X \cdot (Y + Z) = (X \cdot Y) + (X \cdot Z) $</code>, <code>$ X + (Y \cdot Z) = (X + Y) \cdot (X + Z) $</code></li>
+<li>Uniting: <code>$ X \cdot Y + X \cdot Y' = X $</code>, <code>$ (X + Y) \cdot (X + Y') = X $</code></li>
+<li>Absorption: <code>$ X + X \cdot Y = X $</code>, <code>$ X \cdot (X + Y) = X $</code>, <code>$ (X + Y') \cdot Y = X \cdot Y $</code>, <code>$ X \cdot Y' + Y = X + Y $</code></li>
+<li>Factoring: <code>$ (X + Y) \cdot (X' + Z) = X \cdot Z + X' + Y $</code>, <code>$ X \cdot Y + X' \cdot Z = (X + Z) \cdot (X' + Y) $</code></li>
+<li>Concensus: <code>$ X \cdot Y + Y \cdot Z + X' \cdot Z = X \cdot Y + X' \cdot Z $</code>, <code>$ (X + Y) \cdot (Y + Z) \cdot (X' + Z) = (X + Y) \cdot (X' + Z) $</code></li>
 </ol>
 
 <p>이를 잘 이용하면 나중에 긴 boolean expression을 짧게 줄일 수 있다. 굳이 막 외울 필요까진 없다.</p>
 
 <h2 id="canonical-forms">Canonical Forms</h2>
 
-<p>이제 이를 이용하여 truth table로 표현된 boolean function을 boolean expression으로 바꿔보자.</p>
+<p>이를 이용하여 truth table로 표현된 boolean function을 boolean expression으로 바꿔보자.</p>
 
 <table>
 <thead>
@@ -266,7 +266,7 @@
 
 <p>SoP는 말 그대로 곱들의 합으로 표현하는 것이다. 여기서 우리는 저 truth table의 1에 주목한다.</p>
 
-<p>첫 번째 1은 A가 0, B가 0, C가 1일 때 결과가 1이 나온다. 이 경우에만 1이 나오고 그 외에는 모두 0이 나오는 product 형태는 <code>A'B'C</code>이다. 같은 방법으로 두 번째 1의 product 꼴은 <code>A'BC'</code>이고, 세 번째는 <code>ABC'</code>이다. 이 세 product 꼴이 SoP에서 굉장히 중요한 역할을 한다. 결과가 1이어야 하는 A, B, C값이라면 이 세 식 중 적어도 하나는 1이 나온다. 또한 저 세 경우가 아니라면 이 세 식은 모두 0이 된다. 따라서 이 세 식을 모두 OR을 하게 되면 truth table과 같은 결과가 나오게 된다. 즉, <code>A'B'C + A'BC' + ABC'</code>이 저 truth table과 같은 결과를 주는 boolean expression이 된다. 이처럼 1이 되는 결과를 product 형태로 나타낸 후 이를 모두 sum하기 때문에 Sop Canonical Form이라고 부른다. 이를 더 쉽게 표현하기 위해 다음과 같은 기호와 식을 사용한다.</p>
+<p>첫 번째 1은 A가 0, B가 0, C가 1일 때 결과가 1이 나온다. 이 경우에만 1이 나오고 그 외에는 모두 0이 나오는 product 형태는 <code>$ A'B'C $</code>이다. 같은 방법으로 두 번째 1의 product 꼴은 <code>$ A'BC' $</code>이고, 세 번째는 <code>$ ABC' $</code>이다. 이 세 product 꼴이 SoP에서 굉장히 중요한 역할을 한다. 결과가 1이어야 하는 A, B, C값이라면 이 세 식 중 적어도 하나는 1이 나온다. 또한 저 세 경우가 아니라면 이 세 식은 모두 0이 된다. 따라서 이 세 식을 모두 OR을 하게 되면 truth table과 같은 결과가 나오게 된다. 즉, <code>$ A'B'C + A'BC' + ABC' $</code>이 저 truth table과 같은 결과를 주는 boolean expression이 된다. 이처럼 1이 되는 결과를 product 형태로 나타낸 후 이를 모두 sum하기 때문에 Sop Canonical Form이라고 부른다. 이를 더 쉽게 표현하기 위해 다음과 같은 기호와 식을 사용한다.</p>
 
 <table>
 <thead>
@@ -284,69 +284,69 @@
 <td align="center">0</td>
 <td align="center">0</td>
 <td align="center">0</td>
-<td align="center">A&rsquo;B&rsquo;C&rsquo;</td>
-<td align="center">m<sub>0</sub></td>
+<td align="center"><code>$ A'B'C' $</code></td>
+<td align="center"><code>$ m_0 $</code></td>
 </tr>
 
 <tr>
 <td align="center">0</td>
 <td align="center">0</td>
 <td align="center">1</td>
-<td align="center">A&rsquo;B&rsquo;C</td>
-<td align="center">m<sub>1</sub></td>
+<td align="center"><code>$ A'B'C $</code></td>
+<td align="center"><code>$ m_1 $</code></td>
 </tr>
 
 <tr>
 <td align="center">0</td>
 <td align="center">1</td>
 <td align="center">0</td>
-<td align="center">A&rsquo;BC&rsquo;</td>
-<td align="center">m<sub>2</sub></td>
+<td align="center"><code>$ A'BC' $</code></td>
+<td align="center"><code>$ m_2 $</code></td>
 </tr>
 
 <tr>
 <td align="center">0</td>
 <td align="center">1</td>
 <td align="center">1</td>
-<td align="center">A&rsquo;BC</td>
-<td align="center">m<sub>3</sub></td>
+<td align="center"><code>$ A'BC $</code></td>
+<td align="center"><code>$ m_3 $</code></td>
 </tr>
 
 <tr>
 <td align="center">1</td>
 <td align="center">0</td>
 <td align="center">0</td>
-<td align="center">AB&rsquo;C&rsquo;</td>
-<td align="center">m<sub>4</sub></td>
+<td align="center"><code>$ AB'C' $</code></td>
+<td align="center"><code>$ m_4 $</code></td>
 </tr>
 
 <tr>
 <td align="center">1</td>
 <td align="center">0</td>
 <td align="center">1</td>
-<td align="center">AB&rsquo;C</td>
-<td align="center">m<sub>5</sub></td>
+<td align="center"><code>$ AB'C $</code></td>
+<td align="center"><code>$ m_5 $</code></td>
 </tr>
 
 <tr>
 <td align="center">1</td>
 <td align="center">1</td>
 <td align="center">0</td>
-<td align="center">ABC&rsquo;</td>
-<td align="center">m<sub>6</sub></td>
+<td align="center"><code>$ ABC' $</code></td>
+<td align="center"><code>$ m_6 $</code></td>
 </tr>
 
 <tr>
 <td align="center">1</td>
 <td align="center">1</td>
 <td align="center">1</td>
-<td align="center">ABC</td>
-<td align="center">m<sub>7</sub></td>
+<td align="center"><code>$ ABC $</code></td>
+<td align="center"><code>$ m_7 $</code></td>
 </tr>
 </tbody>
 </table>
 
-<p>이 표현식을 사용하면 위 함수는 m<sub>1</sub>, m<sub>2</sub>, m<sub>6</sub>이 1이다. 따라서 다음과 같이 표현할 수 있다.</p>
+<p>이 표현식을 사용하면 위 함수는 <code>$ m_1 , m_2 , m_6 $</code>이 1이다. 따라서 다음과 같이 표현할 수 있다.</p>
 
 <p><code>$\begin{eqnarray} 
 F(A,B,C) &amp;=&amp; \sum m(1,2,6)   \\
@@ -358,7 +358,7 @@ F(A,B,C) &amp;=&amp; \sum m(1,2,6)   \\
 
 <p>Pos는 Sop와 반대로 합들의 곱으로 나타내는 것이다. SoP의 경우 결과 중 1에 주목했던 것처럼, SoP의 경우 0에 집중한다.</p>
 
-<p>맨 처음 0의 경우 A, B, C 값이 모두 0일 경우 0이다. 이 경우에만 0이 나오고 그 외에는 모두 1이 나오는 sum 형태는 <code>A + B + C</code>이다. 위에서 했던 것처럼 이런 방식으로 다른 0들도 sum 꼴로 나타낸다. 이후 이 항을 다 product 하면 SoP 형이 완성된다. 즉, 위의 truth table과 동치인 SoP는 <code>(A + B + C)(A + B' + C')(A' + B + C)(A' + B + C')(A' + B' + C')</code>이다.</p>
+<p>맨 처음 0의 경우 A, B, C 값이 모두 0일 경우 0이다. 이 경우에만 0이 나오고 그 외에는 모두 1이 나오는 sum 형태는 <code>$ A + B + C $</code>이다. 위에서 했던 것처럼 이런 방식으로 다른 0들도 sum 꼴로 나타낸다. 이후 이 항을 다 product 하면 SoP 형이 완성된다. 즉, 위의 truth table과 동치인 SoP는 <code>$ (A + B + C)(A + B' + C')(A' + B + C)(A' + B + C')(A' + B' + C') $</code>이다.</p>
 
 <p>이 또한 기호와 식을 사용하면 다음과 같이 더욱 간단하게 나타낼 수 있다.</p>
 
@@ -378,64 +378,64 @@ F(A,B,C) &amp;=&amp; \sum m(1,2,6)   \\
 <td align="center">0</td>
 <td align="center">0</td>
 <td align="center">0</td>
-<td align="center">A + B + C</td>
-<td align="center">M<sub>0</sub></td>
+<td align="center"><code>$ A + B + C $</code></td>
+<td align="center"><code>$ M_0 $</code></td>
 </tr>
 
 <tr>
 <td align="center">0</td>
 <td align="center">0</td>
 <td align="center">1</td>
-<td align="center">A + B + C&rsquo;</td>
-<td align="center">M<sub>1</sub></td>
+<td align="center"><code>$ A + B + C' $</code></td>
+<td align="center"><code>$ M_1 $</code></td>
 </tr>
 
 <tr>
 <td align="center">0</td>
 <td align="center">1</td>
 <td align="center">0</td>
-<td align="center">A + B&rsquo; + C</td>
-<td align="center">M<sub>2</sub></td>
+<td align="center"><code>$ A + B' + C $</code></td>
+<td align="center"><code>$ M_2 $</code></td>
 </tr>
 
 <tr>
 <td align="center">0</td>
 <td align="center">1</td>
 <td align="center">1</td>
-<td align="center">A + B&rsquo; + C&rsquo;</td>
-<td align="center">M<sub>3</sub></td>
+<td align="center"><code>$ A + B' + C' $</code></td>
+<td align="center"><code>$ M_3 $</code></td>
 </tr>
 
 <tr>
 <td align="center">1</td>
 <td align="center">0</td>
 <td align="center">0</td>
-<td align="center">A&rsquo; + B + C</td>
-<td align="center">M<sub>4</sub></td>
+<td align="center"><code>$ A' + B + C $</code></td>
+<td align="center"><code>$ M_4 $</code></td>
 </tr>
 
 <tr>
 <td align="center">1</td>
 <td align="center">0</td>
 <td align="center">1</td>
-<td align="center">A&rsquo; + B + C&rsquo;</td>
-<td align="center">M<sub>5</sub></td>
+<td align="center"><code>$ A' + B + C' $</code></td>
+<td align="center"><code>$ M_5 $</code></td>
 </tr>
 
 <tr>
 <td align="center">1</td>
 <td align="center">1</td>
 <td align="center">0</td>
-<td align="center">A&rsquo; + B&rsquo; + C</td>
-<td align="center">M<sub>6</sub></td>
+<td align="center"><code>$ A' + B' + C $</code></td>
+<td align="center"><code>$ M_6 $</code></td>
 </tr>
 
 <tr>
 <td align="center">1</td>
 <td align="center">1</td>
 <td align="center">1</td>
-<td align="center">A&rsquo; + B&rsquo; + C&rsquo;</td>
-<td align="center">M<sub>7</sub></td>
+<td align="center"><code>$ A' + B' + C' $</code></td>
+<td align="center"><code>$ M_7 $</code></td>
 </tr>
 </tbody>
 </table>
@@ -457,7 +457,7 @@ F(A,B,C) &amp;=&amp; \prod M(0,3,4,5,7)   \\
 <li><code>$ (A_1 \cdot A_2 \cdot \ldots \cdot A_n)' = A_1 ' + A_2 ' + \ldots + A_n ' $</code></li>
 </ul>
 
-<p>즉, 전체에 NOT을 한 것은 각각에 NOT을 한 다음 <code>*</code>은 <code>+</code>로, <code>+</code>는 <code>*</code>로 바꾼 것과 결과가 같다는 것이 드 모르간의 법칙이다. 이를 이용하면 canonical form을 효과적으로 구현할 수 있다. 예시로 SoP 형태로 만든 것을 구현해보자.</p>
+<p>즉, 전체에 NOT을 한 것은 각각에 NOT을 한 다음 <code>$ \cdot $</code>은 <code>$ + $</code>로, <code>$ + $</code>는 <code>$ \cdot $</code>로 바꾼 것과 결과가 같다는 것이 드 모르간의 법칙이다. 이를 이용하면 canonical form을 효과적으로 구현할 수 있다. 예시로 SoP 형태로 만든 것을 구현해보자.</p>
 
 <p>우선 위 함수의 SoP 형태를 실제 회로로 다음과 같이 구현할 수 있다.</p>
 
@@ -467,7 +467,7 @@ F(A,B,C) &amp;=&amp; \prod M(0,3,4,5,7)   \\
 
 <p><img src="/images/combinational_logic/sop1.png#center50" alt="" /></p>
 
-<p>이제 드 모르간의 법칙을 사용해보자. 드 모르간의 법칙에 따르면 <code>D' + E' + F' = (DEF)'</code> 이므로 다음과 같이 나타낼 수 있다.</p>
+<p>이제 드 모르간의 법칙을 사용해보자. 드 모르간의 법칙에 따르면 <code>$ D' + E' + F' = (DEF)' $</code> 이므로 다음과 같이 나타낼 수 있다.</p>
 
 <p><img src="/images/combinational_logic/sop2.png#center50" alt="" /></p>
 
@@ -617,15 +617,15 @@ F(A,B,C) &amp;=&amp; \prod M(0,3,4,5,7)   \\
 </tbody>
 </table>
 
-<p>이 함수는 <code>ABC + D</code> 라는 함수로, 회로 구현에도 AND와 OR 하나씩만 있으면 된다. 그러나 이 함수를 canonical form으로 표현하면</p>
+<p>이 함수는 <code>$ ABC + D $</code> 라는 함수로, 회로 구현에도 AND와 OR 하나씩만 있으면 된다. 그러나 이 함수를 canonical form으로 표현하면</p>
 
-<p><code>A'B'C'D + A'B'CD + A'BC'D + A'BCD' + AB'C'D + AB'CD + ABC'D + ABCD' + ABCD</code></p>
+<p><code>$ A'B'C'D + A'B'CD + A'BC'D + A'BCD' + AB'C'D + AB'CD + ABC'D + ABCD' + ABCD $</code></p>
 
 <p>라는 굉장히 긴 식이 되고, 이를 구현하려면 10개의 NAND 게이트가 필요하다. 따라서 우리는 식을 효과적으로 간소화할 수 있는 새로운 방법을 찾을 필요가 있다.</p>
 
 <h2 id="karnaugh-map">Karnaugh map</h2>
 
-<p>카르노맵의 기본 기념은 위의 공리 중 Uniting 중 <code>X * Y + X * Y' = X</code> 에서 시작되었다. 우선 카르노맵을 그리는 방법을 먼저 배워보자.</p>
+<p>카르노맵의 기본 기념은 위의 공리 중 Uniting 중 <code>$ X \cdot Y + X \cdot Y' = X $</code> 에서 시작되었다. 우선 카르노맵을 그리는 방법을 먼저 배워보자.</p>
 
 <p><img src="/images/combinational_logic/karnaugh0.png#center50" alt="" /></p>
 
@@ -800,22 +800,22 @@ F(A,B,C) &amp;=&amp; \prod M(0,3,4,5,7)   \\
 <p>이제 각 직사각형에 해당하는 식을 찾으면 된다.</p>
 
 <ul>
-<li>초록색 직사각형의 경우 A의 값은 섞여있지만, B, C, D는 항상 0이다. 따라서 이 직사각형에 해당하는 식은 <code>B'C'D'</code>이다.</li>
-<li>파란색 직사각형의 경우 C의 값은 섞여있지만, A의 값은 항상 0이고 B, D의 값은 항상 1이다. 따라서 이에 해당하는 식은 <code>A'BD</code>이다.</li>
-<li>노란색 직사각형의 경우 A, B의 값은 섞여있지만 C, D의 값은 항상 1이다. 따라서 이에 해당하는 식은 <code>CD</code>이다.</li>
-<li>보라색 직사각형의 경우 B, D의 값은 섞여있지만 A값은 항상 0이고 C의 값은 항상 1이다. 따라서 이에 해당하는 식은 <code>A'C</code> 이다.</li>
+<li>초록색 직사각형의 경우 A의 값은 섞여있지만, B, C, D는 항상 0이다. 따라서 이 직사각형에 해당하는 식은 <code>$ B'C'D' $</code>이다.</li>
+<li>파란색 직사각형의 경우 C의 값은 섞여있지만, A의 값은 항상 0이고 B, D의 값은 항상 1이다. 따라서 이에 해당하는 식은 <code>$ A'BD $</code>이다.</li>
+<li>노란색 직사각형의 경우 A, B의 값은 섞여있지만 C, D의 값은 항상 1이다. 따라서 이에 해당하는 식은 <code>$ CD $</code>이다.</li>
+<li>보라색 직사각형의 경우 B, D의 값은 섞여있지만 A값은 항상 0이고 C의 값은 항상 1이다. 따라서 이에 해당하는 식은 <code>$ A'C $</code> 이다.</li>
 </ul>
 
-<p>따라서 이를 총 정리하면 <code>B'C'D' + A'BD + CD + A'C</code>가 된다.</p>
+<p>따라서 이를 총 정리하면 <code>$ B'C'D' + A'BD + CD + A'C $</code>가 된다.</p>
 
 <p>이게 성립하는 이유는 처음에 말했듯이 Uniting 공리로 설명할 수 있다. 예를 들어 보라색 사각형을 보자. 보라색 사각형의 1들을 SoP로 나타내면</p>
 
-<p><code>A'B'CD + A'BCD + A'B'CD' + A'BCD'</code></p>
+<p><code>$ A'B'CD + A'BCD + A'B'CD' + A'BCD' $</code></p>
 
 <p>이다. 이를 정리하면</p>
 
-<p><code>A'B'CD + A'BCD + A'B'CD' + A'BCD' = A'CD(B' + B) + A'CD'(B' + B) 
-= A'CD + A'CD' = A'C(D + D') = A'C</code></p>
+<p><code>$ A'B'CD + A'BCD + A'B'CD' + A'BCD' = A'CD(B' + B) + A'CD'(B' + B) \\ 
+= A'CD + A'CD' = A'C(D + D') = A'C $</code></p>
 
 <p>가 된다. 이처럼 직사각형의 가로와 세로가 2<sup>n</sup> 꼴이라면 SoP 꼴을 Uniting 공리를 사용하여 짧게 줄일 수 있다.</p>
 
@@ -1202,28 +1202,20 @@ F(A,B,C) &amp;=&amp; \prod M(0,3,4,5,7)   \\
 
 <p>일반적으로 우리가 쓰는 아라비아 숫자의 경우 앞에 -라는 unary operation을 사용하여 음수 여부를 나타낸다. 그러나 이진수 체계에서는 0과 1만을 사용하여 음수와 양수를 모두 표현해야 한다. 이를 효과적으로 처리하기 위해 나온 개념이 2&rsquo;s complement, 한글로 하면 2의 보수이다.</p>
 
-<p>보수란 말 그대로 보충을 해주는 수이다. 즉, 2의 보수란 n-bit 체계에서 보충을 해서 2^n이 되어 overflow 되는 bit를 제외하면 0이 되도록 해주는 수이다. 4-bit로 예를 들면, 0010의 경우 1110이 보수가 된다. 물론 1110 의 보수는 0010이 된다. 이 때 맨 앞의 bit가 0인 부분이 양수가 되고, 1인 부분을 그 양수의 음수표현으로 사용한다. 즉, 0010은 2이므로 1110은 -2가 된다. 이를 정리하면 아래와 같다.</p>
+<p>보수란 말 그대로 보충을 해주는 수이다. 즉, 2의 보수란 n-bit 체계에서 보충을 해서 2<sup>n</sup>이 되어 overflow 되는 bit를 제외하면 0이 되도록 해주는 수이다. 3-bit로 예를 들면, 010의 경우 110이 보수가 된다. 물론 110 의 보수는 010이 된다. 이 때 맨 앞의 bit가 0인 부분이 양수가 되고, 1인 부분을 그 양수의 음수표현으로 사용한다. 즉, 010은 2이므로 110은 -2가 된다. 이를 정리하면 아래와 같다.</p>
 
 <table>
 <thead>
 <tr>
 <th align="center">binary</th>
-<th align="center">0000</th>
-<th align="center">0001</th>
-<th align="center">0010</th>
-<th align="center">0011</th>
-<th align="center">0100</th>
-<th align="center">0101</th>
-<th align="center">0110</th>
-<th align="center">0111</th>
-<th align="center">1000</th>
-<th align="center">1001</th>
-<th align="center">1010</th>
-<th align="center">1011</th>
-<th align="center">1100</th>
-<th align="center">1101</th>
-<th align="center">1110</th>
-<th align="center">1111</th>
+<th align="center">000</th>
+<th align="center">001</th>
+<th align="center">010</th>
+<th align="center">011</th>
+<th align="center">100</th>
+<th align="center">101</th>
+<th align="center">110</th>
+<th align="center">111</th>
 </tr>
 </thead>
 
@@ -1238,14 +1230,6 @@ F(A,B,C) &amp;=&amp; \prod M(0,3,4,5,7)   \\
 <td align="center">5</td>
 <td align="center">6</td>
 <td align="center">7</td>
-<td align="center">8</td>
-<td align="center">9</td>
-<td align="center">10</td>
-<td align="center">11</td>
-<td align="center">12</td>
-<td align="center">13</td>
-<td align="center">14</td>
-<td align="center">15</td>
 </tr>
 
 <tr>
@@ -1254,14 +1238,6 @@ F(A,B,C) &amp;=&amp; \prod M(0,3,4,5,7)   \\
 <td align="center">1</td>
 <td align="center">2</td>
 <td align="center">3</td>
-<td align="center">4</td>
-<td align="center">5</td>
-<td align="center">6</td>
-<td align="center">7</td>
-<td align="center">-8</td>
-<td align="center">-7</td>
-<td align="center">-6</td>
-<td align="center">-5</td>
 <td align="center">-4</td>
 <td align="center">-3</td>
 <td align="center">-2</td>
@@ -1270,11 +1246,11 @@ F(A,B,C) &amp;=&amp; \prod M(0,3,4,5,7)   \\
 </tbody>
 </table>
 
-<p>이처럼 2의 보수를 사용하면 n-bit일 경우 -2<sup>n-1</sup> 부터 2<sup>n-1</sup> - 1 까지 나타낼 수 있다. 여기서 우리가 덧셈이나 뺄셈을 하다 보면 저 범위를 넘어갈 경우가 있고, 그럴 경우 우리가 의도한 수가 안 나올 수도 있다. 예를 들어 <code>5 + 6</code>을 하려고 할 경우 <code>0101 + 0110 = 1011 = -5</code>로 의도하지 않은 수가 나오게 된다. 이러한 경우를 overflow라고 하고, 이러한 상황이 나오지 않도록 주의해야한다.</p>
+<p>이처럼 2의 보수를 사용하면 n-bit일 경우 -2<sup>n-1</sup> 부터 2<sup>n-1</sup> - 1 까지 나타낼 수 있다. 여기서 우리가 덧셈이나 뺄셈을 하다 보면 저 범위를 넘어갈 경우가 있고, 그럴 경우 우리가 의도한 수가 안 나올 수도 있다. 예를 들어 <code>$ 2 + 3 $</code>을 하려고 할 경우 <code>$ 010 + 011 = 101 = -3 $</code>로 의도하지 않은 수가 나오게 된다. 이러한 경우를 overflow라고 하고, 이러한 상황이 나오지 않도록 주의해야한다.</p>
 
-<p>2의 보수를 사용하는 이유는 덧셈을 평소 더하듯이 자연스럽게 더해도 되기 때문이다. 보수인 수끼리 서로 더할 경우 overflow 되는 bit를 제외하면 0000으로 0이 된다. 또한 -2 + 5의 경우 -2 + 5 = -2 + (2 + 3) = (-2 + 2) + 3으로 쪼개어보면 역시 자연스럽게 계산됨을 알 수 있다. 이처럼 우리가 원래 알던 방식대로 더해도 자연스럽게 성립이 되는 2의 보수라는 방식을 통해 음수를 표현한다.</p>
+<p>2의 보수를 사용하는 이유는 덧셈을 평소 더하듯이 자연스럽게 더해도 되기 때문이다. 보수인 수끼리 서로 더할 경우 overflow 되는 bit를 제외하면 000으로 0이 된다. 또한 <code>$ -1 + 2 $</code>의 경우 <code>$ -1 + 2 = -1 + (1 + 1) = (-1 + 1) + 1 $</code>으로 쪼개어보면 역시 자연스럽게 계산됨을 알 수 있다. 이처럼 우리가 원래 알던 방식대로 더해도 자연스럽게 성립이 되는 2의 보수라는 방식을 통해 음수를 표현한다.</p>
 
-<p>2의 보수를 구하는 방법은 간단하다. 10000을 9999 + 1로 나타낼 수 있듯이 2<sup>n</sup>을 만들려면 11&hellip;11를 만드는 수에서 1을 더하면 된다. 또한 11&hellip;11을 만들려면 원래 수에서 1인 부분은 0으로, 0인 부분은 1로 바꾼 수를 더하면 되고, NOT 연산이 이와 같은 역할을 한다. 따라서 <code>A</code>의 보수는 MOT을 한 다음 1을 더하면 되므로 <code>A' + 1</code>이 된다.</p>
+<p>2의 보수를 구하는 방법은 간단하다. 1000을 999 + 1로 나타낼 수 있듯이 2<sup>n</sup>을 만들려면 11&hellip;11를 만드는 수에서 1을 더하면 된다. 또한 11&hellip;11을 만들려면 원래 수에서 1인 부분은 0으로, 0인 부분은 1로 바꾼 수를 더하면 되고, NOT 연산이 이와 같은 역할을 한다. 따라서 <code>$ A $</code>의 보수는 MOT을 한 다음 1을 더하면 되므로 <code>$ A' + 1 $</code>이 된다.</p>
 
 <h3 id="half-adder-full-adder">Half Adder &amp; Full Adder</h3>
 
@@ -1328,11 +1304,11 @@ F(A,B,C) &amp;=&amp; \prod M(0,3,4,5,7)   \\
 
 <p>여기서 carry는 받아 올림으로 생각하면 된다. 각 output을 식으로 나타내면</p>
 
-<p><code>sum = x ^ y</code></p>
+<p><code>$ sum = x \oplus y $</code></p>
 
-<p><code>carry = x * y</code></p>
+<p><code>$ carry = x \cdot y $</code></p>
 
-<p>여기서 <code>^</code>는 XOR을 나타내는 기호이다. 따라서 이를 로직 회로로 구현하면 다음과 같다.</p>
+<p>여기서 <code>$ \oplus $</code>는 XOR을 나타내는 기호이다. 따라서 이를 로직 회로로 구현하면 다음과 같다.</p>
 
 <p><img src="/images/combinational_logic/halfadder0.png#center50" alt="" /></p>
 
@@ -1427,11 +1403,11 @@ F(A,B,C) &amp;=&amp; \prod M(0,3,4,5,7)   \\
 
 <p>또한 이를 식으로 나타내면 다음과 같다.</p>
 
-<p><code>sum = x ^ y ^ Cin</code></p>
+<p><code>$ sum = x \oplus y \oplus Cin $</code></p>
 
-<p><code>Cout = x * y + Cin * (x ^ y)</code></p>
+<p><code>$ Cout = x \cdot y + Cin \cdot (x \oplus y) $</code></p>
 
-<p>사실 잘 생각하면 결국 결과는 <code>x + y + Cin</code>이고,  <code>x + y + Cin = (x + y) + Cin</code>이므로 전가산기는 반가산기 두개로 구현할 수 있다.</p>
+<p>사실 잘 생각하면 결국 결과는 <code>$ x + y + Cin $</code>이고,  <code>$ x + y + Cin = (x + y) + Cin $</code>이므로 전가산기는 반가산기 두개로 구현할 수 있다.</p>
 
 <p><img src="/images/combinational_logic/fulladder0.png#center75" alt="" /></p>
 
@@ -1443,7 +1419,7 @@ F(A,B,C) &amp;=&amp; \prod M(0,3,4,5,7)   \\
 
 <h2 id="alu-arithmetic-logic-unit">ALU (Arithmetic Logic Unit)</h2>
 
-<p>헷갈림을 방지하기 위해 여기서의 <code>+</code>는 logical AND가 아니라 arithmetic ADD를 뜻한다.</p>
+<p>헷갈림을 방지하기 위해 여기서의 <code>$ + $</code>는 logical AND가 아니라 arithmetic ADD를 뜻한다.</p>
 
 <h3 id="arithmetic-unit">Arithmetic Unit</h3>
 
@@ -1892,11 +1868,11 @@ F(A,B,C) &amp;=&amp; \prod M(0,3,4,5,7)   \\
 
 <ul>
 <li>C<sub>i</sub>는 i번째 bit가 받는 carry in을 뜻한다.</li>
-<li>G<sub>i</sub>는 i번째 비트의 <code>x * y</code> 이다.</li>
-<li>P<sub>i</sub>는 i번째 비트의 <code>x ^ y</code> 이다.</li>
+<li>G<sub>i</sub>는 i번째 비트의 <code>$ x \cdot y $</code> 이다.</li>
+<li>P<sub>i</sub>는 i번째 비트의 <code>$ x \oplus y $</code> 이다.</li>
 </ul>
 
-<p>우리는 위에서 했듯이 <code>Cout = x * y + Cin * (x ^ y)</code>임을 이미 알고 있다. 따라서 다음과 같이 적을 수 있다.</p>
+<p>우리는 위에서 했듯이 <code>$ Cout = x \cdot y + Cin \cdot (x \oplus y) $</code>임을 이미 알고 있다. 따라서 다음과 같이 적을 수 있다.</p>
 
 <p><code>$ C_{i+1} = G_{i} + P_{i} \cdot C_{i} $</code></p>
 

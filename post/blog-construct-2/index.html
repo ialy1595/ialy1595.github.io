@@ -184,7 +184,7 @@
 &lt;/ul&gt;
 </code></pre>
 
-<p>이 코드는 태그들을 나열하는 코드이다. 처음의 <code>.</code>은 기본 페이지의 context였기 때문에 <code>.Params.tags</code>를 통해 태그들의 리스트에 접근할 수 있다. 그러나 <code>{{ range }}</code> 안에 들어가면 <code>{{ end }}</code>를 만날 때까지 <code>.</code>은 각각의 태그들로 바뀐다. 따라서 <code>&lt;li&gt;</code> 태그 안에서는 <code>.</code>으로 접근하면 페이지가 아니라 각 태그들이 나오기 때문에 위와 같이 <code>&lt;a&gt;</code> 태그를 써서 리스트를 만들 수 있다.</p>
+<p>이 코드는 태그들을 나열하는 코드이다. 처음의 <code>.</code>은 기본 페이지의 context였기 때문에 <code>.Params.tags</code>를 통해 태그들의 리스트에 접근할 수 있다. 그러나 <code>{{ range }}</code> 안에 들어가면 <code>{{ end }}</code>를 만날 때까지 <code>.</code>은 각각 <code>.Params.tags</code> 안에 있는 원소들로 바뀐다. 따라서 <code>&lt;li&gt;</code> 태그 안에서는 <code>.</code>으로 접근하면 페이지가 아니라 각 태그들이 나오기 때문에 위와 같이 <code>&lt;a&gt;</code> 태그를 써서 리스트를 만들 수 있다.</p>
 
 <p>그렇다면 이렇게 반복문 안에 들어와 있을 때 상위태그에 접근해야하는 상황이 오면 어떻게 해야 할까? 예를 들어 위의 코드에서 각 리스트 옆에 원래 페이지의 제목을 넣고 싶다고 하자. 이는 두 가지 방법으로 구현할 수 있다.</p>
 
@@ -217,7 +217,7 @@
 
 <h2 id="if-else">if, else</h2>
 
-<p>평소에 C++이나 Python밖에 안 써봐서 그럴 수도 있지만, Go templates의 <code>if</code>는 약간 생소했다. 여기서의 <code>if</code>는 조건문을 <a href="https://en.wikipedia.org/wiki/Infix_notation">중위표기법</a>이 아니라 <a href="https://en.wikipedia.org/wiki/Polish_notation">전위표기법</a>을 쓴다. 예를 들어 <code>a</code>와 <code>b</code>가 같은 경우를 원한다면, C++을 비롯한 많은 언어에서 이런 형식을 택한다.</p>
+<p>평소에 C++이나 Python밖에 안 써봐서 그럴 수도 있지만, Go templates의 <code>if</code>는 약간 생소했다. 여기서의 <code>if</code>는 조건문을 <a href="https://en.wikipedia.org/wiki/Infix_notation">중위표기법</a>이 아니라 함수형 언어에서 자주 쓰이는 방식인 <a href="https://en.wikipedia.org/wiki/Polish_notation">전위표기법</a>을 쓴다. 예를 들어 <code>a</code>와 <code>b</code>가 같은 경우를 원한다면, C++을 비롯한 많은 언어에서 이런 형식을 택한다.</p>
 
 <pre><code>if(a == b) {
     ...

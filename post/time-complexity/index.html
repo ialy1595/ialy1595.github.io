@@ -137,7 +137,7 @@
 
 <p>우리가 코드를 작성한 뒤 실행하면 이 코드는 instruction으로 변환한 후 CPU에서 실행된다. 여기서 중요한 점은 instruction은 CPU clock이 rising edge일 때 실행되므로 <strong>각 instruction의 수행 시간은 일정</strong>하다고 볼 수 있다. 따라서 우리의 코드가 얼마나 많은 instruction을 실행하는지 분석하는 것이 얼마나 많은 시간이 걸리는지 분석하는 것과 같다고 볼 수 있다.</p>
 
-<p>instruction 수를 분석하는 것은 어렵지 않다. 코드에서 연산을 하거나, 조건문을 걸거나, 값을 대입하는 것이 모두 instruction이 된다, 그렇다고 이런 연산 하나에 수만 개의 instruction이 실행되지는 않는다. 즉, 각각의 연산이 상수개 정도의 instruction을 실행한다고 가정하고 코드를 분석할 수 있다. 예를 들어 n을 입력하면 n * n까지 구구단을 출력해주는 아래 코드에서 instruction을 얼마나 실행하는지 분석해보자.</p>
+<p>instruction 수를 분석하는 것은 어렵지 않다. 코드에서 연산을 하거나, 조건문을 걸거나, 값을 대입하는 것이 모두 instruction이 된다, 그렇다고 이런 연산 하나에 수만 개의 instruction이 실행되지는 않는다. 즉, 각각의 연산이 상수개 정도의 instruction을 실행한다고 가정하고 코드를 분석할 수 있다. 예를 들어 <code>$ n $</code>을 입력하면 <code>$ n \times n $</code>까지 구구단을 출력해주는 아래 코드에서 instruction을 얼마나 실행하는지 분석해보자.</p>
 
 <pre><code class="language-c">for(i = 1; i &lt;= n; i++)
 {
@@ -149,14 +149,14 @@
 </code></pre>
 
 <ul>
-<li>첫 번째 for문의 <code>i</code>를 보면 맨 처음에 1을 대입하는 과정에서 <code>$ C_1 $</code>개의 instruction을 실행한다. 이후 n + 1까지 1씩 n번 증가하면서 n보다 작거나 같은지 비교하므로 <code>$ C_2 n $</code>개의 instruction을 실행한다.</li>
-<li>두 번째 for문의 <code>j</code>의 경우에도 처음에는 1이 대입된 후 n번 1씩 증가하면서 n보다 작거나 같은지 비교하므로 <code>$ C_1 + C_2 n $</code>개의 instruction을 실행한다. 이만큼의 instruction을 <code>i</code>가 1일 때부터 n일 때까지 n번 실행하므로 총 <code>$ (C_1 + C_2 n)n $</code>개의 instruction을 실행한다.</li>
-<li>출력부분을 보면 <code>i * j</code>연산을 한 뒤 출력을 하는 과정에서 <code>$ C_3 $</code>개의 instruction을 실행한다. 이 과정을 <code>i</code>가 1부터 n까지, <code>j</code>가 1부터 n까지 총 n<sup>2</sup>번 실행한다. 따라서 <code>$ C_3 n^2 $</code>개의 instruction을 실행한다.</li>
+<li>첫 번째 for문의 <code>i</code>를 보면 맨 처음에 1을 대입하는 과정에서 <code>$ C_1 $</code>개의 instruction을 실행한다. 이후 <code>$ n + 1 $</code>까지 1씩 <code>$ n $</code>번 증가하면서 <code>$ n $</code>보다 작거나 같은지 비교하므로 <code>$ C_2 n $</code>개의 instruction을 실행한다.</li>
+<li>두 번째 for문의 <code>j</code>의 경우에도 처음에는 1이 대입된 후 <code>$ n $</code>번 1씩 증가하면서 <code>$ n $</code>보다 작거나 같은지 비교하므로 <code>$ C_1 + C_2 n $</code>개의 instruction을 실행한다. 이만큼의 instruction을 <code>i</code>가 1일 때부터 <code>$ n $</code>일 때까지 <code>$ n $</code>번 실행하므로 총 <code>$ (C_1 + C_2 n)n $</code>개의 instruction을 실행한다.</li>
+<li>출력부분을 보면 <code>i * j</code>연산을 한 뒤 출력을 하는 과정에서 <code>$ C_3 $</code>개의 instruction을 실행한다. 이 과정을 <code>i</code>가 1부터 <code>$ n $</code>까지, <code>j</code>가 1부터 <code>$ n $</code>까지 총 <code>$ n^2 $</code>번 실행한다. 따라서 <code>$ C_3 n^2 $</code>개의 instruction을 실행한다.</li>
 </ul>
 
 <p>이를 정리하면 <code>$ C_1 + C_2 n + (C_1 + C_2 n)n + C_3 n^2 $</code>개의 instruction이 실행된다.</p>
 
-<p>자, 이제 <code>$ C_1 + C_2 n + (C_1 + C_2 n)n + C_3 n^2 $</code>라는 식이 나왔다. 이렇게 output이 나오는데 까지 걸리는 시간을 input(위에서는 <code>n</code>)에 따라 분석한 것을 시간복잡도라 한다. 하지만 저렇게 써놓으면 얼마나 효율적인지 한눈에 알아보기 힘들다. 따라서 일반적으로 시간복잡도를 표기할 때 <strong>한눈에 알아보기 쉬운 Big-O notation을 사용한다.</strong></p>
+<p>자, 이제 <code>$ C_1 + C_2 n + (C_1 + C_2 n)n + C_3 n^2 $</code>라는 식이 나왔다. 이렇게 output이 나오는데 까지 걸리는 시간을 input(위에서는 <code>$ n $</code>)에 따라 분석한 것을 시간복잡도라 한다. 하지만 저렇게 써놓으면 얼마나 효율적인지 한눈에 알아보기 힘들다. 따라서 일반적으로 시간복잡도를 표기할 때 <strong>한눈에 알아보기 쉬운 Big-O notation을 사용한다.</strong></p>
 
 <h2 id="big-o-notation">Big-O notation</h2>
 
@@ -194,7 +194,7 @@ For these reasons, it would be more precise to use set notation and write f(x) �
 
 <h3 id="for문-분석">for문 분석</h3>
 
-<p>가장 쉬운 방법이다. 왜냐하면 for문은 아래에 있는 구문이 얼마나 반복할지 바로 알려주기 때문에다. 예를 들어 위의 구구단의 경우 첫 번째 for문에 의해 아래 코드가 n번 실행되고, 그 코드의 for문에 의해 <code>printf</code>구문은 또 n번 실행된다. 따라서 <code>printf</code>구문은 n<sup>2</sup>번 실행하게 된다. 따라서 이 코드의 시간복잡도는 <code>$ O(n^2) $</code>이다. 이 과정에서 <code>i</code>나 <code>j</code>가 변하는 것은 어차피 <code>$ O(n^2) $</code> 이하이므로 신경 쓰지 않아도 된다.</p>
+<p>가장 쉬운 방법이다. 왜냐하면 for문은 아래에 있는 구문이 얼마나 반복할지 바로 알려주기 때문에다. 예를 들어 위의 구구단의 경우 첫 번째 for문에 의해 아래 코드가 <code>$ n $</code>번 실행되고, 그 코드의 for문에 의해 <code>printf</code>구문은 또 <code>$ n $</code>번 실행된다. 따라서 <code>printf</code>구문은 <code>$ n^2 $</code>번 실행하게 된다. 따라서 이 코드의 시간복잡도는 <code>$ O(n^2) $</code>이다. 이 과정에서 <code>i</code>나 <code>j</code>가 변하는 것은 어차피 <code>$ O(n^2) $</code> 이하이므로 신경 쓰지 않아도 된다.</p>
 
 <h3 id="가장-많이-실행되는-부분-분석">가장 많이 실행되는 부분 분석</h3>
 
@@ -202,7 +202,7 @@ For these reasons, it would be more precise to use set notation and write f(x) �
 
 <h3 id="점화식">점화식</h3>
 
-<p>시간복잡도를 input에 대한 점화식으로 나타낸 후 이 식을 푸는 방법으로 시간복잡도를 구할 수도 있다. 예를 들어 n개짜리의 문제를 해결할 때 <code>$ O(n) $</code>의 연산을 한 다음 n-1개짜리 동일한 문제를 해결하면 된다고 하자. 이 때 n개에서의 시간복잡도를 <code>$ T(n) $</code>이라 하면</p>
+<p>시간복잡도를 input에 대한 점화식으로 나타낸 후 이 식을 푸는 방법으로 시간복잡도를 구할 수도 있다. 예를 들어 <code>$ n $</code>개짜리의 문제를 해결할 때 <code>$ O(n) $</code>의 연산을 한 다음 <code>$ n - 1 $</code>개짜리 동일한 문제를 해결하면 된다고 하자. 이 때 <code>$ n $</code>개에서의 시간복잡도를 <code>$ T(n) $</code>이라 하면</p>
 
 <p><code>$\begin{eqnarray}
 T(n) &amp;=&amp; T(n-1) + C_1 n   \\
@@ -218,12 +218,12 @@ T(n) &amp;=&amp; T(n-1) + C_1 n   \\
 
 <h2 id="주의점-최악의-상황을-가정">주의점 : 최악의 상황을 가정</h2>
 
-<p>여기서 주의할 점은 <strong>최악의 상황을 가정</strong>해야 한다는 것이다. 예를 들어 1이 나올 때까지 n 이하의 자연수를 복원추출 하는 프로그램이 있다고 하자.</p>
+<p>여기서 주의할 점은 <strong>최악의 상황을 가정</strong>해야 한다는 것이다. 예를 들어 1이 나올 때까지 <code>$ n $</code> 이하의 자연수를 복원추출 하는 프로그램이 있다고 하자.</p>
 
 <ul>
 <li><p>최고의 경우, 한번에 1이 나올 수도 있다. 이 경우 시간복잡도는 <code>$ O(1) $</code>이다.</p></li>
 
-<li><p>평균적인 경우, 실행되는 횟수의 기댓값은 n이다. 이 경우 시간복잡도는 <code>$ O(n) $</code>이다.</p></li>
+<li><p>평균적인 경우, 실행되는 횟수의 기댓값은 <code>$ n $</code>이다. 이 경우 시간복잡도는 <code>$ O(n) $</code>이다.</p></li>
 
 <li><p>최악의 경우, 영원히 1이 안 나올 수도 있다. 이 경우 시간복잡도는 <code>$ O( \infty ) $</code>이다.</p></li>
 </ul>
@@ -234,7 +234,7 @@ T(n) &amp;=&amp; T(n-1) + C_1 n   \\
 
 <p>우리가 위의 방법으로 시간복잡도를 구했다고 하자. 하지만 알고리즘 대회에서 보면 &ldquo;<code>$ O(n) $</code>안에 수행하시오&rdquo;가 아니라 &ldquo;1초 안에 수행하도록 하시오&rdquo;처럼 쓰여 있다. 따라서 시간복잡도를 보고 얼마나 시간이 걸릴지 어림짐작 할 수 있어야 한다.</p>
 
-<p>완전히 정확한 수치는 아니지만 시간복잡도에서 최댓값을 계산한 결과 <strong>1억 번에 1초</strong>정도 걸린다고 생각하면 대강 맞다. 예를 들어 n이 1000이하라면 <code>$ O(n^2) $</code>은 1초안에 실행이 가능하지만 <code>$ O(n^3) $</code>은 불가능하고 보면 되고, n이 1000000이하라면 <code>$ O(n) $</code>이나 <code>$ O(n \log n) $</code>은 가능하지만 <code>$ O(n^2) $</code>은 불가능하다. 이를 이용하면 문제 조건을 보고 대략 어떤 시간복잡도의 알고리즘을 사용해야할지 유추할 수도 있다.</p>
+<p>완전히 정확한 수치는 아니지만 시간복잡도에서 최댓값을 계산한 결과 <strong>1억 번에 1초</strong>정도 걸린다고 생각하면 대강 맞다. 예를 들어 <code>$ n $</code>이 1000이하라면 <code>$ O(n^2) $</code>은 1초안에 실행이 가능하지만 <code>$ O(n^3) $</code>은 불가능하고 보면 되고, <code>$ n $</code>이 1000000이하라면 <code>$ O(n) $</code>이나 <code>$ O(n \log n) $</code>은 가능하지만 <code>$ O(n^2) $</code>은 불가능하다. 이를 이용하면 문제 조건을 보고 대략 어떤 시간복잡도의 알고리즘을 사용해야할지 유추할 수도 있다.</p>
 
 </section>
 
