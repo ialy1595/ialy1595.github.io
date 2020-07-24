@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-134848712-1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+  
+    gtag('config', 'UA-134848712-1');
+  </script>
+  
+
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>파라매트릭 서치 (Parametric Search)  | ialy&#39;s blog</title>
+  <link rel="icon" href="/favicon.ico" type="image/x-icon">
+  <link rel="canonical" href="https://ialy1595.github.io/post/parametric-search/">
+  
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/monokai-sublime.min.css">
+  <link rel="stylesheet" href="/css/styles.css">
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+  <script type="text/javascript" async
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+  MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [['$','$'], ['\\(','\\)']],
+    displayMath: [['$$','$$']],
+    processEscapes: true,
+    processEnvironments: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+    TeX: { equationNumbers: { autoNumber: "AMS" },
+         extensions: ["AMSmath.js", "AMSsymbols.js"] }
+  }
+  });
+  MathJax.Hub.Queue(function() {
+    
+    
+    
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i = 0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script> 
+  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/gist-embed/2.7.1/gist-embed.min.js"></script>
+</head>
+
+<body>
+<div class="wrap">
+  <div class="navbar">
+    <ul>
+      <li><a href="/">HELLO WORLD!</a></li>
+      <li><a href="/categories">CATEGORIES</a></li>
+      <li><a href="/tags">TAGS</a></li>
+      <li><a href="/about">ABOUT ME</a></li>
+    </ul>
+  </div>
+  <div class="container">
+
+
+
+  <div class="title">
+  
+  
+  
+  <a href="/categories/code">
+    <img src="/images/logo-code.png" width="260px" height="48px" />
+  </a>
+  
+</div>
+	<a href="https://ialy1595.github.io/post/parametric-search/">
+  <div class="post-title">
+    
+	
+	<img src="/images/post-title-icon-code.png" />
+	
+    <div class="post-meta">
+      <time>24 Jul 2020, 17:53</time>
+      <h1>파라매트릭 서치 (Parametric Search)</h1>
+    </div>
+  </div>
+</a>
+
+<section class="post-content">
+  <div class="post-toc-container1">
+    <div class="post-toc-container2">
+      <div class="post-toc">
+        <span class="title">
+          Table of contents
+        </span>
+        <nav id="TableOfContents">
+<ul>
+<li><a href="#문제를-해결하는-방법">문제를 해결하는 방법</a></li>
+<li><a href="#파라매트릭-서치">파라매트릭 서치</a>
+<ul>
+<li><a href="#조건">조건</a></li>
+<li><a href="#구현">구현</a></li>
+<li><a href="#시간복잡도">시간복잡도</a></li>
+<li><a href="#적용">적용</a></li>
+</ul></li>
+</ul>
+</nav>
+      </div>
+    </div>
+  </div>
+  
+
+<h1 id="문제를-해결하는-방법">문제를 해결하는 방법</h1>
+
+<p>우리가 어떤 문제를 접했을 때 이를 해결하는 방법에는 크게 두 가지가 있다. 첫 번째는 문제의 조건을 가지고 잘 계산을 해서 답을 도출해내는 것이고, 두 번째는 그 문제를 결정문제로 변형을 해서 이분탐색을 활용하여 해결하는 방법이다. 수학문제나 일반적인 시험문제의 경우 대부분이 첫 번째 방법으로 해결된다. 따라서 두 번째 방법이 뭔지 잘 와닿지 않을 수 있다. 그러나 우리 실생활에서 보면 의외로 두 번째 방법으로 해결하는 경우가 많다. 이해를 돕기 위해 예시를 통해 살펴보자.</p>
+
+<p>예를 들어 당신이 정육점 주인인데, 손님이 고기 200g을 달라고 해서 고기 덩이에서 200g을 잘라내야 한다고 해보자. 첫 번째 방법으로 이를 해결하려면, 고기의 밀도, 지방 비중, 마블링 정도 등을 분석한 뒤 얼마나 잘라야 정확히 200g이 되는지를 계산하여 딱 그만큼 잘라야 한다.</p>
+
+<p>그러나 실제로 이렇게 하기엔 굉장히 어렵다. 따라서 일반적으로는 대략 눈대중으로 어느정도 잘라서 저울에 재본 후, 200g보다 부족하면 조금 더 잘라 넣고 200g을 넘치면 조금 잘라서 때낸 뒤 다시 저울에 재보는 식으로 한다. 즉, 우리는 <strong>&ldquo;고기 200g를 잘라라&rdquo;</strong>라는 문제를 <strong>&ldquo;지금 자른 고기가 200g보다 가벼운가/무거운가&rdquo;</strong>라는 결정문제로 변형을 한 뒤 고기를 조금 추가하거나 덜어내면서 이분탐색을 하는 두 번째 방법으로 문제를 해결한다. 이렇게 원래 주어진 문제를 <strong>결정문제로 변형하여 이분탐색을 통해 해결</strong>하는 것을 <strong>파라매트릭 서치</strong>라고 한다.</p>
+
+<h1 id="파라매트릭-서치">파라매트릭 서치</h1>
+
+<h2 id="조건">조건</h2>
+
+<p>파라매트릭 서치는 굉장히 강력한 문제 해결 도구지만, 안타깝게도 모든 문제에 적용할 수는 없고, 아래 세 조건을 만족하는 문제에만 활용할 수 있다.</p>
+
+<ul>
+<li><strong>특정 조건을 만족하는 최댓값/최솟값을 구하는 형식의 문제여야 한다.</strong> 혹은 이러한 형태로 변형이 가능해야 한다. 예를 들어 위의 고기의 경우에도, &ldquo;200g이하의 고기 중 최댓값을 구하여라&rdquo;라는 문제로 생각할 수 있다.</li>
+<li><strong>최댓값을 구하는 문제의 경우 어떤 값이 조건을 만족하면 그 값보다 작은 값은 모두 조건을 만족해야 한다.(최솟값의 경우 그 값보다 큰 값은 모두 조건을 만족해야 한다.)</strong> 그래야 조건을 만족하는 경우 더 큰 값을, 만족하지 않는 경우 더 작은 값을 확인하면서 이분탐색을 통해 답을 구할 수 있다.</li>
+<li><strong>답의 범위가 이산적이거나(e.g. 정수) 허용 오차 범위가 있어야 한다.</strong> 이분탐색으로는 연속적인 범위에서 정답에 한없이 가까워질 수는 있지만 완전히 정확한 값은 구할 수 없기 때문에다.</li>
+</ul>
+
+<h2 id="구현">구현</h2>
+
+<p>우선 서술의 편의성을 위해 어떤 조건 <code>condition(x)</code>를 만족하는 최댓값을 찾는 문제를 풀어야 하고, 답은 정수라고 하자. 이 조건에 맞는 값을 구하기 위해 답의 후보의 범위를 컨트롤한다. 즉, 후보 범위의 최솟값인 <code>$ l $</code>과 최댓값 <code>$ h $</code>을 넉넉하게 잡아준 뒤 이를 점점 줄여나가면서 최종적으로 <code>$ l $</code>과 <code>$ h $</code>가 같아지도록 하는 것이 목표이다.</p>
+
+<p>이분탐색을 해야 하므로 지금 범위에서 조건을 확인할 이 범위의 중간값을 <code>$ m $</code>이라 하자.</p>
+
+<pre><code>m = (l + h + 1) / 2;
+
+if( condotion(m) ) {
+    ...
+} else {
+    ...
+}
+</code></pre>
+
+<p>여기서 중간값을 일반적으로 쓰는 절반인 <code>$ (l + h ) / 2 $</code>이 아니라 <code>$ (l + h + 1) / 2 $</code>로 했는데, 이에 대해서는 뒤에서 설명하고 일단 넘어가자.</p>
+
+<p><code>$ m $</code>에 대해 조건이 만족했을 경우 답의 후보 범위를 <code>$ m \sim h $</code>로 조정하면 된다. 만약에 만족하지 못했을 경우 답의 후보 범위를 <code>$ l \sim (m - 1) $</code>로 조정해야 한다.</p>
+
+<pre><code>m = (l + h + 1) / 2;
+
+if( condotion(m) ) {
+    l = m;
+} else {
+    h = m - 1;
+}
+</code></pre>
+
+<p><img src="/images/parametric_search/cond0.png#center75" alt="" /></p>
+
+<p>이제 이 이분탐색을 <code>$ l $</code>과 <code>$ h $</code>가 같아질 때까지 하면 된다.</p>
+
+<pre><code>while(l &lt; h) {
+    m = (l + h + 1) / 2;
+
+    if( condotion(m) ) {
+        l = m;
+    } else {
+        h = m - 1;
+    }
+}
+</code></pre>
+
+<p>여기서 주의해야할 점은 마지막에 무한루프에 빠지지 않는지 확인해야 한다는 것인데, 이를 위해서 중간값을 <code>$ (l + h ) / 2 $</code>이 아니라 <code>$ (l + h + 1) / 2 $</code>로 해줬다. 이 둘의 차이는 <code>$ l + h $</code>이 홀수여서 반으로 나누면 <code>$ 0.5 $</code>가 남는 경우, 버림을 해줄 지 올림을 해줄 지에 대한 것이다. 현재 다루고 있는 범위가 어느정도 클 경우에는 큰 문제가 되지 않는다. 하지만 이 범위가 좁을 때, 특히 <code>$ l $</code>과 <code>$ h $</code>이 <code>$ 1 $</code>차이로 붙어있을 때 잘못하면 무한루프에 빠질 수 있다.</p>
+
+<p>무한루프에 빠지지 않게 하려면 이분탐색에 의해 위의 그림처럼 두 구역으로 나눠졌을 때 <code>$ m $</code>이 어디에 속하는지를 확인하면 된다. 예를 들어 위와 같이 조건에 만족하는 최댓값을 구해야 하는 경우 <code>$ m $</code>은 <code>$ h $</code>쪽 범위에 속하게 된다. <code>$ l $</code>과 <code>$ h $</code>이 <code>$ 1 $</code>차이로 붙어있을 때 <code>$ m = (l + h ) / 2 $</code>일 경우에는 <code>$ m = l $</code>가 되고 <code>$ m = (l + h + 1) / 2 $</code>일 경우에는 <code>$ m = h $</code>가 되는데 이 때 변화할 범위 그림을 그려보면 아래와 같다.</p>
+
+<p><img src="/images/parametric_search/cond1.png#center75" alt="" /></p>
+
+<p>이처럼 <code>$ m = (l + h ) / 2 $</code>로 할 경우 조건은 항상 만족해야만 하면서 루프를 진행하는 과정에서 범위가 변화하지 않으므로 무한루프에 빠지게 된다. 따라서 조건에 만족하는 최댓값을 구해야 하는 경우에는 <code>$ m = (l + h + 1) / 2 $</code>로 잡아줘야 무한루프에 빠지지 않게 된다.</p>
+
+<p>반대로 조건에 만족하는 최솟값을 구하는 경우에는 조건을 만족했을 땐 범위가 <code>$ l \sim m $</code>, 만족하지 않았을 땐 <code>$ (m + 1) \sim h $</code>로 바뀌면서 <code>$ m $</code>이 <code>$ l $</code>쪽에 속하게 된다. 따라서 이 경우에는 <code>$ m = (l + h ) / 2 $</code>로 해줘야 무한루프에 빠지지 않을 수 있다.</p>
+
+<h2 id="시간복잡도">시간복잡도</h2>
+
+<p>사실 이 알고리즘의 시간복잡도는 이 알고리즘 자체 보다는 조건 함수가 얼마나 빠른지에 달려있다. 우선 <code>while</code>에서 한 번씩 루프를 돌 때마다 범위가 절반씩 줄어들게 된다. 따라서 맨 처음에 넉넉하게 잡은 범위를 <code>$ M $</code>이라고 하면 루프는 <code>$ \log M $</code>번 실행된다. 즉, 조건 함수가 한번 실행될 때 걸리는 시간복잡도를 <code>$ O( C(n) ) $</code>이라 하면 총 시간복잡도는 <code>$ O( C(n) \log M ) $</code>이 된다.</p>
+
+<h2 id="적용">적용</h2>
+
+<p>이 알고리즘은 알고리즘 자체 보다는 문제를 어떻게 해석해서 이 알고리즘을 적용시켜야 하는지가 더 어려운 알고리즘이다. 이해를 돕기 위해 백준에 있는 <a href="https://www.acmicpc.net/problem/1939">중량제한</a>이라는 문제를 풀어보자.</p>
+
+<p>문제를 간략하게 설명하자면, 섬과 다리가 그래프처럼 이루어져 있는 나라가 있는데, 이 중 두 섬에는 공장이 있다. 그리고 각 다리에는 그 다리가 버틸 수 있는 최대 하중이 있다. 이 때 두 공장 사이를 왔다갔다 할 수 있는 무게의 최댓값을 구해야 한다. 섬의 갯수 <code>$ N $</code>은 <code>$ 10,000 $</code>이하, 다리의 갯수 <code>$ M $</code>은 <code>$ 100,000 $</code>이하, 다리가 버틸 수 있는 최대 하중은 <code>$ 1 \sim 1,000,000,000 $</code>이다.</p>
+
+<p>이 문제를 그냥 풀려면 두 공장 사이의 경로 중 그 경로에 포함된 다리가 버틸 수 있는 최대 하중의 최솟값이 가장 큰 경로를 찾아야 한다. 딱 봐도 뭔가 복잡해보인다. 그러나 이를 파라매트릭 서치를 사용하면 문제를 쉽게 바꿀 수 있다.</p>
+
+<p>우선 문제를 <strong>특정 조건을 만족하는 최댓값/최솟값을 구하는 형식의 문제</strong>로 바꿔보자. 사실 어렵게 바꿀 필요도 없이 문제에서 이미 두 공장 사이를 왔다갔다 할 수 있는 문제의 최댓값을 구하라고 하긴 했다. 이를 수학적으로 조금만 더 정리하자면, 어떤 무게 <code>$ x $</code>에 대해 <code>$ x $</code>의 무게를 견딜 수 있는 다리로만 섬들을 연결했을 때 두 공장이 있는 섬이 연결되는 <code>$ x $</code> 중 최댓값을 찾으면 된다.</p>
+
+<p>여기서 우리가 만들어야 하는 조건함수는 어떤 무게 <code>$ x $</code>에 대해 <code>$ x $</code>의 무게를 견딜 수 있는 다리로만 섬들을 연결했을 때 두 공장이 있는 섬이 연결되는지를 판별하면 된다. 이는 주어진 그래프에서 두 공장 중 아무거나 하나를 기준으로 삼아서 버틸 수 있는 하중이 <code>$ x $</code>이상인 간선들만 DFS로 탐색하면서 나머지 한 공장이 나오는지 확인하는 방법으로 풀면 <code>$ O(M) $</code> 안에 해결할 수 있다.</p>
+
+<p>이제 <code>$ l $</code>과 <code>$ h $</code>의 초기값만 정해주면 된다. 정말 넉넉하게 잡아주려면 그냥 문제 조건에서 나온 <code>$ 1 $</code>과 <code>$ 1,000,000,000 $</code>로 해도 되고, 좀 더 최적화 하자면 입력된 간선이 버틸 수 있는 하중들의 최솟값과 최댓값으로 해도 된다. 정말로 더 최적화를 하고 싶다면 입력받은 하중 제한들을 정렬해서 배열에 저장한 후, 그 인덱스로 처리하면 범위를 정확히 <code>$ N $</code>으로 줄일 수 있다. 사실 범위가 로그 스케일로 감속하기 때문에 엄청 큰 차이는 나지 않는다.</p>
+
+<p>조건 함수의 시간복잡도가 DFS이므로 간선 갯수인 <code>$ O(M) $</code>, 범위는 최적화를 할 경우 <code>$ N $</code>이므로 총 시간복잡도는 <code>$ O( M \log N ) $</code>이다. 혹은 범위를 최적화를 하지 않아도 <code>$ O( M \log (1,000,000,000) ) $</code>으로 충분히 시간 안에 통과할 수 있다.</p>
+
+</section>
+
+
+
+<div class="paging post-paging">
+  
+  
+  <a class="left" href="https://ialy1595.github.io/post/binary-indexed-tree/" rel="prev">
+    <i class="fa fa-play fa-rotate-180" aria-hidden="true"></i> <span>인덱스 트리 (Indexed Tree)</span>
+  </a>
+  
+  
+  
+</div>
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+
+(function() {
+    
+    
+    if (window.location.hostname == "localhost")
+        return;
+
+    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+    var disqus_shortname = 'ialy1595';
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com/" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+<div class="post-meta-code">
+  <div class="desc">
+    public string description() {
+    <div class="desc">val author = "
+    
+        <a href="mailto:ialy12006@gmail.com">ialy1595</a>
+    ";
+    </div>
+    
+    <div class="desc">
+      val categories = [
+      
+      
+      <a href="https://ialy1595.github.io//categories/code">"code"</a>
+      
+      ];
+    </div>
+    
+	
+    <div class="desc">
+      val subcategories = [
+      
+      
+      <a href="https://ialy1595.github.io//subcategories/algorithm">"algorithm"</a>
+      
+      ];
+    </div>
+    
+    }
+  </div>
+  <div class="desc">
+    public string tags() {
+      <div class="desc">
+        val tags = [
+        
+          
+          <a href="https://ialy1595.github.io/tags/parametric-search">"parametric search"</a>
+          
+          <a href="https://ialy1595.github.io/tags/binary-search">"binary search"</a>
+          
+        
+        ];
+      </div>
+    }
+  </div>
+  
+</div>
+
+
+
+  </div>
+  <div class="blank"></div>
+</div>
+<footer class="footer">
+  <div class="share">
+    <a href="https://github.com/ialy1595" title="Github" target="_blank"><i class="fa fa-github"></i></a>
+    <a href="mailto:ialy12006@gmail.com" title="Email" target="_blank"><i class="fa fa-envelope"></i></a>
+    <a rel="alternate" type="application/rss+xml" href="https://ialy1595.github.io/index.xml" title="RSS feed" target="_blank"><i class="fa fa-rss"></i></a>
+  </div>
+  COPYRIGHT (C) <a href="https://blog.lulab.net">DONGGEUN,BANG</a>. ALL RIGHTS RESERVED.
+</footer>
+
+</body>
+</html>

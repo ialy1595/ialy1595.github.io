@@ -15,7 +15,7 @@
 
   <meta http-equiv="content-type" content="text/html; charset=utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>인덱스 트리(Indexed Tree)  | ialy&#39;s blog</title>
+  <title>인덱스 트리 (Indexed Tree)  | ialy&#39;s blog</title>
   <link rel="icon" href="/favicon.ico" type="image/x-icon">
   <link rel="canonical" href="https://ialy1595.github.io/post/binary-indexed-tree/">
   
@@ -82,7 +82,7 @@
 	
     <div class="post-meta">
       <time>08 Mar 2020, 19:19</time>
-      <h1>인덱스 트리(Indexed Tree)</h1>
+      <h1>인덱스 트리 (Indexed Tree)</h1>
     </div>
   </div>
 </a>
@@ -126,7 +126,7 @@
 
 <h1 id="개요">개요</h1>
 
-<p>이 자료구조는 point update와 range query를 해야 하는 상황에서 사용된다. 더 자세히 말하자면 길이가 <code>n</code>인 수열에 <code>a</code> 대해</p>
+<p>이 자료구조는 point update와 range query를 해야 하는 상황에서 사용된다. 더 자세히 말하자면 길이가 <code>$ n $</code>인 수열에 <code>$ a $</code> 대해</p>
 
 <ul>
 <li><strong>point update</strong>: (<code>$ i $</code>, <code>$ x $</code>) =&gt; <code>$ a[i] $</code>를 <code>$ x $</code>로 치환</li>
@@ -242,7 +242,7 @@ bit[idx] = x;
 
 <p>query에서의 시간복잡도를 계산해 보면 <code>while</code>문은 <code>$ l $</code>과 <code>$ r $</code>이 반씩 줄어들면서 적어도 모두 0이 되면 끝나므로 최대 <code>$ O(\log n) $</code>번 반복하게 된다. 또한 <code>while</code>문 안에 있는 내용들은 모두 <code>$ O(1) $</code> 안에 처리가 가능하다. 따라서 총 시간복잡도는 <code>$ O(\log n) $</code>이다.</p>
 
-<p>따라서 초기 세팅에 <code>$ O(n) $</code>, 각 쿼리마다 <code>$ O(\log n) $</code>이 걸리므로 총 <code>q</code>개의 쿼리를 처리하는 경우 <code>$ O(n + q \log n) $</code>이 걸린다. 또한 위의 코드에서는 보기 쉽도록 <code>* 2</code>, <code>/ 2</code> 등을 사용했지만 이 연산들은 모두 비트 연산으로 대체할 수 있다. 게다가 짝/홀 판별도 1과 and하는 식으로 판별이 가능하고 <code>$ base $</code>를 더하는 것도 <code>$ base $</code>가 그 인덱스보다 큰 2의 거듭제곱수임을 생각하면 <code>|</code>연산으로 처리가 가능하다. 즉, 인덱스 트리를 구현하는데 대부분의 연산이 비트 연산으로 가능하기 때문에 이를 활용하면 약간의 성능 향상도 얻을 수 있다.</p>
+<p>따라서 초기 세팅에 <code>$ O(n) $</code>, 각 쿼리마다 <code>$ O(\log n) $</code>이 걸리므로 총 <code>$ q $</code>개의 쿼리를 처리하는 경우 <code>$ O(n + q \log n) $</code>이 걸린다. 또한 위의 코드에서는 보기 쉽도록 <code>* 2</code>, <code>/ 2</code> 등을 사용했지만 이 연산들은 모두 비트 연산으로 대체할 수 있다. 게다가 짝/홀 판별도 1과 and하는 식으로 판별이 가능하고 <code>$ base $</code>를 더하는 것도 <code>$ base $</code>가 그 인덱스보다 큰 2의 거듭제곱수임을 생각하면 <code>|</code>연산으로 처리가 가능하다. 즉, 인덱스 트리를 구현하는데 대부분의 연산이 비트 연산으로 가능하기 때문에 이를 활용하면 약간의 성능 향상도 얻을 수 있다.</p>
 
 <h2 id="적용-lis">적용: LIS</h2>
 
@@ -466,6 +466,12 @@ bit[idx] = x;
     <i class="fa fa-play fa-rotate-180" aria-hidden="true"></i> <span>동적계획법 (Dynamic Programming, DP)</span>
   </a>
   
+  
+  
+  
+  <a class="right" href="https://ialy1595.github.io/post/parametric-search/" rel="next">
+    <span>파라매트릭 서치 (Parametric Search)</span> <i class="fa fa-play" aria-hidden="true"></i>
+  </a>
   
   
 </div>

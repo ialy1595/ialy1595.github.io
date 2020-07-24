@@ -14,12 +14,12 @@
     
     
     <item>
-      <title>인덱스 트리(Indexed Tree)</title>
+      <title>인덱스 트리 (Indexed Tree)</title>
       <link>https://ialy1595.github.io/post/binary-indexed-tree/</link>
       <pubDate>Sun, 08 Mar 2020 19:19:01 +0900</pubDate>
       <author>ialy12006@gmail.com (ialy1595)</author>
       <guid>https://ialy1595.github.io/post/binary-indexed-tree/</guid>
-      <description>개요 이 자료구조는 point update와 range query를 해야 하는 상황에서 사용된다. 더 자세히 말하자면 길이가 n인 수열에 a 대해
+      <description>개요 이 자료구조는 point update와 range query를 해야 하는 상황에서 사용된다. 더 자세히 말하자면 길이가 $ n $인 수열에 $ a $ 대해
  point update: ($ i $, $ x $) =&amp;gt; $ a[i] $를 $ x $로 치환 range query: ($ l $, $ r $) =&amp;gt; $ a[l] \sim a[r] $ 중 sum/max/min 등 구하기.</description>
     </item>
     

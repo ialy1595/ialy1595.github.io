@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Binary Search on ialy&#39;s blog</title>
+    <link>https://ialy1595.github.io/tags/binary-search/</link>
+    <description>Recent content in Binary Search on ialy&#39;s blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>ko-KR</language>
+    <managingEditor>ialy12006@gmail.com (ialy1595)</managingEditor>
+    <webMaster>ialy12006@gmail.com (ialy1595)</webMaster>
+    <lastBuildDate>Fri, 24 Jul 2020 17:53:52 +0900</lastBuildDate>
+    
+	<atom:link href="https://ialy1595.github.io/tags/binary-search/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>파라매트릭 서치 (Parametric Search)</title>
+      <link>https://ialy1595.github.io/post/parametric-search/</link>
+      <pubDate>Fri, 24 Jul 2020 17:53:52 +0900</pubDate>
+      <author>ialy12006@gmail.com (ialy1595)</author>
+      <guid>https://ialy1595.github.io/post/parametric-search/</guid>
+      <description>문제를 해결하는 방법 우리가 어떤 문제를 접했을 때 이를 해결하는 방법에는 크게 두 가지가 있다. 첫 번째는 문제의 조건을 가지고 잘 계산을 해서 답을 도출해내는 것이고, 두 번째는 그 문제를 결정문제로 변형을 해서 이분탐색을 활용하여 해결하는 방법이다.</description>
+    </item>
+    
+  </channel>
+</rss>
