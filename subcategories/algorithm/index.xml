@@ -8,10 +8,19 @@
     <language>ko-KR</language>
     <managingEditor>ialy12006@gmail.com (ialy1595)</managingEditor>
     <webMaster>ialy12006@gmail.com (ialy1595)</webMaster>
-    <lastBuildDate>Fri, 24 Jul 2020 17:53:52 +0900</lastBuildDate>
+    <lastBuildDate>Wed, 29 Jul 2020 18:52:50 +0900</lastBuildDate>
     
 	<atom:link href="https://ialy1595.github.io/subcategories/algorithm/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>문자열 매칭 알고리즘 (KMP, Z-Array)</title>
+      <link>https://ialy1595.github.io/post/string-match/</link>
+      <pubDate>Wed, 29 Jul 2020 18:52:50 +0900</pubDate>
+      <author>ialy12006@gmail.com (ialy1595)</author>
+      <guid>https://ialy1595.github.io/post/string-match/</guid>
+      <description>문자열 매칭 문자열을 다루는 문제가 여러 종류가 있지만 그 중 가장 널리 쓰이는 것이 긴 문자열($ data $)에서 어떤 문자열($ query $)가 속해있는지 확인하는 문자열 매칭을 활용하는 것이다. 쉽게 말하면 우리가 인터넷 서핑이나 에디터에서 문서 작업을 할 때 ctrl + f로 단어를 찾는 작업을 구현한다고 생각하면 된다.</description>
+    </item>
     
     <item>
       <title>파라매트릭 서치 (Parametric Search)</title>

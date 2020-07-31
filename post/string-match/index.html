@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-134848712-1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+  
+    gtag('config', 'UA-134848712-1');
+  </script>
+  
+
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>문자열 매칭 알고리즘 (KMP, Z-Array)  | ialy&#39;s blog</title>
+  <link rel="icon" href="/favicon.ico" type="image/x-icon">
+  <link rel="canonical" href="https://ialy1595.github.io/post/string-match/">
+  
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/monokai-sublime.min.css">
+  <link rel="stylesheet" href="/css/styles.css">
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+  <script type="text/javascript" async
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+  MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [['$','$'], ['\\(','\\)']],
+    displayMath: [['$$','$$']],
+    processEscapes: true,
+    processEnvironments: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+    TeX: { equationNumbers: { autoNumber: "AMS" },
+         extensions: ["AMSmath.js", "AMSsymbols.js"] }
+  }
+  });
+  MathJax.Hub.Queue(function() {
+    
+    
+    
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i = 0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script> 
+  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/gist-embed/2.7.1/gist-embed.min.js"></script>
+</head>
+
+<body>
+<div class="wrap">
+  <div class="navbar">
+    <ul>
+      <li><a href="/">HELLO WORLD!</a></li>
+      <li><a href="/categories">CATEGORIES</a></li>
+      <li><a href="/tags">TAGS</a></li>
+      <li><a href="/about">ABOUT ME</a></li>
+    </ul>
+  </div>
+  <div class="container">
+
+
+
+  <div class="title">
+  
+  
+  
+  <a href="/categories/code">
+    <img src="/images/logo-code.png" width="260px" height="48px" />
+  </a>
+  
+</div>
+	<a href="https://ialy1595.github.io/post/string-match/">
+  <div class="post-title">
+    
+	
+	<img src="/images/post-title-icon-code.png" />
+	
+    <div class="post-meta">
+      <time>29 Jul 2020, 18:52</time>
+      <h1>문자열 매칭 알고리즘 (KMP, Z-Array)</h1>
+    </div>
+  </div>
+</a>
+
+<section class="post-content">
+  <div class="post-toc-container1">
+    <div class="post-toc-container2">
+      <div class="post-toc">
+        <span class="title">
+          Table of contents
+        </span>
+        <nav id="TableOfContents">
+<ul>
+<li><a href="#문자열-매칭">문자열 매칭</a></li>
+<li><a href="#문자열-매칭-알고리즘">문자열 매칭 알고리즘</a>
+<ul>
+<li><a href="#brute-force">brute-force</a></li>
+<li><a href="#kmp">KMP</a>
+<ul>
+<li><a href="#개요">개요</a></li>
+<li><a href="#구현">구현</a></li>
+<li><a href="#시간복잡도">시간복잡도</a></li>
+</ul></li>
+<li><a href="#z-array">Z-Array</a>
+<ul>
+<li><a href="#개요-1">개요</a></li>
+<li><a href="#구현-1">구현</a></li>
+<li><a href="#시간복잡도-1">시간복잡도</a></li>
+</ul></li>
+</ul></li>
+</ul>
+</nav>
+      </div>
+    </div>
+  </div>
+  
+
+<h1 id="문자열-매칭">문자열 매칭</h1>
+
+<p>문자열을 다루는 문제가 여러 종류가 있지만 그 중 가장 널리 쓰이는 것이 긴 문자열(<code>$ data $</code>)에서 어떤 문자열(<code>$ query $</code>)가 속해있는지 확인하는 문자열 매칭을 활용하는 것이다. 쉽게 말하면 우리가 인터넷 서핑이나 에디터에서 문서 작업을 할 때 <code>ctrl + f</code>로 단어를 찾는 작업을 구현한다고 생각하면 된다.</p>
+
+<p>간단하게는 <code>$ query $</code>가 <code>$ data $</code>에 포함되어 있는지, 그리고 포함되어 있다면 몇 번이나 포함되어 있는지를 구하는 문제를 해결할 수 있다. 여기서 더 업그레이드하자면 <code>$ data $</code>의 모든 위치에 대해서 <code>$ query $</code>가 최대 몇 글자나 겹치는지 구하는 문제를 해결할 수도 있다. 혹은 UX 관점에서 살펴봐서 인간적인 검색을 위해 완전히 겹치는 것 뿐만 아니라 대략적으로 비슷한 것을 탐지하는 fuzzy-search 관련 알고리즘도 있다. 이 글에서는 <code>$ query $</code>가 <code>$ data $</code>에 몇 번이나 포함되어 있는지와 여기서 나아가 <code>$ data $</code>의 모든 위치에 대해서 <code>$ query $</code>가 최대 몇 글자나 겹치는지를 구하는 알고리즘에 대해 다룰 예정이다.</p>
+
+<h1 id="문자열-매칭-알고리즘">문자열 매칭 알고리즘</h1>
+
+<h2 id="brute-force">brute-force</h2>
+
+<p>가장 무식하게 해볼 수 있는 방법은 brute-force로 모든 위치에 대해서 다 비교해 보는 것이다. 즉, <code>$ data $</code>의 모든 위치 <code>$ data[i] $</code>에서 시작해서 <code>$ data[i + j] $</code>와 <code>$ query[j] $</code>가 달라질 때 까지 <code>$ j $</code>를 증가시키면서 확인하는 방법이다. 이 알고리즘은 <code>$ data $</code>의 길이를 <code>$ n $</code>, <code>$ query $</code>의 길이를 <code>$ m $</code>이라 할 때 <code>$ i $</code>가 <code>$1 $</code>부터 <code>$ n $</code>까지 돌면서 각 루프마다 <code>$ j $</code>가 최대 <code>$ m $</code>까지 증가할 수 있으므로 총 <code>$ O(nm) $</code>이 걸린다. 참고로 최악의 경우는 <code>$ data $</code>와 <code>$ query $</code>가 모두 같은 문자일 때 발생한다.</p>
+
+<h2 id="kmp">KMP</h2>
+
+<h3 id="개요">개요</h3>
+
+<p>KMP 알고리즘은 이 알고리즘을 설계한 세 사람의 이름 <strong>K</strong>nuth–<strong>M</strong>orris–<strong>P</strong>ratt에서 따온 이름으로, 위에서 봤던 문자열 관련 문제 중 두 번째인 <code>$ data $</code>의 모든 위치에 대해서 <code>$ query $</code>가 최대 몇 글자나 겹치는지 구하는 알고리즘이다. 사실 이 문제를 해결하면 첫 번째 문제도 자동으로 해결할 수 있는데, 여기서 구한 결과에서 겹치는 글자가 <code>$ query $</code>의 길이인 부분을 찾으면 되기 때문이다.</p>
+
+<p>다시 KMP 알고리즘으로 돌아오면, 어찌 보면 이 알고리즘은 위에서 brute force로 했던 알고리즘을 최적화한 알고리즘이라고도 볼 수 있다. 기본적으로 알고리즘을 최적화 하는 방법은 비효율적인 부분을 줄이는 것이다. 그렇다면 위에서 했던 brute force로 하나씩 다 비교하는 알고리즘에서 어떤 부분이 비효율적일까? 이를 살펴보기 위해 ababac에 abac가 들어있는지 brute force로 일일이 확인해보는 과정을 살펴보자.</p>
+
+<p><img src="/images/string_match/string_match0.png#center50" alt="" /></p>
+
+<p>여기서 비효율적인 부분은 두 번째 줄에서 <code>$ data $</code>의 두 번째 글자인 <code>$ b $</code>와 <code>$ query $</code>의 첫 번째 글자인 <code>$ a $</code>를 비교하는 작업이다. 왜냐하면 우리는 첫 번째 줄에서 세 글자까지 일치했다는 점에서 <code>$ data $</code>의 두 번째 글자는 <code>$ b $</code>라는 것을 이미 확인했기 때문에 <code>$ query $</code>의 첫 번째 글자인 <code>$ a $</code>와는 비교할 필요도 없이 다르다는 것을 알 수 있기 때문이다.</p>
+
+<p>또한 세 번째 줄에서 <code>$ data $</code>의 세 번째 글자인 <code>$ a $</code>와 <code>$ query $</code>의 첫 번째 글자인 <code>$ a $</code>를 비교하는 작업 또한 비효율적이다. 이미 불일치하는 것을 알아서 그 위치에서 다시 확인을 하지 않는 것으로 비효율적인 부분을 줄이는 것도 해야하지만, 이미 일치하는 것을 아는 만큼 확인시켜 다시 비교하지 않고 그 뒤의 글자부터 비교하기 시작하는 것 또한 비효율적이기 때문이다. 첫 번째 줄에서 세 번째 글자까지 일치했다는 점에서 <code>$ data $</code>의 세 번째 글자는 <code>$ a $</code>라는 것을 알 수 있다. 이를 통해 세 번째 줄에서 비교를 할 때 이미 <code>$ data $</code>의 세 번째 글자인 <code>$ a $</code>와 <code>$ query $</code>의 첫 번째 글자인 <code>$ a $</code>가 일치한다는 것을 알 수 있으니 이 부분을 비교하는 것을 넘어가고 바로 <code>$ data $</code>의 네 번째 글자와 <code>$ query $</code>의 두 번째 글자를 비교는 것이 좀 더 효율적인 탐색이라고 볼 수 있다.</p>
+
+<h3 id="구현">구현</h3>
+
+<p>위의 내용을 토대로 비효율적인 비교를 건너뛰는 알고리즘을 구현해보자. <code>$ data $</code>의 <code>$ i $</code>번째 글자부터 비교하기 시작했을 때 <code>$ query[j] $</code>에서 불일치가 일어나면(<code>$ data[i+j] ~ \neq ~ query[j] $</code>) 어디서부터 다시 비교를 시작해야 하는지 생각해보자. 우선 <code>$ query[j] $</code>에서 불일치했므로 <code>$ data[i \cdots i+j-1] $</code>과 <code>$ query[0 \cdots j-1] $</code>는 이미 일치함을 알고 있다.</p>
+
+<p><img src="/images/string_match/kmp0.png#center100" alt="" /></p>
+
+<p>이를 토대로 <code>$ data[i \cdots i+j-1] $</code>에 대한 정보는 이미 얻었으니 이제 적당한 위치로 점프를 해서 <code>$ data[i+j] $</code>와 <code>$ query[k] $</code>를 비교한다고 해보자. 여기서 <code>$ query[k] $</code>를 비교하려면 적어도 그 앞에 있는 <code>$ query[0 \cdots k-1] $</code>와 <code>$ data[i+j-k+1 \cdots i+j] $</code>는 일치해야 한다. 이를 잘 생각해보면 위에서 <code>$ query[j] $</code>까지 일치했을 때 <code>$ data[i \cdots i+j-1] $</code>과 <code>$ query[0 \cdots j-1] $</code>가 같다는 것을 알았으므로 <code>$ query[0 \cdots k-1] $</code>와 <code>$ query[j-k \cdots j-1] $</code>가 일치함을 알 수 있다. 이 때 <code>$ query[0 \cdots k-1] $</code>는 <code>$ query[0 \cdots j-1] $</code>의 <code>$ k $</code>길이 만큼의 prefix이고, <code>$ query[j-k \cdots j-1] $</code>는 <code>$ query[0 \cdots j-1] $</code>의 <code>$ k $</code>길이 만큼의 suffix이다. 그러면서 가장 긴 매칭을 찾아야 한다. 즉, 이를 정리하면 어떤 <code>$ query $</code>에서 모든 <code>$ x $</code>에 대해 <code>$ query[0 \cdots x] $</code> 의 prefix면서 동시에 suffix가 되는 문자열 중 자기 자신을 제외한 가장 긴 길이를 찾아내면 된다. 이 길이를 저장한 배열을 매칭에 실패했을 때 전진해야할 위치를 저장했다고 하여 실패함수(fail function)이라 하자. 예를 들어 abcabcd의 실패함수는 다음과 같다.</p>
+
+<table>
+<thead>
+<tr>
+<th align="center"><code>$ x $</code></th>
+<th align="center"><code>$ query[0...x] $</code></th>
+<th align="center"><code>$ failf[x] $</code></th>
+<th align="center">prefix &amp; suffix</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td align="center">0</td>
+<td align="center">a</td>
+<td align="center">0</td>
+<td align="center"></td>
+</tr>
+
+<tr>
+<td align="center">1</td>
+<td align="center">ab</td>
+<td align="center">0</td>
+<td align="center"></td>
+</tr>
+
+<tr>
+<td align="center">2</td>
+<td align="center">abc</td>
+<td align="center">0</td>
+<td align="center"></td>
+</tr>
+
+<tr>
+<td align="center">3</td>
+<td align="center">abca</td>
+<td align="center">1</td>
+<td align="center">a</td>
+</tr>
+
+<tr>
+<td align="center">4</td>
+<td align="center">abcab</td>
+<td align="center">2</td>
+<td align="center">ab</td>
+</tr>
+
+<tr>
+<td align="center">5</td>
+<td align="center">abcabc</td>
+<td align="center">3</td>
+<td align="center">abc</td>
+</tr>
+
+<tr>
+<td align="center">6</td>
+<td align="center">abcabcd</td>
+<td align="center">0</td>
+<td align="center"></td>
+</tr>
+</tbody>
+</table>
+
+<p>이 실패함수를 구하는 것은 일단 다음으로 넘어가고 이를 이용하여 어떻게 우리가 원하는 문제를 해결할 수 있는지부터 알아보자. 먼저 우리가 결과를 저장할 <code>$ result $</code>배열을 다음과 같이 정의하자.</p>
+
+<p><code>$$ result[i] := data[i-x+1 \cdots i]와~query[0 \cdots x-1]이~일치하는~가장~큰~x~$$</code></p>
+
+<p>즉, <code>$ data $</code>의 모든 위치에 대해 앞의 몇 글자가 <code>$ query $</code>의 앞부분과 일치하는지를 저장한다. 예를 들어 ababac에서 abac를 찾을 때 <code>$ result $</code>배열은 <code>$ [1, 2, 3, 2, 3, 4] $</code>가 된다.</p>
+
+<p>우선 brute force때와 같이 시작점과 매칭되는 길이를 증가시키며 진행할 것이다. 여기서 <code>$ data $</code>에서 매칭을 확인하는 위치를 <code>$ i $</code>, <code>$ query $</code>에서 매칭을 확인하는 위치를 <code>$ j $</code>라고 하자. 우선 매칭이 일치하는 경우에는 <code>$ i $</code>와 <code>$ j $</code>를 증가시키면서 그 값을 <code>$ result $</code>에 저장하면 된다.</p>
+
+<pre><code>void kmp(char *data, char *query, int *result, int *failf) {
+    int n = strlen(data);
+    for (int i = 0, j = 0; i &lt; n; i++) {
+        if(data[i] == query[j]) {
+            j++;
+            result[i] = j;
+        }
+        else {
+            ...
+        }
+    }
+}
+</code></pre>
+
+<p>만약에 불일치 하는 경우에는 두 가지 경우로 나뉜다. 먼저 첫 번째 글자부터 불일치할 경우 즉, <code>$ j $</code>가 <code>$ 0 $</code>인 경우이다. 이 경우에는 그냥 <code>$ result $</code>에 <code>$ 0 $</code>을 저장하고 <code>$ j $</code>는 그대로 <code>$ 0 $</code>으로 두면 된다.</p>
+
+<pre><code>void kmp(char *data, char *query, int *result, int *failf) {
+    int n = strlen(data);
+    for (int i = 0, j = 0; i &lt; n; i++) {
+        if(data[i] == query[j]) {
+            j++;
+            result[i] = j;
+        }
+        else {
+            if(j == 0) result[i] = 0;
+            else {
+                ...
+            }
+        }
+    }
+}
+</code></pre>
+
+<p>이제 가장 중요한 부분만 짜면 된다. 우선 <code>$ i $</code>는 <code>$ data $</code>의 지금 위치를 <code>$ query $</code>의 바뀐 위치와 다시 비교해야 하므로 <code>$ i $</code>를 <code>$ 1 $</code>감소시켜 포문을 돌아서 왔을 때 <code>$ i $</code>가 그대로가 되도록 한다. 그 다음에 <code>$ j $</code>는 위에서 봤듯이 <code>$ query[0 \cdots j-1] $</code>의 prefix이자 suffix인 문자열 중 가장 긴 것을 찾아 그 다음부터 매칭하기 시작하면 된다. <code>$ query[0 \cdots j-1] $</code>의 prefix이자 suffix인 문자열 중 가장 긴 길이는 <code>$ failf[j-1] $</code>이고, 그렇다면 매칭해야 할 다음 글자는 <code>$ query[failf[j-1]] $</code>이므로 다음과 같이 해주면 된다.</p>
+
+<pre><code>void kmp(char *data, char *query, int *result, int *failf) {
+    int n = strlen(data);
+    for (int i = 0, j = 0; i &lt; n; i++) {
+        if(data[i] == query[j]) {
+            j++;
+            result[i] = j;
+        }
+        else {
+            if(j == 0) result[i] = 0;
+            else {
+                i--;
+                j = failf[j - 1];
+            }
+        }
+    }
+}
+</code></pre>
+
+<p>이제 <code>$ failf $</code>배열을 구하기만 하면 KMP를 완벽하게 구현할 수 있다. 여기서 재밌는 점은 <code>$ result $</code> 배열의 의미를 잘 생각하면 <code>$ failf $</code>를 쉽게 구할 수 있다는 점이다. <code>$ result $</code>는 위에서 봤듯이 그 위치에서 최대 앞의 몇 글자가 <code>$ query $</code>의 앞부분과 일치하냐는 것이다. 여기서 잘 생각해보면 <code>$ data $</code>의 어떤 위치 <code>$ x $</code>에서의 앞의 글자라는 것은 <code>$ data[0 \cdots x] $</code>의 suffix라는 것이고, <code>$ query $</code>의 앞부분은 <code>$ query $</code>의 prefix를 의미한다. 여기서 <code>$ data $</code>를 <code>$ query $</code>로 치환하면, <code>$ query[0 \cdots x] $</code>의 suffix이면서 prefix인 것 중 가장 긴 길이가 된다. 즉, 자기 자신에게 KMP를 시도하면 그 결과가 <code>$ failf $</code>가 된다는 점을 알 수 있다. 물론 그 결과가 자기 자신 길이가 되는 것은 제외해야 하므로, <code>$ query $</code>에서 앞에 한 글자를 뗀 문자열에서 <code>$ query $</code>를 매칭하는 KMP를 돌리면 여기서 나오는 <code>$ result $</code>가 바로 <code>$ query $</code>의 <code>$ failf $</code>가 된다는 것을 알 수 있다. 즉, 위의 함수를 그대로 사용해서 원래의 문제는 아래 코드로 해결할 수 있다.</p>
+
+<pre><code>//실패함수 생성
+kmp(query + 1, query, failf + 1, failf);
+// 실제 KMP
+kmp(data, query, result, failf);
+</code></pre>
+
+<h3 id="시간복잡도">시간복잡도</h3>
+
+<p>이 알고리즘의 시간복잡도는 위에서 구현한 <code>kmp</code> 함수에서 <code>$ i $</code>와 <code>$ j $</code>의 움직임을 잘 살피면 구할 수 있다. 우선 <code>$ i $</code>는 항상 <code>$ 1 $</code>씩 증가하거나 그대로이면서 <code>$ n $</code>이 될 때까지 진행된다. 따라서 이 알고리즘의 시간복잡도는 우선 <code>$ O(n + i가~그대로인~횟수) $</code>라고 할 수 있다.</p>
+
+<p>이제 <code>$ i $</code>가 그대로인 횟수를 구해보자. <code>$ i $</code>가 그대로인 경우는 불일치하여 <code>j = failf[j-1];</code>가 실행되는 부분이다. 여기서 <code>j = failf[j-1]</code>가 실행되면 <code>$ j $</code>는 항상 감소한다. 또한 당연히 <code>$ 0 $</code>보다 작아질 수 는 없다. 따라서 이 구문이 실행되는 횟수는 <code>$ j $</code>가 증가되었던 횟수를 넘을 수 없다. 또한 <code>$ j $</code>가 증가되는 경우에는 매칭이 일치하는 경우이므로 이 땐 항상 <code>$ i $</code>도 같이 증가한다. 따라서 <code>$ j $</code>가 증가되는 총량은 <code>$ i $</code>가 증가되는 총량인 <code>$ n $</code>을 넘을 수 없다. 따라서 <code>$ i $</code>가 그대로인 횟수 또한 <code>$ n $</code>을 넘을 수 없다. 따라서 이 함수의 총 시간복잡도는 <code>$ O(n) $</code>이다. 이 함수를 길이가 <code>$ m $</code>인 <code>$ query $</code>에 대해서 한 번, 길이가 <code>$ n $</code>인 <code>$ data $</code>에 대해서 한 번 하므로 총 <code>$ O(n+m) $</code>이다.</p>
+
+<h2 id="z-array">Z-Array</h2>
+
+<h3 id="개요-1">개요</h3>
+
+<p>위에서 구현한 KMP로는 <code>$ data $</code>의 각 위치에 대해 그 위치로부터 앞의 몇 글자가 최대 <code>$ query $</code>의 앞부분과 일치하는지를 구할 수 있다. 그러나 어떤 상황에서는 이와 반대로 각 위치에 대해 그 위치로부터 뒤의 몇 글자가 최대 <code>$ query $</code>의 앞부분과 일치하는지를 구해야 할 수 도 있다. 이런 문제에 적합한 알고리즘이 Z-Array이다.</p>
+
+<p>사실 이 알고리즘은 위의 KMP처럼 <code>$ data $</code>와 <code>$ query $</code>가 따로 나뉘어진 상태가 아니라 한 문자열에 대해서 진행되는 알고리즘이다. 더 정확히 말하자면 한 문자열 <code>$ S $</code>에 대해 아래와 같이 정의되는 <code>$ Z $</code>배열을 구하는 것이 목표이다.</p>
+
+<p><code>$$ Z[i] := S[i \cdots ]의~prefix와~S의~prefix가~가장~길게~겹치는~길이 $$</code></p>
+
+<p>예를 들어 ababac의 <code>$ Z $</code>배열은 [x, 0, 3, 0, 1, 0]이 된다. 정의에 따르면 <code>$ Z[0] $</code>은 당연히 <code>$ S $</code>의 길이일 테니 굳이 구하진 않는다.</p>
+
+<p>이 <code>$ Z $</code>배열을 구할 줄 알면 위에서 언급한 <code>$ data $</code>의 각 위치에 대해 그 위치로부터 뒤의 몇 글자가 최대 <code>$ query $</code>의 앞부분과 일치하는지도 구할 수 있다. 이 방법은 우선 뒤에서 다시 다루고 <code>$ Z $</code>배열을 구하는 방법부터 알아보자.</p>
+
+<p>이 알고리즘에서는 불필요한 비교를 줄이기 위해 <code>$ l $</code>과 <code>$ r $</code>이라는 변수를 이용한다. 위의 KMP에서는 이전 단계에서 비교했을 때 일치한 만큼의 <code>$ query $</code>데이터를 이용해서 <code>$ data $</code>의 비교 위치인 <code>$ i $</code>가 절대로 후진하지 않도록 하여 불필요한 비교를 줄였다. 이 글에서 <code>$ l $</code>과 <code>$ r $</code>은 지금까지 비교하면서 나왔던 겹친 prefix들 중 오른쪽 인덱스가 가장 큰 prefix의 왼쪽과 오른쪽 인덱스를 의미한다. 그렇다는 것은 <code>$ r $</code>이하의 인덱스에 대해서는 이미 비교를 해봤다는 것이므로 이 데이터를 이용하여 <code>$ r $</code>이하의 인덱스에 대해서 불필요한 비교를 하지 않음으로써 성능을 개선한다.</p>
+
+<h3 id="구현-1">구현</h3>
+
+<p>코드와 함께 바로 살펴보자. 우선 처음 시작할 때나 그동안의 결과가 좋지 않아서 현재 비교를 시작하는 <code>$ i $</code>가 <code>$ r $</code>보다 클 경우에는 이전 데이터를 사용할 수 없으므로 하나씩 비교하면서 그 <code>$ l $</code>과 <code>$ r $</code>을 갱신하고 그 결과를 <code>$ Z[i] $</code>에 저장해주면 된다.</p>
+
+<pre><code>int len = strlen(S);
+for(i = 1; i &lt; len; i++) {
+    if(i &gt; r) {
+        l = r = i;
+        while(S[r] == S[r - l]) r++;
+        Z[i] = r - l;
+        r--;
+    }
+    else {
+        ...
+    }
+}
+</code></pre>
+
+<p>이제 <code>$ i $</code>가 <code>$ r $</code>보다 작은 경우를 보자. 이 경우 정의에 따르면 당연히 <code>$ l $</code>은 <code>$ i $</code>보다 작다. 따라서 이를 그림으로 나타내면 다음과 같다.</p>
+
+<p><img src="/images/string_match/zarray0.png#center100" alt="" /></p>
+
+<p><code>$ l $</code>과 <code>$ r $</code>이 있다는 의미는 이미 이는 앞의 <code>$ S[0 \cdots r-l] $</code>과 일치하다는 뜻이다. 이 구간에서 <code>$ i $</code>의 는 <code>$ i - l $</code>과 짝이라고 생각할 수 있고 따라서 <code>$ S[i-l \cdots r-l] $</code>과 <code>$ S[i \cdots r] $</code>은 같다.</p>
+
+<p><img src="/images/string_match/zarray1.png#center100" alt="" /></p>
+
+<p>우리는 <code>$ S[i \cdots] $</code>의 앞부분이 <code>$ S $</code>의 앞부분과 얼마나 겹치는가를 구해야 한다. 그러나 <code>$ S[i \cdots] $</code>의 앞부분 중 <code>$ S[i \cdots r] $</code>은 <code>$ S[i-l \cdots r-l] $</code>과 이미 일치한다. 또한 <code>$ Z[i-l] $</code>는 <code>$ S[i-l \cdots] $</code>의 앞부분이 <code>$ S $</code>의 앞부분과 얼마나 겹치는지를 의미한다. 따라서 <code>$ Z[i-l] $</code>의 값에 따라 두 가지 경우로 나눠서 생각해볼 수 있다.</p>
+
+<p>우선 첫 번째는 <code>$ Z[i-l] $</code>이 <code>$ r - i + 1$</code>보다 작거나 같은 경우이다. 이 경우에는 같은 값을 가지는 범위인 <code>$ S[i-l \cdots r-l] $</code> 안에서 prefix 매칭이 이미 끝났다. 따라서 <code>$ S[i \cdots] $</code>에서도 <code>$ Z[i-l] $</code>길이 뒤에서는 매칭이 불일치하는 것이 당연하므로 <code>$ Z[i] = Z[i-l] $</code>이 된다.</p>
+
+<pre><code>int len = strlen(S);
+for(i = 1; i &lt; len; i++) {
+    if(i &gt; r) {
+        l = r = i;
+        while(S[l] == S[r - l]) r++;
+        Z[i] = r - l;
+        r--;
+    }
+    else {
+        if(Z[i - l] &lt;= r - i + 1) Z[i] = Z[i - l];
+        else {
+            ...
+        }
+    }
+}
+</code></pre>
+
+<p>두 번째는 <code>$ Z[i-l] $</code>이 <code>$ r - i + 1$</code>보다 큰 경우이다. 이 경우엔 일단 <code>$ r - i + 1$</code>만큼은 매칭이 된다고 확신할 수 있지만 그 뒤로는 아무도 모른다. 왜냐하면 <code>$ S[r-l \cdots] $</code>이 <code>$ S[r \cdots] $</code>과 한 글자라도 같다는 것을 아무도 보장해줄 수 없기 때문이다. 따라서 이 경우에는 <code>$ r $</code>이후 부분은 직접 비교하면서 <code>$ l $</code>과 <code>$ r $</code>을 갱신하고, 그 결과를 <code>$ Z[i] $</code>에 비교하면 된다.</p>
+
+<pre><code>int len = strlen(S);
+for(i = 1; i &lt; len; i++) {
+    if(i &gt; r) {
+        l = r = i;
+        while(S[l] == S[r - l]) r++;
+        Z[i] = r - l;
+        r--;
+    }
+    else {
+        if(Z[i - l] &lt;= r - i + 1) Z[i] = Z[i - l];
+        else {
+            l = i;
+            while(S[l] == S[r - l]) r++;
+            Z[i] = r - l;
+            r--;
+        }
+    }
+}
+</code></pre>
+
+<p>이제 이 알고리즘을 가지고 원래 <code>$ data $</code>와 <code>$ query $</code>로 정의했던 문제를 해결해보자. 이는 <code>$ query $</code>와 <code>$ data $</code>를 합친 문자열에서 <code>$ Z $</code>배열을 구하는 것으로 해결할 수 있다. <code>$ data $</code>의 길이를 <code>$ n $</code>, <code>$ query $</code>의 길이를 <code>$ m $</code>, <code>$ query $</code>뒤에 <code>$ data $</code>를 붙인 문자열을 <code>$ S $</code>이라 하고 이 <code>$ S $</code>에 대해 <code>$ Z $</code>배열을 구해보자. 그렇다면 <code>$ Z $</code>배열에서 <code>$ data $</code>부분인 <code>$ Z[m \cdots] $</code>이 우리가 원하는 부분임을 알 수 있다. 왜냐하면 <code>$ S[m + i \cdots] $</code>는 <code>$ data[i \cdots] $</code>와 같고, <code>$ Z $</code>배열의 정의에 따르면 <code>$ Z[m + i] $</code>는 <code>$ S[m + i \cdots] $</code>의 앞부분이 <code>$ S $</code>의 앞부분과 얼마나 일치하는가를 의미하는데, 여기서 <code>$ S[m + i \cdots] $</code>의 앞부분은 <code>$ data[i \cdots] $</code>의 앞부분이고 <code>$ S $</code>의 앞부분은 <code>$ query $</code>의 앞부분이기 때문이다. 물론 더 정확하게 해주기 위해서는 이렇게 얻은 값 중 <code>$ m $</code>보다 큰 값은 <code>$ m $</code>으로 바꿔주는 작업을 해야한다.</p>
+
+<p>이렇게 우리가 원하는 문제를 해결하기 위해 여러 문자열을 붙인 뒤 그 위에서 여러가지 알고리즘을 적용하는 테크닉은 종종 쓰이니 알아두면 좋다. 그냥 문자열을 뒤에 바로 붙여서 사용하기도 하고, 각 문자열 사이에 특수문자를 집어넣거나 심지어 모든 문자 사이에 특수문자를 집어넣는 문자열은 만드는 등의 테크닉을 사용하기도 한다. 사실 위의 문제에서도 <code>$ query $</code>와 <code>$ data $</code>사이에 특수문자를 하나 집어넣어서 <code>$ Z $</code>배열을 구하면 이 특수문자는 문자열의 다른 문자와 일치할 일이 없으므로 <code>$ m $</code>보다 큰 값을 <code>$ m $</code>으로 바꿔주는 작업을 생략하게 해준다.</p>
+
+<h3 id="시간복잡도-1">시간복잡도</h3>
+
+<p>이 알고리즘의 시간복잡도는 <code>for</code>문과 <code>while</code>문만 살펴보면 된다. 우선 <code>for</code>문은 <code>$ i $</code>가 <code>$ 1 $</code>부터 <code>$ len $</code>까지 증가하므로 총 <code>$ len $</code>번 돌아가게 된다. 그리고 이 안에서 <code>while</code>문에 실행되는데, 이 <code>while</code>문은 실행될 때마다 <code>$ r $</code>이 증가한다. 또한 <code>$ r $</code>은 한 번의 <code>for</code>문 루프에서 최대 <code>$ 1 $</code>씩만 감소한다. 따라서 <code>$ r $</code>이 <code>$ len $</code>을 넘을 수는 없으므로 총 <code>while</code>문은 실행되는 횟수는 <code>$ 2 \times len $</code>을 넘을 수 없다. 따라서 이 알고리즘의 시간복잡도는 <code>$ O(len) $</code>이라 할 수 있다. 여기서 <code>$ S $</code>의 길이 <code>$ len $</code>은 우리가 길이가 <code>$ n $</code>인 <code>$ data $</code>와 <code>$ m $</code>인 <code>$ query $</code>를 붙여서 만들어 <code>$ n + m $</code>이므로 최종 시간복잡도는 <code>$ O(n + m) $</code>이다.</p>
+
+</section>
+
+
+
+<div class="paging post-paging">
+  
+  
+  <a class="left" href="https://ialy1595.github.io/post/parametric-search/" rel="prev">
+    <i class="fa fa-play fa-rotate-180" aria-hidden="true"></i> <span>파라매트릭 서치 (Parametric Search)</span>
+  </a>
+  
+  
+  
+</div>
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+
+(function() {
+    
+    
+    if (window.location.hostname == "localhost")
+        return;
+
+    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+    var disqus_shortname = 'ialy1595';
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com/" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+<div class="post-meta-code">
+  <div class="desc">
+    public string description() {
+    <div class="desc">val author = "
+    
+        <a href="mailto:ialy12006@gmail.com">ialy1595</a>
+    ";
+    </div>
+    
+    <div class="desc">
+      val categories = [
+      
+      
+      <a href="https://ialy1595.github.io//categories/code">"code"</a>
+      
+      ];
+    </div>
+    
+	
+    <div class="desc">
+      val subcategories = [
+      
+      
+      <a href="https://ialy1595.github.io//subcategories/algorithm">"algorithm"</a>
+      
+      ];
+    </div>
+    
+    }
+  </div>
+  <div class="desc">
+    public string tags() {
+      <div class="desc">
+        val tags = [
+        
+          
+          <a href="https://ialy1595.github.io/tags/string-match">"string match"</a>
+          
+          <a href="https://ialy1595.github.io/tags/string-search">"string search"</a>
+          
+          <a href="https://ialy1595.github.io/tags/kmp">"KMP"</a>
+          
+          <a href="https://ialy1595.github.io/tags/z-array">"Z-Array"</a>
+          
+          <a href="https://ialy1595.github.io/tags/suffix">"suffix"</a>
+          
+          <a href="https://ialy1595.github.io/tags/prefix">"prefix"</a>
+          
+        
+        ];
+      </div>
+    }
+  </div>
+  
+</div>
+
+
+
+  </div>
+  <div class="blank"></div>
+</div>
+<footer class="footer">
+  <div class="share">
+    <a href="https://github.com/ialy1595" title="Github" target="_blank"><i class="fa fa-github"></i></a>
+    <a href="mailto:ialy12006@gmail.com" title="Email" target="_blank"><i class="fa fa-envelope"></i></a>
+    <a rel="alternate" type="application/rss+xml" href="https://ialy1595.github.io/index.xml" title="RSS feed" target="_blank"><i class="fa fa-rss"></i></a>
+  </div>
+  COPYRIGHT (C) <a href="https://blog.lulab.net">DONGGEUN,BANG</a>. ALL RIGHTS RESERVED.
+</footer>
+
+</body>
+</html>
