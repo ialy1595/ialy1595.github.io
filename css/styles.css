@@ -230,7 +230,7 @@ bb {
 
 .container {
   margin: auto;
-  max-width: 770px;
+  max-width: 780px;
   padding: 20px 30px 15px 30px;
   font-size: 18px;
   font-weight: 400;
@@ -417,9 +417,6 @@ bb {
   color: #8C8CD9;
   font-size: 1.4rem;
   text-align: center;
-}
-
-.paging:hover {
 }
 
 .paging a, a:visited {
