@@ -336,18 +336,18 @@ for(i = 1; i &lt; len; i++) {
 
 <p>우리는 <code>$ S[i \cdots] $</code>의 앞부분이 <code>$ S $</code>의 앞부분과 얼마나 겹치는가를 구해야 한다. 그러나 <code>$ S[i \cdots] $</code>의 앞부분 중 <code>$ S[i \cdots r] $</code>은 <code>$ S[i-l \cdots r-l] $</code>과 이미 일치한다. 또한 <code>$ Z[i-l] $</code>는 <code>$ S[i-l \cdots] $</code>의 앞부분이 <code>$ S $</code>의 앞부분과 얼마나 겹치는지를 의미한다. 따라서 <code>$ Z[i-l] $</code>의 값에 따라 두 가지 경우로 나눠서 생각해볼 수 있다.</p>
 
-<p>우선 첫 번째는 <code>$ Z[i-l] $</code>이 <code>$ r - i + 1$</code>보다 작거나 같은 경우이다. 이 경우에는 같은 값을 가지는 범위인 <code>$ S[i-l \cdots r-l] $</code> 안에서 prefix 매칭이 이미 끝났다. 따라서 <code>$ S[i \cdots] $</code>에서도 <code>$ Z[i-l] $</code>길이 뒤에서는 매칭이 불일치하는 것이 당연하므로 <code>$ Z[i] = Z[i-l] $</code>이 된다.</p>
+<p>우선 첫 번째는 <code>$ Z[i-l] $</code>이 <code>$ r - i$</code>보다 작거나 같은 경우이다. 이 경우에는 같은 값을 가지는 범위인 <code>$ S[i-l \cdots r-l] $</code> 안에서 prefix 매칭이 이미 끝났다. 따라서 <code>$ S[i \cdots] $</code>에서도 <code>$ Z[i-l] $</code>길이 뒤에서는 매칭이 불일치하는 것이 당연하므로 <code>$ Z[i] = Z[i-l] $</code>이 된다.</p>
 
 <pre><code>int len = strlen(S);
 for(i = 1; i &lt; len; i++) {
     if(i &gt; r) {
         l = r = i;
-        while(S[l] == S[r - l]) r++;
+        while(S[r] == S[r - l]) r++;
         Z[i] = r - l;
         r--;
     }
     else {
-        if(Z[i - l] &lt;= r - i + 1) Z[i] = Z[i - l];
+        if(Z[i - l] &lt;= r - i) Z[i] = Z[i - l];
         else {
             ...
         }
@@ -355,21 +355,21 @@ for(i = 1; i &lt; len; i++) {
 }
 </code></pre>
 
-<p>두 번째는 <code>$ Z[i-l] $</code>이 <code>$ r - i + 1$</code>보다 큰 경우이다. 이 경우엔 일단 <code>$ r - i + 1$</code>만큼은 매칭이 된다고 확신할 수 있지만 그 뒤로는 아무도 모른다. 왜냐하면 <code>$ S[r-l \cdots] $</code>이 <code>$ S[r \cdots] $</code>과 한 글자라도 같다는 것을 아무도 보장해줄 수 없기 때문이다. 따라서 이 경우에는 <code>$ r $</code>이후 부분은 직접 비교하면서 <code>$ l $</code>과 <code>$ r $</code>을 갱신하고, 그 결과를 <code>$ Z[i] $</code>에 비교하면 된다.</p>
+<p>두 번째는 <code>$ Z[i-l] $</code>이 <code>$ r - i$</code>보다 큰 경우이다. 이 경우엔 일단 <code>$ r - i$</code>만큼은 매칭이 된다고 확신할 수 있지만 그 뒤로는 아무도 모른다. 왜냐하면 <code>$ S[r-l \cdots] $</code>이 <code>$ S[r \cdots] $</code>과 한 글자라도 같다는 것을 아무도 보장해줄 수 없기 때문이다. 따라서 이 경우에는 <code>$ r $</code>이후 부분은 직접 비교하면서 <code>$ l $</code>과 <code>$ r $</code>을 갱신하고, 그 결과를 <code>$ Z[i] $</code>에 비교하면 된다.</p>
 
 <pre><code>int len = strlen(S);
 for(i = 1; i &lt; len; i++) {
     if(i &gt; r) {
         l = r = i;
-        while(S[l] == S[r - l]) r++;
+        while(S[r] == S[r - l]) r++;
         Z[i] = r - l;
         r--;
     }
     else {
-        if(Z[i - l] &lt;= r - i + 1) Z[i] = Z[i - l];
+        if(Z[i - l] &lt;= r - i) Z[i] = Z[i - l];
         else {
             l = i;
-            while(S[l] == S[r - l]) r++;
+            while(S[r] == S[r - l]) r++;
             Z[i] = r - l;
             r--;
         }
