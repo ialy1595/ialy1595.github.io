@@ -183,7 +183,7 @@ return res;
 
 <h1 id="문자열-매칭-z-algorithm">문자열 매칭 (Z algorithm)</h1>
 
-<p>한글을 분해하는 함수를 완성했으니 이제 쿼리와 데이터를 모두 분해시킨 후 매칭 함수를 돌리면 된다. 사실 여기서 그냥 원래 있는 <code>indexOf</code>함수를 가져다 써도 된다. 그러나 <code>indexOf</code>는 맨 첫 번째 매칭만 반환하기 때문에, 만약에 모든 매칭 결과를 얻고 싶다면 그 뒤의 문자열에 대해 계속 <code>indexOf</code>함수를 실행해야 한다. <code>indexOf</code>의 내부 구현을 잘 몰라서 자세히 말하긴 힘들지만, 이러한 방식은 잘못하면 시간복잡도가 제곱으로 걸릴 수 있다. 따라서 선형시간 안에 모든 매칭을 찾는 함수를 구현하고 싶었고, 이를 위해 Z algorithm을 써서 직접 문자열 매칭을 구현했다. Z algorithm의 구현부는 <a href="http://localhost:1313/post/string-match/#z-array">여기</a>를 참고하면 된다.</p>
+<p>한글을 분해하는 함수를 완성했으니 이제 쿼리와 데이터를 모두 분해시킨 후 매칭 함수를 돌리면 된다. 사실 여기서 그냥 원래 있는 <code>indexOf</code>함수를 가져다 써도 된다. 그러나 <code>indexOf</code>는 맨 첫 번째 매칭만 반환하기 때문에, 만약에 모든 매칭 결과를 얻고 싶다면 그 뒤의 문자열에 대해 계속 <code>indexOf</code>함수를 실행해야 한다. <code>indexOf</code>의 내부 구현을 잘 몰라서 자세히 말하긴 힘들지만, 이러한 방식은 잘못하면 시간복잡도가 제곱으로 걸릴 수 있다. 따라서 선형시간 안에 모든 매칭을 찾는 함수를 구현하고 싶었고, 이를 위해 Z algorithm을 써서 직접 문자열 매칭을 구현했다. Z algorithm의 구현부는 <a href="https://ialy1595.github.io/post/string-match/#z-array">여기</a>를 참고하면 된다.</p>
 
 <p>Z algorithm은 모든 위치에 대해 최대 몇 글자까지 매칭되는지를 알려준다. 그러나 우리는 전부 매칭된 인덱스만 찾으면 되니 저 배열에서 값이 쿼리의 길이인 인덱스만 모아서 반환하면 된다.</p>
 
