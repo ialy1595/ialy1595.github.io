@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>User Experience on ialy&#39;s blog</title>
-    <link>https://ialy1595.github.io/subcategories/user-experience/</link>
-    <description>Recent content in User Experience on ialy&#39;s blog</description>
+    <title>Normalize on ialy&#39;s blog</title>
+    <link>https://ialy1595.github.io/tags/normalize/</link>
+    <description>Recent content in Normalize on ialy&#39;s blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ko-KR</language>
     <managingEditor>ialy12006@gmail.com (ialy1595)</managingEditor>
     <webMaster>ialy12006@gmail.com (ialy1595)</webMaster>
     <lastBuildDate>Tue, 01 Sep 2020 15:39:16 +0900</lastBuildDate>
     
-	<atom:link href="https://ialy1595.github.io/subcategories/user-experience/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://ialy1595.github.io/tags/normalize/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
@@ -22,15 +22,6 @@
       <description>이 프로젝트의 결과는 여기, 코드는 여기에서 볼 수 있습니다.
 개발 배경 아래 배경에 관한 자세한 설명은 이전 글에서 다뤘으므로 있으니 여기선 간략하게만 설명하고 넘어가자.
 한글의 incremental search 요즘 점점 늘어나고 있는 검색 관련 UX로 incremental search가 있다.</description>
-    </item>
-    
-    <item>
-      <title>한글의 incremental search UX 와 인코딩</title>
-      <link>https://ialy1595.github.io/post/korean-incremental-search/</link>
-      <pubDate>Sun, 03 Mar 2019 17:23:53 +0900</pubDate>
-      <author>ialy12006@gmail.com (ialy1595)</author>
-      <guid>https://ialy1595.github.io/post/korean-incremental-search/</guid>
-      <description>한글 검색의 문제점 우리는 수많은 데이터 속에서 살아간다. 이렇게 많은 데이터 속에서 내가 원하는 정보를 얻기 위해 검색이라는 기능은 필수적이다. 세계적으로 보면 구글, 한국에서 보면 네이버 처럼 검색 엔진을 기반으로 둔 기업이 크게 성장한 것만 봐도 검색이라는 기능이 얼마나 중요한지 알 수 있다.</description>
     </item>
     
   </channel>

@@ -8,10 +8,21 @@
     <language>ko-KR</language>
     <managingEditor>ialy12006@gmail.com (ialy1595)</managingEditor>
     <webMaster>ialy12006@gmail.com (ialy1595)</webMaster>
-    <lastBuildDate>Sun, 03 Mar 2019 17:23:53 +0900</lastBuildDate>
+    <lastBuildDate>Tue, 01 Sep 2020 15:39:16 +0900</lastBuildDate>
     
 	<atom:link href="https://ialy1595.github.io/tags/incremental-search/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>npm 패키지 korea-index-of 개발기</title>
+      <link>https://ialy1595.github.io/post/korean-index-of/</link>
+      <pubDate>Tue, 01 Sep 2020 15:39:16 +0900</pubDate>
+      <author>ialy12006@gmail.com (ialy1595)</author>
+      <guid>https://ialy1595.github.io/post/korean-index-of/</guid>
+      <description>이 프로젝트의 결과는 여기, 코드는 여기에서 볼 수 있습니다.
+개발 배경 아래 배경에 관한 자세한 설명은 이전 글에서 다뤘으므로 있으니 여기선 간략하게만 설명하고 넘어가자.
+한글의 incremental search 요즘 점점 늘어나고 있는 검색 관련 UX로 incremental search가 있다.</description>
+    </item>
     
     <item>
       <title>한글의 incremental search UX 와 인코딩</title>

@@ -3,6 +3,11 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>https://ialy1595.github.io/post/korean-index-of/</loc>
+    <lastmod>2020-09-01T15:39:16+09:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://ialy1595.github.io/post/string-match/</loc>
     <lastmod>2020-07-29T18:52:50+09:00</lastmod>
   </url>
@@ -145,7 +150,7 @@
   
   <url>
     <loc>https://ialy1595.github.io/categories/code/</loc>
-    <lastmod>2020-07-29T18:52:50+09:00</lastmod>
+    <lastmod>2020-09-01T15:39:16+09:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -241,7 +246,7 @@
   
   <url>
     <loc>https://ialy1595.github.io/tags/hangeul/</loc>
-    <lastmod>2019-03-03T17:23:53+09:00</lastmod>
+    <lastmod>2020-09-01T15:39:16+09:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -253,7 +258,7 @@
   
   <url>
     <loc>https://ialy1595.github.io/tags/incremental-search/</loc>
-    <lastmod>2019-03-03T17:23:53+09:00</lastmod>
+    <lastmod>2020-09-01T15:39:16+09:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -283,7 +288,7 @@
   
   <url>
     <loc>https://ialy1595.github.io/tags/korean/</loc>
-    <lastmod>2019-03-03T17:23:53+09:00</lastmod>
+    <lastmod>2020-09-01T15:39:16+09:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -300,6 +305,18 @@
   </url>
   
   <url>
+    <loc>https://ialy1595.github.io/tags/normalize/</loc>
+    <lastmod>2020-09-01T15:39:16+09:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://ialy1595.github.io/tags/npm/</loc>
+    <lastmod>2020-09-01T15:39:16+09:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>https://ialy1595.github.io/tags/parametric-search/</loc>
     <lastmod>2020-07-24T17:53:52+09:00</lastmod>
     <priority>0</priority>
@@ -307,7 +324,7 @@
   
   <url>
     <loc>https://ialy1595.github.io/post/</loc>
-    <lastmod>2020-07-29T18:52:50+09:00</lastmod>
+    <lastmod>2020-09-01T15:39:16+09:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -337,7 +354,7 @@
   
   <url>
     <loc>https://ialy1595.github.io/tags/search/</loc>
-    <lastmod>2019-03-03T17:23:53+09:00</lastmod>
+    <lastmod>2020-09-01T15:39:16+09:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -427,7 +444,7 @@
   
   <url>
     <loc>https://ialy1595.github.io/subcategories/user-experience/</loc>
-    <lastmod>2019-03-03T17:23:53+09:00</lastmod>
+    <lastmod>2020-09-01T15:39:16+09:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -439,7 +456,7 @@
   
   <url>
     <loc>https://ialy1595.github.io/tags/ux/</loc>
-    <lastmod>2019-03-03T17:23:53+09:00</lastmod>
+    <lastmod>2020-09-01T15:39:16+09:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -457,7 +474,7 @@
   
   <url>
     <loc>https://ialy1595.github.io/</loc>
-    <lastmod>2020-07-29T18:52:50+09:00</lastmod>
+    <lastmod>2020-09-01T15:39:16+09:00</lastmod>
     <priority>0</priority>
   </url>
   

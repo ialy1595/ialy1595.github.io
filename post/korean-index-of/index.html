@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-134848712-1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+  
+    gtag('config', 'UA-134848712-1');
+  </script>
+  
+
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta property="og:image" content="https://ialy1595.github.io/images/logo-og.png">
+  <title>npm 패키지 korea-index-of 개발기  | ialy&#39;s blog</title>
+  <link rel="icon" href="/favicon.ico" type="image/x-icon">
+  <link rel="canonical" href="https://ialy1595.github.io/post/korean-index-of/">
+  
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/monokai-sublime.min.css">
+  <link rel="stylesheet" href="/css/styles.css">
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+  <script type="text/javascript" async
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+  MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [['$','$'], ['\\(','\\)']],
+    displayMath: [['$$','$$']],
+    processEscapes: true,
+    processEnvironments: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+    TeX: { equationNumbers: { autoNumber: "AMS" },
+         extensions: ["AMSmath.js", "AMSsymbols.js"] }
+  }
+  });
+  MathJax.Hub.Queue(function() {
+    
+    
+    
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i = 0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script> 
+  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/gist-embed/2.7.1/gist-embed.min.js"></script>
+</head>
+
+<body>
+<div class="wrap">
+  <div class="navbar">
+    <ul>
+      <li><a href="/">HELLO WORLD!</a></li>
+      <li><a href="/categories">CATEGORIES</a></li>
+      <li><a href="/tags">TAGS</a></li>
+      <li><a href="/about">ABOUT ME</a></li>
+    </ul>
+  </div>
+  <div class="container">
+
+
+
+  <div class="title">
+  
+  
+  
+  <a href="/categories/code">
+    <img src="/images/logo-code.png" width="260px" height="48px" />
+  </a>
+  
+</div>
+	<a href="https://ialy1595.github.io/post/korean-index-of/">
+  <div class="post-title">
+    
+	
+	<img src="/images/post-title-icon-code.png" />
+	
+    <div class="post-meta">
+      <time>01 Sep 2020, 15:39</time>
+      <h1>npm 패키지 korea-index-of 개발기</h1>
+    </div>
+  </div>
+</a>
+
+<section class="post-content">
+  <div class="post-toc-container1">
+    <div class="post-toc-container2">
+      <div class="post-toc">
+        <span class="title">
+          Table of contents
+        </span>
+        <nav id="TableOfContents">
+<ul>
+<li><a href="#개발-배경">개발 배경</a>
+<ul>
+<li><a href="#한글의-incremental-search">한글의 incremental search</a></li>
+<li><a href="#한글의-unicode-저장-방식">한글의 Unicode 저장 방식</a></li>
+</ul></li>
+<li><a href="#한글-분해하기">한글 분해하기</a></li>
+<li><a href="#문자열-매칭-z-algorithm">문자열 매칭 (Z algorithm)</a></li>
+<li><a href="#구현된-기능들">구현된 기능들</a>
+<ul>
+<li><a href="#koreanindexof-koreanallindexof"><code>koreanIndexOf</code>, <code>koreanAllIndexOf</code></a></li>
+<li><a href="#koreanindexrangeof-koreanallindexrangeof"><code>koreanIndexRangeOf</code>, <code>koreanAllIndexRangeOf</code></a></li>
+<li><a href="#koreanonsetindexof-koreanallonsetindexof"><code>koreanOnsetIndexOf</code>, <code>koreanAllOnsetIndexOf</code></a></li>
+</ul></li>
+<li><a href="#normailze-와-비교"><code>normailze()</code>와 비교</a></li>
+</ul>
+</nav>
+      </div>
+    </div>
+  </div>
+  
+
+<p>이 프로젝트의 결과는 <a href="https://www.npmjs.com/package/korean-index-of">여기</a>, 코드는 <a href="https://github.com/ialy1595/korean-index-of">여기</a>에서 볼 수 있습니다.</p>
+
+<h1 id="개발-배경">개발 배경</h1>
+
+<p>아래 배경에 관한 자세한 설명은 <a href="https://ialy1595.github.io/post/korean-incremental-search/">이전 글</a>에서 다뤘으므로 있으니 여기선 간략하게만 설명하고 넘어가자.</p>
+
+<h2 id="한글의-incremental-search">한글의 incremental search</h2>
+
+<p>요즘 점점 늘어나고 있는 검색 관련 UX로 <a href="https://en.wikipedia.org/wiki/Incremental_search">incremental search</a>가 있다. 간단히 설명하자면 검색할 내용을 모두 친 다음에 검색 버튼을 누를 때 결과를 보여주는 것이 아니라 한글자 한글자 칠 때마다 갱신된 결과를 실시간으로 보여주는 것이다. 특히 SPA와 Virtual DOM이 나오면서 incremental search로 구현을 해도 랜더링 속도가 괜찮기 때문에 더욱 늘어나는 것 같다. 단순히 검색의 메인 결과를 보여주는 것 뿐만 아니라 페이지에서 찾기, 자동 완성 목록 등 다양한 곳에서도 이와 비슷한 UX를 구성하고 있다.</p>
+
+<p>그러나 한글은 초성 종성 중성을 한 글자에 합치는 시스템을 이루기 때문에 incremental search에 적합하지 못하다. 예를 들어 한글로 <code>코드</code>를 칠 경우 그 과정은 <code>ㅋ</code>, <code>코</code>, <code>콛</code>, <code>코드</code>가 된다. 그러나 일반적인 문자열 매칭 함수로는 그중 <code>코</code>와 <code>코드</code>만이 포함된다. 따라서 실제로 보여져야 하는 결과나 나타났다가 사라졌다가 하는 좋지 못한 UX를 제공하게 된다.</p>
+
+<h2 id="한글의-unicode-저장-방식">한글의 Unicode 저장 방식</h2>
+
+<p>이 문제를 해결하려면 일단 한글의 초성 중성 종성을 분해해서 다뤄야 하므로 한글이 디지털상에 어떻게 저장되어 있는지 확인해야 한다. 결론만 말하자면 한글은 초성 19글자, 중성 21글자, 종성 27글자 + 받침이 없는 경우가 전부 조합되어 19*21*28 = 11172 글자가 순서대로 저장되어 있다.</p>
+
+<p><img src="/images/korean_UX/cjj0.PNG#center75" alt="" /></p>
+
+<p>따라서 중성과 종성의 갯수로 나눈 나머지와 몫을 잘 활용하면 모든 글자를 쉽게 분해할 수 있다.</p>
+
+<h1 id="한글-분해하기">한글 분해하기</h1>
+
+<p>위 내용을 토대로 한글을 분해하는 작업을 해보자. 여기서 할 작업은 한글이 들어오면 실제로 우리가 타이핑하는 형태로 나열하는 것이다. 예를 들어 <code>원</code>이라는 글자가 들어오면 <code>[ㅇ, ㅜ, ㅓ, ㄴ]</code>을 반환하는 것이 목표이다.</p>
+
+<p>먼저 현재 들어올 문자가 내가 분해할 대상인지 아닌지부터 판별해야 한다. 우리가 분해할 글자는 <code>가</code>부터 <code>힣</code>까지의 완전체 한글이고, 다행히도 이 모든 글자는 위에서 말한 3차원 배열과 같은 형태로 순서대로 저장되어있다. 따라서 해당 범위의 첫 글자인 <code>가</code>와 마지막 글자인 <code>힣</code>의 유니코드를 이용하면 된다. 각 글자의 유니코드는 <code>charCodeAt(0)</code>을 통해 얻을 수 있다.</p>
+
+<pre><code>const ga = &quot;가&quot;.charCodeAt(0);
+const hih = &quot;힣&quot;.charCodeAt(0);
+if(c.charCodeAt(0) &lt; ga || c.charCodeAt(0) &gt; hih) return [c];
+</code></pre>
+
+<p>나머지는 위에서 설명했듯이 중성과 종성의 갯수에 잘 맞춰서 저장되에 있으니 몫과 나머지를 잘 사용해서 구현하면 된다.</p>
+
+<pre><code>const choseong = [
+    &quot;ㄱ&quot;, &quot;ㄲ&quot;, &quot;ㄴ&quot;, &quot;ㄷ&quot;, &quot;ㄸ&quot;, &quot;ㄹ&quot;, &quot;ㅁ&quot;, &quot;ㅂ&quot;, &quot;ㅃ&quot;, &quot;ㅅ&quot;, 
+    &quot;ㅆ&quot;, &quot;ㅇ&quot;, &quot;ㅈ&quot;, &quot;ㅉ&quot;, &quot;ㅊ&quot;, &quot;ㅋ&quot;, &quot;ㅌ&quot;, &quot;ㅍ&quot;, &quot;ㅎ&quot;
+];
+
+const jungseong = [
+    [&quot;ㅏ&quot;], [&quot;ㅐ&quot;], [&quot;ㅑ&quot;], [&quot;ㅒ&quot;], [&quot;ㅓ&quot;], [&quot;ㅔ&quot;], [&quot;ㅕ&quot;], [&quot;ㅖ&quot;], [&quot;ㅗ&quot;], 
+    [&quot;ㅗ&quot;, &quot;ㅏ&quot;], [&quot;ㅗ&quot;, &quot;ㅐ&quot;], [&quot;ㅗ&quot;, &quot;ㅣ&quot;], [&quot;ㅛ&quot;], [&quot;ㅜ&quot;], [&quot;ㅜ&quot;, &quot;ㅓ&quot;], 
+    [&quot;ㅜ&quot;, &quot;ㅔ&quot;], [&quot;ㅜ&quot;, &quot;ㅣ&quot;], [&quot;ㅠ&quot;], [&quot;ㅡ&quot;], [&quot;ㅡ&quot;, &quot;ㅣ&quot;], [&quot;ㅣ&quot;]
+];
+
+const jongseong = [
+    [], [&quot;ㄱ&quot;], [&quot;ㄲ&quot;], [&quot;ㄱ&quot;, &quot;ㅅ&quot;], [&quot;ㄴ&quot;], [&quot;ㄴ&quot;, &quot;ㅈ&quot;], [&quot;ㄴ&quot;, &quot;ㅎ&quot;], 
+    [&quot;ㄷ&quot;], [&quot;ㄹ&quot;], [&quot;ㄹ&quot;, &quot;ㄱ&quot;], [&quot;ㄹ&quot;, &quot;ㅁ&quot;], [&quot;ㄹ&quot;, &quot;ㅂ&quot;], [&quot;ㄹ&quot;, &quot;ㅅ&quot;], 
+    [&quot;ㄹ&quot;, &quot;ㅌ&quot;], [&quot;ㄹ&quot;, &quot;ㅍ&quot;], [&quot;ㄹ&quot;, &quot;ㅎ&quot;], [&quot;ㅁ&quot;], [&quot;ㅂ&quot;], [&quot;ㅂ&quot;, &quot;ㅅ&quot;], 
+    [&quot;ㅅ&quot;], [&quot;ㅆ&quot;], [&quot;ㅇ&quot;], [&quot;ㅈ&quot;], [&quot;ㅊ&quot;], [&quot;ㅋ&quot;], [&quot;ㅌ&quot;], [&quot;ㅍ&quot;], [&quot;ㅎ&quot;]
+];
+
+const korCode = (c.charCodeAt(0) - ga);
+
+const res = [
+    choseong[Math.floor(korCode / (jungseong.length * jongseong.length))],
+    ...jungseong[Math.floor((korCode % (jungseong.length * jongseong.length)) / jongseong.length)],
+    ...jongseong[korCode % jongseong.length]
+]
+return res;
+</code></pre>
+
+<p>여기서 주의할 점은 중성의 <code>ㅘ</code>나 종성의 <code>ㄶ</code>은 두 글자가 합쳐져 있으므로 이를 잘 생각해서 배열을 만들어야 한다는 것이다.</p>
+
+<h1 id="문자열-매칭-z-algorithm">문자열 매칭 (Z algorithm)</h1>
+
+<p>한글을 분해하는 함수를 완성했으니 이제 쿼리와 데이터를 모두 분해시킨 후 매칭 함수를 돌리면 된다. 사실 여기서 그냥 원래 있는 <code>indexOf</code>함수를 가져다 써도 된다. 그러나 <code>indexOf</code>는 맨 첫 번째 매칭만 반환하기 때문에, 만약에 모든 매칭 결과를 얻고 싶다면 그 뒤의 문자열에 대해 계속 <code>indexOf</code>함수를 실행해야 한다. <code>indexOf</code>의 내부 구현을 잘 몰라서 자세히 말하긴 힘들지만, 이러한 방식은 잘못하면 시간복잡도가 제곱으로 걸릴 수 있다. 따라서 선형시간 안에 모든 매칭을 찾는 함수를 구현하고 싶었고, 이를 위해 Z algorithm을 써서 직접 문자열 매칭을 구현했다. Z algorithm의 구현부는 <a href="http://localhost:1313/post/string-match/#z-array">여기</a>를 참고하면 된다.</p>
+
+<p>Z algorithm은 모든 위치에 대해 최대 몇 글자까지 매칭되는지를 알려준다. 그러나 우리는 전부 매칭된 인덱스만 찾으면 되니 저 배열에서 값이 쿼리의 길이인 인덱스만 모아서 반환하면 된다.</p>
+
+<pre><code>return Z.slice(query.length).reduce((a, x, i) =&gt; {
+    if(x &gt;= query.length) a.push(i);
+    return a;
+}, [])
+</code></pre>
+
+<h1 id="구현된-기능들">구현된 기능들</h1>
+
+<h2 id="koreanindexof-koreanallindexof"><code>koreanIndexOf</code>, <code>koreanAllIndexOf</code></h2>
+
+<p>위에서 만든 분해 함수로 문자열의 각 문자들을 분해한 후 이어붙인 다음 여기에 위에서 구현한 Z algorithm을 적용시키면 모든 매칭 결과를 선형시간 안에 얻는 <code>koreanAllIndexOf</code>를 구현할 수 있다. 그리고 이 결과에서 첫 번째 값, 혹은 배열이 비어있을 경우 <code>-1</code>을 반환하도록 하면 <code>koreanIndexOf</code>를 구현할 수 있다.</p>
+
+<pre><code>import { koreanIndexOf, koreanAllIndexOf } from 'korean-index-of';
+
+koreanIndexOf(&quot;콛&quot;, &quot;내 코드&quot;);
+/// 2
+
+koreanAllIndexOf(&quot;갭&quot;, &quot;개와 개불과 개발자 사이의 갭&quot;);
+/// [3, 7, 15]
+</code></pre>
+
+<h2 id="koreanindexrangeof-koreanallindexrangeof"><code>koreanIndexRangeOf</code>, <code>koreanAllIndexRangeOf</code></h2>
+
+<p>일반적인 매칭 함수들은 매칭의 끝 위치를 따로 알려주진 않는다. 왜냐하면 쿼리의 길이가 곧 매칭의 길이가 되기 때문이다. 그러나 한글에서는 두 값이 다를 수 있다. 왜냐하면 마지막 자음이 초성이 될지 종성이 될지 모르기 때문이다. 예를 들어 <code>갭</code>은 <code>갭</code>과도 매칭이 되고 <code>개발</code>과도 매칭이 되는데 첫 번째의 경우에는 한 글자, 두 번째의 경우에는 두 글자와 매칭이 된다. 이렇게 한글을 매칭할 경우에는 마지막 매칭 위치도 같이 알려줘야 한다. 그리고 이는 처음에 글자를 분해할 때 원래 문자열에서의 위치를 저장하여 나중에 매칭 결과와 비교하면 알아낼 수 있다.</p>
+
+<pre><code>import { koreanIndexRangeOf, koreanAllIndexRangeOf } from 'korean-index-of';
+
+koreanIndexRangeOf(&quot;콛&quot;, &quot;내 코드&quot;);
+/// [2, 3]
+
+koreanAllIndexRangeOf(&quot;갭&quot;, &quot;개와 개불과 개발자 사이의 갭&quot;);
+/// [[3, 4], [7, 8], [15, 15]]
+</code></pre>
+
+<h2 id="koreanonsetindexof-koreanallonsetindexof"><code>koreanOnsetIndexOf</code>, <code>koreanAllOnsetIndexOf</code></h2>
+
+<p>위 내용만 보면 한글은 UX적으로 단점만 있는 것 같지만, 다른 언어에는 존재하지 않는 엄청나게 좋은 UX도 있다. 바로 초성 검색이다. 초성 검색은 30%밖에 안 되는 타이핑으로 굉장히 정확하면서 직관적인 결과를 얻을 수 있는 훌륭한 UX이다. 위에서 한글을 분해하는 작업은 이미 했으니 여기서 첫 번째 결과만 추출하는 방식으로 구현하면 초성 검색을 지원하는 함수도 쉽게 만들 수 있다.</p>
+
+<pre><code>import { koreanOnsetIndexOf, koreanAllOnsetIndexOf } from 'korean-index-of';
+
+koreanOnsetIndexOf(&quot;ㄱㅂ&quot;, &quot;개와 개불과 개발자 사이의 갭&quot;);
+/// 3
+
+koreanAllOnsetIndexOf(&quot;ㄱㅂ&quot;, &quot;개와 개불과 개발자 사이의 갭&quot;);
+/// [3, 7]
+</code></pre>
+
+<p>다만 쿼리에서 초성과 완전체 한글이 섞여있는 경우 제대로 동작하지 않는다.</p>
+
+<pre><code>import { koreanAllOnsetIndexOf } from 'korean-index-of';
+
+koreanAllOnsetIndexOf(&quot;개ㅂ&quot;, &quot;개와 개불과 개발자 사이의 갭&quot;);
+/// []
+</code></pre>
+
+<p>만약에 기존 <code>indexOf</code>함수처럼 문자열에서 바로 붙여다 쓰는 prototype 방식이 그립다면 아래와 같이 하면 된다.</p>
+
+<pre><code>import { koreanIndexOf } from 'korean-index-of';
+
+String.prototype.kIndexOf = function(query) {
+    return koreanIndexOf(query, this);
+}
+
+&quot;내 코드&quot;.kIndexOf(&quot;콛&quot;);
+/// 2
+</code></pre>
+
+<h1 id="normailze-와-비교"><code>normailze()</code>와 비교</h1>
+
+<p>피드백을 받다가 <a href="https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/String/normalize">ES6에 <code>normalize</code>라는 함수</a>가 있다는 내용을 알게 되었다. 그리고 이 함수를 사용하면 한글을 바로 분해할 수 있다.</p>
+
+<p><a href="https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/String/normalize#%EC%98%88%EC%A0%9C">사이트 예제</a></p>
+
+<pre><code>// U+D55C: 한(HANGUL SYLLABLE HAN)
+// U+AE00: 글(HANGUL SYLLABLE GEUL)
+var first = '\uD55C\uAE00';
+
+// U+1112: ᄒ(HANGUL CHOSEONG HIEUH)
+// U+1161: ᅡ(HANGUL JUNGSEONG A)
+// U+11AB: ᆫ(HANGUL JONGSEONG NIEUN)
+// U+1100: ᄀ(HANGUL CHOSEONG KIYEOK)
+// U+1173: ᅳ(HANGUL JUNGSEONG EU)
+// U+11AF: ᆯ(HANGUL JONGSEONG RIEUL)
+var second = first.normalize('NFD'); // '\u1112\u1161\u11AB\u1100\u1173\u11AF'
+</code></pre>
+
+<p>그래서 처음에는 내가 삽질을 했나 했다가 이 함수의 분해는 incremental search에서 사용하기에 적합하지 않다는 것을 알게 되었다.</p>
+
+<p>우선 이 함수의 결과에서는 같은 자음이어도 초성의 위치에서와 종성의 위치에서 유니코드가 다르다. 하지만 실제로 우리가 검색할 땐 그 글자가 초성이 될지 종성이 될지 모른다. 예를 들어 검색 과정이 <code>갭</code>이었다면 이 <code>ㅂ</code>이 종성의 <code>ㅂ</code>이 될지 초성의 <code>ㅂ</code>이 될지 알 수 없다. 그래서 <code>normalize</code>를 쓰면 종성의 <code>ㅂ</code>만 매칭되므로 원하는 결과를 얻을 수 없다.</p>
+
+<p>또한 이 함수는 겹모음이나 겹자음을 나눠주지 않는다. 즉, <code>않</code>과 같은 글자의 경우 <code>ㅇㅏㄴㅎ</code>이 아니라 <code>ㅇㅏㄶ</code>으로 분리된다. 그러나 우리의 키보드에 <code>ㄶ</code>이라는 글자는 없다. 따라서 이를 치는 중간 과정인 <code>안</code>이라는 글자와는 매칭이 되지 않는 문제점이 생긴다.</p>
+
+<p>따라서 제대로 된 한글에서의 incremental search를 구현하려면 직접 분해하는 함수를 만들어서 사용하는게 맞는 것 같다.</p>
+
+</section>
+
+
+
+<div class="paging post-paging">
+  
+  
+  
+  
+</div>
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+
+(function() {
+    
+    
+    if (window.location.hostname == "localhost")
+        return;
+
+    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+    var disqus_shortname = 'ialy1595';
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com/" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+<div class="post-meta-code">
+  <div class="desc">
+    public string description() {
+    <div class="desc">val author = "
+    
+        <a href="mailto:ialy12006@gmail.com">ialy1595</a>
+    ";
+    </div>
+    
+    <div class="desc">
+      val categories = [
+      
+      
+      <a href="https://ialy1595.github.io//categories/code">"code"</a>
+      
+      ];
+    </div>
+    
+	
+    <div class="desc">
+      val subcategories = [
+      
+      
+      <a href="https://ialy1595.github.io//subcategories/user-experience">"user-experience"</a>
+      
+      ];
+    </div>
+    
+    }
+  </div>
+  <div class="desc">
+    public string tags() {
+      <div class="desc">
+        val tags = [
+        
+          
+          <a href="https://ialy1595.github.io/tags/hangeul">"hangeul"</a>
+          
+          <a href="https://ialy1595.github.io/tags/korean">"korean"</a>
+          
+          <a href="https://ialy1595.github.io/tags/ux">"UX"</a>
+          
+          <a href="https://ialy1595.github.io/tags/search">"search"</a>
+          
+          <a href="https://ialy1595.github.io/tags/incremental-search">"incremental search"</a>
+          
+          <a href="https://ialy1595.github.io/tags/npm">"npm"</a>
+          
+          <a href="https://ialy1595.github.io/tags/normalize">"normalize"</a>
+          
+        
+        ];
+      </div>
+    }
+  </div>
+  
+  <div class="desc">
+    public string references() {
+      <div class="desc">
+        val references = [<br>
+        
+          
+          <a href="https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/String/normalize">&nbsp;&nbsp;"https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/String/normalize"</a><br>
+          
+        
+        ];
+      </div>
+    }
+  </div>
+  
+</div>
+
+
+
+  </div>
+  <div class="blank"></div>
+</div>
+<footer class="footer">
+  <div class="share">
+    <a href="https://github.com/ialy1595" title="Github" target="_blank"><i class="fa fa-github"></i></a>
+    <a href="mailto:ialy12006@gmail.com" title="Email" target="_blank"><i class="fa fa-envelope"></i></a>
+    <a rel="alternate" type="application/rss+xml" href="https://ialy1595.github.io/index.xml" title="RSS feed" target="_blank"><i class="fa fa-rss"></i></a>
+  </div>
+  COPYRIGHT (C) <a href="https://blog.lulab.net">DONGGEUN,BANG</a>. ALL RIGHTS RESERVED.
+</footer>
+
+</body>
+</html>
