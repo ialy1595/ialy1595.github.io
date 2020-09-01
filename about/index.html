@@ -125,13 +125,13 @@
 <p>When you learn English words or phrases, you may want to know how they are pronounced. eng2music can be helpful in this case. Searching for an English word or phrase shows the phrase that contains the word in the music. Click the YouTube button to repeat the phrase on YouTube.</p>
 
 <ul>
-<li><a href="http://64.137.186.47:3010/">Link</a></li>
+<li><a href="http://ialy1595.me/eng2music/">Web link</a></li>
 <li><a href="https://github.com/ialy1595/eng2music">Repository</a></li>
-<li>React with React Hook</li>
+<li>React &amp; React Hook</li>
 <li>Dataset from <a href="https://github.com/gabolsgabs/DALI">DALI</a>
 
 <ul>
-<li>Crawling with selenium to check an invalid YouTube link.</li>
+<li>Crawling with selenium to check invalid YouTube link.</li>
 <li>1071 songs with 33916 phrases are used</li>
 </ul></li>
 <li>Incremental search system
@@ -139,7 +139,8 @@
 <ul>
 <li>Use previous results to reduce search time</li>
 </ul></li>
-<li>Responsive design using css</li>
+<li>Responsive design</li>
+<li>Lazy loading for large data</li>
 </ul>
 
 <table>
@@ -157,6 +158,20 @@
 </tr>
 </tbody>
 </table>
+
+<h1 id="korean-index-of">korean-index-of</h1>
+
+<p>When you type &ldquo;코드&rdquo;, the process is &ldquo;ㅋ&rdquo;, &ldquo;코&rdquo;, &ldquo;콛&rdquo;, and &ldquo;코드&rdquo;, only &ldquo;코&rdquo; and &ldquo;코드&rdquo; is substring of &ldquo;코드&rdquo;. For this reason, incremental search with normal string match function provides a poor UX because it repeats whether the results are included or not. The improved <code>indexOf</code> function, <code>koreanIndexOf</code> in this package can solve this problem because they can determine that &ldquo;ㅋ&rdquo;, &ldquo;코&rdquo;, &ldquo;콛&rdquo;, and &ldquo;코드&rdquo; is substring of &ldquo;코드&rdquo;.</p>
+
+<ul>
+<li>npm package (<a href="https://www.npmjs.com/package/korean-index-of">link</a>)</li>
+<li><a href="https://github.com/ialy1595/korean-index-of">Repository</a></li>
+<li>All functions in this package take a linear time
+
+<ul>
+<li>Use Z algorithm</li>
+</ul></li>
+</ul>
 
 <h2 id="water-half-torpedo-half">Water Half Torpedo Half</h2>
 
@@ -177,8 +192,8 @@
 <li>Torpedo generated more frequently near submarines.
 
 <ul>
-<li>With probability density function</li>
-<li>Prevent long waiting in only one place a.k.a 존버</li>
+<li>For prevent long waiting in only one place a.k.a 존버</li>
+<li>Use probability density function</li>
 </ul></li>
 </ul>
 
