@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Nginx on ialy&#39;s blog</title>
+    <link>https://ialy1595.github.io/tags/nginx/</link>
+    <description>Recent content in Nginx on ialy&#39;s blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>ko-KR</language>
+    <managingEditor>ialy12006@gmail.com (ialy1595)</managingEditor>
+    <webMaster>ialy12006@gmail.com (ialy1595)</webMaster>
+    <lastBuildDate>Wed, 02 Sep 2020 13:41:26 +0900</lastBuildDate>
+    
+	<atom:link href="https://ialy1595.github.io/tags/nginx/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Nginx로 한 도메인에서 여러 프로젝트 배포하기</title>
+      <link>https://ialy1595.github.io/post/nginx-publish-in-same-domain/</link>
+      <pubDate>Wed, 02 Sep 2020 13:41:26 +0900</pubDate>
+      <author>ialy12006@gmail.com (ialy1595)</author>
+      <guid>https://ialy1595.github.io/post/nginx-publish-in-same-domain/</guid>
+      <description>혹시 바빠서 해결법만 원하신 분들은 맨 아래 결론을 보시면 됩니다.
+배경 상황 최근에 웹 관련 프로젝트들을 이것저것 하게 되면서 만든 프로젝트를 배포하기 위해 서버와 도메인도 샀다. 하지만 매번 프로젝트를 하나씩 추가할 때마다 도메인을 새로 사는 flex를 할 수는 없었다.</description>
+    </item>
+    
+  </channel>
+</rss>
