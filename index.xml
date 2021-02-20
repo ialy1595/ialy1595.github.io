@@ -8,10 +8,19 @@
     <language>ko-KR</language>
     <managingEditor>ialy12006@gmail.com (ialy1595)</managingEditor>
     <webMaster>ialy12006@gmail.com (ialy1595)</webMaster>
-    <lastBuildDate>Wed, 02 Sep 2020 13:41:26 +0900</lastBuildDate>
+    <lastBuildDate>Tue, 10 Nov 2020 18:55:30 +0900</lastBuildDate>
     
 	<atom:link href="https://ialy1595.github.io/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Manacher 알고리즘</title>
+      <link>https://ialy1595.github.io/post/manacher/</link>
+      <pubDate>Tue, 10 Nov 2020 18:55:30 +0900</pubDate>
+      <author>ialy12006@gmail.com (ialy1595)</author>
+      <guid>https://ialy1595.github.io/post/manacher/</guid>
+      <description>개요 이 알고리즘은 회문(팰린드롬, palindrome)에 관해서 빠른 시간 안에 강력한 솔루션을 제공한다. 여기서 회문이란 $ abcba $처럼 뒤집어서 읽어도 똑같은 문자열을 뜻한다. 여기에 Manacher 알고리즘을 통해 문자열의 모든 위치에 대해서 그 위치를 중심으로 하는 최대 회문의 한쪽 길이를 $ O(n) $안에 구할 수 있다.</description>
+    </item>
     
     <item>
       <title>Nginx로 한 도메인에서 여러 프로젝트 배포하기</title>
@@ -133,7 +142,7 @@
       <guid>https://ialy1595.github.io/about/</guid>
       <description>Education  Gyeonggi Science High School (GSHS) (Mar 2012 - Feb 2015)
  Seoul National University (SNU) (Mar 2015 – Present)
- B.S. in Computer Science and Engineering   Interest Fields  Problem Solving  Algorithm, Data structure  Human Computer Interaction  UI/UX, Gamification, Human Computing  Design  Game design, project managing   Projects eng2music (web) (repository) When you learn English words or phrases, you may want to know how they are pronounced.</description>
+ B.S. in Computer Science and Engineering   Interest Fields  Problem Solving  Algorithm, Data structure  Human Computer Interaction  UI/UX, Gamification, Human Computing  Design  Game design, project managing   Projects korean-index-of (npm) (repository) When you type &amp;ldquo;코드&amp;rdquo;, the process is &amp;ldquo;ㅋ&amp;rdquo;, &amp;ldquo;코&amp;rdquo;, &amp;ldquo;콛&amp;rdquo;, and &amp;ldquo;코드&amp;rdquo;, only &amp;ldquo;코&amp;rdquo; and &amp;ldquo;코드&amp;rdquo; is substring of &amp;ldquo;코드&amp;rdquo;.</description>
     </item>
     
     <item>

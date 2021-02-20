@@ -166,7 +166,7 @@ for(i = base - 1; i &gt; 0; i--) bit[i] = MAXX(bit[2 * i], bit[2 * i + 1]);
 
 <p>여기서 쓰이는 <code>$ bit $</code> 배열이나 <code>$ base $</code>, 그리고 아래에서 구현할 함수 등은 class나 struct로 구현해서 내부 변수로 가지고 있어도 되고 전체 코드에서 인덱스트리를 하나밖에 안 쓸 경우 그냥 전역 변수로 선언해서 사용해도 된다.</p>
 
-<p>시간복잡도를 계산해 보면 <code>$ base $</code>를 구하는 데 <code>$ O(\log n) $</code>, 원래 배열의 값을 채우는 데 <code>$ O(n) $</code>, 니머지 부모 값들을 채우는데 <code>$ O(n) $</code>이므로 총 <code>$ O(n) $</code>이 걸린다.</p>
+<p>시간복잡도를 계산해 보면 <code>$ base $</code>를 구하는 데 <code>$ O(\log n) $</code>, 원래 배열의 값을 채우는 데 <code>$ O(n) $</code>, 나머지 부모 값들을 채우는데 <code>$ O(n) $</code>이므로 총 <code>$ O(n) $</code>이 걸린다.</p>
 
 <h2 id="point-update">point update</h2>
 
