@@ -140,7 +140,7 @@ for(i = 0; i &lt; len; i++) {
 
 <p>여기서 <code>$ j $</code>의 값은 당연히 <code>$ i $</code>보다 작으므로 우리는 <code>$ res[j] $</code>은 이미 구해져 있다. 이제 이 값에 따라서 <code>$ res[i] $</code>의 값을 구하면 된다.</p>
 
-<p>먼저 <code>$ res[j] $</code>가 <code>$ r - i $</code>이하인 경우를 살펴보자. 이 경우 <code>$ res[j] $</code>로 부터 뻗어나간 최대 길이의 팰린드롬이 <code>$ l $</code>을 벗어나지 못하므로, 이 상황을 그림으로 나타내면 아래와 같다.</p>
+<p>먼저 <code>$ res[j] $</code>가 <code>$ r - i $</code>보다 작은 경우를 살펴보자. 이 경우 <code>$ res[j] $</code>로 부터 뻗어나간 최대 길이의 팰린드롬이 <code>$ l $</code>을 벗어나지 못하므로, 이 상황을 그림으로 나타내면 아래와 같다.</p>
 
 <p><img src="/images/manacher_algorithm/manacher1.png#center100" alt="" /></p>
 
@@ -150,12 +150,12 @@ for(i = 0; i &lt; len; i++) {
     if(i &gt; r) {
         p = r = i;
         while(r &lt; len &amp;&amp; r &lt;= 2 * p &amp;&amp; S[r] == S[2 * p - r]) r++;
-        res[i] = r - p;
         r--;
+        res[i] = r - p;
     }
     else{
-        j = 2 * i - p;
-        if(res[j] &lt;= r - p) {
+        j = 2 * p - i;
+        if(res[j] &lt; r - i) {
             res[i] = res[j];
         }
         else {
@@ -165,28 +165,28 @@ for(i = 0; i &lt; len; i++) {
 }
 </code></pre>
 
-<p>그 다음은 <code>$ res[j] $</code>가 <code>$ r - i + 1$</code>보다 큰 경우를 보자. 이 경우에는 <code>$ j $</code>로 부터 뻗어나간 최대 길이의 팰린드롬이 <code>$ l $</code>을 완전히 벗어난다.</p>
+<p>그 다음은 <code>$ res[j] $</code>가 <code>$ r - i$</code>보다 큰 경우를 보자. 이 경우에는 <code>$ j $</code>로 부터 뻗어나간 최대 길이의 팰린드롬이 <code>$ l $</code>을 완전히 벗어난다.</p>
 
 <p><img src="/images/manacher_algorithm/manacher2.png#center100" alt="" /></p>
 
 <p>여기서 <code>$ S[l - 1] $</code>을 중점으로 생각해보자. 이 글자와 이 글자가 <code>$ j $</code>에 대칭된 글자는 <code>$ j $</code>를 중심으로 한 팰린드롬 안에 속해있으므로 같다. 그리고 그 대칭된 글자를 <code>$ p $</code>에 대칭한 글자도 <code>$ p $</code>를 중심으로 한 팰린드롬 안에 속해 있으므로 같다. 그리고 이 글자를 <code>$ i $</code>에 대칭시키면 <code>$ S[r + 1] $</code>에 매칭된다.</p>
 
-<p>그러나 <code>$ S[r + 1] $</code>은 <code>$ S[l - 1] $</code>과 다르다. 만약 둘이 같다면 <code>$ p $</code>를 중심으로 구한 최대 길이 팰린드롬의 끝이 <code>$ r $</code>이라는 정의에 부합하기 때문이다. 따라서 <code>$ S[r + 1] $</code>과 이 글자가 <code>$ i $</code>에 대칭된 글자(그림에서 보라색 관계)는 서로 다를 수 밖에 없다. 그리고 그 이전까지는 <code>$ j $</code>를 중심으로 한 팰린드롬과 상황이 같으므로 모두 대칭이다. 따라서 <code>$ res[i] $</code>의 값은 정확히 <code>$ r - i + 1 $</code>이 된다.</p>
+<p>그러나 <code>$ S[r + 1] $</code>은 <code>$ S[l - 1] $</code>과 다르다. 만약 둘이 같다면 <code>$ p $</code>를 중심으로 구한 최대 길이 팰린드롬의 끝이 <code>$ r $</code>이라는 정의에 부합하기 때문이다. 따라서 <code>$ S[r + 1] $</code>과 이 글자가 <code>$ i $</code>에 대칭된 글자(그림에서 보라색 관계)는 서로 다를 수 밖에 없다. 그리고 그 이전까지는 <code>$ j $</code>를 중심으로 한 팰린드롬과 상황이 같으므로 모두 대칭이다. 따라서 <code>$ res[i] $</code>의 값은 정확히 <code>$ r - i $</code>이 된다.</p>
 
 <pre><code>for(i = 0; i &lt; len; i++) {
     if(i &gt; r) {
         p = r = i;
         while(r &lt; len &amp;&amp; r &lt;= 2 * p &amp;&amp; S[r] == S[2 * p - r]) r++;
-        res[i] = r - p;
         r--;
+        res[i] = r - p;
     }
     else{
-        j = 2 * i - p;
-        if(res[j] &lt;= r - i) {
+        j = 2 * p - i;
+        if(res[j] &lt; r - i) {
             res[i] = res[j];
         }
-        else if(res[j] &gt; r - i + 1) {
-            res[i] = r - i + 1;
+        else if(res[j] &gt; r - i) {
+            res[i] = r - i;
         }
         else {
             ...
@@ -195,7 +195,7 @@ for(i = 0; i &lt; len; i++) {
 }
 </code></pre>
 
-<p>마지막으로 <code>$ res[j] $</code>가 정확히 <code>$ r - i + 1$</code>여서 <code>$ j $</code>에서 뻗어나간 팰린드롬이 정확히 <code>$ l $</code>에 걸치는 경우를 살펴보자.</p>
+<p>마지막으로 <code>$ res[j] $</code>가 정확히 <code>$ r - i $</code>여서 <code>$ j $</code>에서 뻗어나간 팰린드롬이 정확히 <code>$ l $</code>에 걸치는 경우를 살펴보자.</p>
 
 <p><img src="/images/manacher_algorithm/manacher3.png#center100" alt="" /></p>
 
@@ -205,22 +205,22 @@ for(i = 0; i &lt; len; i++) {
     if(i &gt; r) {
         p = r = i;
         while(r &lt; len &amp;&amp; r &lt;= 2 * p &amp;&amp; S[r] == S[2 * p - r]) r++;
-        res[i] = r - p;
         r--;
+        res[i] = r - p;
     }
     else{
-        j = 2 * i - p;
-        if(res[j] &lt;= r - i) {
+        j = 2 * p - i;
+        if(res[j] &lt; r - i) {
             res[i] = res[j];
         }
-        else if(res[j] &gt; r - i + 1) {
-            res[i] = r - i + 1;
+        else if(res[j] &gt; r - i) {
+            res[i] = r - i;
         }
         else {
             p = i;
             while(r &lt; len &amp;&amp; r &lt;= 2 * p &amp;&amp; S[r] == S[2 * p - r]) r++;
-            res[i] = r - p;
             r--;
+            res[i] = r - p;
         }
     }
 }
