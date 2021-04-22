@@ -214,7 +214,7 @@ int main() {
 
 <p>이렇게 바닥부터 차근차근 한 단계씩 올라가서 내가 원하는 값까지 구해내는 방식을 Bottom-Up이라고 한다. 위와 같은 구현은 내가 원하는 값(<code>$ d[i] $</code>)를 얻기 위해 나보다 작은 값(<code>$ d[i-1]$</code>, <code>$ d[i-2] $</code>)로부터 수집하기 때문에 Collect 방식이라고 이름을 붙였다.</p>
 
-<p>이 방식이 가능하려면 지금 위치(<code>i</code>)에 왔을 때 지금의 값(<code>$ d[i] $</code>)이 수집해야 하는 재료(<code>$ d[n-1] $</code>, <code>$ d[n-2] $</code>)가 모두 구해져 있어야 한다는 조건을 만족해야 한다. 피보나치의 경우 변수가 <code>$ i $</code> 하나뿐이라 <code>$ i $</code>가 증가하는 순으로 계산하면 되지만 나중에 변수가 2,3개 들어가거나 일반적인 차원의 배열을 채우는 것이 아닌 그래프나 집합 같은 자료구조에서 동적계획법을 설계하는 경우 이 점에 유념해서 for문을 순회하는 순서를 정해야 한다.</p>
+<p>이 방식이 가능하려면 지금 위치(<code>i</code>)에 왔을 때 지금의 값(<code>$ d[i] $</code>)이 수집해야 하는 재료(<code>$ d[i-1] $</code>, <code>$ d[i-2] $</code>)가 모두 구해져 있어야 한다는 조건을 만족해야 한다. 피보나치의 경우 변수가 <code>$ i $</code> 하나뿐이라 <code>$ i $</code>가 증가하는 순으로 계산하면 되지만 나중에 변수가 2,3개 들어가거나 일반적인 차원의 배열을 채우는 것이 아닌 그래프나 집합 같은 자료구조에서 동적계획법을 설계하는 경우 이 점에 유념해서 for문을 순회하는 순서를 정해야 한다.</p>
 
 <h2 id="bottom-up-방식-spread">Bottom-Up 방식 (Spread)</h2>
 
@@ -234,7 +234,7 @@ int main() {
 
 <p>피보나치의 점화식을 우변에 있는 <code>$ f(x-1) $</code>과 <code>$ f(x-2) $</code>의 입장에서 생각해 보면, 어떤 <code>$ f(t) $</code>가 영향을 끼치는 값은 <code>$ f(t+1) $</code>와 <code>$ f(t+2) $</code>라고 할 수 있다. 따라서 내가 <code>$ d[i] $</code>값에 도달했을 때 이 값을 <code>$ d[i+1] $</code>과 <code>$ d[i+2] $</code>에 전파하기 때문에 Spread 방식이라고 이름을 붙였다.</p>
 
-<p>이 방식을 설계할 땐 지금 위치(<code>$ i $</code>)에 왔을 때 지금의 값(<code>$ d[i] $</code>)에 전파를 해야 했던 값들(<code>$ d[n-1] $</code>, <code>$ d[n-2] $</code>)이 모두 전파를 완료한 상태여야 한다는 조건에 유념해서 for문을 순회하는 순서를 정해야 한다.</p>
+<p>이 방식을 설계할 땐 지금 위치(<code>$ i $</code>)에 왔을 때 지금의 값(<code>$ d[i] $</code>)에 전파를 해야 했던 값들(<code>$ d[i-1] $</code>, <code>$ d[i-2] $</code>)이 모두 전파를 완료한 상태여야 한다는 조건에 유념해서 for문을 순회하는 순서를 정해야 한다.</p>
 
 <p>Collect 방식과 Spread 방식은 절대적인 상위호환 관계가 있는건 아니고 상황에 따라 어떤게 더 좋을지 달라지는 것 같다. Spread 방식으로 생각하는 것이 익숙하지 않으면 처음엔 어려울 수도 있지만, 나중에 익숙해지면 그래프처럼 특이한 자료구조에서 동적계획법을 해야 할 때 도움이 되는 경우가 많았다.</p>
 
@@ -290,7 +290,7 @@ int main() {
 
 <p>비트연산으로 할 수 있는 연산중 가장 재밌는 게 아닐까 싶다. 우선 코드부터 보자.</p>
 
-<pre><code class="language-C">for(i = mask; mask; i = ((i - 1) &amp; mask)) {
+<pre><code class="language-C">for(i = mask; i; i = ((i - 1) &amp; mask)) {
     do something
 }
 </code></pre>
@@ -312,7 +312,7 @@ int main() {
 <p>부분집합의 순회에 관한 문제를 풀다보면 아래 코드처럼 모든 부분집합의 부분집합을 순회해야 할 경우가 있다.</p>
 
 <pre><code class="language-C">for(mask=1; mask &lt; (1&lt;&lt;n); mask++) {
-    for(i = mask; mask; i = ((i - 1) &amp; mask)) {
+    for(i = mask; i; i = ((i - 1) &amp; mask)) {
         do something
     }
 }
