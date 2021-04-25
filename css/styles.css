@@ -413,7 +413,7 @@ bb {
 */
 
 .paging {
-  margin: 20px 0px 15px 0px;
+  margin: 15px 0px 15px 0px;
   color: #8C8CD9;
   font-size: 1.4rem;
   text-align: center;
@@ -436,7 +436,6 @@ bb {
 }
 
 .post-paging {
-  margin-top: 40px;
   height: 40px;
 }
 
@@ -583,6 +582,14 @@ bb {
   padding: 0px 10px 0px 10px;
   float: right;
   color: #717171;
+}
+
+/*
+* Etc
+*/
+
+.donaricano {
+  text-align: center;
 }
 
 .left-term {
